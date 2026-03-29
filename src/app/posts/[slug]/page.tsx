@@ -26,6 +26,64 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+const mdxComponents = {
+  table: (props: React.HTMLAttributes<HTMLTableElement>) => (
+    <div style={{overflowX:'auto', margin:'24px 0'}}>
+      <table {...props} style={{width:'100%', borderCollapse:'collapse', fontSize:'14px', lineHeight:'1.6'}} />
+    </div>
+  ),
+  thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <thead {...props} style={{backgroundColor:'#f3f4f6'}} />
+  ),
+  th: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
+    <th {...props} style={{padding:'10px 14px', textAlign:'left', fontWeight:'600', color:'#374151', borderBottom:'2px solid #e5e7eb', whiteSpace:'nowrap'}} />
+  ),
+  td: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
+    <td {...props} style={{padding:'10px 14px', borderBottom:'1px solid #f3f4f6', color:'#374151', verticalAlign:'top'}} />
+  ),
+  tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr {...props} />
+  ),
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h2 {...props} style={{fontSize:'20px', fontWeight:'700', color:'#111827', margin:'40px 0 16px', paddingBottom:'8px', borderBottom:'2px solid #f3f4f6'}} />
+  ),
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h3 {...props} style={{fontSize:'17px', fontWeight:'700', color:'#1f2937', margin:'28px 0 12px'}} />
+  ),
+  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p {...props} style={{margin:'0 0 16px', lineHeight:'1.9', color:'#374151'}} />
+  ),
+  ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
+    <ul {...props} style={{margin:'0 0 16px', paddingLeft:'24px', lineHeight:'1.9', color:'#374151'}} />
+  ),
+  ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
+    <ol {...props} style={{margin:'0 0 16px', paddingLeft:'24px', lineHeight:'1.9', color:'#374151'}} />
+  ),
+  li: (props: React.HTMLAttributes<HTMLLIElement>) => (
+    <li {...props} style={{marginBottom:'6px'}} />
+  ),
+  strong: (props: React.HTMLAttributes<HTMLElement>) => (
+    <strong {...props} style={{fontWeight:'700', color:'#111827'}} />
+  ),
+  a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    <a
+      {...props}
+      style={{color:'#2563eb', textDecoration:'underline', textUnderlineOffset:'2px'}}
+      target={props.href?.startsWith('http') ? '_blank' : undefined}
+      rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+    />
+  ),
+  blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote {...props} style={{borderLeft:'4px solid #e5e7eb', margin:'20px 0', padding:'12px 20px', backgroundColor:'#f9fafb', color:'#6b7280', borderRadius:'0 8px 8px 0'}} />
+  ),
+  code: (props: React.HTMLAttributes<HTMLElement>) => (
+    <code {...props} style={{backgroundColor:'#f3f4f6', padding:'2px 6px', borderRadius:'4px', fontSize:'13px', color:'#374151'}} />
+  ),
+  hr: () => (
+    <hr style={{border:'none', borderTop:'1px solid #f3f4f6', margin:'32px 0'}} />
+  ),
+}
+
 export default async function PostPage({ params }: Props) {
   const { slug } = await params
   const post = getPostBySlug(slug)
@@ -63,7 +121,7 @@ export default async function PostPage({ params }: Props) {
         </div>
 
         <div style={{fontSize:'15px', lineHeight:'1.9', color:'#374151'}}>
-          <MDXRemote source={post.content} />
+          <MDXRemote source={post.content} components={mdxComponents} />
         </div>
       </article>
 
