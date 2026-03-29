@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* FV画像 PC/モバイル切り替え */
+.fv-pc { display: block; }
+.fv-mobile { display: none; }
+
+/* ピックアップグリッド */
+.pickup-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 4px; }
+.pickup-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+
+/* 記事グリッド */
+.article-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+/* カードホバー */
+.article-card { transition: all 0.2s; }
+.article-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+/* モバイル (640px以下) */
+@media (max-width: 640px) {
+  .fv-pc { display: none !important; }
+  .fv-mobile { display: block !important; }
+  .pickup-grid { grid-template-columns: 1fr !important; }
+  .pickup-img { height: 140px !important; }
+  .article-grid { grid-template-columns: 1fr !important; }
+  .fv-title { font-size: 17px !important; }
+  .fv-desc { display: none !important; }
+  .fv-overlay { padding: 16px 18px !important; }
+}
+
+/* タブレット (641px〜1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .article-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .fv-title { font-size: 20px !important; }
+}
