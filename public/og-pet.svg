@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a2a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d2218;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="180" r="80" fill="none" stroke="#4ade80" stroke-width="2" opacity="0.3"/>
+  <circle cx="400" cy="180" r="120" fill="none" stroke="#4ade80" stroke-width="1" opacity="0.15"/>
+  <text x="400" y="200" font-family="Arial" font-size="80" text-anchor="middle" fill="#4ade80" opacity="0.8">🐾</text>
+  <text x="400" y="300" font-family="Arial,sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#ffffff" letter-spacing="4">PET CARE</text>
+  <text x="400" y="335" font-family="Arial,sans-serif" font-size="14" text-anchor="middle" fill="#4ade80" opacity="0.7" letter-spacing="2">フィラリア予防・ノミダニ対策・ペット医薬品</text>
+  <line x1="300" y1="315" x2="500" y2="315" stroke="#4ade80" stroke-width="1" opacity="0.4"/>
+</svg>

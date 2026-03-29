@@ -11,7 +11,21 @@ export type Post = {
   description: string
   category: string
   tags: string[]
+  image?: string
   content: string
+}
+
+export function getCategoryImage(category: string): string {
+  const map: Record<string, string> = {
+    'ペット': '/og-pet.svg',
+    '健康': '/og-health.svg',
+    '暮らし': '/og-life.svg',
+  }
+  return map[category] || '/og-default.svg'
+}
+
+export function getPostImage(post: Post): string {
+  return post.image || getCategoryImage(post.category)
 }
 
 export function getAllPosts(): Post[] {
@@ -29,6 +43,7 @@ export function getAllPosts(): Post[] {
         description: data.description || '',
         category: data.category || '未分類',
         tags: data.tags || [],
+        image: data.image || '',
         content,
       }
     })
@@ -47,6 +62,7 @@ export function getPostBySlug(slug: string): Post | null {
     description: data.description || '',
     category: data.category || '未分類',
     tags: data.tags || [],
+    image: data.image || '',
     content,
   }
 }

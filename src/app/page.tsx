@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPosts, getPostImage } from '@/lib/posts'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -8,75 +8,152 @@ export const metadata: Metadata = {
 }
 
 const CATEGORIES = [
-  { label: 'ペット', slug: 'pet', desc: 'フィラリア予防・ノミダニ対策・ペット医薬品', icon: '🐾' },
-  { label: '健康', slug: 'health', desc: 'セルフケア・サプリ・予防医学', icon: '💊' },
-  { label: '暮らし', slug: 'life', desc: '食・住・日常を豊かにするヒント', icon: '🏡' },
+  { label: 'ペット', slug: 'pet', color: '#4ade80' },
+  { label: '健康', slug: 'health', color: '#818cf8' },
+  { label: '暮らし', slug: 'life', color: '#fb923c' },
 ]
+
+const CATEGORY_COLOR: Record<string, string> = {
+  'ペット': '#4ade80',
+  '健康': '#818cf8',
+  '暮らし': '#fb923c',
+}
 
 export default function Home() {
   const posts = getAllPosts()
+  const featured = posts[0]
+  const subFeatured = posts.slice(1, 4)
+  const remaining = posts.slice(4)
 
   return (
-    <div>
-      {/* Hero */}
-      <div style={{background:'linear-gradient(to bottom, #f9fafb, #fff)', padding:'60px 20px 40px'}}>
-        <div style={{maxWidth:'960px', margin:'0 auto', textAlign:'center'}}>
-          <p style={{fontSize:'11px', letterSpacing:'0.15em', color:'#9ca3af', textTransform:'uppercase', marginBottom:'16px', margin:'0 0 16px 0'}}>
-            Information site to enhance Quality Of Life
-          </p>
-          <h1 style={{fontSize:'clamp(24px, 5vw, 36px)', fontWeight:'700', color:'#111827', margin:'0 0 12px 0', lineHeight:'1.3'}}>
-            生活の質を、もっと高く。
-          </h1>
-          <p style={{fontSize:'14px', color:'#6b7280', lineHeight:'1.8', maxWidth:'480px', margin:'0 auto'}}>
-            ペットケアから健康管理まで、あなたと大切な存在のQOLを高める情報をお届けします。
-          </p>
+    <div style={{backgroundColor:'#f3f4f6', minHeight:'100vh'}}>
+
+      {/* ヒーロー featuredカード */}
+      {featured && (
+        <div style={{backgroundColor:'#111'}}>
+          <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px'}}>
+            <Link href={'/posts/' + featured.slug} style={{textDecoration:'none', display:'block'}}>
+              <div style={{position:'relative', overflow:'hidden'}}>
+                <img
+                  src={getPostImage(featured)}
+                  alt={featured.title}
+                  style={{width:'100%', height:'420px', objectFit:'cover', display:'block', opacity:0.65}}
+                />
+                <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)'}}>
+                  <div style={{position:'absolute', bottom:0, left:0, right:0, padding:'32px 36px'}}>
+                    <span style={{
+                      display:'inline-block',
+                      backgroundColor: CATEGORY_COLOR[featured.category] || '#9ca3af',
+                      color:'#000', fontSize:'11px', fontWeight:'700',
+                      padding:'3px 10px', borderRadius:'2px', marginBottom:'12px',
+                    }}>{featured.category}</span>
+                    <h2 style={{fontSize:'clamp(18px, 2.5vw, 28px)', fontWeight:'700', color:'#fff', lineHeight:'1.4', margin:'0 0 10px'}}>
+                      {featured.title}
+                    </h2>
+                    <p style={{fontSize:'13px', color:'rgba(255,255,255,0.7)', lineHeight:'1.7', margin:0, maxWidth:'600px'}}>
+                      {featured.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* サブフィーチャー 3枚 */}
+      <div style={{backgroundColor:'#111', paddingBottom:'20px'}}>
+        <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px'}}>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'3px', marginTop:'3px'}}>
+            {subFeatured.map(post => (
+              <Link key={post.slug} href={'/posts/' + post.slug} style={{textDecoration:'none', display:'block'}}>
+                <div style={{position:'relative', overflow:'hidden'}}>
+                  <img
+                    src={getPostImage(post)}
+                    alt={post.title}
+                    style={{width:'100%', height:'180px', objectFit:'cover', display:'block', opacity:0.6}}
+                  />
+                  <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 65%)'}}>
+                    <div style={{position:'absolute', bottom:0, left:0, right:0, padding:'14px'}}>
+                      <span style={{
+                        display:'inline-block',
+                        backgroundColor: CATEGORY_COLOR[post.category] || '#9ca3af',
+                        color:'#000', fontSize:'10px', fontWeight:'700',
+                        padding:'2px 7px', borderRadius:'2px', marginBottom:'6px',
+                      }}>{post.category}</span>
+                      <p style={{fontSize:'12px', fontWeight:'600', color:'#fff', lineHeight:'1.4', margin:0}}>
+                        {post.title}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* カテゴリ */}
-      <div style={{maxWidth:'960px', margin:'0 auto', padding:'40px 20px 20px'}}>
-        <p style={{fontSize:'11px', fontWeight:'600', letterSpacing:'0.12em', color:'#9ca3af', textTransform:'uppercase', margin:'0 0 16px 0'}}>
-          Categories
-        </p>
-        <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'12px'}}>
+      {/* カテゴリタブ */}
+      <div style={{backgroundColor:'#fff', borderBottom:'1px solid #e5e7eb'}}>
+        <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px', display:'flex', overflowX:'auto'}}>
+          <a href="/" style={{padding:'12px 16px', fontSize:'12px', fontWeight:'700', color:'#111', textDecoration:'none', borderBottom:'2px solid #111', whiteSpace:'nowrap'}}>
+            すべて
+          </a>
           {CATEGORIES.map(cat => (
-            <a key={cat.slug} href={'/' + cat.slug}
-              style={{display:'block', border:'1px solid #e5e7eb', borderRadius:'12px', padding:'20px 16px', textDecoration:'none'}}>
-              <span style={{fontSize:'24px', display:'block', marginBottom:'8px'}}>{cat.icon}</span>
-              <span style={{display:'block', fontWeight:'700', fontSize:'14px', color:'#111827', marginBottom:'4px'}}>{cat.label}</span>
-              <span style={{display:'block', fontSize:'11px', color:'#9ca3af', lineHeight:'1.6'}}>{cat.desc}</span>
+            <a key={cat.slug} href={'/' + cat.slug} style={{
+              display:'flex', alignItems:'center', gap:'5px',
+              padding:'12px 16px', fontSize:'12px', fontWeight:'600',
+              color:'#6b7280', textDecoration:'none',
+              borderBottom:'2px solid transparent', whiteSpace:'nowrap',
+            }}>
+              <span style={{width:'7px', height:'7px', borderRadius:'50%', backgroundColor:cat.color, display:'inline-block'}}></span>
+              {cat.label}
             </a>
           ))}
         </div>
       </div>
 
-      {/* 記事一覧 全件 */}
-      <div style={{maxWidth:'960px', margin:'0 auto', padding:'20px 20px 60px'}}>
-        <p style={{fontSize:'11px', fontWeight:'600', letterSpacing:'0.12em', color:'#9ca3af', textTransform:'uppercase', margin:'0 0 16px 0'}}>
-          Articles ({posts.length})
-        </p>
-        {posts.length === 0 ? (
-          <p style={{fontSize:'14px', color:'#9ca3af'}}>記事がまだありません。</p>
-        ) : (
-          <div>
-            {posts.map(post => (
-              <div key={post.slug} style={{borderBottom:'1px solid #f3f4f6', padding:'20px 0'}}>
-                <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'8px'}}>
-                  <span style={{fontSize:'11px', fontWeight:'500', backgroundColor:'#f3f4f6', color:'#6b7280', padding:'2px 8px', borderRadius:'4px'}}>
-                    {post.category}
-                  </span>
+      {/* 記事グリッド */}
+      <div style={{maxWidth:'1080px', margin:'0 auto', padding:'28px 20px 60px'}}>
+        <div style={{display:'flex', alignItems:'center', marginBottom:'16px'}}>
+          <h2 style={{fontSize:'12px', fontWeight:'700', color:'#6b7280', letterSpacing:'0.12em', textTransform:'uppercase', margin:0}}>
+            All Articles <span style={{color:'#9ca3af', fontWeight:'400'}}>— {posts.length}件</span>
+          </h2>
+        </div>
+
+        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:'16px'}}>
+          {remaining.map(post => (
+            <Link key={post.slug} href={'/posts/' + post.slug} style={{textDecoration:'none', display:'block'}}>
+              <article style={{backgroundColor:'#fff', borderRadius:'6px', overflow:'hidden', border:'1px solid #e5e7eb'}}>
+                <div style={{position:'relative'}}>
+                  <img
+                    src={getPostImage(post)}
+                    alt={post.title}
+                    style={{width:'100%', height:'150px', objectFit:'cover', display:'block'}}
+                  />
+                  <span style={{
+                    position:'absolute', top:'8px', left:'8px',
+                    backgroundColor: CATEGORY_COLOR[post.category] || '#9ca3af',
+                    color:'#000', fontSize:'10px', fontWeight:'700',
+                    padding:'2px 7px', borderRadius:'2px',
+                  }}>{post.category}</span>
+                </div>
+                <div style={{padding:'14px'}}>
+                  <h3 style={{fontSize:'13px', fontWeight:'700', color:'#111827', lineHeight:'1.5', margin:'0 0 8px'}}>
+                    {post.title}
+                  </h3>
+                  <p style={{
+                    fontSize:'12px', color:'#6b7280', lineHeight:'1.6', margin:'0 0 10px',
+                    display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden',
+                  } as React.CSSProperties}>
+                    {post.description}
+                  </p>
                   <time style={{fontSize:'11px', color:'#9ca3af'}}>{post.date}</time>
                 </div>
-                <h2 style={{fontSize:'15px', fontWeight:'700', color:'#111827', margin:'0 0 6px 0', lineHeight:'1.5'}}>
-                  <Link href={'/posts/' + post.slug} style={{color:'#111827', textDecoration:'none'}}>
-                    {post.title}
-                  </Link>
-                </h2>
-                <p style={{fontSize:'12px', color:'#6b7280', lineHeight:'1.7', margin:0}}>{post.description}</p>
-              </div>
-            ))}
-          </div>
-        )}
+              </article>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )
