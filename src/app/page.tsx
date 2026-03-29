@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getAllPosts, getPostImage, getPickupImage, FV_IMAGE } from '@/lib/posts'
+import { getAllPosts, getPostImage, getPickupImage } from '@/lib/posts'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -34,30 +34,65 @@ export default function Home() {
   return (
     <div style={{backgroundColor:'#f3f4f6', minHeight:'100vh'}}>
 
-      {/* FVヒーロー：ブランド画像固定 */}
+      <style>{`
+        .fv-pc { display: block; }
+        .fv-mobile { display: none; }
+        @media (max-width: 640px) {
+          .fv-pc { display: none; }
+          .fv-mobile { display: block; }
+          .pickup-grid { grid-template-columns: 1fr !important; }
+          .article-grid { grid-template-columns: 1fr !important; }
+          .fv-title { font-size: 18px !important; }
+          .fv-desc { display: none; }
+          .pickup-item { height: 140px !important; }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+          .pickup-grid { grid-template-columns: repeat(3, 1fr) !important; }
+          .article-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        .article-card:hover {
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          transform: translateY(-2px);
+          transition: all 0.2s;
+        }
+      `}</style>
+
+      {/* FVヒーロー */}
       {featured && (
         <div style={{backgroundColor:'#f8fafc'}}>
           <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px'}}>
             <Link href={'/posts/' + featured.slug} style={{textDecoration:'none', display:'block'}}>
               <div style={{position:'relative', overflow:'hidden', borderRadius:'0 0 4px 4px'}}>
+
+                {/* PC用FV */}
                 <img
-                  src={FV_IMAGE}
+                  className="fv-pc"
+                  src="/fv-hero.png"
                   alt="QOL media"
                   style={{width:'100%', height:'420px', objectFit:'cover', display:'block'}}
                 />
-                {/* オーバーレイ：下部のみ */}
-                <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.0) 55%)'}}>
-                  <div style={{position:'absolute', bottom:0, left:0, right:0, padding:'28px 32px'}}>
+
+                {/* モバイル用FV */}
+                <img
+                  className="fv-mobile"
+                  src="/fv-hero-mobile.png"
+                  alt="QOL media"
+                  style={{width:'100%', height:'500px', objectFit:'cover', display:'none'}}
+                />
+
+                {/* オーバーレイ */}
+                <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.0) 55%)'}}>
+                  <div style={{position:'absolute', bottom:0, left:0, right:0, padding:'24px 28px'}}>
                     <span style={{
                       display:'inline-block',
                       backgroundColor: CATEGORY_COLOR[featured.category] || '#6b7280',
                       color:'#fff', fontSize:'11px', fontWeight:'700',
                       padding:'3px 10px', borderRadius:'2px', marginBottom:'10px',
                     }}>{featured.category}</span>
-                    <h2 style={{fontSize:'clamp(17px, 2.2vw, 26px)', fontWeight:'700', color:'#fff', lineHeight:'1.45', margin:'0 0 8px'}}>
+                    <h2 className="fv-title" style={{fontSize:'clamp(17px, 2.2vw, 26px)', fontWeight:'700', color:'#fff', lineHeight:'1.45', margin:'0 0 8px'}}>
                       {featured.title}
                     </h2>
-                    <p style={{fontSize:'13px', color:'rgba(255,255,255,0.75)', lineHeight:'1.7', margin:0, maxWidth:'580px'}}>
+                    <p className="fv-desc" style={{fontSize:'13px', color:'rgba(255,255,255,0.75)', lineHeight:'1.7', margin:0, maxWidth:'580px'}}>
                       {featured.description}
                     </p>
                   </div>
@@ -68,16 +103,17 @@ export default function Home() {
         </div>
       )}
 
-      {/* ピックアップ3枚：pickup-default.svg使用 */}
+      {/* ピックアップ3枚 */}
       <div style={{backgroundColor:'#f8fafc', paddingBottom:'16px'}}>
         <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px'}}>
-          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'4px', marginTop:'4px'}}>
+          <div className="pickup-grid" style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'4px', marginTop:'4px'}}>
             {subFeatured.map(post => (
               <Link key={post.slug} href={'/posts/' + post.slug} style={{textDecoration:'none', display:'block'}}>
                 <div style={{position:'relative', overflow:'hidden'}}>
                   <img
                     src={getPickupImage(post)}
                     alt={post.title}
+                    className="pickup-item"
                     style={{width:'100%', height:'180px', objectFit:'cover', display:'block'}}
                   />
                   <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 60%)'}}>
@@ -120,7 +156,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 記事グリッド：カテゴリ別デフォルト画像使用 */}
+      {/* 記事グリッド */}
       <div style={{maxWidth:'1080px', margin:'0 auto', padding:'28px 20px 60px'}}>
         <div style={{display:'flex', alignItems:'center', marginBottom:'16px'}}>
           <h2 style={{fontSize:'12px', fontWeight:'700', color:'#6b7280', letterSpacing:'0.12em', textTransform:'uppercase', margin:0}}>
@@ -128,10 +164,10 @@ export default function Home() {
           </h2>
         </div>
 
-        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:'16px'}}>
+        <div className="article-grid" style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:'16px'}}>
           {remaining.map(post => (
             <Link key={post.slug} href={'/posts/' + post.slug} style={{textDecoration:'none', display:'block'}}>
-              <article style={{backgroundColor:'#fff', borderRadius:'6px', overflow:'hidden', border:'1px solid #e5e7eb'}}>
+              <article className="article-card" style={{backgroundColor:'#fff', borderRadius:'6px', overflow:'hidden', border:'1px solid #e5e7eb', transition:'all 0.2s'}}>
                 <div style={{position:'relative'}}>
                   <img
                     src={getPostImage(post)}
