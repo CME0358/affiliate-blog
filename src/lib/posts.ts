@@ -11,10 +11,18 @@ export type Post = {
   description: string
   category: string
   tags: string[]
-  image?: string
+  image?: string        // 個別指定画像
+  pickupImage?: string  // ピックアップ用個別画像
   content: string
 }
 
+// FVヒーロー用画像（1枚目固定）
+export const FV_IMAGE = '/fv-hero.svg'
+
+// ピックアップ用デフォルト画像（2〜4枚目）
+export const PICKUP_DEFAULT_IMAGE = '/pickup-default.svg'
+
+// カテゴリ別デフォルト画像（記事カード用）
 export function getCategoryImage(category: string): string {
   const map: Record<string, string> = {
     'ペット': '/og-pet.svg',
@@ -24,8 +32,14 @@ export function getCategoryImage(category: string): string {
   return map[category] || '/og-default.svg'
 }
 
+// 記事カード用画像（個別指定 → カテゴリ別）
 export function getPostImage(post: Post): string {
   return post.image || getCategoryImage(post.category)
+}
+
+// ピックアップ用画像（個別指定 → ピックアップデフォルト）
+export function getPickupImage(post: Post): string {
+  return post.pickupImage || post.image || PICKUP_DEFAULT_IMAGE
 }
 
 export function getAllPosts(): Post[] {
@@ -44,6 +58,7 @@ export function getAllPosts(): Post[] {
         category: data.category || '未分類',
         tags: data.tags || [],
         image: data.image || '',
+        pickupImage: data.pickupImage || '',
         content,
       }
     })
@@ -63,6 +78,7 @@ export function getPostBySlug(slug: string): Post | null {
     category: data.category || '未分類',
     tags: data.tags || [],
     image: data.image || '',
+    pickupImage: data.pickupImage || '',
     content,
   }
 }

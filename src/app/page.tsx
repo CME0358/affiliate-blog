@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getAllPosts, getPostImage } from '@/lib/posts'
+import { getAllPosts, getPostImage, getPickupImage, FV_IMAGE } from '@/lib/posts'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -8,15 +8,21 @@ export const metadata: Metadata = {
 }
 
 const CATEGORIES = [
-  { label: 'ペット', slug: 'pet', color: '#4ade80' },
-  { label: '健康', slug: 'health', color: '#818cf8' },
-  { label: '暮らし', slug: 'life', color: '#fb923c' },
+  { label: 'ペット', slug: 'pet', color: '#16a34a' },
+  { label: '健康', slug: 'health', color: '#7c3aed' },
+  { label: '暮らし', slug: 'life', color: '#ea580c' },
 ]
 
 const CATEGORY_COLOR: Record<string, string> = {
-  'ペット': '#4ade80',
-  '健康': '#818cf8',
-  '暮らし': '#fb923c',
+  'ペット': '#16a34a',
+  '健康': '#7c3aed',
+  '暮らし': '#ea580c',
+}
+
+const CATEGORY_BG: Record<string, string> = {
+  'ペット': '#dcfce7',
+  '健康': '#ede9fe',
+  '暮らし': '#ffedd5',
 }
 
 export default function Home() {
@@ -28,29 +34,30 @@ export default function Home() {
   return (
     <div style={{backgroundColor:'#f3f4f6', minHeight:'100vh'}}>
 
-      {/* ヒーロー featuredカード */}
+      {/* FVヒーロー：ブランド画像固定 */}
       {featured && (
-        <div style={{backgroundColor:'#111'}}>
+        <div style={{backgroundColor:'#f8fafc'}}>
           <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px'}}>
             <Link href={'/posts/' + featured.slug} style={{textDecoration:'none', display:'block'}}>
-              <div style={{position:'relative', overflow:'hidden'}}>
+              <div style={{position:'relative', overflow:'hidden', borderRadius:'0 0 4px 4px'}}>
                 <img
-                  src={getPostImage(featured)}
-                  alt={featured.title}
-                  style={{width:'100%', height:'420px', objectFit:'cover', display:'block', opacity:0.65}}
+                  src={FV_IMAGE}
+                  alt="QOL media"
+                  style={{width:'100%', height:'420px', objectFit:'cover', display:'block'}}
                 />
-                <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)'}}>
-                  <div style={{position:'absolute', bottom:0, left:0, right:0, padding:'32px 36px'}}>
+                {/* オーバーレイ：下部のみ */}
+                <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.0) 55%)'}}>
+                  <div style={{position:'absolute', bottom:0, left:0, right:0, padding:'28px 32px'}}>
                     <span style={{
                       display:'inline-block',
-                      backgroundColor: CATEGORY_COLOR[featured.category] || '#9ca3af',
-                      color:'#000', fontSize:'11px', fontWeight:'700',
-                      padding:'3px 10px', borderRadius:'2px', marginBottom:'12px',
+                      backgroundColor: CATEGORY_COLOR[featured.category] || '#6b7280',
+                      color:'#fff', fontSize:'11px', fontWeight:'700',
+                      padding:'3px 10px', borderRadius:'2px', marginBottom:'10px',
                     }}>{featured.category}</span>
-                    <h2 style={{fontSize:'clamp(18px, 2.5vw, 28px)', fontWeight:'700', color:'#fff', lineHeight:'1.4', margin:'0 0 10px'}}>
+                    <h2 style={{fontSize:'clamp(17px, 2.2vw, 26px)', fontWeight:'700', color:'#fff', lineHeight:'1.45', margin:'0 0 8px'}}>
                       {featured.title}
                     </h2>
-                    <p style={{fontSize:'13px', color:'rgba(255,255,255,0.7)', lineHeight:'1.7', margin:0, maxWidth:'600px'}}>
+                    <p style={{fontSize:'13px', color:'rgba(255,255,255,0.75)', lineHeight:'1.7', margin:0, maxWidth:'580px'}}>
                       {featured.description}
                     </p>
                   </div>
@@ -61,24 +68,24 @@ export default function Home() {
         </div>
       )}
 
-      {/* サブフィーチャー 3枚 */}
-      <div style={{backgroundColor:'#111', paddingBottom:'20px'}}>
+      {/* ピックアップ3枚：pickup-default.svg使用 */}
+      <div style={{backgroundColor:'#f8fafc', paddingBottom:'16px'}}>
         <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px'}}>
-          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'3px', marginTop:'3px'}}>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'4px', marginTop:'4px'}}>
             {subFeatured.map(post => (
               <Link key={post.slug} href={'/posts/' + post.slug} style={{textDecoration:'none', display:'block'}}>
                 <div style={{position:'relative', overflow:'hidden'}}>
                   <img
-                    src={getPostImage(post)}
+                    src={getPickupImage(post)}
                     alt={post.title}
-                    style={{width:'100%', height:'180px', objectFit:'cover', display:'block', opacity:0.6}}
+                    style={{width:'100%', height:'180px', objectFit:'cover', display:'block'}}
                   />
-                  <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 65%)'}}>
+                  <div style={{position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 60%)'}}>
                     <div style={{position:'absolute', bottom:0, left:0, right:0, padding:'14px'}}>
                       <span style={{
                         display:'inline-block',
-                        backgroundColor: CATEGORY_COLOR[post.category] || '#9ca3af',
-                        color:'#000', fontSize:'10px', fontWeight:'700',
+                        backgroundColor: CATEGORY_COLOR[post.category] || '#6b7280',
+                        color:'#fff', fontSize:'10px', fontWeight:'700',
                         padding:'2px 7px', borderRadius:'2px', marginBottom:'6px',
                       }}>{post.category}</span>
                       <p style={{fontSize:'12px', fontWeight:'600', color:'#fff', lineHeight:'1.4', margin:0}}>
@@ -94,7 +101,7 @@ export default function Home() {
       </div>
 
       {/* カテゴリタブ */}
-      <div style={{backgroundColor:'#fff', borderBottom:'1px solid #e5e7eb'}}>
+      <div style={{backgroundColor:'#fff', borderBottom:'1px solid #e5e7eb', borderTop:'1px solid #e5e7eb'}}>
         <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px', display:'flex', overflowX:'auto'}}>
           <a href="/" style={{padding:'12px 16px', fontSize:'12px', fontWeight:'700', color:'#111', textDecoration:'none', borderBottom:'2px solid #111', whiteSpace:'nowrap'}}>
             すべて
@@ -113,7 +120,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 記事グリッド */}
+      {/* 記事グリッド：カテゴリ別デフォルト画像使用 */}
       <div style={{maxWidth:'1080px', margin:'0 auto', padding:'28px 20px 60px'}}>
         <div style={{display:'flex', alignItems:'center', marginBottom:'16px'}}>
           <h2 style={{fontSize:'12px', fontWeight:'700', color:'#6b7280', letterSpacing:'0.12em', textTransform:'uppercase', margin:0}}>
@@ -133,9 +140,10 @@ export default function Home() {
                   />
                   <span style={{
                     position:'absolute', top:'8px', left:'8px',
-                    backgroundColor: CATEGORY_COLOR[post.category] || '#9ca3af',
-                    color:'#000', fontSize:'10px', fontWeight:'700',
-                    padding:'2px 7px', borderRadius:'2px',
+                    backgroundColor: CATEGORY_BG[post.category] || '#f3f4f6',
+                    color: CATEGORY_COLOR[post.category] || '#374151',
+                    fontSize:'10px', fontWeight:'700',
+                    padding:'2px 8px', borderRadius:'2px',
                   }}>{post.category}</span>
                 </div>
                 <div style={{padding:'14px'}}>

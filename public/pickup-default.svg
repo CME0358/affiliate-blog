@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f1f5f9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <circle cx="400" cy="180" r="100" fill="none" stroke="#94a3b8" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="400" cy="180" r="60" fill="none" stroke="#94a3b8" stroke-width="1" opacity="0.3"/>
+  <line x1="300" y1="180" x2="500" y2="180" stroke="#94a3b8" stroke-width="1" opacity="0.3"/>
+  <line x1="400" y1="80" x2="400" y2="280" stroke="#94a3b8" stroke-width="1" opacity="0.3"/>
+  <text x="400" y="188" font-family="Georgia,serif" font-size="22" text-anchor="middle" fill="#64748b" letter-spacing="3" opacity="0.8">QOL</text>
+  <text x="400" y="330" font-family="Arial,sans-serif" font-size="12" text-anchor="middle" fill="#94a3b8" letter-spacing="4">QUALITY OF LIFE</text>
+</svg>

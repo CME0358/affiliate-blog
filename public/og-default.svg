@@ -1,13 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f1f5f9;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="800" height="450" fill="url(#bg)"/>
-  <circle cx="400" cy="180" r="80" fill="none" stroke="#9ca3af" stroke-width="2" opacity="0.3"/>
-  <text x="400" y="200" font-family="Arial" font-size="80" text-anchor="middle" fill="#9ca3af" opacity="0.6">✦</text>
-  <text x="400" y="300" font-family="Arial,sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#ffffff" letter-spacing="4">QOL MEDIA</text>
-  <text x="400" y="335" font-family="Arial,sans-serif" font-size="14" text-anchor="middle" fill="#9ca3af" opacity="0.7" letter-spacing="2">Information site to enhance Quality Of Life</text>
+  <rect width="800" height="420" fill="url(#bg)"/>
+  <circle cx="400" cy="190" r="130" fill="none" stroke="#94a3b8" stroke-width="1" opacity="0.2"/>
+  <circle cx="400" cy="190" r="90" fill="#e2e8f0" opacity="0.5"/>
+  <text x="400" y="205" font-family="Georgia,serif" font-size="42" text-anchor="middle" fill="#64748b" opacity="0.6">QOL</text>
+  <text x="400" y="310" font-family="Arial,sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#475569" letter-spacing="3">QOL MEDIA</text>
+  <text x="400" y="340" font-family="Arial,sans-serif" font-size="12" text-anchor="middle" fill="#64748b" opacity="0.7" letter-spacing="1">Information site to enhance Quality Of Life</text>
+  <line x1="280" y1="355" x2="520" y2="355" stroke="#94a3b8" stroke-width="1" opacity="0.2"/>
 </svg>
