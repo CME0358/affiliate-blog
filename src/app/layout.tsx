@@ -5,6 +5,14 @@ export const metadata: Metadata = {
   title: { default: 'QOL media | Quality Of Life情報メディア', template: '%s | QOL media' },
   description: '生活の質（QOL）を高める情報をお届けするメディア。ペットケア・健康・暮らしのヒントをわかりやすく解説します。',
   robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon_16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    shortcut: '/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -12,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ja">
       <body style={{margin:0, padding:0, fontFamily:'-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif', backgroundColor:'#fff', color:'#1a1a1a'}}>
         <header style={{borderBottom:'1px solid #e5e7eb', backgroundColor:'#fff', position:'sticky', top:0, zIndex:50}}>
-          <div style={{maxWidth:'960px', margin:'0 auto', padding:'0 20px', height:'56px', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+          <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px', height:'56px', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
             <a href="/" style={{textDecoration:'none'}}>
               <img src="/QOL_logo_transparent.png" alt="QOL media" style={{height:'26px', width:'auto', maxWidth:'150px', display:'block'}} />
             </a>
@@ -27,8 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <footer style={{borderTop:'1px solid #e5e7eb', backgroundColor:'#f9fafb', marginTop:'60px'}}>
-          <div style={{maxWidth:'960px', margin:'0 auto', padding:'40px 20px', textAlign:'center'}}>
-            <img src="/QOL_logo_transparent.png" alt="QOL media" style={{height:'18px', width:'auto', maxWidth:'110px', opacity:0.3, margin:'0 auto 12px', display:'block'}} />
+          <div style={{maxWidth:'1080px', margin:'0 auto', padding:'40px 20px', textAlign:'center'}}>
+            <img src="/QOL_logo_transparent.png" alt="QOL media" style={{height:'18px', width:'auto', maxWidth:'110px', opacity:0.35, margin:'0 auto 12px', display:'block'}} />
             <p style={{fontSize:'11px', color:'#9ca3af', lineHeight:'1.8', marginBottom:'12px'}}>
               当サイトはアフィリエイト広告を含みます。<br />
               掲載情報は記事公開時点のものです。最新情報は各公式サイトをご確認ください。
