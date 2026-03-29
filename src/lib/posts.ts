@@ -17,7 +17,7 @@ export type Post = {
 }
 
 // FVヒーロー用画像（1枚目固定）
-export const FV_IMAGE = '/fv-hero.svg'
+export const FV_IMAGE = '/fv-hero.png'
 
 // ピックアップ用デフォルト画像（2〜4枚目）
 export const PICKUP_DEFAULT_IMAGE = '/pickup-default.svg'
