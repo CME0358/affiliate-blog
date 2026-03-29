@@ -3,6 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import remarkGfm from 'remark-gfm'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const mdxComponents = {
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
-    <div style={{overflowX:'auto', margin:'24px 0'}}>
+    <div style={{overflowX:'auto', margin:'24px 0', borderRadius:'8px', border:'1px solid #e5e7eb'}}>
       <table {...props} style={{width:'100%', borderCollapse:'collapse', fontSize:'14px', lineHeight:'1.6'}} />
     </div>
   ),
@@ -36,10 +37,10 @@ const mdxComponents = {
     <thead {...props} style={{backgroundColor:'#f3f4f6'}} />
   ),
   th: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <th {...props} style={{padding:'10px 14px', textAlign:'left', fontWeight:'600', color:'#374151', borderBottom:'2px solid #e5e7eb', whiteSpace:'nowrap'}} />
+    <th {...props} style={{padding:'12px 16px', textAlign:'left', fontWeight:'600', color:'#374151', borderBottom:'2px solid #e5e7eb', whiteSpace:'nowrap'}} />
   ),
   td: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <td {...props} style={{padding:'10px 14px', borderBottom:'1px solid #f3f4f6', color:'#374151', verticalAlign:'top'}} />
+    <td {...props} style={{padding:'12px 16px', borderBottom:'1px solid #f3f4f6', color:'#374151', verticalAlign:'top'}} />
   ),
   tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr {...props} />
@@ -121,7 +122,11 @@ export default async function PostPage({ params }: Props) {
         </div>
 
         <div style={{fontSize:'15px', lineHeight:'1.9', color:'#374151'}}>
-          <MDXRemote source={post.content} components={mdxComponents} />
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          />
         </div>
       </article>
 
