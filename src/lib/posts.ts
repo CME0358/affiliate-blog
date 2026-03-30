@@ -13,6 +13,7 @@ export type Post = {
   tags: string[]
   image?: string        // 個別指定画像
   pickupImage?: string  // ピックアップ用個別画像
+  published?: boolean   // false で非公開（省略時は公開）
   content: string
 }
 
@@ -28,7 +29,6 @@ export function getCategoryImage(category: string): string {
     'ペット': '/og-pet.svg',
     '健康': '/og-health.svg',
     '暮らし': '/og-life.svg',
-    '睡眠': '/og-sleep.svg',
   }
   return map[category] || '/og-default.svg'
 }
@@ -60,9 +60,11 @@ export function getAllPosts(): Post[] {
         tags: data.tags || [],
         image: data.image || '',
         pickupImage: data.pickupImage || '',
+        published: data.published !== false,
         content,
       }
     })
+    .filter(post => post.published !== false)
     .sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
