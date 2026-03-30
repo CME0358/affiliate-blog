@@ -24,10 +24,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/" style={{textDecoration:'none'}}>
               <img src="/QOL_logo_transparent.png" alt="QOL media" style={{height:'26px', width:'auto', maxWidth:'150px', display:'block'}} />
             </a>
-            <nav style={{display:'flex', alignItems:'center', gap:'24px'}}>
-              <a href="/pet" style={{fontSize:'13px', color:'#6b7280', textDecoration:'none'}}>ペット</a>
-              <a href="/health" style={{fontSize:'13px', color:'#6b7280', textDecoration:'none'}}>健康</a>
-              <a href="/life" style={{fontSize:'13px', color:'#6b7280', textDecoration:'none'}}>暮らし</a>
+            <nav style={{display:'flex', alignItems:'center', gap:'8px'}}>
+              <a href="/pet"    style={{fontSize:'12px', fontWeight:'600', color:'#16a34a', backgroundColor:'#dcfce7', padding:'5px 14px', borderRadius:'999px', textDecoration:'none', whiteSpace:'nowrap'}}>ペット</a>
+              <a href="/health" style={{fontSize:'12px', fontWeight:'600', color:'#7c3aed', backgroundColor:'#ede9fe', padding:'5px 14px', borderRadius:'999px', textDecoration:'none', whiteSpace:'nowrap'}}>健康</a>
+              <a href="/life"   style={{fontSize:'12px', fontWeight:'600', color:'#ea580c', backgroundColor:'#ffedd5', padding:'5px 14px', borderRadius:'999px', textDecoration:'none', whiteSpace:'nowrap'}}>暮らし</a>
+              <a href="/sleep"  style={{fontSize:'12px', fontWeight:'600', color:'#2563eb', backgroundColor:'#dbeafe', padding:'5px 14px', borderRadius:'999px', textDecoration:'none', whiteSpace:'nowrap'}}>睡眠</a>
             </nav>
           </div>
         </header>
