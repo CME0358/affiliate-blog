@@ -28,6 +28,7 @@ export function getCategoryImage(category: string): string {
     'ペット': '/og-pet.svg',
     '健康': '/og-health.svg',
     '暮らし': '/og-life.svg',
+    '睡眠': '/og-sleep.svg',
   }
   return map[category] || '/og-default.svg'
 }

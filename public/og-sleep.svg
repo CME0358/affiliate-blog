@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- 背景グラデーション（深夜ブルー） -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e3a5f"/>
+    </linearGradient>
+    <linearGradient id="moon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fde68a"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- 星 -->
+  <circle cx="120"  cy="80"  r="2" fill="#e2e8f0" opacity="0.6"/>
+  <circle cx="280"  cy="50"  r="1.5" fill="#e2e8f0" opacity="0.5"/>
+  <circle cx="450"  cy="110" r="2.5" fill="#e2e8f0" opacity="0.7"/>
+  <circle cx="620"  cy="40"  r="1.5" fill="#e2e8f0" opacity="0.4"/>
+  <circle cx="800"  cy="90"  r="2" fill="#e2e8f0" opacity="0.6"/>
+  <circle cx="960"  cy="55"  r="3" fill="#e2e8f0" opacity="0.5"/>
+  <circle cx="1100" cy="100" r="1.5" fill="#e2e8f0" opacity="0.6"/>
+  <circle cx="200"  cy="180" r="1.5" fill="#e2e8f0" opacity="0.3"/>
+  <circle cx="700"  cy="160" r="2" fill="#e2e8f0" opacity="0.4"/>
+  <circle cx="1050" cy="200" r="1.5" fill="#e2e8f0" opacity="0.3"/>
+
+  <!-- 月 -->
+  <circle cx="950" cy="160" r="70" fill="url(#moon)" opacity="0.9"/>
+  <circle cx="990" cy="130" r="70" fill="#1e3a5f"/>
+
+  <!-- zzz テキスト -->
+  <text x="300" y="260" font-family="Georgia, serif" font-size="96" font-weight="700" fill="#93c5fd" opacity="0.25" transform="rotate(-10, 300, 260)">Z</text>
+  <text x="420" y="210" font-family="Georgia, serif" font-size="72" font-weight="700" fill="#93c5fd" opacity="0.20" transform="rotate(-10, 420, 210)">Z</text>
+  <text x="510" y="170" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#93c5fd" opacity="0.15" transform="rotate(-10, 510, 170)">Z</text>
+
+  <!-- カテゴリラベル -->
+  <rect x="80" y="310" width="130" height="36" rx="4" fill="#2563eb"/>
+  <text x="145" y="333" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">睡眠</text>
+
+  <!-- メインテキスト -->
+  <text x="80" y="410" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="52" font-weight="700" fill="#f1f5f9" letter-spacing="-1">QOL media</text>
+  <text x="80" y="480" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="28" font-weight="400" fill="#93c5fd">睡眠の質を上げる、科学的な方法</text>
+
+  <!-- 下部ライン -->
+  <rect x="80" y="530" width="200" height="3" rx="2" fill="#2563eb" opacity="0.7"/>
+</svg>

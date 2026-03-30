@@ -11,18 +11,21 @@ const CATEGORIES = [
   { label: 'ペット', slug: 'pet', color: '#16a34a' },
   { label: '健康', slug: 'health', color: '#7c3aed' },
   { label: '暮らし', slug: 'life', color: '#ea580c' },
+  { label: '睡眠', slug: 'sleep', color: '#2563eb' },
 ]
 
 const CATEGORY_COLOR: Record<string, string> = {
   'ペット': '#16a34a',
   '健康': '#7c3aed',
   '暮らし': '#ea580c',
+  '睡眠': '#2563eb',
 }
 
 const CATEGORY_BG: Record<string, string> = {
   'ペット': '#dcfce7',
   '健康': '#ede9fe',
   '暮らし': '#ffedd5',
+  '睡眠': '#dbeafe',
 }
 
 export default function Home() {
