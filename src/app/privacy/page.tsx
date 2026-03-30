@@ -24,7 +24,7 @@ export default function PrivacyPage() {
         <Section title="運営者情報">
           <p>運営：合同会社コア・リテール<br />
           所在地：東京都港区麻布十番1-2-7 ラフィネ麻布十番7F<br />
-          お問い合わせ：<a href="mailto:info@qolmedia.info" style={{ color: '#2563eb' }}>info@qolmedia.info</a></p>
+          お問い合わせ：<a href="/contact" style={{ color: '#2563eb' }}>お問い合わせフォームはこちら</a></p>
         </Section>
 
         <Section title="取得する情報と利用目的">
@@ -62,7 +62,7 @@ export default function PrivacyPage() {
 
         <Section title="個人情報の開示・訂正・削除">
           <p>ユーザーご本人（または代理人）から、ご自身の個人情報の開示・訂正・削除を求められた場合は、合理的な範囲内で速やかに対応いたします。お問い合わせは下記メールアドレスまでご連絡ください。</p>
-          <p><a href="mailto:info@qolmedia.info" style={{ color: '#2563eb' }}>info@qolmedia.info</a></p>
+          <p><Link href="/contact" style={{ color: '#2563eb' }}>お問い合わせフォームはこちら</Link></p>
         </Section>
 
         <Section title="免責事項">

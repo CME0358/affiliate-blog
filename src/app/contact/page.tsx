@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 // ★ GoogleフォームのURLをここに差し替える
 // フォームを開いて「送信」→「<>」アイコン → iframeのsrc属性のURLをコピー
-const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfUcAXwVcmRPhnN3fgMf-0C8O_O98yWdhgSrfj7EYcgVBKY5Q/viewform?embedded=true'
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfUcAXwVcmRPhnN3fgMf-0C8O_O98yWdhgSrfj7EYcgVBKY5Q/viewform?usp=header'
 
 export default function ContactPage() {
   const [open, setOpen] = useState(false)
@@ -22,14 +22,6 @@ export default function ContactPage() {
           記事内容のご質問・誤りのご指摘・その他お問い合わせは下記フォームよりご連絡ください。<br />
           通常2〜3営業日以内にご返信いたします。
         </p>
-
-        {/* お問い合わせ先情報 */}
-        <div style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px 24px', marginBottom: '32px' }}>
-          <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 6px' }}>メールでのお問い合わせ</p>
-          <a href="mailto:info@qolmedia.info" style={{ fontSize: '15px', fontWeight: '600', color: '#2563eb', textDecoration: 'none' }}>
-            info@qolmedia.info
-          </a>
-        </div>
 
         {/* フォーム起動ボタン */}
         <button

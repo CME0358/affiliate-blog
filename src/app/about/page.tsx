@@ -43,13 +43,13 @@ export default function AboutPage() {
               ['所在地', '東京都港区麻布十番1-2-7 ラフィネ麻布十番7F'],
               ['設立', '2018年2月'],
               ['事業内容', 'デジタルマーケティング・コンテンツ制作'],
-              ['お問い合わせ', 'info@qolmedia.info'],
+              ['お問い合わせ', 'contact'],
             ].map(([label, value]) => (
               <tr key={label} style={{ borderBottom: '1px solid #f3f4f6' }}>
                 <td style={{ padding: '10px 16px 10px 0', fontWeight: '600', color: '#6b7280', whiteSpace: 'nowrap', width: '30%' }}>{label}</td>
                 <td style={{ padding: '10px 0' }}>
                   {label === 'お問い合わせ'
-                    ? <a href="mailto:info@qolmedia.info" style={{ color: '#2563eb' }}>info@qolmedia.info</a>
+                    ? <Link href="/contact" style={{ color: '#2563eb' }}>お問い合わせフォームはこちら</Link>
                     : value}
                 </td>
               </tr>
@@ -79,7 +79,6 @@ export default function AboutPage() {
 
         <Section title="お問い合わせ">
           <p>ご意見・ご質問・記事内容の誤りのご指摘は、お問い合わせページまたは下記メールアドレスよりご連絡ください。</p>
-          <p><a href="mailto:info@qolmedia.info" style={{ color: '#2563eb' }}>info@qolmedia.info</a></p>
           <p style={{ marginTop: '12px' }}>
             <Link href="/contact" style={{ display: 'inline-block', backgroundColor: '#2563eb', color: '#fff', fontSize: '13px', fontWeight: '600', padding: '10px 24px', borderRadius: '6px', textDecoration: 'none' }}>
               お問い合わせフォームはこちら
