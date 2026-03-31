@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -19,6 +20,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body style={{margin:0, padding:0, fontFamily:'-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif', backgroundColor:'#fff', color:'#1a1a1a'}}>
+
+        {/* Google Ads tag */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18052634530"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18052634530');
+          `}
+        </Script>
+
         <header style={{borderBottom:'1px solid #e5e7eb', backgroundColor:'#fff', position:'sticky', top:0, zIndex:50}}>
           <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px', height:'56px', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
             <a href="/" style={{textDecoration:'none'}}>
