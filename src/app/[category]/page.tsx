@@ -26,6 +26,13 @@ const CATEGORY_BG: Record<string, string> = {
   '睡眠':   '#dbeafe',
 }
 
+const CATEGORY_FV: Record<string, string> = {
+  'ペット': '/fv-pet.jpg',
+  '健康':   '/fv-health.jpg',
+  '暮らし': '/fv-life.jpg',
+  '睡眠':   '/fv-sleep.jpg',
+}
+
 export async function generateStaticParams() {
   return Object.keys(SLUG_TO_LABEL).map(category => ({ category }))
 }
@@ -56,8 +63,28 @@ export default async function CategoryPage({ params }: Props) {
     { label: '睡眠',   slug: 'sleep',  color: '#2563eb' },
   ]
 
+  const fvImage = CATEGORY_FV[label] || '/fv-hero.png'
+
   return (
     <div style={{ backgroundColor: '#f3f4f6', minHeight: '100vh' }}>
+
+      {/* カテゴリFV */}
+      <div style={{ backgroundColor: '#f8fafc' }}>
+        <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '0 20px' }}>
+          <img
+            src={fvImage}
+            alt={label}
+            className="fv-pc"
+            style={{ width: '100%', height: '420px', objectFit: 'cover', display: 'block', borderRadius: '0 0 4px 4px' }}
+          />
+          <img
+            src={fvImage}
+            alt={label}
+            className="fv-mobile"
+            style={{ width: '100%', height: '260px', objectFit: 'cover', display: 'none', borderRadius: '0 0 4px 4px' }}
+          />
+        </div>
+      </div>
 
       {/* カテゴリタブ */}
       <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #e5e7eb', borderTop: '1px solid #e5e7eb' }}>
