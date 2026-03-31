@@ -4,7 +4,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: { default: 'QOL media | Quality Of Life情報メディア', template: '%s | QOL media' },
-  description: '生活の質（QOL）を高める情報をお届けするメディア。ペットケア・健康・暮らしのヒントをわかりやすく解説します。',
+  description: '生活の質（QOL）を高める情報をお届けするメディア。ペットケア・健康・暮らしのヒントをわかりやすく解説しますませ。',
   robots: { index: true, follow: true },
   icons: {
     icon: [
@@ -20,6 +20,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body style={{margin:0, padding:0, fontFamily:'-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif', backgroundColor:'#fff', color:'#1a1a1a'}}>
+
+        {/* --- Google AdSense --- */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7396006052703860"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
 
         {/* Google Ads tag */}
         <Script
