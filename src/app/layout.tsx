@@ -35,6 +35,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
 
+        {/* Google Analytics GA4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-BS30YQY1N7"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BS30YQY1N7');
+          `}
+        </Script>
+
         <header style={{borderBottom:'1px solid #e5e7eb', backgroundColor:'#fff', position:'sticky', top:0, zIndex:50}}>
           <div style={{maxWidth:'1080px', margin:'0 auto', padding:'0 20px', height:'56px', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
             <a href="/" style={{textDecoration:'none'}}>
