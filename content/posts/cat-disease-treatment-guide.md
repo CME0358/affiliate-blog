@@ -8,6 +8,39 @@ tags: ["猫の病気", "猫の健康管理", "ペットケア", "症状チェッ
 
 **PR・広告を含む記事です**
 
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>
+
 猫の病気は早期発見が重要です。本記事では、2026年最新の情報をもとに、猫がかかりやすい代表的な病気の症状・原因・対処法を症状別にまとめました。自宅でできるセルフチェックリストや、信頼できる正規品の医薬品を安全に購入できる方法も紹介しますので、愛猫の健康管理にお役立てください。
 
 ## 猫がかかりやすい代表的な病気一覧
@@ -85,39 +118,6 @@ tags: ["猫の病気", "猫の健康管理", "ペットケア", "症状チェッ
 | [レボリューション（3本）](https://mttag.com/s/r1BBxDld9R8) | 約5,000円 | 約3,200円 | 約1,800円お得 |
 | ドロンタール（4錠） | 約3,000円 | 約1,800円 | 約1,200円お得 |
 
-
-<div class="product-carousel">
-  <div class="product-carousel-inner">
-    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/revolution_dog.webp" alt="レボリューション(犬用)" />
-      <span>レボリューション<br/>(犬用)</span>
-    </a>
-    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/nexgard_spectra.webp" alt="ネクスガードスペクトラ" />
-      <span>ネクスガード<br/>スペクトラ</span>
-    </a>
-    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/nexgard.webp" alt="ネクスガード" />
-      <span>ネクスガード</span>
-    </a>
-    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/milprazon_chewable_cat.webp" alt="ミルプラゾンチュアブル(猫用)" />
-      <span>ミルプラゾン<br/>チュアブル(猫用)</span>
-    </a>
-    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/fiprofort_plus_cat.webp" alt="フィプロフォートプラス(猫用)" />
-      <span>フィプロフォート<br/>プラス(猫用)</span>
-    </a>
-    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/semintra.webp" alt="セミントラ" />
-      <span>セミントラ</span>
-    </a>
-    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/zithromax2.webp" alt="ジスロマック錠" />
-      <span>ジスロマック錠</span>
-    </a>
-  </div>
-</div>
 
 [わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
 

@@ -8,6 +8,39 @@ tags: ["猫 健康", "猫 嘔吐", "胆汁嘔吐", "ペットケア"]
 
 **PR・広告を含む記事です**
 
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>
+
 ## 【結論】猫が黄色い液を吐いたら空腹が原因の可能性大、ただし繰り返す場合は要注意
 
 猫が吐く黄色い液体の正体は「胆汁」です。多くの場合、長時間の空腹が原因で危険性は低いですが、頻繁に繰り返す場合や他の症状を伴う場合は病気のサインかもしれません。2026年現在、適切な対処法を知っておくことで愛猫の健康を守れます。
@@ -67,39 +100,6 @@ tags: ["猫 健康", "猫 嘔吐", "胆汁嘔吐", "ペットケア"]
 
 駆虫薬は動物病院で処方してもらうと1回あたり3,000〜5,000円かかりますが、正規品を扱う信頼できる通販サイトを利用すれば、同じ有効成分の薬を50〜70%安く購入できます。
 
-
-<div class="product-carousel">
-  <div class="product-carousel-inner">
-    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/revolution_dog.webp" alt="レボリューション(犬用)" />
-      <span>レボリューション<br/>(犬用)</span>
-    </a>
-    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/nexgard_spectra.webp" alt="ネクスガードスペクトラ" />
-      <span>ネクスガード<br/>スペクトラ</span>
-    </a>
-    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/nexgard.webp" alt="ネクスガード" />
-      <span>ネクスガード</span>
-    </a>
-    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/milprazon_chewable_cat.webp" alt="ミルプラゾンチュアブル(猫用)" />
-      <span>ミルプラゾン<br/>チュアブル(猫用)</span>
-    </a>
-    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/fiprofort_plus_cat.webp" alt="フィプロフォートプラス(猫用)" />
-      <span>フィプロフォート<br/>プラス(猫用)</span>
-    </a>
-    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/semintra.webp" alt="セミントラ" />
-      <span>セミントラ</span>
-    </a>
-    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/zithromax2.webp" alt="ジスロマック錠" />
-      <span>ジスロマック錠</span>
-    </a>
-  </div>
-</div>
 
 [わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
 

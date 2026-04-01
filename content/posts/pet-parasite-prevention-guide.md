@@ -8,6 +8,39 @@ tags: ["寄生虫対策", "フィラリア予防", "ノミダニ駆除", "犬猫
 
 **PR・広告を含む記事です**
 
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>
+
 ## 【結論】ペットの寄生虫対策は「通年予防」と「正規品の選択」が鉄則
 
 ペットの寄生虫対策で最も重要なのは、フィラリア・ノミ・ダニ・回虫すべてを通年で予防することです。2026年現在、温暖化の影響で寄生虫の活動期間が長期化しており、従来の「春〜秋だけ」の予防では不十分になっています。安全で信頼できる正規品の駆除薬を、動物病院より安く入手できる方法もあります。この記事では、各寄生虫の危険性と最新の予防法を完全網羅してお伝えします。
@@ -28,39 +61,6 @@ tags: ["寄生虫対策", "フィラリア予防", "ノミダニ駆除", "犬猫
 
 主なフィラリア予防薬には、イベルメクチン配合の「カルドメック」や、ミルベマイシン配合の「ミルベマイシンA」があります。動物病院では1回1,000〜1,500円かかりますが、個人輸入を活用すれば**1回あたり500円以下**で購入可能です。
 
-
-<div class="product-carousel">
-  <div class="product-carousel-inner">
-    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/revolution_dog.webp" alt="レボリューション(犬用)" />
-      <span>レボリューション<br/>(犬用)</span>
-    </a>
-    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/nexgard_spectra.webp" alt="ネクスガードスペクトラ" />
-      <span>ネクスガード<br/>スペクトラ</span>
-    </a>
-    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/nexgard.webp" alt="ネクスガード" />
-      <span>ネクスガード</span>
-    </a>
-    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/milprazon_chewable_cat.webp" alt="ミルプラゾンチュアブル(猫用)" />
-      <span>ミルプラゾン<br/>チュアブル(猫用)</span>
-    </a>
-    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/fiprofort_plus_cat.webp" alt="フィプロフォートプラス(猫用)" />
-      <span>フィプロフォート<br/>プラス(猫用)</span>
-    </a>
-    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/semintra.webp" alt="セミントラ" />
-      <span>セミントラ</span>
-    </a>
-    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
-      <img src="/zithromax2.webp" alt="ジスロマック錠" />
-      <span>ジスロマック錠</span>
-    </a>
-  </div>
-</div>
 
 [わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
 
