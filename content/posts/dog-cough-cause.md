@@ -41,6 +41,40 @@ tags: ["犬の咳", "フィラリア予防", "ケンネルコフ", "犬の病気
 
 動物病院で購入すると1回分1,500〜2,500円程度ですが、**個人輸入代行サイトを利用すれば半額以下で購入可能**です。正規品を安全に購入したい方は、信頼できる代行サイトの利用をおすすめします。
 
+
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="レボリューション(犬用)" />
+      <span>レボリューション<br/>(犬用)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="ネクスガードスペクトラ" />
+      <span>ネクスガード<br/>スペクトラ</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="ネクスガード" />
+      <span>ネクスガード</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="ミルプラゾンチュアブル(猫用)" />
+      <span>ミルプラゾン<br/>チュアブル(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="フィプロフォートプラス(猫用)" />
+      <span>フィプロフォート<br/>プラス(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="セミントラ" />
+      <span>セミントラ</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="ジスロマック錠" />
+      <span>ジスロマック錠</span>
+    </a>
+  </div>
+</div>
+
 [わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
 
 ---

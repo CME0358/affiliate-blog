@@ -66,7 +66,41 @@ tags: ["猫 食欲不振", "猫 食べない", "猫 健康管理"]
 
 ### 対処法5：食欲増進剤・サプリメントの活用
 
-獣医師に相談の上、食欲増進剤や整腸サプリメントを使用することも有効です。ペット用医薬品は[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)から正規品を安全に購入できます。
+獣医師に相談の上、食欲増進剤や整腸サプリメントを使用することも有効です。ペット用医薬品は
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="レボリューション(犬用)" />
+      <span>レボリューション<br/>(犬用)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="ネクスガードスペクトラ" />
+      <span>ネクスガード<br/>スペクトラ</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="ネクスガード" />
+      <span>ネクスガード</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="ミルプラゾンチュアブル(猫用)" />
+      <span>ミルプラゾン<br/>チュアブル(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="フィプロフォートプラス(猫用)" />
+      <span>フィプロフォート<br/>プラス(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="セミントラ" />
+      <span>セミントラ</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="ジスロマック錠" />
+      <span>ジスロマック錠</span>
+    </a>
+  </div>
+</div>
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)から正規品を安全に購入できます。
 
 ---
 

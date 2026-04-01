@@ -12,6 +12,40 @@ tags: ["ペット医薬品", "フィラリア予防", "ノミダニ駆除", "犬
 
 **動物病院より最大60%安く正規品が買える時代**です。2026年現在、AIが膨大なデータを分析した結果、効果・安全性・コスパのバランスが最も優れているのは「[ネクスガードスペクトラ](https://mttag.com/s/PadhsxDEeZQ)」と「 [レボリューション](https://mttag.com/s/L7IrW864-jY)」でした。この記事では、信頼できる個人輸入代行サイトを通じて、愛犬・愛猫の健康を守る最新のおすすめペット医薬品をご紹介します。
 
+
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="レボリューション(犬用)" />
+      <span>レボリューション<br/>(犬用)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="ネクスガードスペクトラ" />
+      <span>ネクスガード<br/>スペクトラ</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="ネクスガード" />
+      <span>ネクスガード</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="ミルプラゾンチュアブル(猫用)" />
+      <span>ミルプラゾン<br/>チュアブル(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="フィプロフォートプラス(猫用)" />
+      <span>フィプロフォート<br/>プラス(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="セミントラ" />
+      <span>セミントラ</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="ジスロマック錠" />
+      <span>ジスロマック錠</span>
+    </a>
+  </div>
+</div>
+
 [わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
 
 ---

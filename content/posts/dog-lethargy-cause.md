@@ -28,6 +28,40 @@ tags: ["犬の健康", "元気がない", "症状チェック", "ペット医療
 
 フィラリア症は蚊を媒介して感染し、放置すると心臓に重大なダメージを与えます。予防薬による定期的な投与が最も安全で効果的な対策です。
 
+
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="レボリューション(犬用)" />
+      <span>レボリューション<br/>(犬用)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="ネクスガードスペクトラ" />
+      <span>ネクスガード<br/>スペクトラ</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="ネクスガード" />
+      <span>ネクスガード</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="ミルプラゾンチュアブル(猫用)" />
+      <span>ミルプラゾン<br/>チュアブル(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="フィプロフォートプラス(猫用)" />
+      <span>フィプロフォート<br/>プラス(猫用)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="セミントラ" />
+      <span>セミントラ</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="ジスロマック錠" />
+      <span>ジスロマック錠</span>
+    </a>
+  </div>
+</div>
+
 [わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
 
 ### 2. 消化器系のトラブル

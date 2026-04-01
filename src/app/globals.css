@@ -34,3 +34,67 @@
   .article-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .fv-title { font-size: 20px !important; }
 }
+/* ─── 商品カルーセル ─────────────────────────────── */
+.product-carousel {
+  margin: 24px 0;
+  overflow: hidden;
+}
+
+.product-carousel-inner {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  /* スクロールバー非表示 */
+  scrollbar-width: none;
+}
+.product-carousel-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.product-card {
+  flex: 0 0 120px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 8px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.product-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  transform: translateY(-2px);
+}
+
+.product-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.product-card span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .product-card {
+    flex: 0 0 100px;
+  }
+  .product-card img {
+    width: 68px;
+    height: 68px;
+  }
+}
+/* ─────────────────────────────────────────────────── */
