@@ -134,3 +134,36 @@ tags: ["ペット医薬品", "正規品", "フィラリア予防", "ノミダニ
 大切な家族であるペットの健康を守るために、ぜひ正規品を選んでください。
 
 [わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+<div class="product-carousel product-carousel-footer">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>
