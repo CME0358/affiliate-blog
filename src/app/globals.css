@@ -34,29 +34,31 @@
   .article-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .fv-title { font-size: 20px !important; }
 }
-/* ─── 商品カルーセル ─────────────────────────────── */
+/* ─── 商品カルーセル（自動ループ版）─────────────────── */
+@keyframes carousel-loop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .product-carousel {
   margin: 24px 0;
   overflow: hidden;
+  position: relative;
 }
 
 .product-carousel-inner {
   display: flex;
   gap: 12px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px;
-  /* スクロールバー非表示 */
-  scrollbar-width: none;
+  width: max-content;
+  animation: carousel-loop 22s linear infinite;
 }
-.product-carousel-inner::-webkit-scrollbar {
-  display: none;
+
+.product-carousel:hover .product-carousel-inner {
+  animation-play-state: paused;
 }
 
 .product-card {
   flex: 0 0 120px;
-  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   align-items: center;
