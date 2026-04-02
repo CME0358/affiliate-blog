@@ -2,14 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/posts'
 
 function getSiteUrl(): string {
-  const raw =
-    process.env.NEXT_PUBLIC_SITE_URL ||'https://www.qolmedia.info'
-    process.env.SITE_URL ||
-    process.env.VERCEL_URL ||
-    'http://localhost:3000'
-
-  const withProto = raw.startsWith('http') ? raw : `https://${raw}`
-  return withProto.replace(/\/+$/, '')
+  return 'https://www.qolmedia.info'
 }
 
 function toLastModified(dateLike?: string): Date | undefined {
