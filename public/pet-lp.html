@@ -45,11 +45,15 @@
       z-index: 100;
     }
     .logo {
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--ink);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 26px;
+      width: auto;
+      max-width: 150px;
+      display: block;
     }
     .header-cta {
       background: var(--cta);
@@ -607,7 +611,9 @@
 
 <!-- HEADER -->
 <header class="site-header">
-  <a href="https://www.qolmedia.info/" class="logo">QOL media</a>
+  <a href="https://www.qolmedia.info/" class="logo">
+    <img src="/QOL_logo_transparent.png" alt="QOL media" />
+  </a>
   <a href="https://mttag.com/s/CiN-gOTx1i8" class="header-cta" target="_blank">▶ わんにゃん薬局を見る</a>
 </header>
 
