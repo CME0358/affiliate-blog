@@ -4,8 +4,11 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: { default: 'QOL media | Quality Of Life情報メディア', template: '%s | QOL media' },
-  description: '生活の質（QOL）を高める情報をお届けするメディア。ペットケア・健康・暮らしのヒントをわかりやすく解説しますませ。',
+  description: '生活の質（QOL）を高める情報をお届けするメディア。ペットケア・健康・暮らしのヒントをわかりやすく解説します。',
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: 'https://www.qolmedia.info',
+  },
   icons: {
     icon: [
       { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
