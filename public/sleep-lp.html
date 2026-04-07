@@ -7,34 +7,56 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* ===== KRAKEN DARK DESIGN TOKENS ===== */
     :root {
-      --ink: #1a1208;
-      --cream: #faf7f2;
-      --warm-white: #fff9f0;
-      --accent: #c8440a;
-      --accent-light: #f5e6dc;
-      --gold: #b8860b;
-      --green: #2d6a4f;
-      --green-light: #d8f3dc;
-      --border: #e8ddd0;
-      --text-muted: #6b5d4f;
-      --cta: #06C755;
-      --cta-dark: #04a044;
+      /* Core */
+      --bg-base:        #0a0a0f;       /* deep near-black */
+      --bg-surface:     #111118;       /* card surfaces */
+      --bg-elevated:    #18181f;       /* hover / elevated */
+
+      /* Kraken Purple scale */
+      --purple:         #7132f5;       /* primary brand */
+      --purple-dark:    #5741d8;       /* outlined variant / border */
+      --purple-deep:    #5b1ecf;       /* pressed */
+      --purple-subtle:  rgba(133,91,251,0.12); /* badge bg */
+
+      /* Text */
+      --text-primary:   #f0eef8;       /* warm white */
+      --text-secondary: #9497a9;       /* silver-blue */
+      --text-muted:     #686b82;       /* cool gray */
+
+      /* Borders */
+      --border:         #1e1e2a;       /* default border */
+      --border-mid:     #2c2c3e;       /* mid border */
+      --border-strong:  #3d3d55;       /* strong border */
+
+      /* Semantic */
+      --success:        rgba(20,158,97,0.16);
+      --success-text:   #30c97a;
+
+      /* CTA — LINE Green (brand exception) */
+      --cta:            #06C755;
+      --cta-dark:       #04a044;
+
+      /* Shadows */
+      --shadow-card:    0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+      --shadow-purple:  0 8px 32px rgba(113,50,245,0.20);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
+      background: var(--bg-base);
+      color: var(--text-primary);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
     /* ===== HEADER ===== */
     .site-header {
-      background: var(--cream);
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 12px 24px;
       display: flex;
@@ -44,33 +66,26 @@
       top: 0;
       z-index: 100;
     }
-    .logo {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
-    .logo img {
-      height: 26px;
-      width: auto;
-      max-width: 150px;
-      display: block;
-    }
+    .logo { text-decoration: none; display: flex; align-items: center; }
+    .logo img { height: 26px; width: auto; max-width: 150px; display: block; }
     .header-cta {
       background: var(--cta);
       color: #fff;
       font-weight: 700;
       font-size: 13px;
       padding: 8px 16px;
-      border-radius: 4px;
+      border-radius: 12px;
       text-decoration: none;
       white-space: nowrap;
+      transition: background 0.2s;
     }
+    .header-cta:hover { background: var(--cta-dark); }
 
     /* ===== HERO ===== */
     .hero {
-      background: url('/sleep-lp-hero.jpg') center center / cover no-repeat;
-      color: var(--cream);
-      padding: 64px 24px 56px;
+      background: linear-gradient(160deg, #0d0820 0%, #120c28 40%, #0a0a14 100%);
+      color: var(--text-primary);
+      padding: 64px 24px 60px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -78,74 +93,73 @@
     .hero::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(113,50,245,0.18) 0%, transparent 65%);
+      pointer-events: none;
     }
     .hero-eyebrow {
       display: inline-block;
-      background: var(--accent);
-      color: #fff;
+      background: var(--purple-subtle);
+      color: #b89efb;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 4px 12px;
-      border-radius: 2px;
-      margin-bottom: 20px;
+      letter-spacing: 0.12em;
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(133,91,251,0.3);
+      margin-bottom: 22px;
       position: relative;
     }
     .hero h1 {
       font-family: 'Noto Serif JP', serif;
       font-weight: 900;
-      font-size: clamp(26px, 6vw, 42px);
-      line-height: 1.4;
+      font-size: clamp(24px, 5.5vw, 40px);
+      line-height: 1.45;
       margin-bottom: 16px;
       position: relative;
     }
     .hero h1 em {
       font-style: normal;
-      color: #f5c06a;
+      background: linear-gradient(90deg, #a078fc 0%, #7132f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero-sub {
       font-size: 14px;
-      color: rgba(250,247,242,0.75);
+      color: var(--text-secondary);
       max-width: 480px;
-      margin: 0 auto 32px;
+      margin: 0 auto 36px;
       position: relative;
     }
     .hero-stats {
       display: flex;
       justify-content: center;
-      gap: 32px;
+      gap: 36px;
       position: relative;
       flex-wrap: wrap;
     }
-    .hero-stat {
-      text-align: center;
-    }
+    .hero-stat { text-align: center; }
     .hero-stat-num {
       font-family: 'Noto Serif JP', serif;
       font-size: 28px;
       font-weight: 900;
-      color: #f5c06a;
+      color: #a078fc;
       display: block;
       line-height: 1;
     }
     .hero-stat-label {
       font-size: 11px;
-      color: rgba(250,247,242,0.65);
-      margin-top: 4px;
+      color: var(--text-muted);
+      margin-top: 5px;
     }
 
-    /* ===== PAIN SECTION ===== */
-    .pain-section {
-      background: var(--warm-white);
-      padding: 52px 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-inner {
-      max-width: 680px;
-      margin: 0 auto;
-    }
+    /* ===== SECTION COMMONS ===== */
+    .section-inner { max-width: 680px; margin: 0 auto; }
     .section-label {
       font-size: 11px;
       font-weight: 700;
@@ -156,128 +170,124 @@
     }
     .section-title {
       font-family: 'Noto Serif JP', serif;
-      font-size: clamp(20px, 4vw, 28px);
+      font-size: clamp(19px, 3.8vw, 26px);
       font-weight: 700;
-      line-height: 1.45;
+      line-height: 1.5;
       margin-bottom: 24px;
+      color: var(--text-primary);
     }
-    .pain-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+
+    /* ===== PAIN SECTION ===== */
+    .pain-section {
+      background: var(--bg-surface);
+      padding: 52px 24px;
+      border-bottom: 1px solid var(--border);
     }
+    .pain-list { display: flex; flex-direction: column; gap: 12px; }
     .pain-item {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      border-left: 3px solid var(--purple);
       padding: 14px 16px;
-      border-radius: 4px;
+      border-radius: 10px;
     }
     .pain-check {
-      width: 22px;
-      height: 22px;
-      background: var(--accent-light);
+      width: 24px;
+      height: 24px;
+      background: var(--purple-subtle);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 1px;
-      font-size: 12px;
+      font-size: 13px;
     }
-    .pain-item p {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .pain-item strong {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
+    .pain-item p { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
+    .pain-item strong { display: block; font-weight: 700; margin-bottom: 2px; color: var(--text-primary); }
 
     /* ===== DIVIDER BANNER ===== */
     .divider-banner {
-      background: var(--accent);
-      color: #fff;
+      background: linear-gradient(90deg, #1a0d3d 0%, #2a1060 50%, #1a0d3d 100%);
+      border-top: 1px solid rgba(113,50,245,0.4);
+      border-bottom: 1px solid rgba(113,50,245,0.4);
+      color: #c5b5fa;
       text-align: center;
-      padding: 20px 24px;
+      padding: 22px 24px;
       font-family: 'Noto Serif JP', serif;
-      font-size: clamp(15px, 3.5vw, 20px);
+      font-size: clamp(14px, 3vw, 18px);
       font-weight: 700;
-      line-height: 1.5;
+      line-height: 1.55;
     }
     .divider-banner span {
-      opacity: 0.85;
+      opacity: 0.7;
       font-size: 0.75em;
       font-family: 'Noto Sans JP', sans-serif;
       font-weight: 400;
       display: block;
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     /* ===== FEATURE ARTICLES ===== */
     .articles-section {
       padding: 52px 24px;
-      background: var(--cream);
+      background: var(--bg-base);
     }
     .articles-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      gap: 14px;
       margin-top: 28px;
     }
     .article-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 12px;
       overflow: hidden;
       text-decoration: none;
-      color: var(--ink);
+      color: var(--text-primary);
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
     .article-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(26,18,8,0.1);
+      box-shadow: var(--shadow-purple);
+      border-color: rgba(113,50,245,0.5);
     }
     .article-card-badge {
-      background: var(--green);
-      color: #fff;
+      background: rgba(113,50,245,0.15);
+      color: #b89efb;
       font-size: 10px;
       font-weight: 700;
-      padding: 4px 10px;
-      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
     }
-    .article-card-body {
-      padding: 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .article-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
     .article-card-tag {
       font-size: 10px;
-      color: var(--accent);
+      color: #9a78f0;
       font-weight: 700;
       margin-bottom: 6px;
     }
     .article-card h3 {
       font-size: 14px;
       font-weight: 700;
-      line-height: 1.5;
+      line-height: 1.55;
       margin-bottom: 8px;
       flex: 1;
+      color: var(--text-primary);
     }
     .article-card p {
       font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.55;
+      line-height: 1.6;
     }
     .article-card-footer {
-      padding: 12px 16px;
+      padding: 11px 16px;
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -286,90 +296,95 @@
     .article-card-cta {
       font-size: 12px;
       font-weight: 700;
-      color: var(--green);
+      color: #9a78f0;
       display: flex;
       align-items: center;
       gap: 4px;
     }
-    .article-card-cta::after {
-      content: '→';
-    }
+    .article-card-cta::after { content: '→'; }
 
     /* ===== MERIT SECTION ===== */
     .merit-section {
-      background: var(--green-light);
+      background: var(--bg-surface);
       padding: 52px 24px;
-      border-top: 1px solid #b7e4c7;
-      border-bottom: 1px solid #b7e4c7;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
     .merit-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
+      gap: 14px;
       margin-top: 28px;
     }
     .merit-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      border-radius: 12px;
+      padding: 22px 16px;
       text-align: center;
-      border: 1px solid #b7e4c7;
+      transition: border-color 0.2s;
     }
-    .merit-icon {
-      font-size: 28px;
-      display: block;
-      margin-bottom: 10px;
-    }
+    .merit-card:hover { border-color: rgba(113,50,245,0.4); }
+    .merit-icon { font-size: 28px; display: block; margin-bottom: 10px; }
     .merit-card h3 {
       font-size: 13px;
       font-weight: 700;
       margin-bottom: 6px;
-      color: var(--green);
+      color: #a078fc;
     }
     .merit-card p {
       font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     /* ===== MAIN CTA ===== */
     .cta-section {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 60px 24px;
+      background: linear-gradient(160deg, #100828 0%, #0c0620 60%, #0a0a14 100%);
+      color: var(--text-primary);
+      padding: 64px 24px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid rgba(113,50,245,0.25);
     }
     .cta-section::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(200,68,10,0.15) 0%, transparent 70%);
+      bottom: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(113,50,245,0.14) 0%, transparent 65%);
+      pointer-events: none;
     }
     .cta-label {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.15em;
-      color: #f5c06a;
+      color: #9a78f0;
       margin-bottom: 12px;
       position: relative;
     }
     .cta-section h2 {
       font-family: 'Noto Serif JP', serif;
-      font-size: clamp(20px, 4.5vw, 30px);
+      font-size: clamp(20px, 4vw, 28px);
       font-weight: 900;
-      line-height: 1.45;
+      line-height: 1.5;
       margin-bottom: 12px;
       position: relative;
     }
     .cta-section h2 em {
       font-style: normal;
-      color: #f5c06a;
+      background: linear-gradient(90deg, #a078fc 0%, #7132f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .cta-section p {
+    .cta-section > p {
       font-size: 13px;
-      color: rgba(250,247,242,0.7);
+      color: var(--text-secondary);
       margin-bottom: 32px;
       position: relative;
     }
@@ -379,13 +394,13 @@
       color: #fff;
       font-size: 16px;
       font-weight: 700;
-      padding: 18px 40px;
-      border-radius: 4px;
+      padding: 18px 44px;
+      border-radius: 12px;
       text-decoration: none;
       position: relative;
       letter-spacing: 0.03em;
       transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 4px 20px rgba(6,199,85,0.35);
+      box-shadow: 0 4px 24px rgba(6,199,85,0.3);
     }
     .cta-btn:hover {
       background: var(--cta-dark);
@@ -400,59 +415,52 @@
     }
     .cta-note {
       font-size: 11px;
-      color: rgba(250,247,242,0.45);
-      margin-top: 16px;
+      color: var(--text-muted);
+      margin-top: 18px;
       position: relative;
     }
 
     /* ===== POPULAR ARTICLES FULL LIST ===== */
     .list-section {
       padding: 52px 24px;
-      background: var(--warm-white);
+      background: var(--bg-surface);
     }
     .article-list {
       display: flex;
       flex-direction: column;
-      gap: 1px;
       margin-top: 24px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
+      border: 1px solid var(--border-mid);
+      border-radius: 12px;
       overflow: hidden;
     }
     .article-list-item {
-      background: #fff;
+      background: var(--bg-surface);
       display: flex;
       align-items: center;
       gap: 16px;
       padding: 16px 20px;
       text-decoration: none;
-      color: var(--ink);
+      color: var(--text-primary);
       border-bottom: 1px solid var(--border);
       transition: background 0.15s;
     }
-    .article-list-item:last-child {
-      border-bottom: none;
-    }
-    .article-list-item:hover {
-      background: var(--cream);
-    }
+    .article-list-item:last-child { border-bottom: none; }
+    .article-list-item:hover { background: var(--bg-elevated); }
     .article-list-num {
       font-family: 'Noto Serif JP', serif;
       font-size: 18px;
       font-weight: 900;
-      color: var(--border);
+      color: var(--border-strong);
       min-width: 28px;
       text-align: center;
     }
-    .article-list-item:nth-child(1) .article-list-num { color: #c8860a; }
-    .article-list-item:nth-child(2) .article-list-num { color: #888; }
-    .article-list-item:nth-child(3) .article-list-num { color: #b07040; }
-    .article-list-body {
-      flex: 1;
-    }
+    .article-list-item:nth-child(1) .article-list-num { color: #c8a030; }
+    .article-list-item:nth-child(2) .article-list-num { color: #7a7a99; }
+    .article-list-item:nth-child(3) .article-list-num { color: #9a6050; }
+    .article-list-body { flex: 1; }
     .article-list-tag {
       font-size: 10px;
-      color: var(--accent);
+      color: #9a78f0;
       font-weight: 700;
       margin-bottom: 3px;
     }
@@ -460,16 +468,15 @@
       font-size: 13px;
       font-weight: 700;
       line-height: 1.5;
+      color: var(--text-primary);
     }
-    .article-list-arrow {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
+    .article-list-arrow { font-size: 14px; color: var(--text-muted); }
 
     /* ===== INLINE CTA BAR ===== */
     .inline-cta {
-      background: linear-gradient(135deg, #1a4731 0%, #2d6a4f 100%);
-      color: #fff;
+      background: linear-gradient(90deg, #160b38 0%, #1e1050 50%, #160b38 100%);
+      border-top: 1px solid rgba(113,50,245,0.3);
+      border-bottom: 1px solid rgba(113,50,245,0.3);
       padding: 28px 24px;
       display: flex;
       align-items: center;
@@ -482,12 +489,14 @@
       font-size: 14px;
       font-weight: 700;
       line-height: 1.5;
+      color: var(--text-primary);
     }
     .inline-cta p span {
       font-size: 11px;
       font-weight: 400;
-      opacity: 0.75;
+      color: var(--text-secondary);
       display: block;
+      margin-top: 2px;
     }
     .inline-cta-btn {
       background: var(--cta);
@@ -495,7 +504,7 @@
       font-size: 14px;
       font-weight: 700;
       padding: 14px 28px;
-      border-radius: 4px;
+      border-radius: 12px;
       text-decoration: none;
       white-space: nowrap;
       transition: background 0.2s;
@@ -504,7 +513,7 @@
 
     /* ===== TRUST ===== */
     .trust-section {
-      background: var(--cream);
+      background: var(--bg-base);
       padding: 40px 24px;
       text-align: center;
       border-top: 1px solid var(--border);
@@ -523,9 +532,10 @@
       gap: 6px;
     }
     .trust-badge-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--ink);
+      width: 46px;
+      height: 46px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -540,18 +550,20 @@
 
     /* ===== FOOTER ===== */
     .site-footer {
-      background: var(--ink);
-      color: rgba(250,247,242,0.5);
+      background: #080810;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
       padding: 24px;
       text-align: center;
       font-size: 11px;
-      line-height: 1.8;
+      line-height: 1.9;
     }
     .site-footer a {
-      color: rgba(250,247,242,0.5);
+      color: var(--text-muted);
       text-decoration: none;
       margin: 0 8px;
     }
+    .site-footer a:hover { color: var(--text-secondary); }
 
     /* ===== STICKY BOTTOM CTA (mobile) ===== */
     .sticky-cta {
@@ -559,16 +571,17 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--cta);
+      background: rgba(10,10,15,0.97);
+      border-top: 1px solid var(--border-mid);
       padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 200;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      backdrop-filter: blur(8px);
     }
     .sticky-cta p {
-      color: #fff;
+      color: var(--text-primary);
       font-size: 13px;
       font-weight: 700;
       line-height: 1.4;
@@ -576,35 +589,32 @@
     .sticky-cta p span {
       font-size: 11px;
       font-weight: 400;
-      opacity: 0.85;
+      color: var(--text-secondary);
       display: block;
     }
     .sticky-cta a {
-      background: #fff;
-      color: var(--cta-dark);
+      background: var(--cta);
+      color: #fff;
       font-size: 13px;
       font-weight: 700;
       padding: 10px 20px;
-      border-radius: 4px;
+      border-radius: 12px;
       text-decoration: none;
       white-space: nowrap;
     }
 
-    @media (min-width: 640px) {
-      .sticky-cta { display: none; }
-    }
+    @media (min-width: 640px) { .sticky-cta { display: none; } }
 
-    /* Animations */
+    /* ===== ANIMATIONS ===== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .hero h1, .hero-sub, .hero-stats {
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero-sub { animation-delay: 0.1s; }
+    .hero h1, .hero-sub, .hero-stats { animation: fadeUp 0.6s ease both; }
+    .hero-sub  { animation-delay: 0.1s; }
     .hero-stats { animation-delay: 0.2s; }
   </style>
+
   <!-- Google Analytics GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS30YQY1N7"></script>
   <script>
@@ -779,12 +789,12 @@
     <h2 class="section-title">アラプラス 深い眠りが<br>選ばれる3つの理由</h2>
     <div class="merit-grid">
       <div class="merit-card">
-        <span class="merit-icon">💰</span>
+        <span class="merit-icon">💊</span>
         <h3>GABA×テアニン配合</h3>
         <p>科学的に証明された成分を最適な比率で配合。研究データが裏付ける睡眠改善効果。</p>
       </div>
       <div class="merit-card">
-        <span class="merit-icon">🏠</span>
+        <span class="merit-icon">🏥</span>
         <h3>専門家も推奨</h3>
         <p>睡眠の専門家が認める成分設計。飲み始めから実感しやすい即効性が特徴です。</p>
       </div>
@@ -895,7 +905,7 @@
         </div>
         <span class="article-list-arrow">›</span>
       </a>
-      <a href="https://www.qolmedia.info/sleep" class="article-list-item" style="justify-content:center;color:var(--green);font-weight:700;font-size:13px">
+      <a href="https://www.qolmedia.info/sleep" class="article-list-item" style="justify-content:center;color:#9a78f0;font-weight:700;font-size:13px">
         全60記事を見る →
       </a>
     </div>
