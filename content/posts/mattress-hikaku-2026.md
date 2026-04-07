@@ -64,7 +64,7 @@ tags: ["睡眠", "マットレス比較", "快眠グッズ"]
 
 体重60kg以下の方であれば、体圧分散性能も十分。専門家も推奨するエントリーモデルとして人気を集めています。
 
-[アイリスオーヤマのマットレスを楽天で見る](https://hb.afl.rakuten.co.jp/XXXXX)
+[アイリスオーヤマのマットレスをAmazonで見る](https://amzn.to/4vaYeix)
 
 ## ニトリ｜バランス型の安心ブランド
 
@@ -100,7 +100,7 @@ tags: ["睡眠", "マットレス比較", "快眠グッズ"]
 
 [エムリリーマットレスで朝までぐっすり眠る](https://px.a8.net/svt/ejp?a8mat=4AZS0R+87WHZ6+3QJC+BWVTE)
 
-[アイリスオーヤマのマットレスを楽天でチェック](https://hb.afl.rakuten.co.jp/XXXXX)
+[アイリスオーヤマのマットレスをAmazonでチェック](https://amzn.to/4vaYeix)
 
 ## よくある質問（FAQ）
 

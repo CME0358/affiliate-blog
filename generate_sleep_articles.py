@@ -22,32 +22,32 @@ from datetime import date
 # ─────────────────────────────────────────────────────────────
 AFFILIATE_URLS = {
     # afb ─ 睡眠サプリの土台（アラプラス・GABA・テアニン等）
-    "afb_alaplas":    "https://px.a8.net/XXXXX",   # アラプラス 深い眠り
-    "afb_gaba":       "https://px.a8.net/XXXXX",   # GABAサプリ（afb）
-    "afb_theanine":   "https://px.a8.net/XXXXX",   # テアニンサプリ
-    "afb_relacmin":   "https://px.a8.net/XXXXX",   # リラクミン系
-    "afb_general":    "https://px.a8.net/XXXXX",   # afb汎用（サプリ全般）
+    "afb_alaplas":    "https://px.a8.net/svt/ejp?a8mat=4AZS0R+691WZM+43JO+NTJWY",   # アラプラス 深い眠り
+    "afb_gaba":       "https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s",   # GABAサプリ（afb）
+    "afb_theanine":   "https://amzn.to/4cfAMrL",   # テアニンサプリ
+    "afb_relacmin":   "https://amzn.to/4seBnjn",   # リラクミン系
+    "afb_general":    "https://amzn.to/4vx74Y7",   # afb汎用（サプリ全般）
 
     # A8.net ─ NMN・DHC・ファンケル系
-    "a8_nmn":         "https://px.a8.net/XXXXX",   # NMNサプリ
-    "a8_gaba_fancl":  "https://px.a8.net/XXXXX",   # GABAサプリ（ファンケル・DHC）
-    "a8_nightbra":    "https://px.a8.net/XXXXX",   # ナイトブラ（VIAGE等）
+    "a8_nmn":         "https://px.a8.net/svt/ejp?a8mat=4B1FHJ+7YDKAQ+4P4W+C2O5E",   # NMNサプリ
+    "a8_gaba_fancl":  "https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s",   # GABAサプリ（ファンケル・DHC）
+    "a8_nightbra":    "https://px.a8.net/svt/ejp?a8mat=4B1FHJ+9QODMQ+4614+5YJRM",   # ナイトブラ（VIAGE等）
 
     # もしも経由 ─ 枕・マットレス（数で勝つ設計）
-    "moshimo_pillow":  "https://af.moshimo.com/XXXXX",   # ブレインスリープピロー
-    "moshimo_mattress":"https://af.moshimo.com/XXXXX",   # マットレス（エムリリー等）
+    "moshimo_pillow":  "https://amzn.to/4c9wbXX",   # ブレインスリープピロー
+    "moshimo_mattress":"https://px.a8.net/svt/ejp?a8mat=4AZS0R+87WHZ6+3QJC+BWVTE",   # マットレス（エムリリー等）
 
     # 楽天アフィリ
-    "rakuten_mattress":"https://hb.afl.rakuten.co.jp/XXXXX",  # マットレス（楽天）
-    "rakuten_pillow":  "https://hb.afl.rakuten.co.jp/XXXXX",  # 枕（楽天）
-    "rakuten_aroma":   "https://hb.afl.rakuten.co.jp/XXXXX",  # アロマ（生活の木等）
-    "rakuten_alarm":   "https://hb.afl.rakuten.co.jp/XXXXX",  # 光目覚まし時計
+    "rakuten_mattress":"https://amzn.to/3O4AQ5u",  # マットレス（楽天）
+    "rakuten_pillow":  "https://amzn.to/4tRiqob",  # 枕（楽天）
+    "rakuten_aroma":   "https://amzn.to/4c8tplz",  # アロマ（生活の木等）
+    "rakuten_alarm":   "https://px.a8.net/svt/ejp?a8mat=4AZS0R+87B2DE+2HEW+5YCH7M",  # 光目覚まし時計
 
     # Amazon ─ アイマスク・スマートウォッチ・ノーズクリップ
-    "amazon_eyemask":  "https://amzn.to/XXXXX",    # アイマスク
-    "amazon_watch":    "https://amzn.to/XXXXX",    # スマートウォッチ（Xiaomi等）
-    "amazon_noseclip": "https://amzn.to/XXXXX",    # いびき防止ノーズクリップ
-    "amazon_decaf":    "https://amzn.to/XXXXX",    # デカフェ＋GABAドリンク
+    "amazon_eyemask":  "https://amzn.to/41ibR1E",    # アイマスク
+    "amazon_watch":    "https://amzn.to/4tucL6W",    # スマートウォッチ（Xiaomi等）
+    "amazon_noseclip": "https://amzn.to/4c9rRHY",    # いびき防止ノーズクリップ
+    "amazon_decaf":    "https://amzn.to/4shuNZ8",    # デカフェ＋GABAドリンク
 }
 # ─────────────────────────────────────────────────────────────
 
