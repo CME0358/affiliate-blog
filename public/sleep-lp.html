@@ -83,7 +83,7 @@
 
     /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(160deg, #0d0820 0%, #120c28 40%, #0a0a14 100%);
+      background: url('/sleep-lp-hero.jpg') center center / cover no-repeat;
       color: var(--text-primary);
       padding: 64px 24px 60px;
       text-align: center;
@@ -93,12 +93,8 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: -40%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(ellipse at center, rgba(113,50,245,0.18) 0%, transparent 65%);
+      inset: 0;
+      background: rgba(10,8,25,0.62);
       pointer-events: none;
     }
     .hero-eyebrow {
