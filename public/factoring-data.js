@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         badge: 'おすすめ', // または空文字
         fee: '1.5％〜10%',
         speed: '最短即日',
-        speedFast: true,
+        speedFast: false,
         rate: '90%以上',
         target: '法人・個人事業主',
         feature: '西日本地域限定。最大5000万円まで対応可能',
