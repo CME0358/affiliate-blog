@@ -334,6 +334,14 @@
     .compare-table tbody tr:nth-child(even) { background: var(--warm-white); }
     .compare-table tbody tr:hover { background: var(--accent-light); }
     .compare-table .company-name { font-weight: 700; color: var(--ink); }
+    .compare-table .company-name a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--cta);
+      padding-bottom: 1px;
+      transition: color 0.15s;
+    }
+    .compare-table .company-name a:hover { color: var(--cta-dark); }
     .compare-table .badge-recommend {
       display: inline-block;
       background: #fef3c7;
@@ -933,7 +941,7 @@
         <tbody id="compare-tbody">
           <!-- ↓ factoring-data.js で上書き可能 -->
           <tr>
-            <td class="company-name">A社<span class="badge-recommend">おすすめ</span></td>
+            <td class="company-name"><a href="#PLACEHOLDER_A" target="_blank">A社</a><span class="badge-recommend">おすすめ</span></td>
             <td>2〜9%</td>
             <td><span class="badge-fast">最短2時間</span></td>
             <td>95%以上</td>
@@ -942,7 +950,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_A" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name">B社</td>
+            <td class="company-name"><a href="#PLACEHOLDER_B" target="_blank">B社</a></td>
             <td>1.5〜8%</td>
             <td><span class="badge-fast">最短即日</span></td>
             <td>90%以上</td>
@@ -951,7 +959,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_B" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name">C社</td>
+            <td class="company-name"><a href="#PLACEHOLDER_C" target="_blank">C社</a></td>
             <td>3〜10%</td>
             <td>最短翌日</td>
             <td>85%以上</td>
@@ -960,7 +968,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_C" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name">D社</td>
+            <td class="company-name"><a href="#PLACEHOLDER_D" target="_blank">D社</a></td>
             <td>5〜20%</td>
             <td><span class="badge-fast">最短2時間</span></td>
             <td>98%以上</td>
@@ -969,7 +977,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_D" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name">E社</td>
+            <td class="company-name"><a href="#PLACEHOLDER_E" target="_blank">E社</a></td>
             <td>2〜12%</td>
             <td>最短翌日</td>
             <td>88%以上</td>
@@ -1215,7 +1223,7 @@
     const tbody = document.getElementById('compare-tbody');
     tbody.innerHTML = rows.map(r => `
       <tr>
-        <td class="company-name">${r.name}${r.badge ? '<span class="badge-recommend">'+r.badge+'</span>' : ''}</td>
+        <td class="company-name"><a href="${r.ctaUrl}" target="_blank">${r.name}</a>${r.badge ? '<span class="badge-recommend">'+r.badge+'</span>' : ''}</td>
         <td>${r.fee}</td>
         <td>${r.speedFast ? '<span class="badge-fast">'+r.speed+'</span>' : r.speed}</td>
         <td>${r.rate}</td>
