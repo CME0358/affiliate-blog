@@ -334,14 +334,6 @@
     .compare-table tbody tr:nth-child(even) { background: var(--warm-white); }
     .compare-table tbody tr:hover { background: var(--accent-light); }
     .compare-table .company-name { font-weight: 700; color: var(--ink); }
-    .compare-table .company-name a {
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 2px solid var(--cta);
-      padding-bottom: 1px;
-      transition: color 0.15s;
-    }
-    .compare-table .company-name a:hover { color: var(--cta-dark); }
     .compare-table .badge-recommend {
       display: inline-block;
       background: #fef3c7;
@@ -418,6 +410,33 @@
       border-radius: 2px;
       margin-right: 4px;
     }
+    /* 動的生成用スタイル */
+    .type-card-recs {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .type-card-rec-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .type-card-rec-link:hover { color: var(--cta-dark); }
+    .type-card-rec-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .type-card-rec-none { font-size: 13px; color: var(--text-muted); }
 
     /* ===== FLOW ===== */
     .flow-section { padding: 56px 24px; background: #fff; }
@@ -941,7 +960,7 @@
         <tbody id="compare-tbody">
           <!-- ↓ factoring-data.js で上書き可能 -->
           <tr>
-            <td class="company-name"><a href="#PLACEHOLDER_A" target="_blank">A社</a><span class="badge-recommend">おすすめ</span></td>
+            <td class="company-name">A社<span class="badge-recommend">おすすめ</span></td>
             <td>2〜9%</td>
             <td><span class="badge-fast">最短2時間</span></td>
             <td>95%以上</td>
@@ -950,7 +969,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_A" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name"><a href="#PLACEHOLDER_B" target="_blank">B社</a></td>
+            <td class="company-name">B社</td>
             <td>1.5〜8%</td>
             <td><span class="badge-fast">最短即日</span></td>
             <td>90%以上</td>
@@ -959,7 +978,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_B" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name"><a href="#PLACEHOLDER_C" target="_blank">C社</a></td>
+            <td class="company-name">C社</td>
             <td>3〜10%</td>
             <td>最短翌日</td>
             <td>85%以上</td>
@@ -968,7 +987,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_C" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name"><a href="#PLACEHOLDER_D" target="_blank">D社</a></td>
+            <td class="company-name">D社</td>
             <td>5〜20%</td>
             <td><span class="badge-fast">最短2時間</span></td>
             <td>98%以上</td>
@@ -977,7 +996,7 @@
             <td class="cta-cell"><a href="#PLACEHOLDER_D" target="_blank">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name"><a href="#PLACEHOLDER_E" target="_blank">E社</a></td>
+            <td class="company-name">E社</td>
             <td>2〜12%</td>
             <td>最短翌日</td>
             <td>88%以上</td>
@@ -997,50 +1016,7 @@
   <div class="section-inner" style="max-width:900px">
     <p class="section-label">タイプ別おすすめ</p>
     <h2 class="section-title">あなたの状況に合う<br>業者はどれ？</h2>
-    <div class="type-grid">
-      <div class="type-card">
-        <div class="type-card-head">🚀 とにかく急ぎ</div>
-        <div class="type-card-body">
-          <p>今日中に資金が必要。スピード最優先で選びたい方。</p>
-          <div class="type-card-rec"><span>おすすめ</span>A社・D社</div>
-        </div>
-      </div>
-      <div class="type-card">
-        <div class="type-card-head">💰 手数料を抑えたい</div>
-        <div class="type-card-body">
-          <p>コストを最小化したい。繰り返し利用を検討中の方。</p>
-          <div class="type-card-rec"><span>おすすめ</span>B社</div>
-        </div>
-      </div>
-      <div class="type-card">
-        <div class="type-card-head">⚠️ 審査が不安</div>
-        <div class="type-card-body">
-          <p>赤字・税滞納・債務超過などで審査が心配な方。</p>
-          <div class="type-card-rec"><span>おすすめ</span>D社</div>
-        </div>
-      </div>
-      <div class="type-card">
-        <div class="type-card-head">🏢 高額・大口</div>
-        <div class="type-card-body">
-          <p>1,000万円以上の大口取引。法人・上場企業向け。</p>
-          <div class="type-card-rec"><span>おすすめ</span>C社</div>
-        </div>
-      </div>
-      <div class="type-card">
-        <div class="type-card-head">🏥 業種特化</div>
-        <div class="type-card-body">
-          <p>医療・建設・運送など特定業界の売掛金を現金化したい方。</p>
-          <div class="type-card-rec"><span>おすすめ</span>E社</div>
-        </div>
-      </div>
-      <div class="type-card">
-        <div class="type-card-head">👤 個人事業主</div>
-        <div class="type-card-body">
-          <p>フリーランス・個人事業主で少額から利用したい方。</p>
-          <div class="type-card-rec"><span>おすすめ</span>A社・B社</div>
-        </div>
-      </div>
-    </div>
+    <div class="type-grid" id="type-grid"></div>
   </div>
 </section>
 
@@ -1223,7 +1199,7 @@
     const tbody = document.getElementById('compare-tbody');
     tbody.innerHTML = rows.map(r => `
       <tr>
-        <td class="company-name"><a href="${r.ctaUrl}" target="_blank">${r.name}</a>${r.badge ? '<span class="badge-recommend">'+r.badge+'</span>' : ''}</td>
+        <td class="company-name">${r.name}${r.badge ? '<span class="badge-recommend">'+r.badge+'</span>' : ''}</td>
         <td>${r.fee}</td>
         <td>${r.speedFast ? '<span class="badge-fast">'+r.speed+'</span>' : r.speed}</td>
         <td>${r.rate}</td>
