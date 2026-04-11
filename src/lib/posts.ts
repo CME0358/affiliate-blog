@@ -11,9 +11,9 @@ export type Post = {
   description: string
   category: string
   tags: string[]
-  image?: string        // 個別指定画像
-  pickupImage?: string  // ピックアップ用個別画像
-  published?: boolean   // false で非公開（省略時は公開）
+  image?: string
+  pickupImage?: string
+  published?: boolean
   content: string
 }
 
@@ -29,6 +29,7 @@ export function getCategoryImage(category: string): string {
     'ペット': '/og-pet.svg',
     '健康': '/og-health.svg',
     '暮らし': '/og-life.svg',
+    '睡眠': '/og-sleep.svg',
   }
   return map[category] || '/og-default.svg'
 }
@@ -43,13 +44,28 @@ export function getPickupImage(post: Post): string {
   return post.pickupImage || post.image || PICKUP_DEFAULT_IMAGE
 }
 
-export function getAllPosts(): Post[] {
-  if (!fs.existsSync(postsDir)) return []
-  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'))
+// content/posts/ 配下のすべての .md / .mdx ファイルを再帰的に収集
+function collectFiles(dir: string): string[] {
+  if (!fs.existsSync(dir)) return []
+  const entries = fs.readdirSync(dir, { withFileTypes: true })
+  const files: string[] = []
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      files.push(...collectFiles(fullPath))
+    } else if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) {
+      files.push(fullPath)
+    }
+  }
   return files
-    .map(file => {
-      const slug = file.replace(/\.md$/, '')
-      const raw = fs.readFileSync(path.join(postsDir, file), 'utf-8')
+}
+
+export function getAllPosts(): Post[] {
+  const files = collectFiles(postsDir)
+  return files
+    .map(filePath => {
+      const slug = path.basename(filePath).replace(/\.mdx?$/, '')
+      const raw = fs.readFileSync(filePath, 'utf-8')
       const { data, content } = matter(raw)
       return {
         slug,
@@ -69,8 +85,10 @@ export function getAllPosts(): Post[] {
 }
 
 export function getPostBySlug(slug: string): Post | null {
-  const filePath = path.join(postsDir, `${slug}.md`)
-  if (!fs.existsSync(filePath)) return null
+  // サブフォルダを含めて検索
+  const files = collectFiles(postsDir)
+  const filePath = files.find(f => path.basename(f).replace(/\.mdx?$/, '') === slug)
+  if (!filePath) return null
   const raw = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(raw)
   return {
@@ -82,6 +100,7 @@ export function getPostBySlug(slug: string): Post | null {
     tags: data.tags || [],
     image: data.image || '',
     pickupImage: data.pickupImage || '',
+    published: data.published !== false,
     content,
   }
 }
