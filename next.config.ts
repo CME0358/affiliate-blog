@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  outputFileTracingIncludes: {
-    "/sitemap.xml": ["./content/posts/**/*"],
+  experimental: {
+    outputFileTracingIncludes: {
+      "/sitemap.xml": ["./content/posts/**/*"],
+    },
   },
 };
 
