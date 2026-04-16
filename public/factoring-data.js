@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
       rate: '90%以上',
       target: '法人・個人事業主',
       feature: '最大1億円まで対応可能',
-      ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5KN56Q+4EKW+5YJRM',
+      ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5GH3YA+4EKW+TRVYQ',
       ctaText: '無料相談する',
       types: ['large', 'individual'] // 1億円対応・個人事業主OK
     },
