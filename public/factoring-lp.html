@@ -747,6 +747,21 @@
       display: block;
       margin-top: 3px;
     }
+    .result-card {
+      margin: 12px 0;
+      text-align: center;
+    }
+    .result-card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 10px 0 4px;
+    }
+    .result-card-sub {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 12px;
+    }
     .diag-result .result-retry {
       display: block;
       margin-top: 10px;
@@ -1217,34 +1232,46 @@
   const DIAG_DATA = {
     fast: {
       label: 'スピード重視ならコレ',
-      name: '🚀 QuQuMo・うりかけ堂がおすすめ',
-      sub: '最短2時間入金 / 審査通過率95%以上 / 無料相談',
-      url: 'https://px.a8.net/svt/ejp?a8mat=3N81RK+6JRPVM+4S8A+5YJRM'
+      name: 'うりかけ堂',
+      sub: '最短2時間入金 / 審査通過率95%以上',
+      cta_sub: '無料相談・最短即日対応',
+      url: 'https://px.a8.net/svt/ejp?a8mat=3N81RK+6JRPVM+4S8A+5ZMCH',
+      img: 'https://www23.a8.net/svt/bgt?aid=220405232396&wid=003&eno=01&mid=s00000022321001006000&mc=1',
+      pixel: '<img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=3N81RK+6JRPVM+4S8A+5ZMCH" alt="" style="position:absolute;opacity:0;">'
     },
     low: {
       label: 'コスト重視ならコレ',
-      name: '💰 株式会社No.1がおすすめ',
-      sub: '手数料1%〜 / 繰り返し利用に最適 / 無料相談',
-      url: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5KN56Q+4EKW+5YJRM'
+      name: '株式会社No.1',
+      sub: '手数料1%〜 / 繰り返し利用に最適',
+      cta_sub: '無料相談・審査通過率No.1',
+      url: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5GH3YA+4EKW+TS3OI',
+      img: 'https://www29.a8.net/svt/bgt?aid=260408218337&wid=003&eno=01&mid=s00000020552001008000&mc=1',
+      pixel: '<img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4B1G9M+5GH3YA+4EKW+TS3OI" alt="" style="position:absolute;opacity:0;">'
     }
   };
 
   function diagSelect(ctx, answer) {
     const d = DIAG_DATA[answer];
-    const boxId   = ctx === 'hero' ? 'diag-hero' : 'diag-sticky';
+    const boxId    = ctx === 'hero' ? 'diag-hero' : 'diag-sticky';
     const resultId = ctx === 'hero' ? 'diag-hero-result' : 'diag-sticky-result';
 
     document.getElementById(boxId).style.display = 'none';
     const resultEl = document.getElementById(resultId);
-    resultEl.innerHTML = `
-      <span class="result-label">あなたへのおすすめ</span>
-      <span class="result-name">${d.name}</span>
-      <a href="${d.url}" class="result-cta" target="_blank" rel="noopener noreferrer">
-        無料相談する
-        <span class="result-cta-sub">${d.sub}</span>
-      </a>
-      <span class="result-retry" onclick="diagReset('${ctx}')">← もう一度診断する</span>
-    `;
+    resultEl.innerHTML =
+      '<span class="result-label">あなたへのおすすめ</span>' +
+      '<div class="result-card">' +
+        '<a href="' + d.url + '" target="_blank" rel="nofollow noopener" style="display:block;">' +
+          '<img src="' + d.img + '" alt="' + d.name + '" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto;border-radius:8px;">' +
+        '</a>' +
+        '<p class="result-card-name">' + d.name + '</p>' +
+        '<p class="result-card-sub">' + d.sub + '</p>' +
+        '<a href="' + d.url + '" class="result-cta" target="_blank" rel="nofollow noopener">' +
+          '無料相談する' +
+          '<span class="result-cta-sub">' + d.cta_sub + '</span>' +
+        '</a>' +
+        d.pixel +
+      '</div>' +
+      '<span class="result-retry" onclick="diagReset(\'' + ctx + '\')">← もう一度診断する</span>';
     resultEl.style.display = 'block';
   }
 
