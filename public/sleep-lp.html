@@ -603,6 +603,168 @@
 
     @media (min-width: 640px) { .sticky-cta { display: none; } }
 
+    /* ===== WORRY MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 540px;
+      padding: 36px 28px 32px;
+      position: relative;
+      animation: fadeUp 0.3s ease both;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+    .modal-step { transition: opacity 0.2s, transform 0.2s; }
+    .modal-step.hidden { display: none; }
+
+    /* Step 1 — 悩み選択 */
+    .modal-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #9a78f0;
+      margin-bottom: 8px;
+    }
+    .modal-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(17px, 4vw, 22px);
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    .worry-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .worry-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-mid);
+      border-radius: 14px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-align: left;
+      color: var(--text-primary);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .worry-btn:hover {
+      border-color: var(--purple);
+      background: rgba(113,50,245,0.08);
+    }
+    .worry-btn-icon { font-size: 26px; flex-shrink: 0; }
+    .worry-btn-text strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    .worry-btn-text span { font-size: 12px; color: var(--text-muted); }
+
+    /* Step 2 — 解決策カード */
+    .modal-back {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .modal-back:hover { color: var(--text-secondary); }
+    .solution-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .solution-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(15px, 3.5vw, 19px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .solution-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 480px) {
+      .solution-cards { grid-template-columns: 1fr; }
+    }
+    .solution-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      border-radius: 14px;
+      overflow: hidden;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .solution-card:hover {
+      border-color: rgba(113,50,245,0.5);
+      transform: translateY(-2px);
+    }
+    .solution-card-img {
+      width: 100%;
+      aspect-ratio: 300/250;
+      object-fit: cover;
+      display: block;
+    }
+    .solution-card-body { padding: 12px 10px; }
+    .solution-card-category {
+      font-size: 10px;
+      font-weight: 700;
+      color: #9a78f0;
+      margin-bottom: 4px;
+    }
+    .solution-card-name {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .solution-card-btn {
+      display: block;
+      background: var(--cta);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 9px 6px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .solution-card-btn:hover { background: var(--cta-dark); }
+    /* アフィリ計測用透明ピクセル */
+    .affili-pixel { position: absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+
     /* ===== ANIMATIONS ===== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -631,31 +793,35 @@
   <a href="https://www.qolmedia.info/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <a href="https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s" class="header-cta" target="_blank">▶ グッドナイト27000プラスを見る</a>
+  <button class="header-cta open-modal" style="border:none;cursor:pointer;">▶ 解決策を探す</button>
 </header>
 
 <!-- HERO -->
-<a href="https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;color:inherit;">
 <section class="hero">
   <div class="hero-eyebrow">睡眠改善 完全ガイド 2026</div>
-  <h1>毎晩の眠れない夜を、<br><em>科学的に</em>解決します。</h1>
-  <p class="hero-sub">ストレス・スマホ・生活習慣が原因の不眠に。専門家も推奨するグッドナイト27000プラスで、明日の朝を変える。</p>
-  <div class="hero-stats">
+  <h1>毎晩の眠れない夜を、<br><em>今夜から</em>変える。</h1>
+  <p class="hero-sub">寝つけない・眠りが浅い・朝が辛い。あなたの悩みに合った解決策を、科学的根拠のある記事と厳選アイテムで提案します。</p>
+    <div class="hero-stats">
     <div class="hero-stat">
       <span class="hero-stat-num">60</span>
       <div class="hero-stat-label">専門記事</div>
     </div>
     <div class="hero-stat">
-      <span class="hero-stat-num">GABA</span>
-      <div class="hero-stat-label">科学的成分</div>
+      <span class="hero-stat-num" style="font-size:16px;line-height:1.4;">サプリ<br>枕<br>マットレス</span>
+      <div class="hero-stat-label">解決アイテム</div>
     </div>
     <div class="hero-stat">
       <span class="hero-stat-num">専門家</span>
       <div class="hero-stat-label">推奨レベル</div>
     </div>
   </div>
+  <div style="margin-top:32px;position:relative;">
+    <button class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
+      あなたの悩みに合わせて探す
+      <span class="cta-btn-sub">サプリ・枕・マットレスから提案します</span>
+    </button>
+  </div>
 </section>
-</a>
 
 <!-- PAIN -->
 <section class="pain-section">
@@ -776,30 +942,30 @@
 
 <!-- INLINE CTA -->
 <div class="inline-cta">
-  <p>記事で紹介しているサプリは、ここで買えます。<span>科学的成分・専門家推奨・安心の正規品</span></p>
-  <a href="https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s" class="inline-cta-btn" target="_blank">▶ グッドナイト27000プラスを見る</a>
+  <p>サプリ・枕・マットレス。あなたに合う解決策はどれ？<span>科学的根拠のある厳選アイテムをご提案</span></p>
+  <button class="inline-cta-btn open-modal" style="border:none;cursor:pointer;">▶ 悩みから探す</button>
 </div>
 
 <!-- MERIT -->
 <section class="merit-section">
   <div class="section-inner" style="max-width:900px">
-    <p class="section-label">なぜグッドナイト27000プラスが選ばれるのか</p>
-    <h2 class="section-title">グッドナイト27000プラスが<br>選ばれる3つの理由</h2>
+    <p class="section-label">睡眠改善の3つのアプローチ</p>
+    <h2 class="section-title">あなたの悩みに合わせた<br>解決策がある</h2>
     <div class="merit-grid">
       <div class="merit-card">
-        <span class="merit-icon">🌙</span>
-        <h3>2種の機能性関与成分配合</h3>
-        <p>消費者庁に届出した機能性表示食品（届出番号D76）。L-テアニンが夜間の良質な睡眠をサポートし、GABAが一時的な精神的ストレスや疲労感を緩和。科学的根拠のある2成分をW配合。</p>
+        <span class="merit-icon">💊</span>
+        <h3>サプリで内側から整える</h3>
+        <p>GABA・L-テアニンなど科学的根拠のある成分配合。機能性表示食品で安心。寝つきが悪い・ストレスで眠れない方に。</p>
       </div>
       <div class="merit-card">
-        <span class="merit-icon">🔬</span>
-        <h3>7種のリフレッシュ成分も一緒に</h3>
-        <p>ラクティウム・グリシン・トリプトファン・ラフマ・カモミール・ビタミンB群・パルキサンを追加配合。機能性成分だけでなく、休息をトータルでサポートする設計。</p>
+        <span class="merit-icon">🛏️</span>
+        <h3>マットレスで体をリセット</h3>
+        <p>体圧分散・寝返りのしやすさが睡眠の質を左右する。腰痛・肩こりが原因で眠れない方に最適なアプローチ。</p>
       </div>
       <div class="merit-card">
-        <span class="merit-icon">✅</span>
-        <h3>GMP認定工場・国内製造</h3>
-        <p>GMP基準認定の国内工場で製造。放射能検査も実施済みで安心。継続率89%・累計12万袋突破の実績が品質を証明している。</p>
+        <span class="merit-icon">😴</span>
+        <h3>枕で首・頭を正しく支える</h3>
+        <p>合わない枕は首コリ・いびきの原因に。高さ・素材・形状の選び方で朝の目覚めが変わる。</p>
       </div>
     </div>
   </div>
@@ -807,13 +973,13 @@
 
 <!-- MAIN CTA -->
 <section class="cta-section">
-  <p class="cta-label">▼ おすすめ睡眠サプリ</p>
-  <h2>眠れない夜を終わらせる<br><em>科学的アプローチ</em></h2>
-  <p>L-テアニン×GABA配合の機能性表示食品。継続率89%・累計12万袋の実績。</p>
-  <a href="https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s" class="cta-btn" target="_blank">
-    グッドナイト27000プラスを見る
-    <span class="cta-btn-sub">機能性表示食品 / GMP認定工場製造 / 継続率89%</span>
-  </a>
+  <p class="cta-label">▼ あなたに合う睡眠改善を見つける</p>
+  <h2>眠れない夜を終わらせる<br><em>あなただけの解決策</em></h2>
+  <p>サプリ・枕・マットレス。悩みを選ぶだけで、科学的根拠のある厳選アイテムをご提案します。</p>
+  <button class="cta-btn open-modal" style="border:none;cursor:pointer;">
+    悩みから解決策を探す
+    <span class="cta-btn-sub">サプリ / 枕 / マットレスの3カテゴリから提案</span>
+  </button>
   <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
 </section>
 
@@ -933,6 +1099,92 @@
   </div>
 </section>
 
+<!-- WORRY MODAL -->
+<div class="modal-overlay" id="worryModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+
+    <!-- Step 1: 悩み選択 -->
+    <div class="modal-step" id="step1">
+      <p class="modal-eyebrow">SLEEP SOLUTION FINDER</p>
+      <h3 class="modal-title">あなたの悩みはどれですか？</h3>
+      <div class="worry-btns">
+        <button class="worry-btn" data-worry="netsuki">
+          <span class="worry-btn-icon">😞</span>
+          <div class="worry-btn-text">
+            <strong>寝つきが悪い・なかなか眠れない</strong>
+            <span>布団に入っても眠れない、ストレスで頭が冴える</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-worry="asai">
+          <span class="worry-btn-icon">😪</span>
+          <div class="worry-btn-text">
+            <strong>眠りが浅い・夜中に目が覚める</strong>
+            <span>寝た気がしない、夢ばかり見る、途中で起きてしまう</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-worry="tsukare">
+          <span class="worry-btn-icon">😩</span>
+          <div class="worry-btn-text">
+            <strong>朝起きても疲れが取れない</strong>
+            <span>体が重い、肩・腰が痛い、すっきり起きられない</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: 解決策カード -->
+    <div class="modal-step hidden" id="step2">
+      <button class="modal-back" id="backBtn">← 悩みを選び直す</button>
+      <p class="solution-label" id="solutionLabel"></p>
+      <h3 class="solution-title" id="solutionTitle"></h3>
+      <!-- 寝つきが悪い → サプリ1枚 -->
+      <div class="solution-cards" id="cards-netsuki" style="display:none;justify-content:center;">
+        <div class="solution-card" style="width:220px;margin:0 auto;">
+          <a href="https://t.afi-b.com/visit.php?a=M7608f-U291953J&p=e855734s" target="_blank" rel="nofollow" style="display:block;">
+            <img src="https://www.afi-b.com/upload_image/7608-1500488441-3.gif" alt="グッドナイト27000プラス" style="width:220px;height:auto;display:block;">
+          </a>
+          <div class="solution-card-body" style="text-align:center;">
+            <p class="solution-card-category">💊 サプリ</p>
+            <p class="solution-card-name">グッドナイト27000プラス</p>
+            <a href="https://t.afi-b.com/visit.php?a=M7608f-U291953J&p=e855734s" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+          <img src="https://t.afi-b.com/lead/M7608f/e855734s/U291953J" width="1" height="1" style="position:absolute;opacity:0;" alt="">
+        </div>
+      </div>
+
+      <!-- 眠りが浅い → 枕1枚 -->
+      <div class="solution-cards" id="cards-asai" style="display:none;justify-content:center;">
+        <div class="solution-card" style="width:220px;margin:0 auto;">
+          <a href="https://amzn.to/4mOggmL" target="_blank" rel="nofollow" style="display:block;">
+            <img src="https://m.media-amazon.com/images/I/514jq5I-wKL._AC_SX679_.jpg" alt="ブレインスリープ ピロー" style="width:220px;height:auto;display:block;">
+          </a>
+          <div class="solution-card-body" style="text-align:center;">
+            <p class="solution-card-category">😴 枕</p>
+            <p class="solution-card-name">ブレインスリープ ピロー</p>
+            <a href="https://amzn.to/4mOggmL" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 疲れが取れない → マットレス1枚 -->
+      <div class="solution-cards" id="cards-tsukare" style="display:none;justify-content:center;">
+        <div class="solution-card" style="width:220px;margin:0 auto;">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+87WHZ6+3QJC+C0QPD" target="_blank" rel="nofollow" style="display:block;">
+            <img src="https://www27.a8.net/svt/bgt?aid=260330139497&wid=003&eno=01&mid=s00000017436002019000&mc=1" alt="エムリリー優反発マットレス" style="width:220px;height:auto;display:block;" border="0">
+          </a>
+          <div class="solution-card-body" style="text-align:center;">
+            <p class="solution-card-category">🛏️ マットレス</p>
+            <p class="solution-card-name">エムリリー優反発マットレス</p>
+            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+87WHZ6+3QJC+C0QPD" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+          <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4AZS0R+87WHZ6+3QJC+C0QPD" alt="" style="position:absolute;opacity:0;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="site-footer">
   当サイトはアフィリエイト広告を含みます。掲載情報は記事公開時点のものです。<br>
@@ -944,9 +1196,84 @@
 
 <!-- STICKY BOTTOM CTA (mobile only) -->
 <div class="sticky-cta">
-  <p>眠れない夜を解決<span>グッドナイト27000プラスで睡眠改善</span></p>
-  <a href="https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s" target="_blank">今すぐ見る</a>
+  <p>眠れない夜を解決<span>悩みに合わせてアイテムを提案</span></p>
+  <button class="open-modal" style="background:var(--cta);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:12px;border:none;cursor:pointer;">今すぐ探す</button>
 </div>
 
+<script>
+  // 悩み別メッセージ
+  const worryMessages = {
+    netsuki: {
+      label: '寝つきが悪い・なかなか眠れない',
+      title: 'ストレス・緊張を和らげるなら\nこのサプリが効く'
+    },
+    asai: {
+      label: '眠りが浅い・夜中に目が覚める',
+      title: '深い眠りに導く枕で\n睡眠の質を変える'
+    },
+    tsukare: {
+      label: '朝起きても疲れが取れない',
+      title: '体圧分散マットレスで\n朝の目覚めをリセット'
+    }
+  };
+
+  // 悩みとカードIDのマッピング
+  const cardMap = {
+    netsuki: 'cards-netsuki',
+    asai:    'cards-asai',
+    tsukare: 'cards-tsukare'
+  };
+
+  const modal = document.getElementById('worryModal');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const solutionLabel = document.getElementById('solutionLabel');
+  const solutionTitle = document.getElementById('solutionTitle');
+  const allCards = ['cards-netsuki', 'cards-asai', 'cards-tsukare'];
+
+  // モーダルを開く
+  document.querySelectorAll('.open-modal').forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.classList.add('open');
+      step1.classList.remove('hidden');
+      step2.classList.add('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // 閉じる
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // 悩み選択 → Step2へ（対応カードだけ表示）
+  document.querySelectorAll('.worry-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const worry = btn.dataset.worry;
+      const msg = worryMessages[worry];
+      solutionLabel.textContent = '「' + msg.label + '」の方へ';
+      solutionTitle.textContent = msg.title;
+
+      // 全カード非表示 → 該当カードのみ表示
+      allCards.forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+      document.getElementById(cardMap[worry]).style.display = 'flex';
+
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden');
+    });
+  });
+
+  // 戻る
+  document.getElementById('backBtn').addEventListener('click', () => {
+    step2.classList.add('hidden');
+    step1.classList.remove('hidden');
+  });
+</script>
 </body>
 </html>
