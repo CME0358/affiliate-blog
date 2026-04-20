@@ -839,6 +839,7 @@
       <div class="diag-btns">
         <button class="diag-btn" onclick="diagSelect('hero','fast')">⚡ 即日・最速で欲しい</button>
         <button class="diag-btn" onclick="diagSelect('hero','low')">💰 手数料を抑えたい</button>
+        <button class="diag-btn" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--cta-dark);border:2px solid var(--cta);">📋 複数社を相見積もり</button>
       </div>
     </div>
     <div class="diag-result" id="diag-hero-result" style="display:none;"></div>
@@ -1183,6 +1184,7 @@
     <div class="diag-btns sticky-diag-btns">
       <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','fast')">⚡ 即日入金</button>
       <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','low')">💰 低コスト</button>
+      <button class="diag-btn sticky-diag-btn" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--cta-dark);border:2px solid var(--cta);">📋 相見積もり</button>
     </div>
   </div>
   <div class="diag-result sticky-diag-result" id="diag-sticky-result" style="display:none;"></div>
