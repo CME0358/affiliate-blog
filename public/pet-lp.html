@@ -604,6 +604,120 @@
     }
     .hero-sub { animation-delay: 0.1s; }
     .hero-stats { animation-delay: 0.2s; }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px 28px;
+      max-width: 420px;
+      width: 100%;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #888;
+      line-height: 1;
+    }
+    .modal-step { transition: opacity 0.2s; }
+    .modal-step.hidden { display: none; }
+    .modal-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #06C755;
+      margin-bottom: 8px;
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .worry-btns { display: flex; flex-direction: column; gap: 10px; }
+    .worry-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #f7f7f7;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .worry-btn:hover { border-color: #06C755; background: #f0faf3; }
+    .worry-btn-icon { font-size: 26px; flex-shrink: 0; }
+    .worry-btn-text strong { display: block; font-size: 14px; color: #1a1a1a; font-weight: 700; }
+    .worry-btn-text span { font-size: 12px; color: #666; margin-top: 2px; display: block; }
+    .modal-back {
+      background: none;
+      border: none;
+      color: #06C755;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 0 0 16px 0;
+      font-weight: 600;
+    }
+    .modal-back:hover { opacity: 0.75; }
+    .solution-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #06C755;
+      margin-bottom: 4px;
+    }
+    .solution-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #1a1a1a;
+      margin-bottom: 18px;
+    }
+    .solution-cards { display: flex; justify-content: center; }
+    .solution-card {
+      width: 220px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .solution-card img { width: 100%; height: auto; display: block; }
+    .solution-card-body { padding: 12px; text-align: center; }
+    .solution-card-category { font-size: 12px; color: #666; margin-bottom: 4px; }
+    .solution-card-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
+    .solution-card-btn {
+      display: block;
+      background: #06C755;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+    }
+    .solution-card-btn:hover { background: #04a044; }
   </style>
   <!-- Google Analytics GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS30YQY1N7"></script>
@@ -623,11 +737,11 @@
   <a href="https://www.qolmedia.info/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <a href="https://mttag.com/s/CiN-gOTx1i8" class="header-cta" target="_blank">▶ わんにゃん薬局を見る</a>
+  <button class="header-cta open-modal" style="border:none;cursor:pointer;">▶ 薬を探す</button>
 </header>
 
 <!-- HERO -->
-<a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;color:inherit;">
+<div style="cursor:pointer;" class="open-modal">
 <section class="hero">
   <div class="hero-eyebrow">ペット医薬品 完全ガイド 2026</div>
   <h1>動物病院の薬代、<br><em>最大70%</em>安くなります。</h1>
@@ -647,7 +761,7 @@
     </div>
   </div>
 </section>
-</a>
+</div>
 
 <!-- PAIN -->
 <section class="pain-section">
@@ -768,8 +882,8 @@
 
 <!-- INLINE CTA -->
 <div class="inline-cta">
-  <p>記事で紹介している商品は、ここで買えます。<span>正規品・最安値・安心の国内発送対応</span></p>
-  <a href="https://mttag.com/s/CiN-gOTx1i8" class="inline-cta-btn" target="_blank">▶ わんにゃん薬局を見る</a>
+  <p>あなたのペットに合う薬はこちら。<span>犬・猫別に最適な商品をご提案</span></p>
+  <button class="inline-cta-btn open-modal" style="border:none;cursor:pointer;">▶ ペットの薬を探す</button>
 </div>
 
 <!-- MERIT -->
@@ -799,13 +913,13 @@
 
 <!-- MAIN CTA -->
 <section class="cta-section">
-  <p class="cta-label">▼ おすすめ購入先</p>
-  <h2>フィラリア・ノミダニ薬を<br><em>最安値</em>で手に入れる</h2>
-  <p>記事で紹介している正規品が、すべて揃っています。</p>
-  <a href="https://mttag.com/s/CiN-gOTx1i8" class="cta-btn" target="_blank">
-    わんにゃん薬局で商品を見る
-    <span class="cta-btn-sub">正規品 / 安心購入 / 最安値クラス</span>
-  </a>
+  <p class="cta-label">▼ ペットに合う薬を探す</p>
+  <h2>犬・猫別に<br><em>最適な薬</em>をご提案</h2>
+  <p>犬・猫の種類と症状を選ぶだけ。正規品を最安値クラスで購入できます。</p>
+  <button class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
+    ペットの薬を今すぐ探す
+    <span class="cta-btn-sub">犬・猫別 / 薬種別でご提案</span>
+  </button>
   <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
 </section>
 
@@ -925,6 +1039,290 @@
   </div>
 </section>
 
+<!-- PET MODAL -->
+<div class="modal-overlay" id="petModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+
+    <!-- Step 1: 犬 or 猫 -->
+    <div class="modal-step" id="step1">
+      <p class="modal-eyebrow">PET MEDICINE FINDER</p>
+      <h3 class="modal-title">どちらのペットですか？</h3>
+      <div class="worry-btns">
+        <button class="worry-btn" data-pet="dog">
+          <span class="worry-btn-icon">🐕</span>
+          <div class="worry-btn-text">
+            <strong>犬</strong>
+            <span>フィラリア・ノミダニ・抗生物質など</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-pet="cat">
+          <span class="worry-btn-icon">🐈</span>
+          <div class="worry-btn-text">
+            <strong>猫</strong>
+            <span>ノミダニ・抗生物質・腎臓・泌尿器など</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: 薬種選択 -->
+    <div class="modal-step hidden" id="step2">
+      <button class="modal-back" id="backToStep1">← ペットを選び直す</button>
+      <p class="modal-eyebrow" id="step2Eyebrow"></p>
+      <h3 class="modal-title">何の薬を探していますか？</h3>
+      <!-- 犬の選択肢 -->
+      <div id="dogMeds" class="worry-btns" style="display:none;">
+        <button class="worry-btn" data-med="dog-filaria">
+          <span class="worry-btn-icon">🦟</span>
+          <div class="worry-btn-text">
+            <strong>フィラリア予防薬</strong>
+            <span>蚊が媒介する寄生虫を予防</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="dog-nomi">
+          <span class="worry-btn-icon">🐛</span>
+          <div class="worry-btn-text">
+            <strong>ノミ・ダニ予防薬</strong>
+            <span>外部寄生虫の駆除・予防</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="dog-antibiotic">
+          <span class="worry-btn-icon">💊</span>
+          <div class="worry-btn-text">
+            <strong>抗生物質・抗菌薬</strong>
+            <span>細菌感染・皮膚炎・気管支炎など</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="other">
+          <span class="worry-btn-icon">🛒</span>
+          <div class="worry-btn-text">
+            <strong>その他</strong>
+            <span>目・耳・皮膚の病気、シャンプー・サプリ・おやつなど</span>
+          </div>
+        </button>
+      </div>
+      <!-- 猫の選択肢 -->
+      <div id="catMeds" class="worry-btns" style="display:none;">
+        <button class="worry-btn" data-med="cat-nomi">
+          <span class="worry-btn-icon">🐛</span>
+          <div class="worry-btn-text">
+            <strong>ノミ・ダニ予防薬</strong>
+            <span>外部寄生虫の駆除・予防</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="cat-antibiotic">
+          <span class="worry-btn-icon">💊</span>
+          <div class="worry-btn-text">
+            <strong>抗生物質・抗菌薬</strong>
+            <span>細菌感染・皮膚炎・気管支炎など</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="cat-kidney">
+          <span class="worry-btn-icon">🫘</span>
+          <div class="worry-btn-text">
+            <strong>腎臓・泌尿器の病気</strong>
+            <span>慢性腎臓病・膀胱炎などの治療薬</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="other">
+          <span class="worry-btn-icon">🛒</span>
+          <div class="worry-btn-text">
+            <strong>その他</strong>
+            <span>目・耳・皮膚の病気、シャンプー・サプリ・おやつなど</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: 商品カード -->
+    <div class="modal-step hidden" id="step3">
+      <button class="modal-back" id="backToStep2">← 薬種を選び直す</button>
+      <p class="solution-label" id="solutionLabel"></p>
+      <h3 class="solution-title" id="solutionTitle"></h3>
+
+      <!-- 犬 × フィラリア -->
+      <div class="solution-cards" id="cards-dog-filaria" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/revolution_dog_3.webp" alt="レボリューション(犬用)">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🦟 フィラリア予防薬</p>
+            <p class="solution-card-name">レボリューション（犬用）</p>
+            <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 犬 × ノミ・ダニ -->
+      <div class="solution-cards" id="cards-dog-nomi" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/nexgard__1.webp" alt="ネクスガード">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🐛 ノミ・ダニ予防薬</p>
+            <p class="solution-card-name">ネクスガード</p>
+            <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 犬 × 抗生物質 -->
+      <div class="solution-cards" id="cards-dog-antibiotic" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/zithromax2.webp" alt="ジスロマック錠">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">💊 抗生物質・抗菌薬</p>
+            <p class="solution-card-name">ジスロマック錠</p>
+            <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 猫 × ノミ・ダニ -->
+      <div class="solution-cards" id="cards-cat-nomi" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/fiprofort_plus_cat_1.webp" alt="フィプロフォートプラス(猫用)">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🐛 ノミ・ダニ予防薬</p>
+            <p class="solution-card-name">フィプロフォートプラス（猫用）</p>
+            <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 猫 × 抗生物質 -->
+      <div class="solution-cards" id="cards-cat-antibiotic" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/zithromax2.webp" alt="ジスロマック錠">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">💊 抗生物質・抗菌薬</p>
+            <p class="solution-card-name">ジスロマック錠</p>
+            <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 猫 × 腎臓・泌尿器 -->
+      <div class="solution-cards" id="cards-cat-kidney" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/semintra_1.webp" alt="セミントラ">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🫘 腎臓・泌尿器</p>
+            <p class="solution-card-name">セミントラ</p>
+            <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- その他 → わんにゃん薬局 -->
+      <div class="solution-cards" id="cards-other" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow">
+            <img src="https://mttag.com/banner/CiN-gOTx1i8" alt="わんにゃん薬局">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🛒 総合ペット通販</p>
+            <p class="solution-card-name">わんにゃん薬局</p>
+            <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow" class="solution-card-btn">お店を見る</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const modal = document.getElementById('petModal');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const step3 = document.getElementById('step3');
+  let currentPet = '';
+
+  const medLabels = {
+    'dog-filaria':    ['🦟 フィラリア予防薬（犬）', 'こちらがおすすめです'],
+    'dog-nomi':       ['🐛 ノミ・ダニ予防薬（犬）', 'こちらがおすすめです'],
+    'dog-antibiotic': ['💊 抗生物質・抗菌薬（犬）', 'こちらがおすすめです'],
+    'cat-nomi':       ['🐛 ノミ・ダニ予防薬（猫）', 'こちらがおすすめです'],
+    'cat-antibiotic': ['💊 抗生物質・抗菌薬（猫）', 'こちらがおすすめです'],
+    'cat-kidney':     ['🫘 腎臓・泌尿器（猫）', 'こちらがおすすめです'],
+    'other':          ['🛒 その他', 'わんにゃん薬局で探してみてください'],
+  };
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    // リセット
+    setTimeout(function(){
+      showStep(step1);
+      currentPet = '';
+      document.getElementById('dogMeds').style.display = 'none';
+      document.getElementById('catMeds').style.display = 'none';
+      document.querySelectorAll('[id^="cards-"]').forEach(function(el){ el.style.display = 'none'; });
+    }, 300);
+  }
+  function showStep(target) {
+    [step1, step2, step3].forEach(function(s){ s.classList.add('hidden'); });
+    target.classList.remove('hidden');
+  }
+
+  // 開くトリガー
+  document.querySelectorAll('.open-modal').forEach(function(el){
+    el.addEventListener('click', openModal);
+  });
+
+  // 閉じる
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // Step1: ペット選択
+  document.querySelectorAll('[data-pet]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      currentPet = btn.dataset.pet;
+      document.getElementById('step2Eyebrow').textContent = currentPet === 'dog' ? '犬の薬を探す' : '猫の薬を探す';
+      document.getElementById('dogMeds').style.display = currentPet === 'dog' ? 'flex' : 'none';
+      document.getElementById('catMeds').style.display = currentPet === 'cat' ? 'flex' : 'none';
+      showStep(step2);
+    });
+  });
+
+  // Step2: 薬種選択
+  document.querySelectorAll('[data-med]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const med = btn.dataset.med;
+      document.querySelectorAll('[id^="cards-"]').forEach(function(el){ el.style.display = 'none'; });
+      const card = document.getElementById('cards-' + med);
+      if(card) card.style.display = 'flex';
+      const labels = medLabels[med] || ['おすすめ商品', 'こちらがおすすめです'];
+      document.getElementById('solutionLabel').textContent = labels[0];
+      document.getElementById('solutionTitle').textContent = labels[1];
+      showStep(step3);
+    });
+  });
+
+  // 戻るボタン
+  document.getElementById('backToStep1').addEventListener('click', function(){ showStep(step1); });
+  document.getElementById('backToStep2').addEventListener('click', function(){ showStep(step2); });
+})();
+</script>
+
 <!-- FOOTER -->
 <footer class="site-footer">
   当サイトはアフィリエイト広告を含みます。掲載情報は記事公開時点のものです。<br>
@@ -936,8 +1334,8 @@
 
 <!-- STICKY BOTTOM CTA (mobile only) -->
 <div class="sticky-cta">
-  <p>薬代を最大70%節約<span>わんにゃん薬局で正規品を購入</span></p>
-  <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank">今すぐ見る</a>
+  <p>薬代を最大70%節約<span>犬・猫別に最適な商品を提案</span></p>
+  <button class="open-modal" style="background:#fff;color:var(--cta-dark);font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap;">今すぐ探す</button>
 </div>
 
 </body>
