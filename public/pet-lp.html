@@ -1052,14 +1052,14 @@
         <button class="worry-btn" data-pet="dog">
           <span class="worry-btn-icon">🐕</span>
           <div class="worry-btn-text">
-            <strong>犬</strong>
+            <strong>わんちゃん</strong>
             <span>フィラリア・ノミダニ・抗生物質など</span>
           </div>
         </button>
         <button class="worry-btn" data-pet="cat">
           <span class="worry-btn-icon">🐈</span>
           <div class="worry-btn-text">
-            <strong>猫</strong>
+            <strong>ネコちゃん</strong>
             <span>ノミダニ・抗生物質・腎臓・泌尿器など</span>
           </div>
         </button>
@@ -1296,7 +1296,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.querySelectorAll('[data-pet]').forEach(function(btn){
     btn.addEventListener('click', function(){
       currentPet = btn.dataset.pet;
-      document.getElementById('step2Eyebrow').textContent = currentPet === 'dog' ? '犬の薬を探す' : '猫の薬を探す';
+      document.getElementById('step2Eyebrow').textContent = currentPet === 'dog' ? 'わんちゃんのお薬を探す' : 'ネコちゃんのお薬を探す';
       document.getElementById('dogMeds').style.display = currentPet === 'dog' ? 'flex' : 'none';
       document.getElementById('catMeds').style.display = currentPet === 'cat' ? 'flex' : 'none';
       showStep(step2);
