@@ -882,8 +882,8 @@
 
 <!-- INLINE CTA -->
 <div class="inline-cta">
-  <p>あなたのペットに合うお薬はこちら。<span>犬・猫別に最適な商品をご提案</span></p>
-  <button class="inline-cta-btn open-modal" style="border:none;cursor:pointer;">▶ ペットのお薬を探す</button>
+  <p>あなたのペットに合う薬はこちら。<span>犬・猫別に最適な商品をご提案</span></p>
+  <button class="inline-cta-btn open-modal" style="border:none;cursor:pointer;">▶ ペットの薬を探す</button>
 </div>
 
 <!-- MERIT -->
@@ -913,11 +913,11 @@
 
 <!-- MAIN CTA -->
 <section class="cta-section">
-  <p class="cta-label">▼ ペットに合うお薬を探す</p>
+  <p class="cta-label">▼ ペットに合う薬を探す</p>
   <h2>犬・猫別に<br><em>最適な薬</em>をご提案</h2>
   <p>犬・猫の種類と症状を選ぶだけ。正規品を最安値クラスで購入できます。</p>
   <button class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
-    ペットのお薬を今すぐ探す
+    ペットの薬を今すぐ探す
     <span class="cta-btn-sub">犬・猫別 / 薬種別でご提案</span>
   </button>
   <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
@@ -1244,7 +1244,7 @@
 </div>
 
 <script>
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   const modal = document.getElementById('petModal');
   const step1 = document.getElementById('step1');
   const step2 = document.getElementById('step2');
@@ -1320,7 +1320,7 @@
   // 戻るボタン
   document.getElementById('backToStep1').addEventListener('click', function(){ showStep(step1); });
   document.getElementById('backToStep2').addEventListener('click', function(){ showStep(step2); });
-})();
+});
 </script>
 
 <!-- FOOTER -->
@@ -1335,7 +1335,7 @@
 <!-- STICKY BOTTOM CTA (mobile only) -->
 <div class="sticky-cta">
   <p>薬代を最大70%節約<span>犬・猫別に最適な商品を提案</span></p>
-  <button class="open-modal" style="background:#fff;color:var(--cta-dark);font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap;">今すぐ探す</button>
+  <button class="open-modal" onclick="document.getElementById('petModal').classList.add('open');document.body.style.overflow='hidden';" style="background:#fff;color:var(--cta-dark);font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap;">今すぐ探す</button>
 </div>
 
 </body>
