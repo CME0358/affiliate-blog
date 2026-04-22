@@ -71,6 +71,13 @@ header {
   opacity: 0.85;
 }
 
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.logo img { height: 26px; width: auto; max-width: 150px; display: block; }
+
 .header-cta {
   background: var(--cta);
   color: #fff;
@@ -129,6 +136,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   padding: 64px 48px 64px 5%;
   text-align: left;
   background: linear-gradient(
@@ -141,7 +149,7 @@ header {
 
 /* --- Mobile: 背景画像＋オーバーレイ --- */
 .fv-mb {
-  display: block;
+  display: none;
   position: relative;
   min-height: calc(100svh - 60px);
   overflow: hidden;
@@ -216,6 +224,7 @@ header {
 }
 
 .fv-stat {
+  display: inline-block;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 8px;
@@ -224,6 +233,7 @@ header {
   color: rgba(255,255,255,0.8);
   font-size: 14px;
   line-height: 1.7;
+  max-width: 100%;
 }
 
 .fv-stat strong {
@@ -877,6 +887,7 @@ section { padding: 64px 24px; }
   #sticky-cta { display: block; }
   body { padding-bottom: 72px; }
   .cred-stats { grid-template-columns: repeat(3,1fr); }
+  .fv-mb { display: block; }
 }
 
 /* ========== MODAL ========== */
@@ -1057,7 +1068,9 @@ footer {
 
 <!-- HEADER -->
 <header>
-  <span class="header-logo">薄毛・植毛ガイド</span>
+  <a href="/" class="logo">
+    <img src="/QOL_logo_transparent.png" alt="QOL media" />
+  </a>
   <button class="header-cta open-modal">▶ 無料で調べる</button>
 </header>
 
