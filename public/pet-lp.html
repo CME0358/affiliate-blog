@@ -1264,6 +1264,7 @@ document.addEventListener('DOMContentLoaded', function(){
   function openModal() {
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    gtag('event', 'modal_open', { event_category: 'cta' });
   }
   function closeModal() {
     modal.classList.remove('open');
@@ -1300,6 +1301,7 @@ document.addEventListener('DOMContentLoaded', function(){
       document.getElementById('dogMeds').style.display = currentPet === 'dog' ? 'flex' : 'none';
       document.getElementById('catMeds').style.display = currentPet === 'cat' ? 'flex' : 'none';
       showStep(step2);
+      gtag('event', 'modal_pet_select', { event_category: 'cta', event_label: currentPet });
     });
   });
 
@@ -1314,7 +1316,17 @@ document.addEventListener('DOMContentLoaded', function(){
       document.getElementById('solutionLabel').textContent = labels[0];
       document.getElementById('solutionTitle').textContent = labels[1];
       showStep(step3);
+      gtag('event', 'modal_med_select', { event_category: 'cta', event_label: med });
     });
+  });
+
+  // CTAリンククリック計測
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.solution-card-btn');
+    if(btn){
+      const name = btn.closest('.solution-card')?.querySelector('.solution-card-name')?.textContent || '';
+      gtag('event', 'cta_click', { event_category: 'affiliate', event_label: name });
+    }
   });
 
   // 戻るボタン

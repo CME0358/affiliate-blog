@@ -1236,6 +1236,7 @@
       step1.classList.remove('hidden');
       step2.classList.add('hidden');
       document.body.style.overflow = 'hidden';
+      gtag('event', 'modal_open', { event_category: 'cta' });
     });
   });
 
@@ -1264,6 +1265,14 @@
 
       step1.classList.add('hidden');
       step2.classList.remove('hidden');
+      gtag('event', 'modal_worry_select', { event_category: 'cta', event_label: worry });
+    });
+  });
+
+  // CTAリンククリック計測
+  document.querySelectorAll('.solution-card-btn').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'cta_click', { event_category: 'affiliate', event_label: link.closest('.solution-card').querySelector('.solution-card-name')?.textContent || '' });
     });
   });
 

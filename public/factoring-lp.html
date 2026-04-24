@@ -1257,17 +1257,19 @@
     const boxId    = ctx === 'hero' ? 'diag-hero' : 'diag-sticky';
     const resultId = ctx === 'hero' ? 'diag-hero-result' : 'diag-sticky-result';
 
+    gtag('event', 'diag_select', { event_category: 'cta', event_label: answer });
+
     document.getElementById(boxId).style.display = 'none';
     const resultEl = document.getElementById(resultId);
     resultEl.innerHTML =
       '<span class="result-label">あなたへのおすすめ</span>' +
       '<div class="result-card">' +
-        '<a href="' + d.url + '" target="_blank" rel="nofollow noopener" style="display:block;">' +
+        '<a href="' + d.url + '" target="_blank" rel="nofollow noopener" style="display:block;" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
           '<img src="' + d.img + '" alt="' + d.name + '" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto;border-radius:8px;">' +
         '</a>' +
         '<p class="result-card-name">' + d.name + '</p>' +
         '<p class="result-card-sub">' + d.sub + '</p>' +
-        '<a href="' + d.url + '" class="result-cta" target="_blank" rel="nofollow noopener">' +
+        '<a href="' + d.url + '" class="result-cta" target="_blank" rel="nofollow noopener" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
           '無料相談する' +
           '<span class="result-cta-sub">' + d.cta_sub + '</span>' +
         '</a>' +
