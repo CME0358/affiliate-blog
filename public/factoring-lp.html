@@ -961,7 +961,7 @@
 <section class="compare-section" id="compare">
   <div class="section-inner">
     <p class="section-label">業者比較</p>
-    <h2 class="section-title">手数料・スピード・審査通過率<br>おすすめファクタリング業者比較表<br>※ファクタリングは3社以上での相見積もりをおすすめします</h2>
+    <h2 class="section-title">手数料・スピード・審査通過率<br>おすすめファクタリング業者比較表<br><span class="blink-red">※ファクタリングは3社以上での相見積もりをおすすめします</span></h2>
     <div class="table-wrap">
       <table class="compare-table" id="compare-table">
         <thead>
@@ -1290,7 +1290,15 @@
 </script>
 
 <style>
-@keyframes ctaPulse {
+@keyframes textBlink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+.blink-red {
+  color: #e8000d;
+  animation: textBlink 1s step-start infinite;
+  font-size: 0.75em;
+}
   0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
   50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
 }
