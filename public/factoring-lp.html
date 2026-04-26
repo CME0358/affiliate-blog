@@ -829,6 +829,8 @@
 
 <!-- HERO -->
 <section class="hero">
+  <!-- 月末カウントダウン（25日以降のみ表示） -->
+  <div id="month-end-banner" style="display:none;background:linear-gradient(90deg,#ff6b35,#f7c948);color:#fff;font-size:13px;font-weight:700;text-align:center;padding:8px 16px;border-radius:8px;margin-bottom:14px;letter-spacing:0.03em;"></div>
   <div class="hero-eyebrow">ファクタリング 完全比較ガイド 2026</div>
   <h1>売掛金を<em>最短即日</em>で資金化。<br>手数料・スピードで選ぶ最適業者</h1>
   <p class="hero-sub">審査なし・担保不要・最短2時間入金。資金繰りに悩む中小企業・個人事業主のための、失敗しない業者選びを徹底解説。</p>
@@ -1328,6 +1330,24 @@
       gtag('event', 'diag_auto_show', { event_category: 'engagement', event_label: 'scroll50' });
     }
   });
+})();
+
+// 月末カウントダウン（25日以降のみ表示）
+(function(){
+  var now = new Date();
+  var day = now.getDate();
+  var lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  var remaining = lastDay - day;
+  if(day >= 25){
+    var banner = document.getElementById('month-end-banner');
+    if(remaining === 0){
+      banner.textContent = '⚠️ 今日が今月の最終日！月内入金は本日中の申込が必須です';
+    } else {
+      banner.textContent = '⏰ 今月あと' + remaining + '日｜月内に資金化するなら今がラストチャンス';
+    }
+    banner.style.display = 'block';
+    gtag('event', 'month_end_banner_show', { event_category: 'engagement', event_label: 'remaining_' + remaining });
+  }
 })();
 </script>
 
