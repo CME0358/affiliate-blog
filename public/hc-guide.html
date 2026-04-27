@@ -965,21 +965,28 @@ section { padding: 64px 24px; }
 
 .modal-choice {
   padding: 16px 20px;
-  border: 2px solid var(--border);
+  border: 2.5px solid #06C755;
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
   font-weight: 700;
-  transition: border-color 0.2s, background 0.2s;
+  transition: background 0.15s, transform 0.1s;
   display: flex;
   align-items: center;
   gap: 12px;
   background: #fff;
+  box-shadow: 0 3px 10px rgba(6,199,85,0.18);
+  position: relative;
 }
-.modal-choice:hover {
-  border-color: var(--cta);
-  background: #f0fdf4;
+.modal-choice::after {
+  content: '→';
+  position: absolute;
+  right: 16px;
+  font-size: 18px;
+  color: #06C755;
+  font-weight: 700;
 }
+.modal-choice:active { transform: scale(0.98); background: #f0faf3; }
 
 .modal-choice-icon { font-size: 24px; }
 
@@ -1464,6 +1471,7 @@ footer {
     <div class="modal-step active" id="step1">
       <div class="modal-eyebrow">Step 1 / 2</div>
       <div class="modal-title">あなたが気になるのは<br>どちらですか？</div>
+      <p style="font-size:12px;color:#888;text-align:center;margin:-8px 0 12px;">▼ タップして選んでください</p>
       <div class="modal-choices">
         <div class="modal-choice" onclick="showStep2('consult')">
           <span class="modal-choice-icon">💬</span>
@@ -1524,7 +1532,7 @@ footer {
           無料カウンセリング受付中。費用・施術内容・アフターケアまで丁寧に案内しています。
           ※ 強引な勧誘は一切ありません。
         </div>
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="modal-result-cta" target="_blank" rel="noopener">
+        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="modal-result-cta" target="_blank" rel="noopener" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'アルモ形成クリニック_A'})">
           無料カウンセリングを予約する →
         </a>
         <button class="modal-back" onclick="goBack('step2-consult')">← 前に戻る</button>
@@ -1542,7 +1550,7 @@ footer {
           費用の明示・オンライン相談にも対応。まず話を聞くだけでも構いません。
           ※ 強引な勧誘は一切ありません。
         </div>
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="modal-result-cta" target="_blank" rel="noopener">
+        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="modal-result-cta" target="_blank" rel="noopener" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'アルモ形成クリニック_B'})">
           無料カウンセリングを予約する →
         </a>
         <button class="modal-back" onclick="goBack('step2-info')">← 前に戻る</button>
