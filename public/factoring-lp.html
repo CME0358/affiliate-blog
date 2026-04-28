@@ -1170,16 +1170,8 @@
 </footer>
 
 <!-- STICKY DIAG (mobile) -->
-<div class="sticky-cta" id="sticky-diag">
-  <div class="diag-box sticky-diag-box" id="diag-sticky">
-    <p class="diag-q sticky-diag-q">📋 あなたに合う業者は？</p>
-    <div class="diag-btns sticky-diag-btns">
-      <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','fast')">⚡ 即日入金</button>
-      <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','low')">💰 低コスト</button>
-      <button class="diag-btn sticky-diag-btn" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--cta-dark);border:2px solid var(--cta);">📋 相見積もり</button>
-    </div>
-  </div>
-  <div class="diag-result sticky-diag-result" id="diag-sticky-result" style="display:none;"></div>
+<div class="sticky-cta" id="sticky-diag" style="padding:10px 16px;">
+  <button class="diag-btn" onclick="document.getElementById('diag-hero').scrollIntoView({behavior:'smooth',block:'center'});" style="width:100%;font-size:15px;padding:12px 20px;text-align:center;">📋 あなたに合う業者は？</button>
 </div>
 
 <!-- ===== 比較テーブルデータ上書き用 =====
@@ -1335,13 +1327,13 @@
   var now = new Date();
   var day = now.getDate();
   var lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-  var remaining = lastDay - day;
+  var remaining = lastDay - day + 1;
   if(day >= 25){
     var banner = document.getElementById('month-end-banner');
     if(remaining === 0){
       banner.textContent = '⚠️ 今日が今月の最終日！月内入金は本日中の申込が必須です';
     } else {
-      banner.textContent = '⏰ 今月も残りあと' + remaining + '日｜月内に資金化するなら今がラストチャンス';
+      banner.textContent = '⏰ 今月も残りあと' + remaining + '日';
     }
     banner.style.display = 'block';
     gtag('event', 'month_end_banner_show', { event_category: 'engagement', event_label: 'remaining_' + remaining });
