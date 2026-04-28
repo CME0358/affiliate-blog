@@ -1361,5 +1361,50 @@ document.addEventListener('DOMContentLoaded', function(){
   <button class="open-modal" onclick="document.getElementById('petModal').classList.add('open');document.body.style.overflow='hidden';" style="background:#fff;color:var(--cta-dark);font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap;">今すぐ探す</button>
 </div>
 
+<style>
+@keyframes ctaPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
+  50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
+}
+.open-modal { animation: ctaPulse 2s infinite; }
+#lp-toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #1a1a2e; color: #fff; font-size: 13px; font-weight: 700;
+  padding: 12px 20px; border-radius: 30px; white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9999;
+  opacity: 0; transition: all 0.4s; pointer-events: none;
+}
+#lp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; cursor: pointer; }
+</style>
+<div id="lp-toast">🐾 愛犬・愛猫のお薬、30秒で最適なものを見つけませんか？</div>
+<script>
+(function(){
+  var toast = document.getElementById('lp-toast');
+  var toastShown = false;
+  setTimeout(function(){
+    if(toastShown) return;
+    toastShown = true;
+    toast.classList.add('show');
+    gtag('event', 'toast_show', { event_category: 'engagement' });
+    toast.addEventListener('click', function(){
+      toast.classList.remove('show');
+      document.querySelector('.open-modal').click();
+    });
+    setTimeout(function(){ toast.classList.remove('show'); }, 6000);
+  }, 15000);
+  var autoTriggered = false;
+  window.addEventListener('scroll', function(){
+    if(autoTriggered) return;
+    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if(pct >= 0.5){
+      autoTriggered = true;
+      toastShown = true;
+      gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
+      document.querySelector('.open-modal').click();
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
