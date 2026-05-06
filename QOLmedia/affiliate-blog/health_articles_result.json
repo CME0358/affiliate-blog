@@ -1,0 +1,252 @@
+[
+  {
+    "slug": "health-check-diagnosis",
+    "status": "ok",
+    "title": "あなたに合う健康改善法診断【5問でわかる最適アプローチ】"
+  },
+  {
+    "slug": "autonomic-gut-sleep-diagnosis",
+    "status": "ok",
+    "title": "不調タイプ診断｜自律神経・腸・睡眠どれが原因？"
+  },
+  {
+    "slug": "supplement-diagnosis",
+    "status": "ok",
+    "title": "最適なサプリ診断｜あなたに本当に必要な栄養素はこれ"
+  },
+  {
+    "slug": "gut-environment-diagnosis",
+    "status": "ok",
+    "title": "腸内環境タイプ診断｜4タイプで変わる改善法"
+  },
+  {
+    "slug": "sleep-type-diagnosis",
+    "status": "ok",
+    "title": "睡眠タイプ診断｜あなたの眠れない本当の原因"
+  },
+  {
+    "slug": "stress-resistance-diagnosis",
+    "status": "ok",
+    "title": "ストレス耐性診断｜あなたのメンタル強度チェック"
+  },
+  {
+    "slug": "nutrition-deficiency-check",
+    "status": "ok",
+    "title": "栄養不足チェック診断｜症状からわかる欠乏栄養素"
+  },
+  {
+    "slug": "menopause-risk-diagnosis",
+    "status": "ok",
+    "title": "更年期リスク診断（男女別）｜早期対策のための自己チェック"
+  },
+  {
+    "slug": "metabolism-type-diagnosis",
+    "status": "ok",
+    "title": "代謝タイプ診断｜痩せにくい原因を代謝から特定する"
+  },
+  {
+    "slug": "fatigue-cause-diagnosis",
+    "status": "ok",
+    "title": "疲労原因診断｜慢性疲労の正体を5つのタイプから特定"
+  },
+  {
+    "slug": "personal-health-record",
+    "status": "ok",
+    "title": "パーソナルヘルスレコードとは？自分の健康データを活用する方法"
+  },
+  {
+    "slug": "online-medical-merits",
+    "status": "ok",
+    "title": "オンライン診療のメリット・デメリット｜利用前に知るべき全知識"
+  },
+  {
+    "slug": "digital-therapeutics",
+    "status": "ok",
+    "title": "デジタルセラピューティクスとは？治療アプリの最前線"
+  },
+  {
+    "slug": "wearable-health-management",
+    "status": "ok",
+    "title": "ウェアラブルで健康管理する方法｜おすすめデバイス比較"
+  },
+  {
+    "slug": "medical-ai-reliability",
+    "status": "ok",
+    "title": "医療AIはどこまで信用できる？最新研究と活用の限界"
+  },
+  {
+    "slug": "sleep-tech-comparison",
+    "status": "ok",
+    "title": "スリープテックおすすめ比較2026｜睡眠データを活用する最新デバイス"
+  },
+  {
+    "slug": "health-app-recommendation",
+    "status": "ok",
+    "title": "健康管理アプリおすすめ2026｜目的別に選ぶベスト5"
+  },
+  {
+    "slug": "data-driven-health",
+    "status": "ok",
+    "title": "データで健康を改善する方法｜数値化が変える生活習慣"
+  },
+  {
+    "slug": "sleep-quality-improvement",
+    "status": "ok",
+    "title": "睡眠の質を上げる方法【結論：これだけやれば変わる】"
+  },
+  {
+    "slug": "autonomic-nerve-adjustment",
+    "status": "ok",
+    "title": "自律神経を整える方法｜医学的に効果が証明された7つの習慣"
+  },
+  {
+    "slug": "sleep-debt-recovery",
+    "status": "ok",
+    "title": "睡眠負債の正しい解消法｜週末寝だめは逆効果だった"
+  },
+  {
+    "slug": "mindfulness-effects",
+    "status": "ok",
+    "title": "マインドフルネスの効果｜科学が証明した脳への影響"
+  },
+  {
+    "slug": "cbd-oil-effects",
+    "status": "ok",
+    "title": "CBDオイルの効果と注意点｜研究データで読み解く正しい知識"
+  },
+  {
+    "slug": "temperature-fatigue-measures",
+    "status": "ok",
+    "title": "寒暖差疲労の対策｜自律神経が乱れるメカニズムと回復法"
+  },
+  {
+    "slug": "snoring-sleep-apnea-improvement",
+    "status": "ok",
+    "title": "いびき・無呼吸の改善方法｜原因別の対処法と受診タイミング"
+  },
+  {
+    "slug": "stress-insomnia-cause",
+    "status": "ok",
+    "title": "ストレスで眠れない原因と対策｜メカニズムから解決する方法"
+  },
+  {
+    "slug": "gut-environment-improvement",
+    "status": "ok",
+    "title": "腸内環境を整える方法｜科学的に正しい腸活の全手順"
+  },
+  {
+    "slug": "blood-sugar-spike-measures",
+    "status": "ok",
+    "title": "血糖値スパイク対策｜食後の急上昇を防ぐ食べ方と食品選び"
+  },
+  {
+    "slug": "protein-deficiency-symptoms",
+    "status": "ok",
+    "title": "タンパク質不足の症状｜あなたの不調はこれが原因かもしれない"
+  },
+  {
+    "slug": "autophagy-effects",
+    "status": "ok",
+    "title": "オートファジーは効果ある？科学的根拠と実践方法を解説"
+  },
+  {
+    "slug": "hot-water-effects",
+    "status": "ok",
+    "title": "白湯の効果と正しい飲み方｜腸活・代謝改善への影響"
+  },
+  {
+    "slug": "gluten-free-truth",
+    "status": "ok",
+    "title": "グルテンフリーの真実｜やるべき人・やらなくていい人の違い"
+  },
+  {
+    "slug": "slim-bacteria-increase",
+    "status": "ok",
+    "title": "痩せ菌を増やす方法｜腸内フローラと体重の科学的関係"
+  },
+  {
+    "slug": "apple-cider-vinegar-diet",
+    "status": "ok",
+    "title": "リンゴ酢ダイエットの効果｜研究データで見る本当の実力"
+  },
+  {
+    "slug": "additive-free-food-selection",
+    "status": "ok",
+    "title": "無添加食品の選び方｜ラベルの読み方と信頼できるブランド"
+  },
+  {
+    "slug": "plant-milk-comparison",
+    "status": "ok",
+    "title": "植物性ミルク比較2026｜豆乳・アーモンド・オーツ麦の栄養差"
+  },
+  {
+    "slug": "frailty-prevention",
+    "status": "ok",
+    "title": "フレイル予防の方法｜65歳からでも遅くない筋力・認知力の守り方"
+  },
+  {
+    "slug": "dementia-prevention-habits",
+    "status": "ok",
+    "title": "認知症予防の生活習慣｜医学的エビデンスがある7つの習慣"
+  },
+  {
+    "slug": "nmn-supplement-effects",
+    "status": "ok",
+    "title": "NMNサプリは本当に効く？最新研究と選び方・注意点"
+  },
+  {
+    "slug": "bone-density-increase",
+    "status": "ok",
+    "title": "骨密度を上げる方法｜食事・運動・サプリで骨を強くする"
+  },
+  {
+    "slug": "liver-function-food",
+    "status": "ok",
+    "title": "肝機能を改善する食事｜数値を下げる食べ物と避けるべき習慣"
+  },
+  {
+    "slug": "high-blood-pressure-reduction",
+    "status": "ok",
+    "title": "高血圧を下げる方法｜薬に頼る前に試したい生活習慣の見直し"
+  },
+  {
+    "slug": "genetic-test-diet",
+    "status": "ok",
+    "title": "遺伝子検査ダイエットとは？データで選ぶパーソナル減量法"
+  },
+  {
+    "slug": "femtech-explanation",
+    "status": "ok",
+    "title": "フェムテックとは？女性の健康課題をテクノロジーで解決する市場"
+  },
+  {
+    "slug": "menopause-measures-women",
+    "status": "ok",
+    "title": "更年期対策（女性）｜症状別・医学的に正しいアプローチ"
+  },
+  {
+    "slug": "male-menopause-measures",
+    "status": "ok",
+    "title": "男性更年期の対処法｜LOH症候群の見分け方と改善策"
+  },
+  {
+    "slug": "equol-supplement-effects",
+    "status": "ok",
+    "title": "エクオールサプリの効果｜更年期症状への科学的エビデンス"
+  },
+  {
+    "slug": "smartphone-neck-treatment",
+    "status": "ok",
+    "title": "スマホ首の治し方｜今日からできるストレッチと再発防止習慣"
+  },
+  {
+    "slug": "eye-strain-improvement",
+    "status": "ok",
+    "title": "眼精疲労の改善方法｜原因別の対処法とおすすめグッズ"
+  },
+  {
+    "slug": "posture-improvement",
+    "status": "ok",
+    "title": "姿勢改善の方法｜猫背・反り腰を自力で治す科学的アプローチ"
+  }
+]

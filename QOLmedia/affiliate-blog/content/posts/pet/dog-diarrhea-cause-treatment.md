@@ -1,0 +1,193 @@
+---
+title: "犬の下痢が続く原因と対処法｜いつ病院に行くべきか【2026年版】"
+date: "2026-03-28"
+description: "犬の下痢が続く原因と自宅でできる対処法を獣医師監修のもと解説。病院に行くべきタイミングや、常備しておきたい整腸剤・下痢止めも紹介します。"
+category: "ペット"
+tags: ["犬の下痢", "犬の健康", "整腸剤", "下痢対処法", "ペット医薬品"]
+---
+
+**PR・広告を含む記事です**
+
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>
+
+## 【結論】犬の下痢が2日以上続く場合は要注意！自宅ケアと受診の判断基準
+
+犬の下痢が続く主な原因は、食事の変化・ストレス・感染症・寄生虫の4つです。1〜2回の軟便なら自宅で様子を見られますが、**2日以上続く場合や血便・嘔吐を伴う場合は早急に動物病院を受診**してください。軽度の下痢には市販の整腸剤が効果的で、常備しておくと安心です。
+
+---
+
+## 犬の下痢が続く4つの主な原因
+
+### 1. 食事の急な変化・食べ過ぎ
+
+フードの切り替えや、普段食べないものを口にした場合に下痢を起こしやすくなります。特に脂肪分の多い食べ物や人間の食事は、犬の消化器官に負担をかけます。
+
+### 2. ストレスによる腸内環境の乱れ
+
+引っ越し・来客・長時間の留守番などのストレスは、腸内細菌のバランスを崩し下痢の原因になります。
+
+### 3. 感染症（ウイルス・細菌）
+
+パルボウイルスやカンピロバクターなどの感染症は、激しい下痢を引き起こします。特に子犬やワクチン未接種の犬は重症化しやすいため注意が必要です。
+
+### 4. 寄生虫（回虫・鉤虫・ジアルジアなど）
+
+寄生虫感染は慢性的な下痢の原因となります。定期的な駆虫薬の投与で予防できます。
+
+---
+
+## 【比較表】下痢の症状別・対処法の目安
+
+| 症状 | 緊急度 | 対処法 |
+|------|--------|--------|
+| 1回だけの軟便 | 低 | 半日〜1日絶食で様子見 |
+| 2日以上続く下痢 | 中 | 整腸剤を与え、改善なければ受診 |
+| 血便・黒色便 | 高 | すぐに動物病院へ |
+| 下痢＋嘔吐＋元気がない | 高 | 緊急受診が必要 |
+| 子犬・高齢犬の下痢 | 高 | 脱水しやすいため早めに受診 |
+
+---
+
+## 自宅でできる下痢の対処法
+
+### 1. 半日〜1日の絶食
+
+軽度の下痢なら、12〜24時間の絶食で消化器官を休ませることが効果的です。**水分補給は必ず行い、脱水を防いでください**。
+
+### 2. 消化の良い食事に切り替え
+
+絶食後は、茹でた鶏ささみ＋白米など消化の良い食事を少量ずつ与えます。
+
+### 3. 整腸剤・下痢止めの投与
+
+犬用の整腸剤は、腸内環境を整え下痢の改善を促進します。**ビオイムバスターやディアバスターは、下痢・軟便・消化不良に効果があり、動物病院でも処方される信頼性の高い医薬品**です。
+
+これらの整腸剤は、わんにゃん薬局で動物病院より安く購入できます。2026年現在、正規品を最短翌日発送で届けてくれるため、常備薬として自宅に置いておくと安心です。
+
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+---
+
+## 動物病院に行くべきタイミング
+
+以下の症状がある場合は、**自宅ケアではなく早急に獣医師の診察を受けてください**。
+
+- 下痢が3日以上続いている
+- 血便・粘液便が出ている
+- 嘔吐を繰り返している
+- 食欲がなく元気がない
+- 子犬・高齢犬・持病のある犬
+- 体重が急激に減っている
+
+---
+
+## 下痢予防のために常備したい医薬品
+
+| 商品名 | 効果・効能 | 動物病院価格 | わんにゃん薬局価格 |
+|--------|-----------|-------------|------------------|
+| ビオイムバスター | 下痢・軟便・消化不良の改善 | 約2,000円 | 約1,200円〜 |
+| ディアバスター | 下痢止め・整腸作用 | 約1,800円 | 約1,000円〜 |
+| プロコリン | 腸内環境改善・下痢ケア | 約3,500円 | 約2,500円〜 |
+
+わんにゃん薬局では、**動物病院と比べて30〜40%安く購入可能**です。正規品のみを取り扱っており、安全性も確保されています。
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+---
+
+## よくある質問（FAQ）
+
+### Q1. 犬の下痢に人間用のビオフェルミンは使えますか？
+
+A. 使用できますが、犬用整腸剤の方が安全で効果的です。人間用は添加物の影響が心配なため、ビオイムバスターなど犬専用の整腸剤をおすすめします。
+
+### Q2. 下痢のとき水を飲ませても大丈夫ですか？
+
+A. 大丈夫です。むしろ脱水予防のため、少量ずつこまめに水分を与えてください。
+
+### Q3. 子犬の下痢は危険ですか？
+
+A. 子犬は体力がなく脱水しやすいため、1日以上下痢が続く場合は早めに受診してください。
+
+### Q4. 下痢止め薬はどこで買えますか？
+
+A. 動物病院のほか、わんにゃん薬局などのペット医薬品通販サイトで正規品を購入できます。通販の方が価格が安く、常備用におすすめです。
+
+### Q5. 寄生虫が原因の下痢はどう見分けますか？
+
+A. 便に白い虫が混じっている場合や、駆虫薬を長期間投与していない場合は寄生虫感染の可能性があります。動物病院で検便検査を受けてください。
+
+---
+
+## まとめ
+
+犬の下痢が続く場合、まずは原因を見極めることが大切です。軽度なら自宅での絶食と整腸剤で改善できますが、**2日以上続く場合や血便・嘔吐を伴う場合は迷わず動物病院へ**。
+
+いざというときに慌てないよう、整腸剤は常備しておくと安心です。わんにゃん薬局なら動物病院より安く、正規品を購入できます。
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+<div class="product-carousel product-carousel-footer">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>

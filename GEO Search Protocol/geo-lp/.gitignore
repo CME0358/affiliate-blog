@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.env*
+.DS_Store
+**/.DS_Store
+service-account-key.json
+indexing-submit.js
+service-account-key.json
+indexing-submit.js

@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ペットの薬代、高すぎませんか？ | QOL media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1208;
+      --cream: #faf7f2;
+      --warm-white: #fff9f0;
+      --accent: #c8440a;
+      --accent-light: #f5e6dc;
+      --gold: #b8860b;
+      --green: #2d6a4f;
+      --green-light: #d8f3dc;
+      --border: #e8ddd0;
+      --text-muted: #6b5d4f;
+      --cta: #06C755;
+      --cta-dark: #04a044;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 26px;
+      width: auto;
+      max-width: 150px;
+      display: block;
+    }
+    .header-cta {
+      background: var(--cta);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: url('/pet-hero.png') center center / cover no-repeat;
+      color: var(--cream);
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 900;
+      font-size: clamp(26px, 6vw, 42px);
+      line-height: 1.4;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: #f5c06a;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(250,247,242,0.75);
+      max-width: 480px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #f5c06a;
+      display: block;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 11px;
+      color: rgba(250,247,242,0.65);
+      margin-top: 4px;
+    }
+
+    /* ===== PAIN SECTION ===== */
+    .pain-section {
+      background: var(--warm-white);
+      padding: 52px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 24px;
+    }
+    .pain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 4px;
+    }
+    .pain-check {
+      width: 22px;
+      height: 22px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 12px;
+    }
+    .pain-item p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .pain-item strong {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    /* ===== DIVIDER BANNER ===== */
+    .divider-banner {
+      background: var(--accent);
+      color: #fff;
+      text-align: center;
+      padding: 20px 24px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(15px, 3.5vw, 20px);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .divider-banner span {
+      opacity: 0.85;
+      font-size: 0.75em;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* ===== FEATURE ARTICLES ===== */
+    .articles-section {
+      padding: 52px 24px;
+      background: var(--cream);
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .article-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .article-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26,18,8,0.1);
+    }
+    .article-card-badge {
+      background: var(--green);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      letter-spacing: 0.08em;
+    }
+    .article-card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .article-card-tag {
+      font-size: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .article-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      flex: 1;
+    }
+    .article-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .article-card-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .article-card-cta {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .article-card-cta::after {
+      content: '→';
+    }
+
+    /* ===== MERIT SECTION ===== */
+    .merit-section {
+      background: var(--green-light);
+      padding: 52px 24px;
+      border-top: 1px solid #b7e4c7;
+      border-bottom: 1px solid #b7e4c7;
+    }
+    .merit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .merit-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+      border: 1px solid #b7e4c7;
+    }
+    .merit-icon {
+      font-size: 28px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .merit-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--green);
+    }
+    .merit-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ===== MAIN CTA ===== */
+    .cta-section {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 60px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(200,68,10,0.15) 0%, transparent 70%);
+    }
+    .cta-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #f5c06a;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .cta-section h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(20px, 4.5vw, 30px);
+      font-weight: 900;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .cta-section h2 em {
+      font-style: normal;
+      color: #f5c06a;
+    }
+    .cta-section p {
+      font-size: 13px;
+      color: rgba(250,247,242,0.7);
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--cta);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: 4px;
+      text-decoration: none;
+      position: relative;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 20px rgba(6,199,85,0.35);
+    }
+    .cta-btn:hover {
+      background: var(--cta-dark);
+      transform: translateY(-2px);
+    }
+    .cta-btn-sub {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.85;
+      display: block;
+      margin-top: 3px;
+    }
+    .cta-note {
+      font-size: 11px;
+      color: rgba(250,247,242,0.45);
+      margin-top: 16px;
+      position: relative;
+    }
+
+    /* ===== POPULAR ARTICLES FULL LIST ===== */
+    .list-section {
+      padding: 52px 24px;
+      background: var(--warm-white);
+    }
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-top: 24px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .article-list-item {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: var(--ink);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .article-list-item:last-child {
+      border-bottom: none;
+    }
+    .article-list-item:hover {
+      background: var(--cream);
+    }
+    .article-list-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--border);
+      min-width: 28px;
+      text-align: center;
+    }
+    .article-list-item:nth-child(1) .article-list-num { color: #c8860a; }
+    .article-list-item:nth-child(2) .article-list-num { color: #888; }
+    .article-list-item:nth-child(3) .article-list-num { color: #b07040; }
+    .article-list-body {
+      flex: 1;
+    }
+    .article-list-tag {
+      font-size: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .article-list-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .article-list-arrow {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ===== INLINE CTA BAR ===== */
+    .inline-cta {
+      background: linear-gradient(135deg, #1a4731 0%, #2d6a4f 100%);
+      color: #fff;
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .inline-cta p {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .inline-cta p span {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.75;
+      display: block;
+    }
+    .inline-cta-btn {
+      background: var(--cta);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .inline-cta-btn:hover { background: var(--cta-dark); }
+
+    /* ===== TRUST ===== */
+    .trust-section {
+      background: var(--cream);
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .trust-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .trust-badge-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .trust-badge-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: var(--ink);
+      color: rgba(250,247,242,0.5);
+      padding: 24px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+    .site-footer a {
+      color: rgba(250,247,242,0.5);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    /* ===== STICKY BOTTOM CTA (mobile) ===== */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--cta);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 200;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    }
+    .sticky-cta p {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .sticky-cta p span {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.85;
+      display: block;
+    }
+    .sticky-cta a {
+      background: #fff;
+      color: var(--cta-dark);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 640px) {
+      .sticky-cta { display: none; }
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1, .hero-sub, .hero-stats {
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-sub { animation-delay: 0.1s; }
+    .hero-stats { animation-delay: 0.2s; }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px 28px;
+      max-width: 420px;
+      width: 100%;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #888;
+      line-height: 1;
+    }
+    .modal-step { transition: opacity 0.2s; }
+    .modal-step.hidden { display: none; }
+    .modal-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #06C755;
+      margin-bottom: 8px;
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .worry-btns { display: flex; flex-direction: column; gap: 10px; }
+    .worry-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border: 2.5px solid #06C755;
+      border-radius: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      box-shadow: 0 3px 10px rgba(6,199,85,0.18);
+      width: 100%;
+      position: relative;
+    }
+    .worry-btn::after {
+      content: '→';
+      position: absolute;
+      right: 16px;
+      font-size: 18px;
+      color: #06C755;
+      font-weight: 700;
+    }
+    .worry-btn:active { transform: scale(0.98); background: #f0faf3; }
+    .worry-btn-icon { font-size: 26px; flex-shrink: 0; }
+    .worry-btn-text strong { display: block; font-size: 14px; color: #1a1a1a; font-weight: 700; }
+    .worry-btn-text span { font-size: 12px; color: #666; margin-top: 2px; display: block; }
+    .modal-back {
+      background: none;
+      border: none;
+      color: #06C755;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 0 0 16px 0;
+      font-weight: 600;
+    }
+    .modal-back:hover { opacity: 0.75; }
+    .solution-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #06C755;
+      margin-bottom: 4px;
+    }
+    .solution-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #1a1a1a;
+      margin-bottom: 18px;
+    }
+    .solution-cards { display: flex; justify-content: center; }
+    .solution-card {
+      width: 220px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .solution-card img { width: 100%; height: auto; display: block; }
+    .solution-card-body { padding: 12px; text-align: center; }
+    .solution-card-category { font-size: 12px; color: #666; margin-bottom: 4px; }
+    .solution-card-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
+    .solution-card-btn {
+      display: block;
+      background: #06C755;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+    }
+    .solution-card-btn:hover { background: #04a044; }
+  </style>
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS30YQY1N7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BS30YQY1N7');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w6fgeud38o");</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="https://www.qolmedia.info/" class="logo">
+    <img src="/QOL_logo_transparent.png" alt="QOL media" />
+  </a>
+  <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow" class="header-cta" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'header-cta'});" style="text-decoration:none;display:inline-block;">▶ お薬を探す</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">ペット医薬品 完全ガイド 2026</div>
+  <h1>愛犬・愛猫のお薬<br>動物病院で<br>買うのが<em>当たり前</em>ですか？</h1>
+  <p class="hero-sub">正規品・獣医師監修・最大70%節約。同じ成分の薬を、賢く安全に手に入れる方法を徹底解説します。</p>
+  <button class="open-modal" style="margin-top:32px;margin-bottom:32px;background:#06C755;color:#fff;font-size:16px;font-weight:700;padding:14px 28px;border-radius:14px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:2;box-shadow:0 4px 16px rgba(6,199,85,0.45);">▶ 愛犬・愛猫どちらですか？</button>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">49</span>
+      <div class="hero-stat-label">専門記事</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">70%</span>
+      <div class="hero-stat-label">最大節約率</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">獣医師</span>
+      <div class="hero-stat-label">監修レベル</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain-section">
+  <div class="section-inner">
+    <p class="section-label">こんなお悩みありませんか</p>
+    <h2 class="section-title">「毎年フィラリア薬に1万円以上…<br>もっと安く済ませたい」</h2>
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="pain-check">😓</div>
+        <p><strong>動物病院でしか買えないと思っていた</strong>正規品の予防薬が、通販で合法的に購入できると知らない方が多い。</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">😟</div>
+        <p><strong>海外サイトの安全性が心配</strong>で踏み出せない。どこが信頼できるのか分からない。</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">😰</div>
+        <p><strong>ノミダニ薬・フィラリア薬の種類が多すぎて</strong>、自分のペットに合ったものを選べない。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider-banner">
+  その悩み、この記事が全部解決します。<br>
+  <span>正規品・安全・最安値の3拍子が揃った情報だけを集めました</span>
+</div>
+
+<!-- FEATURED ARTICLES -->
+<section class="articles-section">
+  <div class="section-inner" style="max-width:900px">
+    <p class="section-label">まずはここから読む</p>
+    <h2 class="section-title">飼い主さんに<br>一番読まれている記事</h2>
+    <div class="articles-grid">
+
+      <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking" class="article-card">
+        <div class="article-card-badge">🏆 人気 No.1</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">フィラリア予防</p>
+          <h3>フィラリア薬最安ランキング｜動物病院との価格差と通販の選び方</h3>
+          <p>動物病院との価格差は最大70%。正規品を安全に購入できる通販サイトの選び方を徹底解説。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">最大70%OFF</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/pet-parasite-prevention-guide" class="article-card">
+        <div class="article-card-badge">📋 完全まとめ</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">寄生虫対策</p>
+          <h3>ペットの寄生虫対策まとめ｜フィラリア・ノミ・ダニ・回虫の完全予防法</h3>
+          <p>2026年最新の安全な駆除薬と正規品を安く購入する方法を獣医師監修でまとめました。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">獣医師監修</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/dog-heartworm-medicine-recommend" class="article-card">
+        <div class="article-card-badge">🐕 犬オーナー向け</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">犬 / フィラリア</p>
+          <h3>犬のフィラリア薬おすすめ5選｜動物病院より安く買う方法【2026年】</h3>
+          <p>最大70%安く購入できる正規品通販サイトをご紹介。安全な個人輸入方法を解説。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">おすすめ5選</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/flea-tick-medicine-cost-compare" class="article-card">
+        <div class="article-card-badge">🐱 猫オーナー向け</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">ノミ・ダニ対策</p>
+          <h3>ノミダニ薬コスパ比較｜犬猫別おすすめ商品と価格一覧【2026年版】</h3>
+          <p>犬猫別おすすめ商品の価格・効果を徹底比較し、最大70%お得な購入方法を紹介。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">価格比較あり</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/pet-medicine-online-legal" class="article-card">
+        <div class="article-card-badge">⚖️ 安心・安全</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">法律・安全性</p>
+          <h3>ペット薬の通販は違法？個人輸入の法律と安全な購入方法を解説</h3>
+          <p>個人輸入の法律根拠と安全な購入方法を専門家が解説。2026年最新情報。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">合法を確認</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/safe-pet-medicine-selection" class="article-card">
+        <div class="article-card-badge">✅ 初心者向け</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">正規品の選び方</p>
+          <h3>安全なペット医薬品の選び方｜獣医師が教える正規品の見分け方と購入先</h3>
+          <p>正規品の見分け方、信頼できる購入先、偽造品を避けるポイントを解説。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">まず読む</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- INLINE CTA -->
+<div class="inline-cta">
+  <p>あなたのペットに合うお薬はこちら。<span>犬・猫別に最適な商品をご提案</span></p>
+  <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow" class="inline-cta-btn" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'inline-cta'});" style="display:inline-block;text-decoration:none;">▶ ペットのお薬を探す</a>
+</div>
+
+<!-- MERIT -->
+<section class="merit-section">
+  <div class="section-inner" style="max-width:900px">
+    <p class="section-label">なぜ通販が選ばれるのか</p>
+    <h2 class="section-title">動物病院でなく<br>通販を選ぶ3つの理由</h2>
+    <div class="merit-grid">
+      <div class="merit-card">
+        <span class="merit-icon">💰</span>
+        <h3>最大70%コスト削減</h3>
+        <p>同じ正規品でも、通販なら動物病院の価格より大幅に安く購入できます。</p>
+      </div>
+      <div class="merit-card">
+        <span class="merit-icon">🏠</span>
+        <h3>自宅で完結</h3>
+        <p>病院に連れて行くストレスゼロ。予防薬は処方箋なしで購入可能です。</p>
+      </div>
+      <div class="merit-card">
+        <span class="merit-icon">✅</span>
+        <h3>正規品・合法</h3>
+        <p>個人輸入は日本の法律で認められています。品質は動物病院と同じ正規品。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CTA -->
+<section class="cta-section">
+  <p class="cta-label">▼ ペットに合うお薬を探す</p>
+  <h2>犬・猫別に<br><em>最適な薬</em>をご提案</h2>
+  <p>犬・猫の種類と症状を選ぶだけ。正規品を最安値クラスで購入できます。</p>
+  <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow" class="cta-btn" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'main-cta'});" style="font-size:15px;text-decoration:none;display:inline-flex;flex-direction:column;align-items:center;">
+    ペットのお薬を今すぐ探す
+    <span class="cta-btn-sub">犬・猫別 / 薬種別でご提案</span>
+  </a>
+  <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
+</section>
+
+<!-- ARTICLE LIST -->
+<section class="list-section">
+  <div class="section-inner" style="max-width:760px">
+    <p class="section-label">全記事一覧</p>
+    <h2 class="section-title">症状・お悩み別で<br>記事を探す</h2>
+    <div class="article-list">
+      <a href="https://www.qolmedia.info/posts/parasite-medicine-recommend-ranking" class="article-list-item">
+        <span class="article-list-num">1</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">駆虫薬ランキング</p>
+          <p class="article-list-title">駆虫薬おすすめランキング｜フィラリア・回虫・条虫別の選び方【2026年最新版】</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/pet-medicine-online-shop-compare" class="article-list-item">
+        <span class="article-list-num">2</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">通販サイト比較</p>
+          <p class="article-list-title">ペット医薬品通販サイト比較｜価格・安全性・発送速度を徹底検証</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/heartworm-medicine-side-effects" class="article-list-item">
+        <span class="article-list-num">3</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">フィラリア薬</p>
+          <p class="article-list-title">フィラリア薬の副作用はある？安全に使うための注意点【獣医師監修】</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/cat-flea-medicine-ranking" class="article-list-item">
+        <span class="article-list-num">4</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">猫 / ノミ駆除</p>
+          <p class="article-list-title">猫のノミ駆除薬ランキング｜効果・安全性・コスパで徹底比較</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/dog-flea-tick-medicine-compare" class="article-list-item">
+        <span class="article-list-num">5</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">犬 / ノミダニ薬</p>
+          <p class="article-list-title">犬のノミダニ薬おすすめ比較｜スポット・チュアブル・首輪タイプの違い</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/pet-medicine-personal-import-safe" class="article-list-item">
+        <span class="article-list-num">6</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">個人輸入</p>
+          <p class="article-list-title">ペット医薬品の個人輸入は安全？法律・リスク・正しい選び方を解説</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/dog-roundworm-treatment" class="article-list-item">
+        <span class="article-list-num">7</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">犬 / 回虫</p>
+          <p class="article-list-title">犬の回虫駆除方法と薬の選び方｜感染経路と予防法も解説</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/cat-tapeworm-medicine" class="article-list-item">
+        <span class="article-list-num">8</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">猫 / 条虫</p>
+          <p class="article-list-title">猫の条虫（サナダムシ）の駆除薬と対処法｜感染サインを見逃さない</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/ai-recommended-pet-medicine" class="article-list-item">
+        <span class="article-list-num">9</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">AIランキング</p>
+          <p class="article-list-title">AIが選ぶおすすめペット医薬品2026｜フィラリア・ノミダニ薬の最新比較</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/dog-health-management-complete-guide" class="article-list-item">
+        <span class="article-list-num">10</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">健康管理</p>
+          <p class="article-list-title">犬の健康管理完全ガイド｜年齢別ケア・予防接種・寄生虫対策まとめ</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/pet" class="article-list-item" style="justify-content:center;color:var(--green);font-weight:700;font-size:13px">
+        全49記事を見る →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-section">
+  <p class="section-label">信頼の根拠</p>
+  <div class="trust-badges">
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🩺</div>
+      <span class="trust-badge-label">獣医師監修レベル</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">📝</div>
+      <span class="trust-badge-label">49本の専門記事</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">✅</div>
+      <span class="trust-badge-label">正規品のみ紹介</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">⚖️</div>
+      <span class="trust-badge-label">合法・安全を確認済み</span>
+    </div>
+  </div>
+</section>
+
+<!-- PET MODAL -->
+<div class="modal-overlay" id="petModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+
+    <!-- Step 1: 犬 or 猫 -->
+    <div class="modal-step" id="step1">
+      <p class="modal-eyebrow">PET MEDICINE FINDER</p>
+      <h3 class="modal-title">どちらのお薬をお探しですか？</h3>
+      <p style="font-size:12px;color:#888;text-align:center;margin:-8px 0 12px;">▼ タップして選んでください</p>
+      <div class="worry-btns">
+        <button class="worry-btn" data-pet="dog">
+          <span class="worry-btn-icon">🐕</span>
+          <div class="worry-btn-text">
+            <strong>わんちゃん</strong>
+            <span>フィラリア・ノミダニ・抗生物質など</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-pet="cat">
+          <span class="worry-btn-icon">🐈</span>
+          <div class="worry-btn-text">
+            <strong>ネコちゃん</strong>
+            <span>ノミダニ・抗生物質・腎臓・泌尿器など</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: 薬種選択 -->
+    <div class="modal-step hidden" id="step2">
+      <button class="modal-back" id="backToStep1">← ペットを選び直す</button>
+      <p class="modal-eyebrow" id="step2Eyebrow"></p>
+      <h3 class="modal-title">何のお薬をお探しですか？</h3>
+      <!-- 犬の選択肢 -->
+      <div id="dogMeds" class="worry-btns" style="display:none;">
+        <button class="worry-btn" data-med="dog-filaria">
+          <span class="worry-btn-icon">🦟</span>
+          <div class="worry-btn-text">
+            <strong>フィラリア予防薬</strong>
+            <span>蚊が媒介する寄生虫を予防</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="dog-nomi">
+          <span class="worry-btn-icon">🐛</span>
+          <div class="worry-btn-text">
+            <strong>ノミ・ダニ予防薬</strong>
+            <span>外部寄生虫の駆除・予防</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="dog-antibiotic">
+          <span class="worry-btn-icon">💊</span>
+          <div class="worry-btn-text">
+            <strong>抗生物質・抗菌薬</strong>
+            <span>細菌感染・皮膚炎・気管支炎など</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="other">
+          <span class="worry-btn-icon">🛒</span>
+          <div class="worry-btn-text">
+            <strong>その他</strong>
+            <span>目・耳・皮膚の病気、シャンプー・サプリ・おやつなど</span>
+          </div>
+        </button>
+      </div>
+      <!-- 猫の選択肢 -->
+      <div id="catMeds" class="worry-btns" style="display:none;">
+        <button class="worry-btn" data-med="cat-nomi">
+          <span class="worry-btn-icon">🐛</span>
+          <div class="worry-btn-text">
+            <strong>ノミ・ダニ予防薬</strong>
+            <span>外部寄生虫の駆除・予防</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="cat-antibiotic">
+          <span class="worry-btn-icon">💊</span>
+          <div class="worry-btn-text">
+            <strong>抗生物質・抗菌薬</strong>
+            <span>細菌感染・皮膚炎・気管支炎など</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="cat-kidney">
+          <span class="worry-btn-icon">🫘</span>
+          <div class="worry-btn-text">
+            <strong>腎臓・泌尿器の病気</strong>
+            <span>慢性腎臓病・膀胱炎などの治療薬</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-med="other">
+          <span class="worry-btn-icon">🛒</span>
+          <div class="worry-btn-text">
+            <strong>その他</strong>
+            <span>目・耳・皮膚の病気、シャンプー・サプリ・おやつなど</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: 商品カード -->
+    <div class="modal-step hidden" id="step3">
+      <button class="modal-back" id="backToStep2">← 薬種を選び直す</button>
+      <p class="solution-label" id="solutionLabel"></p>
+      <h3 class="solution-title" id="solutionTitle"></h3>
+
+      <!-- 犬 × フィラリア -->
+      <div class="solution-cards" id="cards-dog-filaria" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/revolution_dog_3.webp" alt="レボリューション(犬用)">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🦟 フィラリア予防薬</p>
+            <p class="solution-card-name">レボリューション（犬用）</p>
+            <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 犬 × ノミ・ダニ -->
+      <div class="solution-cards" id="cards-dog-nomi" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/nexgard__1.webp" alt="ネクスガード">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🐛 ノミ・ダニ予防薬</p>
+            <p class="solution-card-name">ネクスガード</p>
+            <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 犬 × 抗生物質 -->
+      <div class="solution-cards" id="cards-dog-antibiotic" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/zithromax2.webp" alt="ジスロマック錠">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">💊 抗生物質・抗菌薬</p>
+            <p class="solution-card-name">ジスロマック錠</p>
+            <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 猫 × ノミ・ダニ -->
+      <div class="solution-cards" id="cards-cat-nomi" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/fiprofort_plus_cat_1.webp" alt="フィプロフォートプラス(猫用)">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🐛 ノミ・ダニ予防薬</p>
+            <p class="solution-card-name">フィプロフォートプラス（猫用）</p>
+            <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 猫 × 抗生物質 -->
+      <div class="solution-cards" id="cards-cat-antibiotic" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/zithromax2.webp" alt="ジスロマック錠">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">💊 抗生物質・抗菌薬</p>
+            <p class="solution-card-name">ジスロマック錠</p>
+            <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 猫 × 腎臓・泌尿器 -->
+      <div class="solution-cards" id="cards-cat-kidney" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="nofollow">
+            <img src="https://biodiversityexplorer.org/products_img/semintra_1.webp" alt="セミントラ">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🫘 腎臓・泌尿器</p>
+            <p class="solution-card-name">セミントラ</p>
+            <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="nofollow" class="solution-card-btn">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- その他 → わんにゃん薬局 -->
+      <div class="solution-cards" id="cards-other" style="display:none;">
+        <div class="solution-card">
+          <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow">
+            <img src="https://mttag.com/banner/CiN-gOTx1i8" alt="わんにゃん薬局">
+          </a>
+          <div class="solution-card-body">
+            <p class="solution-card-category">🛒 総合ペット通販</p>
+            <p class="solution-card-name">わんにゃん薬局</p>
+            <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow" class="solution-card-btn">お店を見る</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const modal = document.getElementById('petModal');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const step3 = document.getElementById('step3');
+  let currentPet = '';
+
+  const medLabels = {
+    'dog-filaria':    ['🦟 フィラリア予防薬（犬）', 'こちらがおすすめです'],
+    'dog-nomi':       ['🐛 ノミ・ダニ予防薬（犬）', 'こちらがおすすめです'],
+    'dog-antibiotic': ['💊 抗生物質・抗菌薬（犬）', 'こちらがおすすめです'],
+    'cat-nomi':       ['🐛 ノミ・ダニ予防薬（猫）', 'こちらがおすすめです'],
+    'cat-antibiotic': ['💊 抗生物質・抗菌薬（猫）', 'こちらがおすすめです'],
+    'cat-kidney':     ['🫘 腎臓・泌尿器（猫）', 'こちらがおすすめです'],
+    'other':          ['🛒 その他', 'わんにゃん薬局で探してみてください'],
+  };
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    gtag('event', 'modal_open', { event_category: 'cta' });
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    // リセット
+    setTimeout(function(){
+      showStep(step1);
+      currentPet = '';
+      document.getElementById('dogMeds').style.display = 'none';
+      document.getElementById('catMeds').style.display = 'none';
+      document.querySelectorAll('[id^="cards-"]').forEach(function(el){ el.style.display = 'none'; });
+    }, 300);
+  }
+  function showStep(target) {
+    [step1, step2, step3].forEach(function(s){ s.classList.add('hidden'); });
+    target.classList.remove('hidden');
+  }
+
+  // 開くトリガー
+  document.querySelectorAll('.open-modal').forEach(function(el){
+    el.addEventListener('click', openModal);
+  });
+
+  // 閉じる
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // Step1: ペット選択
+  document.querySelectorAll('[data-pet]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      currentPet = btn.dataset.pet;
+      document.getElementById('step2Eyebrow').textContent = currentPet === 'dog' ? 'わんちゃんのお薬を探す' : 'ネコちゃんのお薬を探す';
+      document.getElementById('dogMeds').style.display = currentPet === 'dog' ? 'flex' : 'none';
+      document.getElementById('catMeds').style.display = currentPet === 'cat' ? 'flex' : 'none';
+      showStep(step2);
+      gtag('event', 'modal_pet_select', { event_category: 'cta', event_label: currentPet });
+    });
+  });
+
+  // Step2: 薬種選択
+  document.querySelectorAll('[data-med]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const med = btn.dataset.med;
+      document.querySelectorAll('[id^="cards-"]').forEach(function(el){ el.style.display = 'none'; });
+      const card = document.getElementById('cards-' + med);
+      if(card) card.style.display = 'flex';
+      const labels = medLabels[med] || ['おすすめ商品', 'こちらがおすすめです'];
+      document.getElementById('solutionLabel').textContent = labels[0];
+      document.getElementById('solutionTitle').textContent = labels[1];
+      showStep(step3);
+      gtag('event', 'modal_med_select', { event_category: 'cta', event_label: med });
+    });
+  });
+
+  // CTAリンククリック計測
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.solution-card-btn');
+    if(btn){
+      const name = btn.closest('.solution-card')?.querySelector('.solution-card-name')?.textContent || '';
+      gtag('event', 'cta_click', { event_category: 'affiliate', event_label: name });
+    }
+  });
+
+  // 戻るボタン
+  document.getElementById('backToStep1').addEventListener('click', function(){ showStep(step1); });
+  document.getElementById('backToStep2').addEventListener('click', function(){ showStep(step2); });
+});
+</script>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  当サイトはアフィリエイト広告を含みます。掲載情報は記事公開時点のものです。<br>
+  <a href="https://www.qolmedia.info/privacy">プライバシーポリシー</a>
+  <a href="https://www.qolmedia.info/about">運営について</a>
+  <a href="https://www.qolmedia.info/contact">お問い合わせ</a><br>
+  © 2026 QOL media
+</footer>
+
+<!-- STICKY BOTTOM CTA (mobile only) -->
+<div class="sticky-cta">
+  <p>薬代を最大70%節約<span>犬・猫別に最適な商品を提案</span></p>
+  <a href="https://mttag.com/s/CiN-gOTx1i8" target="_blank" rel="nofollow" class="open-modal" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'sticky-cta'});" style="background:#fff;color:var(--cta-dark);font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;text-decoration:none;white-space:nowrap;display:inline-block;">今すぐ探す</a>
+</div>
+
+<style>
+@keyframes ctaPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
+  50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
+}
+.open-modal { animation: ctaPulse 2s infinite; }
+#lp-toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #1a1a2e; color: #fff; font-size: 13px; font-weight: 700;
+  padding: 12px 20px; border-radius: 30px; white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9999;
+  opacity: 0; transition: all 0.4s; pointer-events: none;
+}
+#lp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; cursor: pointer; }
+</style>
+<div id="lp-toast">🐾 愛犬・愛猫のお薬、30秒で最適なものを見つけませんか？</div>
+<script>
+(function(){
+  var toast = document.getElementById('lp-toast');
+  var toastShown = false;
+  setTimeout(function(){
+    if(toastShown) return;
+    toastShown = true;
+    toast.classList.add('show');
+    gtag('event', 'toast_show', { event_category: 'engagement' });
+    toast.addEventListener('click', function(){
+      toast.classList.remove('show');
+      document.querySelector('.open-modal').click();
+    });
+    setTimeout(function(){ toast.classList.remove('show'); }, 6000);
+  }, 15000);
+  var autoTriggered = false;
+  window.addEventListener('scroll', function(){
+    if(autoTriggered) return;
+    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if(pct >= 0.5){
+      autoTriggered = true;
+      toastShown = true;
+      gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
+      document.querySelector('.open-modal').click();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #0D1B3E;
+  --magenta: #A0006E;
+  --accent: #C8234F;
+  --gold: #D4880A;
+  --bg: #F7F5F2;
+  --surface: #FFFFFF;
+  --surface2: #F0EDE8;
+  --text: #1A1A2E;
+  --muted: #6B7280;
+  --border: rgba(0,0,0,0.08);
+}
+
+/* FVセクションのみダークモード維持 */
+.fv-dark {
+  --bg: #060D1F;
+  --surface: #0F1E3C;
+  --text: #F0F4FF;
+  --muted: #8899BB;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  color-scheme: light;
+  font-family: var(--font-noto), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(6, 199, 85, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(6, 199, 85, 0.7); }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes scanline {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.25s; opacity: 0; }
+.delay-3 { animation-delay: 0.4s; opacity: 0; }
+.delay-4 { animation-delay: 0.6s; opacity: 0; }
+
+.cta-btn {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-inner {
+  display: inline-flex;
+  animation: ticker 20s linear infinite;
+}
+
+/* AI terminal effect */
+.terminal {
+  background: #0a0f1e;
+  border: 1px solid rgba(255, 45, 107, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.terminal::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,45,107,0.6), transparent);
+  animation: scanline 3s linear infinite;
+  z-index: 10;
+}
+
+.terminal-bar {
+  background: #161d32;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-r { background: #ff5f57; }
+.dot-y { background: #ffbd2e; }
+.dot-g { background: #28ca42; }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #FF2D6B, #A0006E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #F5A623, #FF6B35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,45,107,0.3), transparent);
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 45, 107, 0.5);
+}
+
+/* Noise overlay */
+.noise {
+  position: relative;
+}
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.04;
+}
+/* ── FV背景画像 モバイル切り替え ──────────────────────────────────────
+   追記先: app/globals.css の末尾
+   画像ファイル:
+     PC  → /fv-bg.webp / /fv-bg-b.webp（既存）
+     SP  → /fv-bg-mobile.webp / /fv-bg-mobile-b.webp（変換後）
+   ブレークポイント: 768px以下をモバイル扱い
+────────────────────────────────────────────────────────────────────── */
+
+/* A案 */
+.fv-bg-a {
+  background-image: url('/fv-bg.webp');
+}
+
+@media (max-width: 768px) {
+  .fv-bg-a {
+    background-image: url('/fv-bg-mobile.webp');
+  }
+}
+
+/* B案 */
+.fv-bg-b {
+  background-image: url('/fv-bg-b.webp');
+}
+
+@media (max-width: 768px) {
+  .fv-bg-b {
+    background-image: url('/fv-bg-mobile-b.webp');
+  }
+}
+
+/* ── WHY HARD TO REPLICATE / BLACK BOX セクション レスポンシブ ── */
+@media (max-width: 700px) {
+  .geo-3col { grid-template-columns: 1fr !important; }
+  .geo-2col { grid-template-columns: 1fr !important; }
+}

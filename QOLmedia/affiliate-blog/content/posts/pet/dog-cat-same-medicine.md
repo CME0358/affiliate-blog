@@ -1,0 +1,188 @@
+---
+title: "犬と猫に同じ薬は使える？種類別の注意点と危険な組み合わせ"
+date: "2026-03-28"
+description: "犬と猫で同じ薬が使えるかを徹底解説。共用できる薬・絶対NGな薬・安全に使い分けるポイントを2026年最新情報でお届けします。"
+category: "ペット"
+tags: ["犬猫共用", "ペット薬", "フィラリア予防", "ノミダニ駆除", "投薬注意"]
+---
+
+**PR・広告を含む記事です**
+
+<div class="product-carousel">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>
+
+## 【結論】犬と猫で同じ薬は「使えるものと使えないもの」がある
+
+犬と猫に同じ薬を使えるかどうかは、薬の種類によって明確に分かれます。フィラリア予防薬やノミダニ駆除薬の一部は犬猫共用が可能ですが、**猫に使うと命に関わる犬専用薬**も存在します。2026年現在、安全で信頼できる正規品を選び、種類ごとの注意点を理解することが重要です。
+
+---
+
+## 犬と猫で共用できる薬の種類
+
+### フィラリア予防薬
+
+[イベルメクチン](https://mttag.com/s/-dlwkEXJ_Jg)やミルベマイシンを主成分とするフィラリア予防薬は、犬猫ともに使用できる製品が多くあります。
+
+| 製品名 | 犬への効果 | 猫への効果 | 共用可否 |
+|--------|-----------|-----------|---------|
+| ハートガードプラス | フィラリア予防・回虫駆除 | - | 犬専用 |
+| [レボリューション](https://mttag.com/s/L7IrW864-jY) | フィラリア予防・ノミ駆除 | フィラリア予防・ノミ駆除 | ✅共用OK |
+| ストロングホールド | フィラリア予防・ノミ駆除 | フィラリア予防・ノミ駆除 | ✅共用OK |
+
+**[レボリューション](https://mttag.com/s/L7IrW864-jY)**や**ストロングホールド**はセラメクチンを主成分とし、犬にも猫にも安全に使用できます。月1回の投与でフィラリア幼虫を100%駆除し、ノミの成虫・卵にも効果を発揮します。
+
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+### ノミダニ駆除薬（一部）
+
+フロントラインプラスは犬用・猫用で成分濃度が異なりますが、それぞれの専用品を使えば安全に駆除効果が得られます。
+
+---
+
+## 【危険】猫に絶対使ってはいけない犬用薬
+
+### ペルメトリン含有製品は猫に致死的
+
+**アドバンテージプラス（犬用）**や一部のノミダニ駆除スプレーに含まれる**ペルメトリン**は、猫には絶対に使用してはいけません。
+
+猫はペルメトリンを代謝する酵素を持っていないため、少量でも以下の中毒症状を引き起こします：
+
+- 激しい震え・けいれん
+- よだれ・嘔吐
+- 最悪の場合、死亡
+
+**「犬用」と明記された製品を猫に使う行為は命に関わります。**
+
+### 犬用の用量をそのまま猫に使うのもNG
+
+同じ成分でも、犬と猫では体重あたりの安全用量が異なります。例えば、犬用フィプロニル製品を猫に塗布すると過剰投与になる可能性があります。
+
+---
+
+## 安全に使い分けるための3つのポイント
+
+### 1. 必ず「犬猫兼用」または「猫用」を確認
+
+製品パッケージやラベルに「犬猫兼用」「For Dogs and Cats」と明記されているものを選びましょう。
+
+### 2. 体重に合った製品サイズを選ぶ
+
+ストロングホールドやレボリューションは体重別にパッケージが分かれています。5kg以下の小型犬・猫用、10kg以上の大型犬用など、正しいサイズを選ぶことで効果と安全性が両立できます。
+
+### 3. 正規品を信頼できるルートで購入する
+
+海外通販では偽造品や品質劣化品のリスクがあります。**わんにゃん薬局**のような正規品取扱店から購入すれば、成分保証があり安心です。
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+---
+
+## 動物病院と通販の価格比較
+
+犬猫の薬は動物病院でも購入できますが、通販を利用すると大幅にコストを抑えられます。
+
+| 製品名 | 動物病院価格（目安） | わんにゃん薬局価格 | 差額 |
+|--------|-------------------|------------------|------|
+| [レボリューション6本](https://mttag.com/s/L7IrW864-jY) | 約12,000円 | 約6,500円 | **約5,500円お得** |
+| ストロングホールド6本 | 約11,000円 | 約5,800円 | **約5,200円お得** |
+| [フロントライン犬用6本](https://mttag.com/s/1mFYeWhr6ZA) | 約8,000円 | 約4,200円 | **約3,800円お得** |
+
+年間で1万円以上の節約も可能です。まとめ買いするほどお得になるケースも多いため、フィラリアシーズン前にストックしておくことをおすすめします。
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+---
+
+## よくある質問（FAQ）
+
+### Q1. 犬と猫を多頭飼いしています。同じ薬を使い回せますか？
+
+**A.** 犬猫兼用と明記された製品（[レボリューション](https://mttag.com/s/L7IrW864-jY)、ストロングホールドなど）であれば可能ですが、**体重に合ったサイズを個別に用意**してください。1本を分けて使うのは用量管理が難しく推奨されません。
+
+### Q2. 猫に犬用ノミ取りシャンプーを使ってしまいました。どうすれば？
+
+**A.** すぐに大量の水で洗い流し、動物病院に連絡してください。ペルメトリン中毒の症状が出る前に対処することが重要です。
+
+### Q3. 通販の薬は本当に安全ですか？
+
+**A.** 正規品を扱う信頼できる店舗から購入すれば安全です。わんにゃん薬局では成分表示と使用期限が明確な正規品のみを取り扱っています。
+
+### Q4. フィラリア予防薬は年中必要ですか？
+
+**A.** 温暖な地域では通年投与が推奨されます。蚊の発生時期に合わせて4月〜12月に月1回投与するのが一般的です。
+
+### Q5. 2026年に新しく認可された犬猫共用薬はありますか？
+
+**A.** 2026年時点では、既存の[レボリューション](https://mttag.com/s/L7IrW864-jY)・ストロングホールドが引き続き主流です。新製品情報は随時更新されますので、定期的にチェックしましょう。
+
+---
+
+## まとめ
+
+犬と猫に同じ薬を使えるかは、製品によって明確に異なります。**[レボリューション](https://mttag.com/s/L7IrW864-jY)やストロングホールドは犬猫共用で安全**ですが、**ペルメトリン含有の犬用薬は猫に致死的**です。正規品を正しく選び、安全な投薬でペットの健康を守りましょう。
+
+[わんにゃん薬局で詳細を見る](https://mttag.com/s/CiN-gOTx1i8)
+
+<div class="product-carousel product-carousel-footer">
+  <div class="product-carousel-inner">
+    <a href="https://mttag.com/s/L7IrW864-jY" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/revolution_dog.webp" alt="revolution_dog" />
+      <span>&#x30EC;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;(&#x72AC;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/PadhsxDEeZQ" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard_spectra.webp" alt="nexgard_spectra" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;&#x30B9;&#x30DA;&#x30AF;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/MFppScuKzeM" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/nexgard.webp" alt="nexgard" />
+      <span>&#x30CD;&#x30AF;&#x30B9;&#x30AC;&#x30FC;&#x30C9;</span>
+    </a>
+    <a href="https://mttag.com/s/JgUCemnI7d4" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/milprazon_chewable_cat.webp" alt="milprazon" />
+      <span>&#x30DF;&#x30EB;&#x30D7;&#x30E9;&#x30BE;&#x30F3;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/yaFOovyO8ac" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/fiprofort_plus_cat.webp" alt="fiprofort" />
+      <span>&#x30D5;&#x30A3;&#x30D7;&#x30ED;&#x30D5;&#x30A9;&#x30FC;&#x30C8;(&#x732B;&#x7528;)</span>
+    </a>
+    <a href="https://mttag.com/s/lr269oGXelI" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/semintra.webp" alt="semintra" />
+      <span>&#x30BB;&#x30DF;&#x30F3;&#x30C8;&#x30E9;</span>
+    </a>
+    <a href="https://mttag.com/s/QlCa-I83UNc" target="_blank" rel="noopener noreferrer" class="product-card">
+      <img src="/zithromax2.webp" alt="zithromax" />
+      <span>&#x30B8;&#x30B9;&#x30ED;&#x30DE;&#x30C3;&#x30AF;&#x9320;</span>
+    </a>
+  </div>
+</div>

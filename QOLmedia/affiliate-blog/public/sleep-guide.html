@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>眠れない夜、終わりにしませんか？ | QOL media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== KRAKEN DARK DESIGN TOKENS ===== */
+    :root {
+      /* Core */
+      --bg-base:        #0a0a0f;       /* deep near-black */
+      --bg-surface:     #111118;       /* card surfaces */
+      --bg-elevated:    #18181f;       /* hover / elevated */
+
+      /* Kraken Purple scale */
+      --purple:         #7132f5;       /* primary brand */
+      --purple-dark:    #5741d8;       /* outlined variant / border */
+      --purple-deep:    #5b1ecf;       /* pressed */
+      --purple-subtle:  rgba(133,91,251,0.12); /* badge bg */
+
+      /* Text */
+      --text-primary:   #f0eef8;       /* warm white */
+      --text-secondary: #9497a9;       /* silver-blue */
+      --text-muted:     #686b82;       /* cool gray */
+
+      /* Borders */
+      --border:         #1e1e2a;       /* default border */
+      --border-mid:     #2c2c3e;       /* mid border */
+      --border-strong:  #3d3d55;       /* strong border */
+
+      /* Semantic */
+      --success:        rgba(20,158,97,0.16);
+      --success-text:   #30c97a;
+
+      /* CTA — LINE Green (brand exception) */
+      --cta:            #06C755;
+      --cta-dark:       #04a044;
+
+      /* Shadows */
+      --shadow-card:    0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+      --shadow-purple:  0 8px 32px rgba(113,50,245,0.20);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { text-decoration: none; display: flex; align-items: center; }
+    .logo img { height: 26px; width: auto; max-width: 150px; display: block; }
+    .header-cta {
+      background: var(--cta);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--cta-dark); }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: url('/sleep-lp-hero.jpg') center center / cover no-repeat;
+      color: var(--text-primary);
+      padding: 64px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10,8,25,0.62);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--purple-subtle);
+      color: #b89efb;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(133,91,251,0.3);
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 900;
+      font-size: clamp(24px, 5.5vw, 40px);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #a078fc 0%, #7132f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      position: relative;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #a078fc;
+      display: block;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    /* ===== SECTION COMMONS ===== */
+    .section-inner { max-width: 680px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(19px, 3.8vw, 26px);
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    /* ===== PAIN SECTION ===== */
+    .pain-section {
+      background: var(--bg-surface);
+      padding: 52px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pain-list { display: flex; flex-direction: column; gap: 12px; }
+    .pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      border-left: 3px solid var(--purple);
+      padding: 14px 16px;
+      border-radius: 10px;
+    }
+    .pain-check {
+      width: 24px;
+      height: 24px;
+      background: var(--purple-subtle);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 13px;
+    }
+    .pain-item p { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
+    .pain-item strong { display: block; font-weight: 700; margin-bottom: 2px; color: var(--text-primary); }
+
+    /* ===== DIVIDER BANNER ===== */
+    .divider-banner {
+      background: linear-gradient(90deg, #1a0d3d 0%, #2a1060 50%, #1a0d3d 100%);
+      border-top: 1px solid rgba(113,50,245,0.4);
+      border-bottom: 1px solid rgba(113,50,245,0.4);
+      color: #c5b5fa;
+      text-align: center;
+      padding: 22px 24px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(14px, 3vw, 18px);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .divider-banner span {
+      opacity: 0.7;
+      font-size: 0.75em;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      display: block;
+      margin-top: 5px;
+    }
+
+    /* ===== FEATURE ARTICLES ===== */
+    .articles-section {
+      padding: 52px 24px;
+      background: var(--bg-base);
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .article-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .article-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-purple);
+      border-color: rgba(113,50,245,0.5);
+    }
+    .article-card-badge {
+      background: rgba(113,50,245,0.15);
+      color: #b89efb;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 6px 12px;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+    .article-card-tag {
+      font-size: 10px;
+      color: #9a78f0;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .article-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 8px;
+      flex: 1;
+      color: var(--text-primary);
+    }
+    .article-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .article-card-footer {
+      padding: 11px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .article-card-cta {
+      font-size: 12px;
+      font-weight: 700;
+      color: #9a78f0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .article-card-cta::after { content: '→'; }
+
+    /* ===== MERIT SECTION ===== */
+    .merit-section {
+      background: var(--bg-surface);
+      padding: 52px 24px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .merit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .merit-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      border-radius: 12px;
+      padding: 22px 16px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .merit-card:hover { border-color: rgba(113,50,245,0.4); }
+    .merit-icon { font-size: 28px; display: block; margin-bottom: 10px; }
+    .merit-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #a078fc;
+    }
+    .merit-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== MAIN CTA ===== */
+    .cta-section {
+      background: linear-gradient(160deg, #100828 0%, #0c0620 60%, #0a0a14 100%);
+      color: var(--text-primary);
+      padding: 64px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(113,50,245,0.25);
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(113,50,245,0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #9a78f0;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .cta-section h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .cta-section h2 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #a078fc 0%, #7132f5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-section > p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--cta);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px 44px;
+      border-radius: 12px;
+      text-decoration: none;
+      position: relative;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 24px rgba(6,199,85,0.3);
+    }
+    .cta-btn:hover {
+      background: var(--cta-dark);
+      transform: translateY(-2px);
+    }
+    .cta-btn-sub {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.85;
+      display: block;
+      margin-top: 3px;
+    }
+    .cta-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 18px;
+      position: relative;
+    }
+
+    /* ===== POPULAR ARTICLES FULL LIST ===== */
+    .list-section {
+      padding: 52px 24px;
+      background: var(--bg-surface);
+    }
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+      border: 1px solid var(--border-mid);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .article-list-item {
+      background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .article-list-item:last-child { border-bottom: none; }
+    .article-list-item:hover { background: var(--bg-elevated); }
+    .article-list-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--border-strong);
+      min-width: 28px;
+      text-align: center;
+    }
+    .article-list-item:nth-child(1) .article-list-num { color: #c8a030; }
+    .article-list-item:nth-child(2) .article-list-num { color: #7a7a99; }
+    .article-list-item:nth-child(3) .article-list-num { color: #9a6050; }
+    .article-list-body { flex: 1; }
+    .article-list-tag {
+      font-size: 10px;
+      color: #9a78f0;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .article-list-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .article-list-arrow { font-size: 14px; color: var(--text-muted); }
+
+    /* ===== INLINE CTA BAR ===== */
+    .inline-cta {
+      background: linear-gradient(90deg, #160b38 0%, #1e1050 50%, #160b38 100%);
+      border-top: 1px solid rgba(113,50,245,0.3);
+      border-bottom: 1px solid rgba(113,50,245,0.3);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .inline-cta p {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .inline-cta p span {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 2px;
+    }
+    .inline-cta-btn {
+      background: var(--cta);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .inline-cta-btn:hover { background: var(--cta-dark); }
+
+    /* ===== TRUST ===== */
+    .trust-section {
+      background: var(--bg-base);
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .trust-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .trust-badge-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .trust-badge-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: #080810;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 24px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.9;
+    }
+    .site-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    .site-footer a:hover { color: var(--text-secondary); }
+
+    /* ===== STICKY BOTTOM CTA (mobile) ===== */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10,10,15,0.97);
+      border-top: 1px solid var(--border-mid);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+    }
+    .sticky-cta p {
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .sticky-cta p span {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      display: block;
+    }
+    .sticky-cta a {
+      background: var(--cta);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 640px) { .sticky-cta { display: none; } }
+
+    /* ===== WORRY MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 540px;
+      padding: 36px 28px 32px;
+      position: relative;
+      animation: fadeUp 0.3s ease both;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+    .modal-step { transition: opacity 0.2s, transform 0.2s; }
+    .modal-step.hidden { display: none; }
+
+    /* Step 1 — 悩み選択 */
+    .modal-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #9a78f0;
+      margin-bottom: 8px;
+    }
+    .modal-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(17px, 4vw, 22px);
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    .worry-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .worry-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border: 2.5px solid #06C755;
+      border-radius: 14px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      text-align: left;
+      color: var(--text-primary);
+      font-family: 'Noto Sans JP', sans-serif;
+      box-shadow: 0 3px 10px rgba(6,199,85,0.18);
+      width: 100%;
+      position: relative;
+    }
+    .worry-btn::after {
+      content: '→';
+      position: absolute;
+      right: 16px;
+      font-size: 18px;
+      color: #06C755;
+      font-weight: 700;
+    }
+    .worry-btn:active { transform: scale(0.98); background: #f0faf3; }
+    .worry-btn-icon { font-size: 26px; flex-shrink: 0; }
+    .worry-btn-text strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    .worry-btn-text span { font-size: 12px; color: var(--text-muted); }
+
+    /* Step 2 — 解決策カード */
+    .modal-back {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .modal-back:hover { color: var(--text-secondary); }
+    .solution-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .solution-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(15px, 3.5vw, 19px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .solution-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 480px) {
+      .solution-cards { grid-template-columns: 1fr; }
+    }
+    .solution-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      border-radius: 14px;
+      overflow: hidden;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .solution-card:hover {
+      border-color: rgba(113,50,245,0.5);
+      transform: translateY(-2px);
+    }
+    .solution-card-img {
+      width: 100%;
+      aspect-ratio: 300/250;
+      object-fit: cover;
+      display: block;
+    }
+    .solution-card-body { padding: 12px 10px; }
+    .solution-card-category {
+      font-size: 10px;
+      font-weight: 700;
+      color: #9a78f0;
+      margin-bottom: 4px;
+    }
+    .solution-card-name {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .solution-card-btn {
+      display: block;
+      background: var(--cta);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .solution-card-btn::before { content: '▶ '; }
+    .solution-card-btn:hover { background: var(--cta-dark); }
+    /* アフィリ計測用透明ピクセル */
+    .affili-pixel { position: absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1, .hero-sub, .hero-stats { animation: fadeUp 0.6s ease both; }
+    .hero-sub  { animation-delay: 0.1s; }
+    .hero-stats { animation-delay: 0.2s; }
+  </style>
+
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS30YQY1N7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BS30YQY1N7');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w6fgeud38o");</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="https://www.qolmedia.info/" class="logo">
+    <img src="/QOL_logo_transparent.png" alt="QOL media" />
+  </a>
+  <button class="header-cta open-modal" style="border:none;cursor:pointer;">▶ 寝つき・眠りの浅さ、どっち？</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">睡眠改善 完全ガイド 2026</div>
+  <h1>寝つけない？夜中に目が覚める？<br>朝、<em>疲れが取れない？</em></h1>
+  <p class="hero-sub">悩みのタイプで対策が変わります。30秒で原因とアイテムがわかる。</p>
+  <div style="margin-top:24px;position:relative;">
+    <button class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
+      あなたの悩みはどれ？ 30秒で解決策を見つける
+      <span class="cta-btn-sub">寝つき・眠りの浅さ・朝の疲れ → ぴったりのアイテムを提案</span>
+    </button>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain-section">
+  <div class="section-inner">
+    <p class="section-label">こんなお悩みありませんか</p>
+    <h2 class="section-title">「布団に入っても眠れない…<br>明日も仕事なのに」</h2>
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="pain-check">😓</div>
+        <p><strong>眠れない原因がわからない</strong>まま、市販の睡眠薬に頼り続けて体への影響が心配になっている。</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">😟</div>
+        <p><strong>寝ても疲れが取れない</strong>、朝起きてもだるいという状態が続いて、日中のパフォーマンスが落ちている。</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">😰</div>
+        <p><strong>サプリや睡眠グッズを試したけど</strong>、どれも効果を感じられず何を選べばいいかわからない。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider-banner">
+  その悩み、この記事が全部解決します。<br>
+  <span>科学的根拠・専門家推奨・実績のある情報だけを集めました</span>
+</div>
+
+<!-- FEATURED ARTICLES -->
+<section class="articles-section">
+  <div class="section-inner" style="max-width:900px">
+    <p class="section-label">まずはここから読む</p>
+    <h2 class="section-title">眠れない方に<br>一番読まれている記事</h2>
+    <div class="articles-grid">
+
+      <a href="https://www.qolmedia.info/posts/nemurenaiy-genin-taisho" class="article-card">
+        <div class="article-card-badge">🏆 人気 No.1</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">入眠障害</p>
+          <h3>眠れない原因と対処法【医師監修】根本から解決する7つの方法</h3>
+          <p>眠れない夜の根本原因を解説。科学的に効果が証明された対処法を7つ紹介します。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">医師監修</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026" class="article-card">
+        <div class="article-card-badge">📋 完全まとめ</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">サプリ比較</p>
+          <h3>睡眠サプリおすすめランキング2026｜グッドナイト27000プラスvsGABAを徹底比較</h3>
+          <p>成分・効果・価格で徹底比較。専門家が選ぶ睡眠サプリTOP5を一挙公開。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">専門家監修</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/stress-nemurenai-gaba-theanine" class="article-card">
+        <div class="article-card-badge">😓 ストレス不眠向け</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">メンタル / 睡眠</p>
+          <h3>ストレスで眠れない夜に効くGABAとテアニンの組み合わせ</h3>
+          <p>交感神経優位の状態を整える科学的アプローチ。GABAとテアニンのW効果を解説。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">研究データあり</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/alaplas-fukainemuri-kuchikomi" class="article-card">
+        <div class="article-card-badge">⭐ 体験レビュー</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">アラプラス</p>
+          <h3>グッドナイト27000プラス 口コミ｜1ヶ月飲んでわかったリアルな効果</h3>
+          <p>1週目〜4週目の変化を正直にレビュー。科学的根拠と口コミをもとに徹底解説。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">実体験レビュー</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/fumin-sho-kanzen-guide" class="article-card">
+        <div class="article-card-badge">📖 完全ガイド</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">不眠症</p>
+          <h3>不眠症の原因と対策 完全ガイド｜タイプ別に解説する科学的アプローチ</h3>
+          <p>入眠・中途・早朝の3タイプ別に原因と対策を網羅。専門家も推奨する改善法。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">GEO対応</span>
+        </div>
+      </a>
+
+      <a href="https://www.qolmedia.info/posts/kagaku-teki-suimin-kaizen" class="article-card">
+        <div class="article-card-badge">🔬 科学的根拠</div>
+        <div class="article-card-body">
+          <p class="article-card-tag">睡眠改善</p>
+          <h3>科学的に正しい睡眠改善法｜研究データが示す最も効果的な方法</h3>
+          <p>メタ分析・RCT研究を複数引用。断定的な結論で「本当に効く方法」だけを紹介。</p>
+        </div>
+        <div class="article-card-footer">
+          <span class="article-card-cta">記事を読む</span>
+          <span style="font-size:11px;color:var(--text-muted)">研究データ引用</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- INLINE CTA -->
+<div class="inline-cta">
+  <p>サプリ・枕・マットレス。あなたに合う解決策はどれ？<span>科学的根拠のある厳選アイテムをご提案</span></p>
+  <button class="inline-cta-btn open-modal" style="border:none;cursor:pointer;">▶ 悩みから探す</button>
+</div>
+
+<!-- MERIT -->
+<section class="merit-section">
+  <div class="section-inner" style="max-width:900px">
+    <p class="section-label">睡眠改善の3つのアプローチ</p>
+    <h2 class="section-title">あなたの悩みに合わせた<br>解決策がある</h2>
+    <div class="merit-grid">
+      <div class="merit-card">
+        <span class="merit-icon">💊</span>
+        <h3>サプリで内側から整える</h3>
+        <p>GABA・L-テアニンなど科学的根拠のある成分配合。機能性表示食品で安心。寝つきが悪い・ストレスで眠れない方に。</p>
+      </div>
+      <div class="merit-card">
+        <span class="merit-icon">🛏️</span>
+        <h3>マットレスで体をリセット</h3>
+        <p>体圧分散・寝返りのしやすさが睡眠の質を左右する。腰痛・肩こりが原因で眠れない方に最適なアプローチ。</p>
+      </div>
+      <div class="merit-card">
+        <span class="merit-icon">😴</span>
+        <h3>枕で首・頭を正しく支える</h3>
+        <p>合わない枕は首コリ・いびきの原因に。高さ・素材・形状の選び方で朝の目覚めが変わる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CTA -->
+<section class="cta-section">
+  <p class="cta-label">▼ あなたに合う睡眠改善を見つける</p>
+  <h2>眠れない夜を終わらせる<br><em>あなただけの解決策</em></h2>
+  <p>サプリ・枕・マットレス。悩みを選ぶだけで、科学的根拠のある厳選アイテムをご提案します。</p>
+  <button class="cta-btn open-modal" style="border:none;cursor:pointer;">
+    悩みから解決策を探す
+    <span class="cta-btn-sub">サプリ / 枕 / マットレスの3カテゴリから提案</span>
+  </button>
+  <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
+</section>
+
+<!-- ARTICLE LIST -->
+<section class="list-section">
+  <div class="section-inner" style="max-width:760px">
+    <p class="section-label">全記事一覧</p>
+    <h2 class="section-title">症状・お悩み別で<br>睡眠記事を探す</h2>
+    <div class="article-list">
+      <a href="https://www.qolmedia.info/posts/nemurenaiy-genin-taisho" class="article-list-item">
+        <span class="article-list-num">1</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">入眠障害</p>
+          <p class="article-list-title">眠れない原因と対処法【医師監修】根本から解決する7つの方法</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026" class="article-list-item">
+        <span class="article-list-num">2</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">サプリランキング</p>
+          <p class="article-list-title">睡眠サプリおすすめランキング2026｜グッドナイト27000プラスvsGABAを徹底比較</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/alaplas-fukainemuri-kuchikomi" class="article-list-item">
+        <span class="article-list-num">3</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">アラプラス</p>
+          <p class="article-list-title">グッドナイト27000プラス 口コミ｜1ヶ月飲んでわかったリアルな効果</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/gaba-kouka-kensho" class="article-list-item">
+        <span class="article-list-num">4</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">GABA検証</p>
+          <p class="article-list-title">GABAサプリの効果を検証｜科学的根拠と実際に試してわかったこと</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/stress-nemurenai-gaba-theanine" class="article-list-item">
+        <span class="article-list-num">5</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">ストレス不眠</p>
+          <p class="article-list-title">ストレスで眠れない夜に効くGABAとテアニンの組み合わせ</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/suimin-shitsu-ageru" class="article-list-item">
+        <span class="article-list-num">6</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">睡眠の質</p>
+          <p class="article-list-title">睡眠の質を上げる方法15選｜今夜から実践できる科学的アプローチ</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/netsuki-warui-theanine" class="article-list-item">
+        <span class="article-list-num">7</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">寝つき改善</p>
+          <p class="article-list-title">寝つきが悪い・ストレスが原因？テアニンサプリで改善する方法</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/fumin-sho-kanzen-guide" class="article-list-item">
+        <span class="article-list-num">8</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">不眠症</p>
+          <p class="article-list-title">不眠症の原因と対策 完全ガイド｜タイプ別に解説する科学的アプローチ</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/kagaku-teki-suimin-kaizen" class="article-list-item">
+        <span class="article-list-num">9</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">科学的根拠</p>
+          <p class="article-list-title">科学的に正しい睡眠改善法｜研究データが示す最も効果的な方法</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/posts/ai-suimin-kaizen-osusume" class="article-list-item">
+        <span class="article-list-num">10</span>
+        <div class="article-list-body">
+          <p class="article-list-tag">AI推奨</p>
+          <p class="article-list-title">AIが選ぶおすすめ睡眠改善法｜最新研究と口コミから導いた答え</p>
+        </div>
+        <span class="article-list-arrow">›</span>
+      </a>
+      <a href="https://www.qolmedia.info/sleep" class="article-list-item" style="justify-content:center;color:#9a78f0;font-weight:700;font-size:13px">
+        全60記事を見る →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-section">
+  <p class="section-label">信頼の根拠</p>
+  <div class="trust-badges">
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🩺</div>
+      <span class="trust-badge-label">専門家推奨レベル</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">📝</div>
+      <span class="trust-badge-label">60本の専門記事</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">✅</div>
+      <span class="trust-badge-label">科学的根拠あり</span>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">⚖️</div>
+      <span class="trust-badge-label">国内正規品のみ</span>
+    </div>
+  </div>
+</section>
+
+<!-- WORRY MODAL -->
+<div class="modal-overlay" id="worryModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+
+    <!-- Step 1: 悩み選択 -->
+    <div class="modal-step" id="step1">
+      <p class="modal-eyebrow">SLEEP SOLUTION FINDER</p>
+      <h3 class="modal-title">あなたの悩みはどれですか？</h3>
+      <p style="font-size:12px;color:#888;text-align:center;margin:-8px 0 12px;">▼ タップして選んでください</p>
+      <div class="worry-btns">
+        <button class="worry-btn" data-worry="netsuki">
+          <span class="worry-btn-icon">😞</span>
+          <div class="worry-btn-text">
+            <strong>寝つきが悪い・なかなか眠れない</strong>
+            <span>布団に入っても眠れない、ストレスで頭が冴える</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-worry="asai">
+          <span class="worry-btn-icon">😪</span>
+          <div class="worry-btn-text">
+            <strong>眠りが浅い・夜中に目が覚める</strong>
+            <span>寝た気がしない、夢ばかり見る、途中で起きてしまう</span>
+          </div>
+        </button>
+        <button class="worry-btn" data-worry="tsukare">
+          <span class="worry-btn-icon">😩</span>
+          <div class="worry-btn-text">
+            <strong>朝起きても疲れが取れない</strong>
+            <span>体が重い、肩・腰が痛い、すっきり起きられない</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: 解決策カード -->
+    <div class="modal-step hidden" id="step2">
+      <button class="modal-back" id="backBtn">← 悩みを選び直す</button>
+      <p class="solution-label" id="solutionLabel"></p>
+      <h3 class="solution-title" id="solutionTitle"></h3>
+      <!-- 寝つきが悪い → サプリ1枚 -->
+      <div class="solution-cards" id="cards-netsuki" style="display:none;justify-content:center;">
+        <div class="solution-card" style="width:220px;margin:0 auto;">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0Q+FLFTS2+4KU6+ZRXQP" target="_blank" rel="nofollow" style="display:block;">
+            <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000021363&id=202204252050035840" alt="ブレインスリープNMN9000" style="width:220px;height:auto;display:block;">
+          </a>
+          <div class="solution-card-body" style="text-align:center;">
+            <p class="solution-card-category">💊 サプリ</p>
+            <p class="solution-card-name">ブレインスリープNMN9000</p>
+            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0Q+FLFTS2+4KU6+ZRXQP" target="_blank" rel="nofollow" class="solution-card-btn">公式サイトで確認する</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 眠りが浅い → 枕1枚 -->
+      <div class="solution-cards" id="cards-asai" style="display:none;justify-content:center;">
+        <div class="solution-card" style="width:220px;margin:0 auto;">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6C130I+4KU6+61Z81" target="_blank" rel="nofollow" style="display:block;">
+            <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000021363&id=202207081525050010" alt="ブレインスリープピロー" style="width:220px;height:auto;display:block;">
+          </a>
+          <div class="solution-card-body" style="text-align:center;">
+            <p class="solution-card-category">😴 枕</p>
+            <p class="solution-card-name">ブレインスリープピロー</p>
+            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6C130I+4KU6+61Z81" target="_blank" rel="nofollow" class="solution-card-btn">公式サイトで確認する</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 疲れが取れない → マットレス1枚 -->
+      <div class="solution-cards" id="cards-tsukare" style="display:none;justify-content:center;">
+        <div class="solution-card" style="width:220px;margin:0 auto;">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6BFNEQ+4KU6+BYLJL" target="_blank" rel="nofollow" style="display:block;">
+            <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000021363&id=202207081643145244" alt="ブレインスリープマットレスフロート" style="width:220px;height:auto;display:block;">
+          </a>
+          <div class="solution-card-body" style="text-align:center;">
+            <p class="solution-card-category">🛏️ マットレス</p>
+            <p class="solution-card-name">ブレインスリープマットレスフロート</p>
+            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6BFNEQ+4KU6+BYLJL" target="_blank" rel="nofollow" class="solution-card-btn">公式サイトで確認する</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  当サイトはアフィリエイト広告を含みます。掲載情報は記事公開時点のものです。<br>
+  <a href="https://www.qolmedia.info/privacy">プライバシーポリシー</a>
+  <a href="https://www.qolmedia.info/about">運営について</a>
+  <a href="https://www.qolmedia.info/contact">お問い合わせ</a><br>
+  © 2026 QOL media
+</footer>
+
+<!-- STICKY BOTTOM CTA (mobile only) -->
+<div class="sticky-cta">
+  <p>寝つき・眠りの浅さ・朝の疲れ<span>30秒で原因とアイテムがわかる</span></p>
+  <button class="open-modal" style="background:var(--cta);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:12px;border:none;cursor:pointer;">どれに当てはまる？</button>
+</div>
+
+<script>
+  // 悩み別メッセージ
+  const worryMessages = {
+    netsuki: {
+      label: '寝つきが悪い・なかなか眠れない',
+      title: 'ストレス・緊張を和らげるなら\nこのサプリ'
+    },
+    asai: {
+      label: '眠りが浅い・夜中に目が覚める',
+      title: '深い眠りに導く枕で\n睡眠の質を変える'
+    },
+    tsukare: {
+      label: '朝起きても疲れが取れない',
+      title: '脳も体も究極の睡眠を'
+    }
+  };
+
+  // 悩みとカードIDのマッピング
+  const cardMap = {
+    netsuki: 'cards-netsuki',
+    asai:    'cards-asai',
+    tsukare: 'cards-tsukare'
+  };
+
+  const modal = document.getElementById('worryModal');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const solutionLabel = document.getElementById('solutionLabel');
+  const solutionTitle = document.getElementById('solutionTitle');
+  const allCards = ['cards-netsuki', 'cards-asai', 'cards-tsukare'];
+
+  // モーダルを開く
+  document.querySelectorAll('.open-modal').forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.classList.add('open');
+      step1.classList.remove('hidden');
+      step2.classList.add('hidden');
+      document.body.style.overflow = 'hidden';
+      gtag('event', 'modal_open', { event_category: 'cta' });
+    });
+  });
+
+  // 閉じる
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // 悩み選択 → Step2へ（対応カードだけ表示）
+  document.querySelectorAll('.worry-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const worry = btn.dataset.worry;
+      const msg = worryMessages[worry];
+      solutionLabel.textContent = '「' + msg.label + '」の方へ';
+      solutionTitle.textContent = msg.title;
+
+      // 全カード非表示 → 該当カードのみ表示
+      allCards.forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+      document.getElementById(cardMap[worry]).style.display = 'flex';
+
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden');
+      gtag('event', 'modal_worry_select', { event_category: 'cta', event_label: worry });
+    });
+  });
+
+  // CTAリンククリック計測
+  document.querySelectorAll('.solution-card-btn').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'cta_click', { event_category: 'affiliate', event_label: link.closest('.solution-card').querySelector('.solution-card-name')?.textContent || '' });
+    });
+  });
+
+  // 戻る
+  document.getElementById('backBtn').addEventListener('click', () => {
+    step2.classList.add('hidden');
+    step1.classList.remove('hidden');
+  });
+</script>
+
+<style>
+@keyframes ctaPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
+  50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
+}
+.open-modal { animation: ctaPulse 2s infinite; }
+#lp-toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #1a1a2e; color: #fff; font-size: 13px; font-weight: 700;
+  padding: 12px 20px; border-radius: 30px; white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9999;
+  opacity: 0; transition: all 0.4s; pointer-events: none;
+}
+#lp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; cursor: pointer; }
+</style>
+<div id="lp-toast">💤 寝つき・眠りの浅さ、どれに当てはまりますか？</div>
+<script>
+(function(){
+  var toast = document.getElementById('lp-toast');
+  var toastShown = false;
+  setTimeout(function(){
+    if(toastShown) return;
+    toastShown = true;
+    toast.classList.add('show');
+    gtag('event', 'toast_show', { event_category: 'engagement' });
+    toast.addEventListener('click', function(){
+      toast.classList.remove('show');
+      document.querySelector('.open-modal').click();
+    });
+    setTimeout(function(){ toast.classList.remove('show'); }, 6000);
+  }, 15000);
+  var autoTriggered = false;
+  window.addEventListener('scroll', function(){
+    if(autoTriggered) return;
+    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if(pct >= 0.5){
+      autoTriggered = true;
+      toastShown = true;
+      gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
+      document.querySelector('.open-modal').click();
+    }
+  });
+})();
+</script>
+</body>
+</html>
