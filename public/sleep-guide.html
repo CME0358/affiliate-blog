@@ -809,11 +809,11 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-eyebrow">睡眠改善 完全ガイド 2026</div>
-  <h1>寝つけない？夜中に目が覚める？<br>朝、<em>疲れが取れない？</em></h1>
-  <p class="hero-sub">悩みのタイプで対策が変わります。30秒で原因とアイテムがわかる。</p>
+  <h1>その「眠れない」、<br><em>原因と対策</em>が30秒でわかる。</h1>
+  <p class="hero-sub">寝つき・中途覚醒・朝の疲れ——悩みのタイプで解決策は違います。専門家推奨アイテムをすぐ確認。</p>
   <div style="margin-top:24px;position:relative;">
-    <button class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
-      あなたの悩みはどれ？ 30秒で解決策を見つける
+    <button id="fv-modal-btn" class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
+      あなたの悩みタイプを選ぶ（30秒）
       <span class="cta-btn-sub">寝つき・眠りの浅さ・朝の疲れ → ぴったりのアイテムを提案</span>
     </button>
   </div>
@@ -1307,7 +1307,7 @@
     gtag('event', 'toast_show', { event_category: 'engagement' });
     toast.addEventListener('click', function(){
       toast.classList.remove('show');
-      document.querySelector('.open-modal').click();
+      document.getElementById('fv-modal-btn').click();
     });
     setTimeout(function(){ toast.classList.remove('show'); }, 6000);
   }, 15000);
@@ -1319,7 +1319,7 @@
       autoTriggered = true;
       toastShown = true;
       gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
-      document.querySelector('.open-modal').click();
+      document.getElementById('fv-modal-btn').click();
     }
   });
 })();

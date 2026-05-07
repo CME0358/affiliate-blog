@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '最大1億円まで対応可能',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5GH3YA+4EKW+TRVYQ',
       ctaText: '無料相談する',
-      types: ['large', 'individual'] // 1億円対応・個人事業主OK
+      types: ['large', 'individual']
     },
     {
       name: 'ジャパンマネジメント',
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '最大5000万円まで対応可能',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5L8KSI+3V6A+5YJRM',
       ctaText: '無料相談する',
-      types: ['large'] // 5000万円対応・手数料高めで他には非該当
+      types: ['large']
     },
     {
       name: '株式会社アクシアプラス',
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '土日祝日・平日時間外の振込も対応',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N82JP+4YM3SY+4HV8+5YJRM',
       ctaText: '無料相談する',
-      types: ['fast'] // 土日祝・時間外対応でスピード重視
+      types: ['fast']
     },
     {
       name: 'PayToday',
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '低手数料・少額から対応（10万円〜）',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N83C4+6J6A9U+4OPW+5YRHE',
       ctaText: '無料相談する',
-      types: ['low', 'individual'] // 手数料1%〜・10万円〜
+      types: ['low', 'individual']
     },
     {
       name: '株式会社トラストゲートウェイ',
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '医療系法人の診療報酬債権の買取も対応',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N82JP+4Z7JEQ+3RD2+5YJRM',
       ctaText: '無料相談する',
-      types: ['industry', 'low'] // 医療特化・手数料1%〜
+      types: ['industry', 'low']
     },
     {
       name: '株式会社トップ・マネジメント',
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '高額対応（1億円以上）・大企業向け',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N83C4+A6R2YQ+3JLM+63H8I',
       ctaText: '無料相談する',
-      types: ['large'] // 1億円以上・大企業向け
+      types: ['large']
     },
     {
       name: '株式会社エスコム',
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '低手数料・少額から対応（30万円〜）',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N83C4+6JRPVM+4OCA+60OXE',
       ctaText: '無料相談する',
-      types: ['low'] // 手数料1.5%〜・法人のみなので individual 除外
+      types: ['low']
     },
     {
       name: '株式会社ネクストワン',
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '高額対応（1億円以上）・大企業向け',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N82JP+50EEMA+4OCU+609HU',
       ctaText: '無料相談する',
-      types: ['large'] // 1億円以上・法人のみ
+      types: ['large']
     },
     {
       name: '株式会社西日本ファクター',
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '福岡中心に九州・四国地方に強い。',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N81RK+6NCBIA+3XT0+5YJRM',
       ctaText: '無料相談する',
-      types: ['industry'] // 地域特化（九州・四国）
+      types: ['industry']
     },
     {
       name: 'えんナビ',
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '最大5000万円まで対応可能',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N81RK+6LK0OY+44CA+5YJRM',
       ctaText: '無料相談する',
-      types: ['individual'] // 個人事業主OK・他は特筆なし
+      types: ['individual']
     },
     {
       name: 'うりかけ堂',
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '低手数料・少額から対応（10万円〜）',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N81RK+6JRPVM+4S8A+5YJRM',
       ctaText: '無料相談する',
-      types: ['fast', 'low', 'audit', 'individual'] // 最短2時間・手数料2%〜・審査97%・個人OK
+      types: ['fast', 'low', 'audit', 'individual']
     },
     {
       name: 'QuQuMo',
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '低手数料・少額から対応（5万円〜）',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=3N81RK+6IKUO2+4JGG+BWVTE',
       ctaText: '無料相談する',
-      types: ['fast', 'low', 'individual'] // 最短2時間・手数料1%〜・5万円〜
+      types: ['fast', 'low', 'individual']
     },
     {
       name: 'ファクタリングゼロ',
@@ -167,22 +167,43 @@ document.addEventListener('DOMContentLoaded', function() {
       feature: '西日本地域限定。最大5000万円まで対応可能',
       ctaUrl: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5XQOHU+4DJO+5YJRM',
       ctaText: '無料相談する',
-      types: ['industry', 'individual'] // 西日本地域特化・個人事業主OK
+      types: ['industry', 'individual']
     },
   ];
+
+  // ===== GA4 cta_click ヘルパー =====
+  function trackCtaClick(companyName, location) {
+    if (typeof gtag === 'function') {
+      gtag('event', 'cta_click', {
+        event_category: 'affiliate',
+        event_label: companyName,
+        cta_location: location
+      });
+    }
+  }
 
   // ===== 比較テーブル生成 =====
   const tbody = document.getElementById('compare-tbody');
   if (tbody) {
     tbody.innerHTML = rows.map(r => `
       <tr>
-        <td class="company-name"><a href="${r.ctaUrl}" target="_blank">${r.name}</a>${r.badge ? '<span class="badge-recommend">'+r.badge+'</span>' : ''}</td>
+        <td class="company-name">
+          <a href="${r.ctaUrl}" target="_blank" rel="nofollow noopener"
+            onclick="if(typeof gtag==='function')gtag('event','cta_click',{event_category:'affiliate',event_label:'${r.name}',cta_location:'compare_name'})">
+            ${r.name}
+          </a>${r.badge ? '<span class="badge-recommend">' + r.badge + '</span>' : ''}
+        </td>
         <td>${r.fee}</td>
-        <td>${r.speedFast ? '<span class="badge-fast">'+r.speed+'</span>' : r.speed}</td>
+        <td>${r.speedFast ? '<span class="badge-fast">' + r.speed + '</span>' : r.speed}</td>
         <td>${r.rate}</td>
         <td>${r.target}</td>
         <td>${r.feature}</td>
-        <td class="cta-cell"><a href="${r.ctaUrl}" target="_blank">${r.ctaText}</a></td>
+        <td class="cta-cell">
+          <a href="${r.ctaUrl}" target="_blank" rel="nofollow noopener"
+            onclick="if(typeof gtag==='function')gtag('event','cta_click',{event_category:'affiliate',event_label:'${r.name}',cta_location:'compare_cta'})">
+            ${r.ctaText}
+          </a>
+        </td>
       </tr>
     `).join('');
   }
@@ -231,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeGrid) {
     typeGrid.innerHTML = TYPE_CONFIG.map(cfg => {
       const matched = rows.filter(r => r.types && r.types.includes(cfg.key));
-      // badgeありを優先、最大3社まで表示
       const sorted = [
         ...matched.filter(r => r.badge),
         ...matched.filter(r => !r.badge)
@@ -239,7 +259,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const recHtml = sorted.length
         ? sorted.map(r =>
-            `<a href="${r.ctaUrl}" target="_blank" class="type-card-rec-link">
+            `<a href="${r.ctaUrl}" target="_blank" rel="nofollow noopener" class="type-card-rec-link"
+              onclick="if(typeof gtag==='function')gtag('event','cta_click',{event_category:'affiliate',event_label:'${r.name}',cta_location:'type_card_${cfg.key}'})">
               <span class="type-card-rec-badge">おすすめ</span>${r.name}
             </a>`
           ).join('')

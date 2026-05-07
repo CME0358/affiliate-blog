@@ -1469,56 +1469,19 @@ footer {
 
     <!-- Step 1: カテゴリ選択 -->
     <div class="modal-step active" id="step1">
-      <div class="modal-eyebrow">Step 1 / 2</div>
+      <div class="modal-eyebrow">クリニック案内</div>
       <div class="modal-title">あなたが気になるのは<br>どちらですか？</div>
       <p style="font-size:12px;color:#888;text-align:center;margin:-8px 0 12px;">▼ タップして選んでください</p>
       <div class="modal-choices">
-        <div class="modal-choice" onclick="showStep2('consult')">
+        <div class="modal-choice" onclick="showResult('clinic-a')">
           <span class="modal-choice-icon">💬</span>
           <span>無料カウンセリングを受けたい</span>
         </div>
-        <div class="modal-choice" onclick="showStep2('info')">
+        <div class="modal-choice" onclick="showResult('clinic-a')">
           <span class="modal-choice-icon">📖</span>
           <span>まず費用や詳細を知りたい</span>
         </div>
       </div>
-    </div>
-
-    <!-- Step 2: 目的選択 -->
-    <div class="modal-step" id="step2-consult">
-      <div class="modal-eyebrow">Step 2 / 2</div>
-      <div class="modal-title">いつ頃のご相談を<br>お考えですか？</div>
-      <div class="modal-choices">
-        <div class="modal-choice" onclick="showResult('clinic-a')">
-          <span class="modal-choice-icon">📅</span>
-          <span>できるだけ早く相談したい</span>
-        </div>
-        <div class="modal-choice" onclick="showResult('clinic-a')">
-          <span class="modal-choice-icon">🤔</span>
-          <span>まずは情報収集として</span>
-        </div>
-      </div>
-      <button class="modal-back" onclick="goBack('step1')">← 前に戻る</button>
-    </div>
-
-    <div class="modal-step" id="step2-info">
-      <div class="modal-eyebrow">Step 2 / 2</div>
-      <div class="modal-title">特に気になることは？</div>
-      <div class="modal-choices">
-        <div class="modal-choice" onclick="showResult('clinic-b')">
-          <span class="modal-choice-icon">💴</span>
-          <span>費用・支払い方法</span>
-        </div>
-        <div class="modal-choice" onclick="showResult('clinic-b')">
-          <span class="modal-choice-icon">🏥</span>
-          <span>施術の流れ・痛み</span>
-        </div>
-        <div class="modal-choice" onclick="showResult('clinic-b')">
-          <span class="modal-choice-icon">📍</span>
-          <span>クリニックの場所・対応エリア</span>
-        </div>
-      </div>
-      <button class="modal-back" onclick="goBack('step1')">← 前に戻る</button>
     </div>
 
     <!-- Result A -->
@@ -1535,7 +1498,7 @@ footer {
         <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="modal-result-cta" target="_blank" rel="noopener" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'アルモ形成クリニック_A'})">
           無料カウンセリングを予約する →
         </a>
-        <button class="modal-back" onclick="goBack('step2-consult')">← 前に戻る</button>
+        <button class="modal-back" onclick="goBack('step1')">← 前に戻る</button>
       </div>
     </div>
 
@@ -1553,7 +1516,7 @@ footer {
         <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="modal-result-cta" target="_blank" rel="noopener" onclick="gtag('event','cta_click',{event_category:'affiliate',event_label:'アルモ形成クリニック_B'})">
           無料カウンセリングを予約する →
         </a>
-        <button class="modal-back" onclick="goBack('step2-info')">← 前に戻る</button>
+        <button class="modal-back" onclick="goBack('step1')">← 前に戻る</button>
       </div>
     </div>
   </div>
@@ -1592,12 +1555,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.modal-step').forEach(function(s) { s.classList.remove('active'); });
     document.getElementById('step1').classList.add('active');
   }
-
-  window.showStep2 = function(type) {
-    document.querySelectorAll('.modal-step').forEach(function(s) { s.classList.remove('active'); });
-    document.getElementById('step2-' + type).classList.add('active');
-    gtag('event', 'modal_step2', { event_category: 'cta', event_label: type });
-  };
 
   window.showResult = function(id) {
     document.querySelectorAll('.modal-step').forEach(function(s) { s.classList.remove('active'); });
