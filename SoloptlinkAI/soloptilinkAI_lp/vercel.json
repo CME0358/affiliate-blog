@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/soloptilinkAI_lp.html" }
+  ]
+}
