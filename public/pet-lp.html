@@ -756,7 +756,6 @@
   <div class="hero-eyebrow">ペット医薬品 完全ガイド 2026</div>
   <h1>愛犬・愛猫のお薬<br>動物病院で<br>買うのが<em>当たり前</em>ですか？</h1>
   <p class="hero-sub">正規品・獣医師監修・最大70%節約。同じ成分の薬を、賢く安全に手に入れる方法を徹底解説します。</p>
-  <button id="fv-modal-btn" class="open-modal" style="margin-top:32px;margin-bottom:32px;background:#06C755;color:#fff;font-size:16px;font-weight:700;padding:14px 28px;border-radius:14px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:2;box-shadow:0 4px 16px rgba(6,199,85,0.45);">▶ 愛犬・愛猫どちらですか？</button>
   <div class="hero-stats">
     <div class="hero-stat">
       <span class="hero-stat-num">49</span>
@@ -1388,7 +1387,7 @@ document.addEventListener('DOMContentLoaded', function(){
     gtag('event', 'toast_show', { event_category: 'engagement' });
     toast.addEventListener('click', function(){
       toast.classList.remove('show');
-      document.getElementById('fv-modal-btn').click();
+      openModal();
     });
     setTimeout(function(){ toast.classList.remove('show'); }, 6000);
   }, 15000);
@@ -1400,7 +1399,7 @@ document.addEventListener('DOMContentLoaded', function(){
       autoTriggered = true;
       toastShown = true;
       gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
-      document.getElementById('fv-modal-btn').click();
+      openModal();
     }
   });
 })();

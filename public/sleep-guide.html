@@ -811,12 +811,7 @@
   <div class="hero-eyebrow">睡眠改善 完全ガイド 2026</div>
   <h1>その「眠れない」、<br><em>原因と対策</em>が30秒でわかる。</h1>
   <p class="hero-sub">寝つき・中途覚醒・朝の疲れ——悩みのタイプで解決策は違います。専門家推奨アイテムをすぐ確認。</p>
-  <div style="margin-top:24px;position:relative;">
-    <button id="fv-modal-btn" class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
-      あなたの悩みタイプを選ぶ（30秒）
-      <span class="cta-btn-sub">寝つき・眠りの浅さ・朝の疲れ → ぴったりのアイテムを提案</span>
-    </button>
-  </div>
+
 </section>
 
 <!-- PAIN -->
@@ -1227,14 +1222,15 @@
   const allCards = ['cards-netsuki', 'cards-asai', 'cards-tsukare'];
 
   // モーダルを開く
+  function openModal() {
+    modal.classList.add('open');
+    step1.classList.remove('hidden');
+    step2.classList.add('hidden');
+    document.body.style.overflow = 'hidden';
+    gtag('event', 'modal_open', { event_category: 'cta' });
+  }
   document.querySelectorAll('.open-modal').forEach(btn => {
-    btn.addEventListener('click', () => {
-      modal.classList.add('open');
-      step1.classList.remove('hidden');
-      step2.classList.add('hidden');
-      document.body.style.overflow = 'hidden';
-      gtag('event', 'modal_open', { event_category: 'cta' });
-    });
+    btn.addEventListener('click', () => { openModal(); });
   });
 
   // 閉じる
@@ -1307,7 +1303,7 @@
     gtag('event', 'toast_show', { event_category: 'engagement' });
     toast.addEventListener('click', function(){
       toast.classList.remove('show');
-      document.getElementById('fv-modal-btn').click();
+      openModal();
     });
     setTimeout(function(){ toast.classList.remove('show'); }, 6000);
   }, 15000);
@@ -1319,7 +1315,7 @@
       autoTriggered = true;
       toastShown = true;
       gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
-      document.getElementById('fv-modal-btn').click();
+      openModal();
     }
   });
 })();
