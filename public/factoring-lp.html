@@ -673,7 +673,7 @@
       background: #fff;
       border: none;
       border-radius: 14px;
-      padding: 12px 14px;
+      padding: 20px 24px;
       box-shadow: 0 6px 24px rgba(0,0,0,0.25);
       max-width: 480px;
       margin: 0 auto;
@@ -698,8 +698,8 @@
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 14px;
+      padding: 14px 20px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       transition: background 0.2s, transform 0.1s;
@@ -823,7 +823,7 @@
 <body>
 
 <!-- 月末カウントダウンバナー（25日以降のみ表示・最上面） -->
-<div id="month-end-banner" style="display:none;position:relative;z-index:9999;background:linear-gradient(90deg,#ff4500,#ffcc00);color:#fff;font-size:15px;font-weight:800;text-align:center;padding:10px 16px;letter-spacing:0.04em;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>
+<div id="month-end-banner" style="display:none;position:relative;z-index:9999;background:linear-gradient(90deg,#ff4500,#ffcc00);color:#fff;font-size:17px;font-weight:800;text-align:center;padding:10px 16px;letter-spacing:0.04em;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>
 
 <!-- HEADER -->
 <header class="site-header">
@@ -838,7 +838,20 @@
   <div class="hero-eyebrow">ファクタリング 完全比較ガイド 2026</div>
   <h1>売掛金を<em>最短即日</em>で資金化。<br>手数料・スピードで選ぶ最適業者</h1>
   <p class="hero-sub">審査なし・担保不要・最短2時間入金。資金繰りに悩む中小企業・個人事業主のための、失敗しない業者選びを徹底解説。</p>
-
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">最短</span>
+      <div class="hero-stat-label">2時間で入金</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">1%〜</span>
+      <div class="hero-stat-label">手数料（2社間）</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">審査</span>
+      <div class="hero-stat-label">売掛先が基準</div>
+    </div>
+  </div>
 </section>
 
 <!-- PAIN -->
@@ -1159,8 +1172,16 @@
 </footer>
 
 <!-- STICKY DIAG (mobile) -->
-<div class="sticky-cta" id="sticky-diag" style="padding:10px 16px;">
-  <button class="diag-btn" onclick="document.getElementById('diag-hero').scrollIntoView({behavior:'smooth',block:'center'});" style="width:100%;font-size:15px;padding:12px 20px;text-align:center;">📋 あなたに合う業者は？</button>
+<div class="sticky-cta" id="sticky-diag">
+  <div class="diag-box sticky-diag-box" id="diag-sticky">
+    <p class="diag-q sticky-diag-q">📋 あなたに合う業者は？</p>
+    <div class="diag-btns sticky-diag-btns">
+      <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','fast')">⚡ 即日入金</button>
+      <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','low')">💰 低コスト</button>
+      <button class="diag-btn sticky-diag-btn" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--cta-dark);border:2px solid var(--cta);">📋 相見積もり</button>
+    </div>
+  </div>
+  <div class="diag-result sticky-diag-result" id="diag-sticky-result" style="display:none;"></div>
 </div>
 
 <!-- ===== 比較テーブルデータ上書き用 =====
@@ -1316,13 +1337,13 @@
   var now = new Date();
   var day = now.getDate();
   var lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-  var remaining = lastDay - day + 1;
+  var remaining = lastDay - day;
   if(day >= 25){
     var banner = document.getElementById('month-end-banner');
     if(remaining === 0){
       banner.textContent = '⚠️ 今日が今月の最終日！月内入金は本日中の申込が必須です';
     } else {
-      banner.textContent = '⏰ 今月も残りあと' + remaining + '日';
+      banner.textContent = '⏰ 今月も残りあと' + remaining + '日｜月内に資金化するなら今がラストチャンス';
     }
     banner.style.display = 'block';
     gtag('event', 'month_end_banner_show', { event_category: 'engagement', event_label: 'remaining_' + remaining });
