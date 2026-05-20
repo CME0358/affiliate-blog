@@ -217,6 +217,74 @@
       display: block;
       margin-top: 4px;
     }
+    .divider-banner a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+    .divider-banner a:hover { text-decoration: underline; }
+
+    .hero-cta-wrap {
+      margin-top: 28px;
+      animation: fadeUp 0.6s ease 0.25s both;
+    }
+    .hero-cta-btn {
+      display: inline-block;
+      background: var(--cta);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 4px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(6,199,85,0.4);
+      letter-spacing: 0.03em;
+    }
+    .hero-cta-btn:hover { background: var(--cta-dark); }
+    .hero-cta-note {
+      display: block;
+      margin-top: 10px;
+      font-size: 11px;
+      opacity: 0.85;
+    }
+
+    .article-card--primary {
+      grid-column: 1 / -1;
+      border: 2px solid var(--green);
+      box-shadow: 0 8px 28px rgba(45,106,79,0.12);
+    }
+    .article-card--primary h3 { font-size: clamp(16px, 3vw, 20px); }
+    .more-articles {
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #fff;
+      padding: 0 16px;
+    }
+    .more-articles summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green);
+      padding: 14px 0;
+      list-style: none;
+    }
+    .more-articles summary::-webkit-details-marker { display: none; }
+    .more-articles .articles-grid { margin-top: 0; padding-bottom: 16px; }
+    .cta-alt {
+      margin-top: 16px;
+      font-size: 12px;
+      position: relative;
+    }
+    .cta-alt button {
+      background: none;
+      border: none;
+      color: rgba(250,247,242,0.65);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 0;
+    }
 
     /* ===== FEATURE ARTICLES ===== */
     .articles-section {
@@ -748,7 +816,7 @@
   <a href="https://www.qolmedia.info/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <button class="header-cta open-modal" style="border:none;cursor:pointer;">▶ お薬を探す</button>
+  <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=heartworm_ranking" class="header-cta primary-cta-link">▶ 最安ランキングを見る</a>
 </header>
 
 <!-- HERO -->
@@ -769,6 +837,10 @@
       <span class="hero-stat-num">獣医師</span>
       <div class="hero-stat-label">監修レベル</div>
     </div>
+  </div>
+  <div class="hero-cta-wrap">
+    <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=heartworm_ranking" class="hero-cta-btn primary-cta-link">▶ フィラリア薬・最安ランキングを読む</a>
+    <span class="hero-cta-note">動物病院との価格差・正規品の選び方（2026年版）</span>
   </div>
 </section>
 
@@ -796,19 +868,21 @@
 
 <!-- DIVIDER -->
 <div class="divider-banner">
-  その悩み、この記事が全部解決します。<br>
-  <span>正規品・安全・最安値の3拍子が揃った情報だけを集めました</span>
+  <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=heartworm_ranking" class="primary-cta-link">
+    その悩み、フィラリア薬の最安ランキング記事で整理できます。<br>
+    <span>正規品・価格比較・通販の選び方（2026年版）▶ 今すぐ読む</span>
+  </a>
 </div>
 
 <!-- FEATURED ARTICLES -->
 <section class="articles-section">
   <div class="section-inner" style="max-width:900px">
-    <p class="section-label">まずはここから読む</p>
-    <h2 class="section-title">飼い主さんに<br>一番読まれている記事</h2>
+    <p class="section-label">まずはここから</p>
+    <h2 class="section-title">いちばん読まれている<br>フィラリア薬ガイド</h2>
     <div class="articles-grid">
 
-      <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking" class="article-card">
-        <div class="article-card-badge">🏆 人気 No.1</div>
+      <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=heartworm_ranking" class="article-card article-card--primary primary-cta-link">
+        <div class="article-card-badge">🏆 まずはここから（メイン）</div>
         <div class="article-card-body">
           <p class="article-card-tag">フィラリア予防</p>
           <h3>フィラリア薬最安ランキング｜動物病院との価格差と通販の選び方</h3>
@@ -819,6 +893,12 @@
           <span style="font-size:11px;color:var(--text-muted)">最大70%OFF</span>
         </div>
       </a>
+
+    </div>
+
+    <details class="more-articles">
+      <summary>▸ その他のおすすめ記事（5本）</summary>
+      <div class="articles-grid">
 
       <a href="https://www.qolmedia.info/posts/pet-parasite-prevention-guide" class="article-card">
         <div class="article-card-badge">📋 完全まとめ</div>
@@ -885,14 +965,15 @@
         </div>
       </a>
 
-    </div>
+      </div>
+    </details>
   </div>
 </section>
 
 <!-- INLINE CTA -->
 <div class="inline-cta">
-  <p>あなたのペットに合うお薬はこちら。<span>犬・猫別に最適な商品をご提案</span></p>
-  <button class="inline-cta-btn open-modal" style="border:none;cursor:pointer;">▶ ペットのお薬を探す</button>
+  <p>フィラリア薬の価格比較はこちら。<span>動物病院との差額・正規品の選び方</span></p>
+  <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=heartworm_ranking" class="inline-cta-btn primary-cta-link" style="display:inline-block;text-decoration:none;">▶ 最安ランキングを読む</a>
 </div>
 
 <!-- MERIT -->
@@ -922,13 +1003,14 @@
 
 <!-- MAIN CTA -->
 <section class="cta-section">
-  <p class="cta-label">▼ ペットに合うお薬を探す</p>
-  <h2>犬・猫別に<br><em>最適な薬</em>をご提案</h2>
-  <p>犬・猫の種類と症状を選ぶだけ。正規品を最安値クラスで購入できます。</p>
-  <button class="cta-btn open-modal" style="border:none;cursor:pointer;font-size:15px;">
-    ペットのお薬を今すぐ探す
-    <span class="cta-btn-sub">犬・猫別 / 薬種別でご提案</span>
-  </button>
+  <p class="cta-label">▼ まずは1本だけ読む</p>
+  <h2>フィラリア薬の<br><em>最安ランキング</em>【2026年版】</h2>
+  <p>動物病院との価格差・正規品の通販の選び方を1記事にまとめました。</p>
+  <a href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=heartworm_ranking" class="cta-btn primary-cta-link" style="font-size:15px;">
+    ランキング記事を読む
+    <span class="cta-btn-sub">最大70%OFF・正規品の比較</span>
+  </a>
+  <p class="cta-alt"><button type="button" class="open-modal">症状別で商品を探す（任意）</button></p>
   <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
 </section>
 
@@ -1255,6 +1337,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
+  const PRIMARY_ARTICLE = 'https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&utm_medium=referral&utm_campaign=heartworm_ranking';
   const modal = document.getElementById('petModal');
   const step1 = document.getElementById('step1');
   const step2 = document.getElementById('step2');
@@ -1293,7 +1376,17 @@ document.addEventListener('DOMContentLoaded', function(){
     target.classList.remove('hidden');
   }
 
-  // 開くトリガー
+  // メイン記事CTA計測
+  document.querySelectorAll('.primary-cta-link').forEach(function(el){
+    el.addEventListener('click', function(){
+      gtag('event', 'primary_article_click', {
+        event_category: 'cta',
+        event_label: 'heartworm_ranking'
+      });
+    });
+  });
+
+  // 開くトリガー（任意・モーダル）
   document.querySelectorAll('.open-modal').forEach(function(el){
     el.addEventListener('click', openModal);
   });
@@ -1356,8 +1449,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <!-- STICKY BOTTOM CTA (mobile only) -->
 <div class="sticky-cta">
-  <p>薬代を最大70%節約<span>犬・猫別に最適な商品を提案</span></p>
-  <button id="stickyCta" class="open-modal" onclick="document.getElementById('petModal').classList.add('open');document.body.style.overflow='hidden';" style="background:#fff;color:var(--cta-dark);font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap;">今すぐ探す</button>
+  <p>フィラリア薬を最安で<span>ランキング記事で比較</span></p>
+  <a id="stickyCta" href="https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=heartworm_ranking" class="primary-cta-link">記事を読む</a>
 </div>
 
 <style>
@@ -1375,7 +1468,7 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 #lp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; cursor: pointer; }
 </style>
-<div id="lp-toast">🐾 愛犬・愛猫のお薬、30秒で最適なものを見つけませんか？</div>
+<div id="lp-toast">🐾 フィラリア薬の最安ランキング、読みましたか？</div>
 <script>
 (function(){
   var toast = document.getElementById('lp-toast');
@@ -1387,7 +1480,8 @@ document.addEventListener('DOMContentLoaded', function(){
     gtag('event', 'toast_show', { event_category: 'engagement' });
     toast.addEventListener('click', function(){
       toast.classList.remove('show');
-      document.getElementById('stickyCta').click();
+      gtag('event', 'toast_click', { event_category: 'cta', event_label: 'heartworm_ranking' });
+      window.location.href = 'https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&utm_medium=referral&utm_campaign=heartworm_ranking';
     });
     setTimeout(function(){ toast.classList.remove('show'); }, 6000);
   }, 15000);
@@ -1398,8 +1492,9 @@ document.addEventListener('DOMContentLoaded', function(){
     if(pct >= 0.5){
       autoTriggered = true;
       toastShown = true;
-      gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
-      document.getElementById('stickyCta').click();
+      gtag('event', 'toast_auto_show', { event_category: 'engagement', event_label: 'scroll50' });
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 8000);
     }
   });
 })();
