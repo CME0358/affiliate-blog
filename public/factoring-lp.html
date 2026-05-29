@@ -635,28 +635,27 @@
     .site-footer a { color: rgba(255,255,255,0.45); text-decoration: none; margin: 0 8px; }
 
     /* ===== STICKY CTA (mobile) ===== */
+    @media (max-width: 639px) {
+      body {
+        padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+      }
+      body:has(#sticky-diag.is-result) {
+        padding-bottom: min(42vh, 300px);
+      }
+    }
     .sticky-cta {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      background: var(--cta);
-      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(15, 28, 46, 0.08);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 200;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-    }
-    .sticky-cta p { color: #fff; font-size: 13px; font-weight: 700; line-height: 1.4; }
-    .sticky-cta p span { font-size: 11px; font-weight: 400; opacity: 0.85; display: block; }
-    .sticky-cta a {
-      background: #fff;
-      color: var(--cta-dark);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 10px 20px;
-      border-radius: 4px;
-      text-decoration: none;
-      white-space: nowrap;
+      box-shadow: 0 -8px 32px rgba(15, 28, 46, 0.12);
     }
     @media (min-width: 640px) { .sticky-cta { display: none; } }
 
@@ -774,39 +773,118 @@
       text-decoration: underline;
     }
 
-    /* sticky診断UI */
+    /* sticky診断UI（スリム横並びバー） */
+    @media (min-width: 640px) { #sticky-diag { display: none; } }
+    #sticky-diag {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      width: 100%;
+    }
+    #sticky-diag.is-result {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      max-height: 40vh;
+      overflow-y: auto;
+    }
     .sticky-diag-box {
       background: transparent;
       border: none;
       backdrop-filter: none;
       padding: 0;
       flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: none;
+      max-width: none;
+      margin: 0;
     }
     .sticky-diag-q {
-      color: #fff;
-      font-size: 13px;
-      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 0;
+      text-align: left;
+      flex: 0 0 auto;
+      white-space: nowrap;
+      line-height: 1.3;
     }
-    .sticky-diag-btns { gap: 8px; justify-content: flex-start; }
-    .sticky-diag-btn {
-      font-size: 12px;
-      padding: 8px 14px;
+    #sticky-diag:not(.is-result) .sticky-diag-box {
+      width: 100%;
+    }
+    .sticky-diag-btns {
+      flex: 1;
+      flex-direction: row;
+      gap: 6px;
       min-width: 0;
-      flex: none;
+    }
+    .sticky-diag-btn {
+      flex: 1;
+      font-size: 12px;
+      padding: 10px 6px;
+      min-width: 0;
+      width: auto;
+      text-align: center;
+      border-radius: 999px;
+      box-shadow: none;
+      animation: none;
+      background: var(--warm-white);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+    .sticky-diag-btn::after { content: none; }
+    .sticky-diag-btn:active { transform: scale(0.97); }
+    .sticky-diag-btn-primary {
+      flex: 1.15;
+      background: var(--cta);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 8px rgba(6, 199, 85, 0.35);
     }
     .sticky-diag-result {
       flex: 1;
+      width: 100%;
+      color: var(--ink);
+      text-align: left;
     }
-    .sticky-diag-result .result-label { font-size: 10px; }
-    .sticky-diag-result .result-name { font-size: 14px; margin-bottom: 6px; }
+    .sticky-diag-result .result-label {
+      font-size: 10px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .sticky-diag-result .result-card {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+    .sticky-diag-result .result-card-name {
+      font-size: 14px;
+      margin: 0 0 2px;
+    }
+    .sticky-diag-result .result-card-sub {
+      font-size: 11px;
+      margin-bottom: 0;
+    }
+    .sticky-diag-result .result-card-body { flex: 1; min-width: 0; }
     .sticky-diag-result .result-cta {
       font-size: 13px;
-      padding: 10px 20px;
+      padding: 10px 16px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .sticky-diag-result .result-retry { font-size: 11px; margin-top: 6px; }
-    @media (min-width: 640px) { #sticky-diag { display: none; } }
-    /* sticky内はcolumn配置 */
-    #sticky-diag { flex-direction: column; padding: 12px 16px; gap: 0; }
+    .sticky-diag-result .result-cta-sub { display: none; }
+    .sticky-diag-result .result-retry {
+      font-size: 11px;
+      margin-top: 4px;
+      color: var(--text-muted);
+      text-align: center;
+    }
   </style>
 
   <!-- Google Analytics GA4 -->
@@ -1179,11 +1257,11 @@
 <!-- STICKY DIAG (mobile) -->
 <div class="sticky-cta" id="sticky-diag">
   <div class="diag-box sticky-diag-box" id="diag-sticky">
-    <p class="diag-q sticky-diag-q">📋 あなたに合う業者は？</p>
+    <p class="diag-q sticky-diag-q">おすすめ診断</p>
     <div class="diag-btns sticky-diag-btns">
-      <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','fast')">⚡ 即日入金</button>
-      <button class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','low')">💰 低コスト</button>
-      <button class="diag-btn sticky-diag-btn" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--cta-dark);border:2px solid var(--cta);">📋 相見積もり</button>
+      <button type="button" class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','fast')">⚡ 即日</button>
+      <button type="button" class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','low')">💰 低コスト</button>
+      <button type="button" class="diag-btn sticky-diag-btn sticky-diag-btn-primary" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})">相見積もり →</button>
     </div>
   </div>
   <div class="diag-result sticky-diag-result" id="diag-sticky-result" style="display:none;"></div>
@@ -1255,26 +1333,43 @@
     const d = DIAG_DATA[answer];
     const boxId    = ctx === 'hero' ? 'diag-hero' : 'diag-sticky';
     const resultId = ctx === 'hero' ? 'diag-hero-result' : 'diag-sticky-result';
+    const isSticky = ctx === 'sticky';
 
     gtag('event', 'diag_select', { event_category: 'cta', event_label: answer });
 
     document.getElementById(boxId).style.display = 'none';
     const resultEl = document.getElementById(resultId);
-    resultEl.innerHTML =
-      '<span class="result-label">あなたへのおすすめ</span>' +
-      '<div class="result-card">' +
-        '<a href="' + d.url + '" target="_blank" rel="nofollow noopener" style="display:block;" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
-          '<img src="' + d.img + '" alt="' + d.name + '" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto;border-radius:8px;">' +
-        '</a>' +
-        '<p class="result-card-name">' + d.name + '</p>' +
-        '<p class="result-card-sub">' + d.sub + '</p>' +
-        '<a href="' + d.url + '" class="result-cta" target="_blank" rel="nofollow noopener" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
-          '無料相談する' +
-          '<span class="result-cta-sub">' + d.cta_sub + '</span>' +
-        '</a>' +
-        d.pixel +
-      '</div>' +
-      '<span class="result-retry" onclick="diagReset(\'' + ctx + '\')">← もう一度診断する</span>';
+
+    if (isSticky) {
+      document.getElementById('sticky-diag').classList.add('is-result');
+      resultEl.innerHTML =
+        '<span class="result-label">' + d.label + '</span>' +
+        '<div class="result-card">' +
+          '<div class="result-card-body">' +
+            '<p class="result-card-name">' + d.name + '</p>' +
+            '<p class="result-card-sub">' + d.sub + '</p>' +
+          '</div>' +
+          '<a href="' + d.url + '" class="result-cta" target="_blank" rel="nofollow noopener" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">無料相談</a>' +
+          d.pixel +
+        '</div>' +
+        '<span class="result-retry" onclick="diagReset(\'sticky\')">← もう一度診断する</span>';
+    } else {
+      resultEl.innerHTML =
+        '<span class="result-label">あなたへのおすすめ</span>' +
+        '<div class="result-card">' +
+          '<a href="' + d.url + '" target="_blank" rel="nofollow noopener" style="display:block;" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
+            '<img src="' + d.img + '" alt="' + d.name + '" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto;border-radius:8px;">' +
+          '</a>' +
+          '<p class="result-card-name">' + d.name + '</p>' +
+          '<p class="result-card-sub">' + d.sub + '</p>' +
+          '<a href="' + d.url + '" class="result-cta" target="_blank" rel="nofollow noopener" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
+            '無料相談する' +
+            '<span class="result-cta-sub">' + d.cta_sub + '</span>' +
+          '</a>' +
+          d.pixel +
+        '</div>' +
+        '<span class="result-retry" onclick="diagReset(\'' + ctx + '\')">← もう一度診断する</span>';
+    }
     resultEl.style.display = 'block';
   }
 
@@ -1283,6 +1378,9 @@
     const resultId = ctx === 'hero' ? 'diag-hero-result' : 'diag-sticky-result';
     document.getElementById(boxId).style.display = '';
     document.getElementById(resultId).style.display = 'none';
+    if (ctx === 'sticky') {
+      document.getElementById('sticky-diag').classList.remove('is-result');
+    }
   }
 </script>
 
@@ -1296,12 +1394,16 @@
   animation: textBlink 1s step-start infinite;
   font-size: 0.9em;
 }
-  0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
-  50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
+@keyframes ctaPulse {
+  0%,100% { box-shadow: 0 3px 12px rgba(6,199,85,0.4), 0 0 0 0 rgba(6,199,85,0.6); }
+  50%      { box-shadow: 0 3px 12px rgba(6,199,85,0.4), 0 0 0 10px rgba(6,199,85,0); }
 }
-.diag-btn { animation: ctaPulse 2s infinite; }
+.diag-btn:not(.sticky-diag-btn) { animation: ctaPulse 2s infinite; }
 #lp-toast {
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+  position: fixed;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
   background: #1a1a2e; color: #fff; font-size: 13px; font-weight: 700;
   padding: 12px 20px; border-radius: 30px; white-space: nowrap;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9999;
