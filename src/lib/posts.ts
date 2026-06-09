@@ -30,6 +30,8 @@ export function getCategoryImage(category: string): string {
     '健康': '/og-health.svg',
     '暮らし': '/og-life.svg',
     '睡眠': '/og-sleep.svg',
+    '薄毛': '/og-hc.svg',
+    'ヘアケア': '/og-hc.svg',
   }
   return map[category] || '/og-default.svg'
 }
