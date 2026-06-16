@@ -1758,16 +1758,16 @@ document.addEventListener('DOMContentLoaded', function() {
   position: relative;
   background: #fff;
   border-radius: 12px;
-  padding: 20px 16px 16px;
-  max-width: 360px;
-  width: 100%;
+  padding: 36px 12px 12px;
+  width: 324px;
+  max-width: calc(100vw - 40px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
   animation: slideUp 0.3s ease;
 }
 #vc-popup-close {
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: 6px;
+  right: 8px;
   background: none;
   border: none;
   font-size: 22px;
@@ -1775,25 +1775,40 @@ document.addEventListener('DOMContentLoaded', function() {
   color: #888;
   cursor: pointer;
   padding: 4px 8px;
+  z-index: 1;
 }
 #vc-popup-close:hover { color: #333; }
 #vc-popup-banner {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60px;
+  width: 300px;
+  max-width: 100%;
+  margin: 0 auto;
 }
-#vc-popup-banner a img { max-width: 100%; height: auto; display: block; }
+#vc-popup-banner a {
+  display: block;
+  line-height: 0;
+}
+#vc-popup-banner img {
+  width: 300px;
+  max-width: 100%;
+  aspect-ratio: 300 / 250;
+  height: auto;
+  display: block;
+  border: 0;
+}
 </style>
 <div id="vc-popup-overlay" role="dialog" aria-modal="true" aria-label="おすすめ情報">
   <div id="vc-popup-box">
     <button id="vc-popup-close" type="button" aria-label="閉じる">&times;</button>
     <div id="vc-popup-banner">
-      <noscript>
-        <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3767826&pid=892636399" rel="nofollow">
-          <img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3767826&pid=892636399" border="0" alt="">
-        </a>
-      </noscript>
+      <a href="https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3767826&pid=892636399"
+         target="_blank" rel="nofollow noopener sponsored"
+         onclick="if(typeof gtag==='function')gtag('event','vc_popup_click',{event_category:'affiliate'})">
+        <img src="https://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3767826&pid=892636399"
+             width="300" height="250" alt="おすすめ情報" loading="lazy">
+      </a>
     </div>
   </div>
 </div>
@@ -1828,11 +1843,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function showVcPopup() {
-    var s = document.createElement('script');
-    s.language = 'javascript';
-    s.src = '//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid='
-      + VC_POPUP_CONFIG.sid + '&pid=' + VC_POPUP_CONFIG.pid;
-    bannerEl.appendChild(s);
     overlay.classList.add('active');
     if (typeof gtag === 'function') {
       gtag('event', 'vc_popup_show', { event_category: 'affiliate' });
