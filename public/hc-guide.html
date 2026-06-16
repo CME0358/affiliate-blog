@@ -1740,6 +1740,116 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
+<!-- ValueCommerce ポップアップ（非表示化: VC_POPUP_CONFIG.enabled を false に変更） -->
+<style>
+#vc-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(3px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#vc-popup-overlay.active { display: flex; }
+#vc-popup-box {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 16px 16px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  animation: slideUp 0.3s ease;
+}
+#vc-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+#vc-popup-close:hover { color: #333; }
+#vc-popup-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+}
+#vc-popup-banner a img { max-width: 100%; height: auto; display: block; }
+</style>
+<div id="vc-popup-overlay" role="dialog" aria-modal="true" aria-label="おすすめ情報">
+  <div id="vc-popup-box">
+    <button id="vc-popup-close" type="button" aria-label="閉じる">&times;</button>
+    <div id="vc-popup-banner">
+      <noscript>
+        <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3767826&pid=892636399" rel="nofollow">
+          <img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3767826&pid=892636399" border="0" alt="">
+        </a>
+      </noscript>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  /**
+   * ValueCommerce ポップアップ設定
+   * 後日非表示化する場合 → enabled: false に変更するだけ
+   */
+  var VC_POPUP_CONFIG = {
+    enabled: true,
+    delayMs: 2000,
+    sid: '3767826',
+    pid: '892636399',
+    storageKey: 'hc_vc_popup_dismissed'
+  };
+
+  if (!VC_POPUP_CONFIG.enabled) return;
+  if (sessionStorage.getItem(VC_POPUP_CONFIG.storageKey)) return;
+
+  var overlay = document.getElementById('vc-popup-overlay');
+  var closeBtn = document.getElementById('vc-popup-close');
+  var bannerEl = document.getElementById('vc-popup-banner');
+  if (!overlay || !bannerEl) return;
+
+  function closeVcPopup() {
+    overlay.classList.remove('active');
+    sessionStorage.setItem(VC_POPUP_CONFIG.storageKey, '1');
+    if (typeof gtag === 'function') {
+      gtag('event', 'vc_popup_close', { event_category: 'affiliate' });
+    }
+  }
+
+  function showVcPopup() {
+    var s = document.createElement('script');
+    s.language = 'javascript';
+    s.src = '//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid='
+      + VC_POPUP_CONFIG.sid + '&pid=' + VC_POPUP_CONFIG.pid;
+    bannerEl.appendChild(s);
+    overlay.classList.add('active');
+    if (typeof gtag === 'function') {
+      gtag('event', 'vc_popup_show', { event_category: 'affiliate' });
+    }
+  }
+
+  closeBtn.addEventListener('click', closeVcPopup);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeVcPopup();
+  });
+
+  window.addEventListener('load', function() {
+    setTimeout(showVcPopup, VC_POPUP_CONFIG.delayMs);
+  });
+})();
+</script>
+
 <!-- FOOTER -->
 <style>
 .site-footer {
