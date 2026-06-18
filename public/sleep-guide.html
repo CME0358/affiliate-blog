@@ -96,6 +96,9 @@
       text-decoration: none;
       white-space: nowrap;
       transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+      font-family: 'Noto Sans JP', sans-serif;
     }
     .header-cta:hover { background: var(--cta-dark); }
 
@@ -317,16 +320,27 @@
     }
     .article-card-cta::after { content: '→'; }
 
-    .divider-banner a { color: inherit; text-decoration: none; display: block; }
-    .divider-banner a:hover { text-decoration: underline; }
+    .divider-banner-btn {
+      background: none; border: none; color: inherit;
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(14px, 3vw, 18px); font-weight: 700;
+      line-height: 1.55; cursor: pointer; width: 100%; padding: 0;
+    }
+    .divider-banner-btn:hover span { text-decoration: underline; }
     .hero-cta-wrap { margin-top: 28px; }
     .hero-cta-btn {
       display: inline-block; background: var(--cta); color: #fff;
       font-size: 15px; font-weight: 700; padding: 16px 32px; border-radius: 12px;
       text-decoration: none; box-shadow: 0 4px 20px rgba(6,199,85,0.35);
+      border: none; cursor: pointer; font-family: 'Noto Sans JP', sans-serif;
     }
     .hero-cta-btn:hover { background: var(--cta-dark); }
     .hero-cta-note { display: block; margin-top: 10px; font-size: 11px; color: var(--text-secondary); }
+    .hero-cta-secondary { margin-top: 14px; font-size: 12px; position: relative; }
+    .hero-cta-secondary a {
+      color: rgba(240,238,248,0.65); text-decoration: underline;
+    }
+    .hero-cta-secondary a:hover { color: var(--text-primary); }
     .article-card--primary {
       grid-column: 1 / -1; border: 2px solid var(--purple);
       box-shadow: var(--shadow-purple);
@@ -450,6 +464,18 @@
     .cta-btn:hover {
       background: var(--cta-dark);
       transform: translateY(-2px);
+    }
+    .cta-btn--modal {
+      border: none; cursor: pointer; font-family: 'Noto Sans JP', sans-serif;
+    }
+    .cta-btn-secondary {
+      display: inline-block; margin-top: 16px;
+      font-size: 12px; color: rgba(240,238,248,0.55);
+      text-decoration: underline;
+    }
+    .cta-btn-secondary:hover { color: var(--text-primary); }
+    .inline-cta-btn--modal {
+      border: none; cursor: pointer; font-family: 'Noto Sans JP', sans-serif;
     }
     .cta-btn-sub {
       font-size: 11px;
@@ -850,7 +876,7 @@
   <a href="https://www.qolmedia.info/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&amp;utm_medium=referral&amp;utm_campaign=sleep_ranking" class="header-cta primary-cta-link">▶ サプリ比較を見る</a>
+  <button type="button" class="header-cta open-modal" data-track-location="header">▶ 30秒で診断</button>
 </header>
 
 <!-- HERO -->
@@ -859,8 +885,11 @@
   <h1>その「眠れない」、<br><em>原因と対策</em>が30秒でわかる。</h1>
   <p class="hero-sub">寝つき・中途覚醒・朝の疲れ——悩みのタイプで解決策は違います。専門家推奨アイテムをすぐ確認。</p>
   <div class="hero-cta-wrap">
-    <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&amp;utm_medium=referral&amp;utm_campaign=sleep_ranking" class="hero-cta-btn primary-cta-link">▶ 睡眠サプリ比較ランキングを読む</a>
-    <span class="hero-cta-note">2026年版・成分と価格を専門家視点で比較</span>
+    <button type="button" class="hero-cta-btn open-modal" data-track-location="hero">▶ 悩み別で30秒診断する</button>
+    <span class="hero-cta-note">寝つき・中途覚醒・朝の疲れから最適なアイテムを提案</span>
+    <p class="hero-cta-secondary">
+      <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&amp;utm_medium=referral&amp;utm_campaign=sleep_ranking" class="article-cta-link" data-track-location="hero_secondary" data-track-label="サプリ比較ランキング">先にサプリ比較ランキングを読む →</a>
+    </p>
   </div>
 
 </section>
@@ -889,21 +918,21 @@
 
 <!-- DIVIDER -->
 <div class="divider-banner">
-  <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&amp;utm_medium=referral&amp;utm_campaign=sleep_ranking" class="primary-cta-link">
-    まずは睡眠サプリ比較ランキングで選び方を整理。<br>
-    <span>2026年版・成分比較 ▶ 今すぐ読む</span>
-  </a>
+  <button type="button" class="divider-banner-btn open-modal" data-track-location="divider">
+    30秒であなたの悩みに合うアイテムがわかる<br>
+    <span>寝つき・中途覚醒・朝の疲れ ▶ 今すぐ診断</span>
+  </button>
 </div>
 
 <!-- FEATURED ARTICLES -->
 <section class="articles-section">
   <div class="section-inner" style="max-width:900px">
-    <p class="section-label">まずはここから</p>
+    <p class="section-label">詳しく比較したい方へ</p>
     <h2 class="section-title">睡眠サプリ<br>比較ランキング</h2>
     <div class="articles-grid">
 
-      <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&utm_medium=referral&utm_campaign=sleep_ranking" class="article-card article-card--primary primary-cta-link">
-        <div class="article-card-badge">🏆 まずはここから（メイン）</div>
+      <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&utm_medium=referral&utm_campaign=sleep_ranking" class="article-card article-card--primary article-cta-link" data-track-location="article_card" data-track-label="サプリ比較ランキング2026">
+        <div class="article-card-badge">📋 詳しく比較したい方へ</div>
         <div class="article-card-body">
           <p class="article-card-tag">サプリ比較</p>
           <h3>睡眠サプリおすすめランキング2026｜グッドナイト27000プラスvsGABAを徹底比較</h3>
@@ -993,8 +1022,8 @@
 
 <!-- INLINE CTA -->
 <div class="inline-cta">
-  <p>サプリ・枕・マットレス。あなたに合う解決策はどれ？<span>科学的根拠のある厳選アイテムをご提案</span></p>
-  <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&utm_medium=referral&utm_campaign=sleep_ranking" class="inline-cta-btn primary-cta-link" style="display:inline-block;text-decoration:none;">▶ ランキングを読む</a>
+  <p>サプリ・枕・マットレス。あなたに合う解決策はどれ？<span>悩みを選ぶだけで厳選アイテムをご提案</span></p>
+  <button type="button" class="inline-cta-btn inline-cta-btn--modal open-modal" data-track-location="inline">▶ 30秒で診断する</button>
 </div>
 
 <!-- MERIT -->
@@ -1026,12 +1055,14 @@
 <section class="cta-section">
   <p class="cta-label">▼ あなたに合う睡眠改善を見つける</p>
   <h2>眠れない夜を終わらせる<br><em>あなただけの解決策</em></h2>
-  <p>サプリ・枕・マットレス。悩みを選ぶだけで、科学的根拠のある厳選アイテムをご提案します。</p>
-  <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&utm_medium=referral&utm_campaign=sleep_ranking" class="cta-btn primary-cta-link">
-    ランキング記事を読む
-    <span class="cta-btn-sub">2026年版・サプリ比較</span>
-  </a>
-  <p class="cta-alt"><button type="button" class="open-modal">枕・マットレスは悩み別で探す（任意）</button></p>
+  <p>サプリ・枕・マットレス。悩みを選ぶだけで、あなたに合う厳選アイテムをご提案します。</p>
+  <button type="button" class="cta-btn cta-btn--modal open-modal" data-track-location="main_cta">
+    悩み別で30秒診断する
+    <span class="cta-btn-sub">寝つき・中途覚醒・朝の疲れ</span>
+  </button>
+  <p class="cta-alt">
+    <a href="https://www.qolmedia.info/posts/suimin-supplement-ranking-2026?utm_source=sleep_lp&utm_medium=referral&utm_campaign=sleep_ranking" class="cta-btn-secondary article-cta-link" data-track-location="main_cta_secondary" data-track-label="サプリ比較ランキング">先にサプリ比較ランキングを読む →</a>
+  </p>
   <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
 </section>
 
@@ -1194,13 +1225,13 @@
       <!-- 寝つきが悪い → サプリ1枚 -->
       <div class="solution-cards" id="cards-netsuki" style="display:none;justify-content:center;">
         <div class="solution-card" style="width:220px;margin:0 auto;">
-          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0Q+FLFTS2+4KU6+ZRXQP" target="_blank" rel="nofollow" style="display:block;">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0Q+FLFTS2+4KU6+ZRXQP" target="_blank" rel="nofollow sponsored" class="affiliate-link" data-product="ブレインスリープNMN9000" style="display:block;">
             <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000021363&id=202204252050035840" alt="ブレインスリープNMN9000" style="width:220px;height:auto;display:block;">
           </a>
           <div class="solution-card-body" style="text-align:center;">
             <p class="solution-card-category">💊 サプリ</p>
             <p class="solution-card-name">ブレインスリープNMN9000</p>
-            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0Q+FLFTS2+4KU6+ZRXQP" target="_blank" rel="nofollow" class="solution-card-btn">公式サイトで確認する</a>
+            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0Q+FLFTS2+4KU6+ZRXQP" target="_blank" rel="nofollow sponsored" class="solution-card-btn affiliate-link" data-product="ブレインスリープNMN9000">公式サイトで確認する</a>
           </div>
         </div>
       </div>
@@ -1208,13 +1239,13 @@
       <!-- 眠りが浅い → 枕1枚 -->
       <div class="solution-cards" id="cards-asai" style="display:none;justify-content:center;">
         <div class="solution-card" style="width:220px;margin:0 auto;">
-          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6C130I+4KU6+61Z81" target="_blank" rel="nofollow" style="display:block;">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6C130I+4KU6+61Z81" target="_blank" rel="nofollow sponsored" class="affiliate-link" data-product="ブレインスリープピロー" style="display:block;">
             <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000021363&id=202207081525050010" alt="ブレインスリープピロー" style="width:220px;height:auto;display:block;">
           </a>
           <div class="solution-card-body" style="text-align:center;">
             <p class="solution-card-category">😴 枕</p>
             <p class="solution-card-name">ブレインスリープピロー</p>
-            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6C130I+4KU6+61Z81" target="_blank" rel="nofollow" class="solution-card-btn">公式サイトで確認する</a>
+            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6C130I+4KU6+61Z81" target="_blank" rel="nofollow sponsored" class="solution-card-btn affiliate-link" data-product="ブレインスリープピロー">公式サイトで確認する</a>
           </div>
         </div>
       </div>
@@ -1222,13 +1253,13 @@
       <!-- 疲れが取れない → マットレス1枚 -->
       <div class="solution-cards" id="cards-tsukare" style="display:none;justify-content:center;">
         <div class="solution-card" style="width:220px;margin:0 auto;">
-          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6BFNEQ+4KU6+BYLJL" target="_blank" rel="nofollow" style="display:block;">
+          <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6BFNEQ+4KU6+BYLJL" target="_blank" rel="nofollow sponsored" class="affiliate-link" data-product="ブレインスリープマットレスフロート" style="display:block;">
             <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000021363&id=202207081643145244" alt="ブレインスリープマットレスフロート" style="width:220px;height:auto;display:block;">
           </a>
           <div class="solution-card-body" style="text-align:center;">
             <p class="solution-card-category">🛏️ マットレス</p>
             <p class="solution-card-name">ブレインスリープマットレスフロート</p>
-            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6BFNEQ+4KU6+BYLJL" target="_blank" rel="nofollow" class="solution-card-btn">公式サイトで確認する</a>
+            <a href="https://px.a8.net/svt/ejp?a8mat=4AZS0R+6BFNEQ+4KU6+BYLJL" target="_blank" rel="nofollow sponsored" class="solution-card-btn affiliate-link" data-product="ブレインスリープマットレスフロート">公式サイトで確認する</a>
           </div>
         </div>
       </div>
@@ -1248,11 +1279,37 @@
 <!-- STICKY BOTTOM CTA (mobile only) -->
 <div class="sticky-cta">
   <p>寝つき・眠りの浅さ・朝の疲れ<span>30秒で原因とアイテムがわかる</span></p>
-  <button type="button" class="open-modal" style="background:var(--cta);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:12px;border:none;cursor:pointer;">悩み別で探す</button>
+  <button type="button" class="open-modal" data-track-location="sticky" style="background:var(--cta);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:12px;border:none;cursor:pointer;">30秒で診断</button>
 </div>
 
 <script>
-  // 悩み別メッセージ
+  // --- CV計測: affiliate_click = コンバージョン ---
+  var currentWorry = null;
+
+  function trackAffiliateClick(label, worry, location) {
+    gtag('event', 'affiliate_click', {
+      event_category: 'cv',
+      event_label: label || 'unknown',
+      worry_type: worry || 'none',
+      link_location: location || 'modal'
+    });
+  }
+
+  function trackArticleClick(el) {
+    gtag('event', 'article_click', {
+      event_category: 'engagement',
+      event_label: (el.dataset.trackLabel || el.textContent || '').trim().slice(0, 100),
+      link_location: el.dataset.trackLocation || 'unknown'
+    });
+  }
+
+  function trackModalOpen(source) {
+    gtag('event', 'modal_open', {
+      event_category: 'funnel',
+      event_label: source || 'manual'
+    });
+  }
+
   const worryMessages = {
     netsuki: {
       label: '寝つきが悪い・なかなか眠れない',
@@ -1268,7 +1325,6 @@
     }
   };
 
-  // 悩みとカードIDのマッピング
   const cardMap = {
     netsuki: 'cards-netsuki',
     asai:    'cards-asai',
@@ -1282,58 +1338,68 @@
   const solutionTitle = document.getElementById('solutionTitle');
   const allCards = ['cards-netsuki', 'cards-asai', 'cards-tsukare'];
 
-  // モーダルを開く
-  function openModal() {
+  function openModal(source) {
     modal.classList.add('open');
     step1.classList.remove('hidden');
     step2.classList.add('hidden');
+    currentWorry = null;
     document.body.style.overflow = 'hidden';
-    gtag('event', 'modal_open', { event_category: 'cta' });
+    trackModalOpen(source);
   }
-  document.querySelectorAll('.open-modal').forEach(btn => {
-    btn.addEventListener('click', () => { openModal(); });
+
+  document.querySelectorAll('.open-modal').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      openModal(btn.dataset.trackLocation || 'cta_button');
+    });
   });
 
-  // 閉じる
   document.getElementById('modalClose').addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
   function closeModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  // 悩み選択 → Step2へ（対応カードだけ表示）
-  document.querySelectorAll('.worry-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const worry = btn.dataset.worry;
-      const msg = worryMessages[worry];
+  document.querySelectorAll('.worry-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var worry = btn.dataset.worry;
+      currentWorry = worry;
+      var msg = worryMessages[worry];
       solutionLabel.textContent = '「' + msg.label + '」の方へ';
       solutionTitle.textContent = msg.title;
 
-      // 全カード非表示 → 該当カードのみ表示
-      allCards.forEach(id => {
+      allCards.forEach(function(id) {
         document.getElementById(id).style.display = 'none';
       });
       document.getElementById(cardMap[worry]).style.display = 'flex';
 
       step1.classList.add('hidden');
       step2.classList.remove('hidden');
-      gtag('event', 'modal_worry_select', { event_category: 'cta', event_label: worry });
+      gtag('event', 'modal_worry_select', { event_category: 'funnel', event_label: worry });
     });
   });
 
-  // CTAリンククリック計測
-  document.querySelectorAll('.solution-card-btn').forEach(link => {
-    link.addEventListener('click', () => {
-      gtag('event', 'cta_click', { event_category: 'affiliate', event_label: link.closest('.solution-card').querySelector('.solution-card-name')?.textContent || '' });
+  document.querySelectorAll('.affiliate-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      var card = link.closest('.solution-card');
+      var label = link.dataset.product
+        || (card && card.querySelector('.solution-card-name') && card.querySelector('.solution-card-name').textContent)
+        || link.getAttribute('alt')
+        || 'unknown';
+      trackAffiliateClick(label, currentWorry, 'modal_product');
     });
   });
 
-  // 戻る
-  document.getElementById('backBtn').addEventListener('click', () => {
+  document.querySelectorAll('.article-cta-link').forEach(function(link) {
+    link.addEventListener('click', function() { trackArticleClick(link); });
+  });
+
+  document.getElementById('backBtn').addEventListener('click', function() {
     step2.classList.add('hidden');
     step1.classList.remove('hidden');
+    currentWorry = null;
   });
 </script>
 
@@ -1342,44 +1408,10 @@
   0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
   50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
 }
-.open-modal { animation: ctaPulse 2s infinite; }
-#lp-toast {
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
-  background: #1a1a2e; color: #fff; font-size: 13px; font-weight: 700;
-  padding: 12px 20px; border-radius: 30px; white-space: nowrap;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9999;
-  opacity: 0; transition: all 0.4s; pointer-events: none;
-}
-#lp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; cursor: pointer; }
+.hero-cta-btn.open-modal,
+.header-cta.open-modal,
+.inline-cta-btn.open-modal,
+.cta-btn.open-modal { animation: ctaPulse 2s infinite; }
 </style>
-<div id="lp-toast">💤 寝つき・眠りの浅さ、どれに当てはまりますか？</div>
-<script>
-(function(){
-  var toast = document.getElementById('lp-toast');
-  var toastShown = false;
-  setTimeout(function(){
-    if(toastShown) return;
-    toastShown = true;
-    toast.classList.add('show');
-    gtag('event', 'toast_show', { event_category: 'engagement' });
-    toast.addEventListener('click', function(){
-      toast.classList.remove('show');
-      openModal();
-    });
-    setTimeout(function(){ toast.classList.remove('show'); }, 6000);
-  }, 15000);
-  var autoTriggered = false;
-  window.addEventListener('scroll', function(){
-    if(autoTriggered) return;
-    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    if(pct >= 0.5){
-      autoTriggered = true;
-      toastShown = true;
-      gtag('event', 'modal_auto_open', { event_category: 'engagement', event_label: 'scroll50' });
-      openModal();
-    }
-  });
-})();
-</script>
 </body>
 </html>
