@@ -460,12 +460,37 @@ section { padding: 64px 24px; }
   display: flex;
   align-items: flex-start;
   gap: 14px;
+  transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
+}
+
+.method-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .method-card.featured {
   border-color: var(--cta);
   border-width: 2px;
   background: #f0fdf4;
+}
+
+.method-card.featured:hover {
+  box-shadow: 0 4px 24px rgba(6, 199, 85, 0.15);
+}
+
+a.method-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a.method-card:hover {
+  border-color: var(--cta);
+}
+
+a.method-card:hover .method-num,
+a.method-card:hover .method-title {
+  color: var(--cta);
 }
 
 .method-num {
@@ -1282,13 +1307,13 @@ footer {
         </div>
       </div>
 
-      <div class="method-card">
+      <a class="method-card" href="https://t.afi-b.com/visit.php?a=T16384N-A526160G&p=e855734s" target="_blank" rel="noopener noreferrer sponsored">
         <div class="method-num">02</div>
         <div>
           <div class="method-title">育毛サロン・クリニックケア</div>
           <div class="method-desc">頭皮環境のケアを通じて、状態を整えるアプローチ。継続的な通院が必要な場合が多い。</div>
         </div>
-      </div>
+      </a>
 
       <div class="method-card featured">
         <div class="method-num">03</div>
