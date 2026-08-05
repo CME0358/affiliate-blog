@@ -1,0 +1,12 @@
+{
+  "indices": {
+    "sleep": 10,
+    "focus": 10,
+    "fatigue": 10,
+    "haircare": 10,
+    "stress": 10,
+    "pet": 18,
+    "factoring": 18
+  },
+  "last_run_date": "2026-08-05"
+}
