@@ -22,10 +22,10 @@
   <path d="M800 240 C880 210, 970 220, 1030 280" fill="none" stroke="#06C755" stroke-width="2" opacity="0.2"/>
 
   <rect x="80" y="310" width="160" height="36" rx="4" fill="url(#accent)"/>
-  <text x="160" y="333" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">„ÛûAGA</text>
+  <text x="160" y="333" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">ï¿½ï¿½ï¿½AGA</text>
 
   <text x="80" y="400" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="48" font-weight="700" fill="#f5f5f5" letter-spacing="-1">QOL media</text>
-  <text x="80" y="470" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="28" font-weight="400" fill="#a8b0c8">Œ”WjD¯êËÃ¯xs</text>
+  <text x="80" y="470" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="28" font-weight="400" fill="#a8b0c8">ï¿½ï¿½WjDï¿½ï¿½ï¿½Ã¯xs</text>
 
   <rect x="80" y="530" width="240" height="3" rx="2" fill="#06C755" opacity="0.8"/>
 </svg>

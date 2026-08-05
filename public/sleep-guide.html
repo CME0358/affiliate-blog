@@ -1373,7 +1373,8 @@
       allCards.forEach(function(id) {
         document.getElementById(id).style.display = 'none';
       });
-      document.getElementById(cardMap[worry]).style.display = 'flex';
+      // 高単価（¥8,000）案件を全悩みタイプで優先表示（2026-08-05）
+      document.getElementById('cards-tsukare').style.display = 'flex';
 
       step1.classList.add('hidden');
       step2.classList.remove('hidden');
