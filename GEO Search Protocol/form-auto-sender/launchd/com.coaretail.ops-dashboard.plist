@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  運用ダッシュボード（70_outputs/運用ダッシュボード.html）を 1 時間ごとに再生成する。
+
+  ▼ 事前に編集すること
+  1) WorkingDirectory … form-auto-sender の絶対パス（既にこのマシン用に入れてある）
+  2) StandardOutPath / StandardErrorPath … 任意で変更可
+
+  ▼ 登録（推奨・一発）
+  bash launchd/install_ops_dashboard.sh
+
+  ▼ 手動登録
+  cp launchd/com.coaretail.ops-dashboard.plist ~/Library/LaunchAgents/
+  launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.coaretail.ops-dashboard.plist
+
+  ▼ 停止
+  launchctl unload ~/Library/LaunchAgents/com.coaretail.ops-dashboard.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.coaretail.ops-dashboard</string>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StartInterval</key>
+	<integer>3600</integer>
+	<key>WorkingDirectory</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/run_if_enabled.sh</string>
+		<string>ops-dashboard</string>
+		<string>--</string>
+		<string>/usr/bin/python3</string>
+		<string>build_ops_dashboard.py</string>
+	</array>
+	<key>StandardOutPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/ops_dashboard_launchd_stdout.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/ops_dashboard_launchd_stderr.log</string>
+</dict>
+</plist>

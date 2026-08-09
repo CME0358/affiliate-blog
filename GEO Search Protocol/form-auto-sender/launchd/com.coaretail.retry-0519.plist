@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  2026-05-20 10:00 に 1 回だけ retry_errors（logged_date=2026-05-19）を実行。
+  main.py の日次スケジュールとは独立。実行後に自身を launchctl unload する。
+
+  登録:
+    cp launchd/com.coaretail.retry-0519.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.coaretail.retry-0519.plist
+
+  確認:
+    launchctl list | grep retry-0519
+    tail -f logs/retry_2026-05-19.log
+
+  手動解除:
+    launchctl unload ~/Library/LaunchAgents/com.coaretail.retry-0519.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.coaretail.retry-0519</string>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>WorkingDirectory</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Month</key>
+		<integer>5</integer>
+		<key>Day</key>
+		<integer>20</integer>
+		<key>Hour</key>
+		<integer>10</integer>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>-lc</string>
+		<string>/usr/bin/python3 retry_errors.py --date 2026-05-19 --force; launchctl unload "$HOME/Library/LaunchAgents/com.coaretail.retry-0519.plist" 2&gt;/dev/null; exit 0</string>
+	</array>
+	<key>StandardOutPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/retry_0519_launchd_stdout.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/retry_0519_launchd_stderr.log</string>
+</dict>
+</plist>

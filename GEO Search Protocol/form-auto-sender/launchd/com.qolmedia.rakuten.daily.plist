@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.qolmedia.rakuten.daily</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/run_if_enabled.sh</string>
+		<string>qol-buffer-daily</string>
+		<string>--</string>
+		<string>/bin/bash</string>
+		<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/QOLmedia/rakuten-affiliate/rakuten-x-affiliate/run_daily.sh</string>
+	</array>
+	<key>WorkingDirectory</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/QOLmedia/rakuten-affiliate/rakuten-x-affiliate</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>18</integer>
+		<key>Minute</key>
+		<integer>30</integer>
+	</dict>
+	<key>StandardOutPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/QOLmedia/rakuten-affiliate/rakuten-x-affiliate/logs/launchd-daily.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/QOLmedia/rakuten-affiliate/rakuten-x-affiliate/logs/launchd-daily.err.log</string>
+</dict>
+</plist>

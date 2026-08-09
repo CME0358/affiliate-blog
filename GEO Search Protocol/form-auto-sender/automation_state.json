@@ -1,0 +1,44 @@
+{
+  "form-auto-sender": {
+    "paused": true,
+    "launchd": "com.coaretail.form-auto-sender",
+    "updated_at": "2026-06-12T13:16:54+09:00",
+    "updated_by": "automation_control.py pause"
+  },
+  "qol-buffer-daily": {
+    "paused": false,
+    "launchd": "com.qolmedia.rakuten.daily",
+    "updated_at": "2026-06-14T00:55:11+09:00",
+    "updated_by": "automation_control.py resume"
+  },
+  "buffer-fatigue": {
+    "paused": false,
+    "launchd": "（qol-buffer-daily 内）",
+    "updated_at": "2026-06-14T00:55:12+09:00",
+    "updated_by": "automation_control.py resume"
+  },
+  "buffer-focus": {
+    "paused": false,
+    "launchd": "（qol-buffer-daily 内）",
+    "updated_at": "2026-06-14T00:55:14+09:00",
+    "updated_by": "automation_control.py resume"
+  },
+  "buffer-stress": {
+    "paused": false,
+    "launchd": "（qol-buffer-daily 内）",
+    "updated_at": "2026-06-14T00:55:15+09:00",
+    "updated_by": "automation_control.py resume"
+  },
+  "buffer-sleep": {
+    "paused": false,
+    "launchd": "（qol-buffer-daily 内）",
+    "updated_at": "2026-06-14T00:55:16+09:00",
+    "updated_by": "automation_control.py resume"
+  },
+  "buffer-haircare": {
+    "paused": false,
+    "launchd": "（qol-buffer-daily 内）",
+    "updated_at": "2026-06-14T00:55:16+09:00",
+    "updated_by": "automation_control.py resume"
+  }
+}

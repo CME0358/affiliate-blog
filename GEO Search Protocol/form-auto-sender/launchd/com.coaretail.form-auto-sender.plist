@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.coaretail.form-auto-sender</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/run_scheduled.sh</string>
+    </array>
+
+    <!-- 毎日 10:00 に実行（企業営業時間 10:00〜18:00 に準拠） -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>10</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/launchd_stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/launchd_stderr.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  イレギュラー: error.csv に logged_date=指定日 の行だけを翌朝など 1 回だけ再実行する。
+
+  ▼ 事前に編集すること
+  1) WorkingDirectory … form-auto-sender の絶対パス
+  2) StartCalendarInterval … 実行したい「翌日」の月・日・時・分（毎年同じ暦日に再発火するため、
+     実行後はアンロードするか plist を削除すること）
+  3) bash -lc 内の --date … error.csv の logged_date と一致させる日付
+
+  ▼ 登録（ユーザーエージェント）
+  cp launchd/com.coaretail.retry-errors.plist ~/Library/LaunchAgents/
+  launchctl load ~/Library/LaunchAgents/com.coaretail.retry-errors.plist
+
+  新しい macOS では load の代わりに次でも可:
+  launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.coaretail.retry-errors.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.coaretail.retry-errors</string>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>WorkingDirectory</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Month</key>
+		<integer>5</integer>
+		<key>Day</key>
+		<integer>14</integer>
+		<key>Hour</key>
+		<integer>10</integer>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>-lc</string>
+		<string>/usr/bin/python3 retry_errors.py --date '2026-05-13'; launchctl unload "$HOME/Library/LaunchAgents/com.coaretail.retry-errors.plist" 2&gt;/dev/null; exit 0</string>
+	</array>
+	<key>StandardOutPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/retry_launchd_stdout.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/takeshisasaki/Downloads/Obsidian_Vault/10_Projects/GEO Search Protocol/form-auto-sender/logs/retry_launchd_stderr.log</string>
+</dict>
+</plist>
