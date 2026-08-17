@@ -1,0 +1,38 @@
+[
+  {
+    "name": "generic_action_present",
+    "crawler": {
+      "evidence_source": "generic_scan",
+      "site_reachable": true,
+      "action_path_scanned": true,
+      "action_path_present": true,
+      "faq_scanned": true,
+      "faq_present": true,
+      "schema_scanned": true,
+      "schema_present": true,
+      "service_info_scanned": true,
+      "service_info_ok": true,
+      "service_info_weak": false,
+      "llms_txt_scanned": true,
+      "has_llms_txt": false
+    }
+  },
+  {
+    "name": "generic_not_found_mix",
+    "crawler": {
+      "evidence_source": "generic_scan",
+      "site_reachable": true,
+      "action_path_scanned": true,
+      "action_path_present": false,
+      "faq_scanned": true,
+      "faq_present": false,
+      "schema_scanned": true,
+      "schema_present": false,
+      "service_info_scanned": true,
+      "service_info_ok": false,
+      "service_info_weak": true,
+      "llms_txt_scanned": true,
+      "has_llms_txt": false
+    }
+  }
+]

@@ -238,11 +238,9 @@ def build_fitness_section_html(vault_root: Path, today: date, generated_ts: str)
 
     crawler_rel = "40_Sales/営業自動化ツール/reservation_crawler"
 
-    return f"""<section id="fitness-crawler" class="tab-panel" role="tabpanel" aria-labelledby="tab-fitness-crawler" hidden>
-      <div class="section-head">
-        <h2>パーソナルジムクローラー · Agent Readiness Index</h2>
-        <span class="section-tag">23区 · 1日1区 · 18:00</span>
-      </div>
+    return f"""<div id="fitness-crawler" class="kanban-card kanban-card--wide kanban-card--scroll">
+      <h3>パーソナルジムクローラー · Agent Readiness Index</h3>
+      <span class="section-tag" style="display:inline-block;margin-bottom:12px">23区 · 1日1区 · 18:00</span>
       <p class="expo-note">
         <strong>対象業種:</strong> {escape_html(industries_label)}。
         <strong>データソース:</strong> <a href="{escape_html(stats.data_source)}" target="_blank" rel="noopener">FIT Search</a>（fitsearch.jp）· Google Maps 不使用。
@@ -327,4 +325,4 @@ def build_fitness_section_html(vault_root: Path, today: date, generated_ts: str)
         <code id="p-ari-master"></code>
         <button type="button" class="copy" data-copy-target="p-ari-master">コピー</button>
       </div>
-    </section>"""
+    </div>"""

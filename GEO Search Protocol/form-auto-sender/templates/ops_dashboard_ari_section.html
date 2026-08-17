@@ -1,119 +1,159 @@
-<section id="ari-daily" class="tab-panel active" role="tabpanel" aria-labelledby="tab-ari-daily">
+<section id="ari-daily" class="board-panel active" role="region" aria-labelledby="tab-board-daily">
   <div class="section-head">
     <h2>Agent Readiness Insights · 日次運用</h2>
     <span class="section-tag">Season 1 Release v1.0</span>
     <span class="release-pill" style="margin-left:8px">RELEASED</span>
   </div>
 
-  <div class="daily-hero">
-    <div>
-      <div class="daily-clock" id="ari-jst-clock">--:--</div>
-      <div class="daily-date" id="ari-jst-date">—</div>
-      <div style="margin-top:10px;font-size:0.82rem;color:var(--muted)">
-        validate: <strong style="color:var(--success)">PASS</strong> · Blocking: <strong>0</strong> ·
-        <a href="https://readiness.coaretail.com/insights/" target="_blank" rel="noopener" class="ext-link">Insights</a>
+  <div class="kanban-board">
+    <!-- 列1: 待機 -->
+    <div class="kanban-column" data-col="backlog">
+      <div class="kanban-col-header">
+        <span class="kanban-col-title">待機</span>
+        <span class="kanban-count">hold</span>
       </div>
-    </div>
-    <div class="daily-next">
-      <div class="daily-next-label">次のアクション</div>
-      <div class="daily-next-time" id="ari-next-time">—</div>
-      <div class="daily-next-task" id="ari-next-task">—</div>
-    </div>
-  </div>
-
+      <div class="kanban-cards">
+        <div class="kanban-card">
 __ARI_DYNAMIC__
-
-  <div class="daily-grid">
-    <div class="daily-card">
-      <h3>今日のタイムライン（平日）</h3>
-      <ul class="timeline" id="ari-timeline"></ul>
-    </div>
-
-    <div class="daily-card">
-      <h3>09:30 確認チェックリスト</h3>
-      <ul class="checklist-daily" id="ari-check-am" data-check-group="am"></ul>
-      <div class="progress-bar"><span id="ari-progress-am" style="width:0%"></span></div>
-    </div>
-
-    <div class="daily-card">
-      <h3>17:00 日次 Review</h3>
-      <ul class="checklist-daily" id="ari-check-pm" data-check-group="pm"></ul>
-      <div class="progress-bar"><span id="ari-progress-pm" style="width:0%"></span></div>
-    </div>
-
-    <div class="daily-card">
-      <h3>公開フロー</h3>
-      <p style="margin:0 0 10px;font-size:0.82rem;color:var(--muted);line-height:1.5">
-        hold → <strong style="color:var(--text)">unlock</strong> (15:00) →
-        <strong style="color:var(--text)">publish</strong> (10:00) →
-        <strong style="color:var(--text)">Buffer</strong> (publish 直後チェーン) → SNS (11:30–12:00)
-      </p>
-      <div class="kpis" style="grid-template-columns:1fr 1fr;gap:8px">
-        <div class="kpi" style="padding:12px"><div class="label">LinkedIn queue</div><div class="value" style="font-size:1.2rem">30</div></div>
-        <div class="kpi" style="padding:12px"><div class="label">Buffer 3ch</div><div class="value" style="font-size:1.2rem">30</div></div>
-      </div>
-    </div>
-
-    <div class="daily-card">
-      <h3>手動コマンド（コピー）</h3>
-      <div class="cmd-grid">
-        <div class="cmd-row">
-          <code id="ari-cmd-validate">cd "10_Projects/Agent Readiness" && node scripts/validate-insights-v2.mjs</code>
-          <button type="button" class="copy" data-copy-target="ari-cmd-validate">コピー</button>
         </div>
-        <div class="cmd-row">
-          <code id="ari-cmd-unlock">cd "10_Projects/Agent Readiness" && node scripts/unlock-next-insight.mjs --dry-run</code>
-          <button type="button" class="copy" data-copy-target="ari-cmd-unlock">コピー</button>
-        </div>
-        <div class="cmd-row">
-          <code id="ari-cmd-publish">cd "10_Projects/Agent Readiness" && node scripts/publish-scheduled-insights.mjs</code>
-          <button type="button" class="copy" data-copy-target="ari-cmd-publish">コピー</button>
-        </div>
-        <div class="cmd-row">
-          <code id="ari-cmd-buffer">cd "10_Projects/Agent Readiness" && npm run queue:buffer:dry</code>
-          <button type="button" class="copy" data-copy-target="ari-cmd-buffer">コピー</button>
+        <div class="kanban-card">
+          <h3>Observations（非ブロッキング）</h3>
+          <ul class="obs-list">
+            <li><span class="badge badge--mid">P1</span> LinkedIn 5 本 450 字未満</li>
+            <li><span class="badge badge--mid">P1</span> recommendation-logic publishAt ずれ</li>
+            <li><span class="badge badge--low">—</span> legacy 2 本 v5+Evidence 未統一</li>
+            <li><span class="badge badge--low">—</span> Phase B Evidence retrofill 未実施</li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <div class="daily-card">
-      <h3>GitHub Actions</h3>
-      <table style="width:100%;font-size:0.82rem">
-        <tr><td style="padding:6px 0;color:var(--muted);width:45%">publish-scheduled</td><td style="padding:6px 0">10:00 JST 毎日</td></tr>
-        <tr><td style="padding:6px 0;color:var(--muted)">queue-daily-buffer</td><td style="padding:6px 0">10:30 JST 平日</td></tr>
-        <tr><td style="padding:6px 0;color:var(--muted)">unlock-next-insight</td><td style="padding:6px 0">15:00 JST 平日</td></tr>
-      </table>
-      <p class="hint" style="margin-top:10px">workflow_dispatch で force_slug / dry_run 可</p>
+    <!-- 列2: 本日 -->
+    <div class="kanban-column kanban-column--highlight" data-col="today">
+      <div class="kanban-col-header">
+        <span class="kanban-col-title">本日</span>
+        <span class="kanban-count">now</span>
+      </div>
+      <div class="kanban-cards">
+        <div class="kanban-card kanban-card--highlight">
+          <div class="daily-clock" id="ari-jst-clock">--:--</div>
+          <div class="daily-date" id="ari-jst-date">—</div>
+          <div class="daily-next" style="margin-top:14px">
+            <div class="daily-next-label">次のアクション</div>
+            <div class="daily-next-time" id="ari-next-time">—</div>
+            <div class="daily-next-task" id="ari-next-task">—</div>
+          </div>
+        </div>
+        <div class="kanban-card">
+          <h3>09:30 確認チェックリスト</h3>
+          <ul class="checklist-daily" id="ari-check-am" data-check-group="am"></ul>
+          <div class="progress-bar"><span id="ari-progress-am" style="width:0%"></span></div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="section-head" style="margin-top:8px">
-    <h2>参照パス · Observations</h2>
-  </div>
-  <div class="daily-grid">
-    <div class="daily-card">
-      <h3>Runbook · ドキュメント</h3>
-      <div class="path-row" style="margin-bottom:8px">
-        <code id="p-ari-runbook"></code>
-        <button type="button" class="copy" data-copy-target="p-ari-runbook">コピー</button>
+    <!-- 列3: 実行中 -->
+    <div class="kanban-column" data-col="running">
+      <div class="kanban-col-header">
+        <span class="kanban-col-title">実行中</span>
+        <span class="kanban-count">flow</span>
       </div>
-      <div class="path-row" style="margin-bottom:8px">
-        <code id="p-ari-status"></code>
-        <button type="button" class="copy" data-copy-target="p-ari-status">コピー</button>
-      </div>
-      <div class="path-row">
-        <code id="p-ari-schedule"></code>
-        <button type="button" class="copy" data-copy-target="p-ari-schedule">コピー</button>
+      <div class="kanban-cards">
+        <div class="kanban-card">
+          <h3>今日のタイムライン（平日）</h3>
+          <ul class="timeline" id="ari-timeline"></ul>
+        </div>
+        <div class="kanban-card">
+          <h3>公開フロー</h3>
+          <p style="margin:0 0 10px;font-size:0.82rem;color:var(--muted);line-height:1.5">
+            hold → <strong style="color:var(--text)">unlock</strong> (15:00) →
+            <strong style="color:var(--text)">publish</strong> (10:00) →
+            <strong style="color:var(--text)">Buffer</strong> (publish 直後チェーン) → SNS (11:30–12:00)
+          </p>
+          <div class="kpis" style="grid-template-columns:1fr 1fr;gap:8px">
+            <div class="kpi" style="padding:12px"><div class="label">LinkedIn queue</div><div class="value" style="font-size:1.2rem">30</div></div>
+            <div class="kpi" style="padding:12px"><div class="label">Buffer 3ch</div><div class="value" style="font-size:1.2rem">30</div></div>
+          </div>
+        </div>
+        <div class="kanban-card">
+          <h3>GitHub Actions</h3>
+          <table style="width:100%;font-size:0.82rem">
+            <tr><td style="padding:6px 0;color:var(--muted);width:45%">publish-scheduled</td><td style="padding:6px 0">10:00 JST 毎日</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">queue-daily-buffer</td><td style="padding:6px 0">10:30 JST 平日</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">unlock-next-insight</td><td style="padding:6px 0">15:00 JST 平日</td></tr>
+          </table>
+          <p class="hint" style="margin-top:10px">workflow_dispatch で force_slug / dry_run 可</p>
+        </div>
       </div>
     </div>
-    <div class="daily-card">
-      <h3>Observations（非ブロッキング）</h3>
-      <ul class="obs-list">
-        <li><span class="badge badge--mid">P1</span> LinkedIn 5 本 450 字未満</li>
-        <li><span class="badge badge--mid">P1</span> recommendation-logic publishAt ずれ</li>
-        <li><span class="badge badge--low">—</span> legacy 2 本 v5+Evidence 未統一</li>
-        <li><span class="badge badge--low">—</span> Phase B Evidence retrofill 未実施</li>
-      </ul>
+
+    <!-- 列4: Review -->
+    <div class="kanban-column" data-col="review">
+      <div class="kanban-col-header">
+        <span class="kanban-col-title">Review</span>
+        <span class="kanban-count">17:00</span>
+      </div>
+      <div class="kanban-cards">
+        <div class="kanban-card">
+          <h3>17:00 日次 Review</h3>
+          <ul class="checklist-daily" id="ari-check-pm" data-check-group="pm"></ul>
+          <div class="progress-bar"><span id="ari-progress-pm" style="width:0%"></span></div>
+        </div>
+        <div class="kanban-card">
+          <h3>手動コマンド（コピー）</h3>
+          <div class="cmd-grid">
+            <div class="cmd-row">
+              <code id="ari-cmd-validate">cd "10_Projects/Agent Readiness" && node scripts/validate-insights-v2.mjs</code>
+              <button type="button" class="copy" data-copy-target="ari-cmd-validate">コピー</button>
+            </div>
+            <div class="cmd-row">
+              <code id="ari-cmd-unlock">cd "10_Projects/Agent Readiness" && node scripts/unlock-next-insight.mjs --dry-run</code>
+              <button type="button" class="copy" data-copy-target="ari-cmd-unlock">コピー</button>
+            </div>
+            <div class="cmd-row">
+              <code id="ari-cmd-publish">cd "10_Projects/Agent Readiness" && node scripts/publish-scheduled-insights.mjs</code>
+              <button type="button" class="copy" data-copy-target="ari-cmd-publish">コピー</button>
+            </div>
+            <div class="cmd-row">
+              <code id="ari-cmd-buffer">cd "10_Projects/Agent Readiness" && npm run queue:buffer:dry</code>
+              <button type="button" class="copy" data-copy-target="ari-cmd-buffer">コピー</button>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-card">
+          <h3>Runbook · ドキュメント</h3>
+          <div class="path-row" style="margin-bottom:8px">
+            <code id="p-ari-runbook"></code>
+            <button type="button" class="copy" data-copy-target="p-ari-runbook">コピー</button>
+          </div>
+          <div class="path-row" style="margin-bottom:8px">
+            <code id="p-ari-status"></code>
+            <button type="button" class="copy" data-copy-target="p-ari-status">コピー</button>
+          </div>
+          <div class="path-row">
+            <code id="p-ari-schedule"></code>
+            <button type="button" class="copy" data-copy-target="p-ari-schedule">コピー</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 列5: 完了 -->
+    <div class="kanban-column" data-col="done">
+      <div class="kanban-col-header">
+        <span class="kanban-col-title">完了</span>
+        <span class="kanban-count">PASS</span>
+      </div>
+      <div class="kanban-cards">
+        <div class="kanban-card kanban-card--success">
+          <h3>validate</h3>
+          <div class="kanban-status-value" style="color:var(--success)">PASS</div>
+          <p class="hint" style="margin-top:8px">Blocking: <strong>0</strong></p>
+          <p style="margin-top:10px;font-size:0.82rem">
+            <a href="https://readiness.coaretail.com/insights/" target="_blank" rel="noopener" class="ext-link">Insights 公開サイト</a>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

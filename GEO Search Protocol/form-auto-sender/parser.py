@@ -28,7 +28,7 @@ from config import VAULT_ROOT
 # ファイル名: 2026-05-12_美容クリニック_港区.md
 FILENAME_RE = re.compile(r"(\d{4}-\d{2}-\d{2})_(.+?)_(.+?)\.md$")
 PILOT_FILENAME_RE = re.compile(
-    r"^ARI-(Pilot(-Form-Friendly-\d+|-Timeout-Retry|-\d+)|Canary-[A-Za-z0-9-]+)\.md$"
+    r"^ARI-(Pilot(-Form-Friendly-\d+|-Timeout-Retry|-\d+)|Canary-[A-Za-z0-9-]+|Production-Batch-\d+|Expansion-Batch-\d+|Preselection-Batch-\d+)\.md$"
 )
 
 # 会社名ブロック開始: - **麻布台美容皮膚科クリニック**（★4.8 / 84件 / Webあり）

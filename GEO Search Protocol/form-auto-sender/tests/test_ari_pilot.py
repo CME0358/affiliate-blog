@@ -31,17 +31,20 @@ class TestARIConfig(unittest.TestCase):
 class TestARIMessage(unittest.TestCase):
     def test_message_has_no_geo_legacy(self):
         msg = build_message(
-            "ホワイトニング・審美歯科",
-            "テスト歯科",
+            "リフォーム・リノベーション",
+            "株式会社山田工務店一級建築士事務所",
             "https://readiness.coaretail.com/report/",
             area_name="台東区",
         )
-        self.assertIn("Agent Readiness", msg)
-        self.assertIn("発見・理解・比較・推薦", msg)
+        self.assertIn("Agent Readiness Company Report", msg)
+        self.assertIn("SEOやMEO", msg)
         self.assertIn("readiness.coaretail.com/report/", msg)
+        self.assertIn("tiktok.com/@coaretail/video/7646962366919265543", msg)
+        self.assertIn("佐々木", msg)
         self.assertNotIn("localgeo", msg)
-        self.assertNotIn("GEO", msg)
-        self.assertNotIn("無料AI推薦スコア診断", msg)
+        self.assertNotIn("GEO Search Protocol", msg)
+        self.assertNotIn("無料AI推薦", msg)
+        self.assertNotIn("競合比較", msg)
         self.assertNotIn("ABIS", msg)
 
     def test_build_lp_url_uses_override(self):
@@ -91,7 +94,7 @@ class TestDetectOnly(unittest.TestCase):
         from form_sender import set_submit_forbidden, _click_submit
 
         set_submit_forbidden(True)
-        ok, reason = asyncio.get_event_loop().run_until_complete(_click_submit(None, {}))
+        ok, reason, _meta = asyncio.get_event_loop().run_until_complete(_click_submit(None, {}))
         self.assertFalse(ok)
         self.assertEqual(reason, "submit_forbidden_detect_only")
         set_submit_forbidden(False)

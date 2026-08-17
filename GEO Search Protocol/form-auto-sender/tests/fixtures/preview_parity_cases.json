@@ -1,0 +1,52 @@
+[
+  {
+    "name": "booking_present",
+    "crawler": {
+      "reservation_button": 20,
+      "faq": 20,
+      "schema_org": 20,
+      "local_business": 20,
+      "has_llms_txt": true,
+      "site_reachable": true
+    }
+  },
+  {
+    "name": "booking_missing_faq_weak",
+    "crawler": {
+      "reservation_button": 0,
+      "has_reservation_url": false,
+      "faq": 5,
+      "schema_org": 0,
+      "local_business": 0,
+      "has_llms_txt": false,
+      "site_reachable": true
+    }
+  },
+  {
+    "name": "faq_boundary_11",
+    "crawler": {
+      "reservation_button": 20,
+      "faq": 11,
+      "schema_org": 20,
+      "site_reachable": true
+    }
+  },
+  {
+    "name": "faq_boundary_12",
+    "crawler": {
+      "reservation_button": 20,
+      "faq": 12,
+      "schema_org": 20,
+      "site_reachable": true
+    }
+  },
+  {
+    "name": "site_unreachable",
+    "crawler": {
+      "site_reachable": false,
+      "faq": 0,
+      "schema_org": 0,
+      "reservation_button": 0
+    }
+  }
+]

@@ -13,6 +13,8 @@ form_sender.py  —  フォーム自動送信エンジン
 from __future__ import annotations
 
 import asyncio
+import hashlib
+import os
 import random
 import re
 
@@ -30,10 +32,11 @@ from config import (
     SEND_INTERVAL_MAX,
 )
 from form_field_resolver import resolve_form_fields, _FIND_MESSAGE_FIELD_JS, _element_tag
+from message_variant import format_selection_log_line, resolve_ari_message_for_form, selection_as_dict
 from form_finder import NAV_TIMEOUT, is_file_download_url
 from form_finder import _goto_settled
 
-# detect-only / fill-no-submit モードでは submit を絶対に実行しない（二重安全弁）
+# detect-only / fill-no-submit / submit-canary（live 未武装）では submit 禁止
 _SUBMIT_FORBIDDEN = False
 _REAL_SUBMISSION_COUNT = 0
 
@@ -43,13 +46,38 @@ def set_submit_forbidden(value: bool) -> None:
     _SUBMIT_FORBIDDEN = value
 
 
+def get_submit_forbidden() -> bool:
+    return _SUBMIT_FORBIDDEN
+
+
 def get_real_submission_count() -> int:
     return _REAL_SUBMISSION_COUNT
 
 
 def _record_real_submission() -> None:
     global _REAL_SUBMISSION_COUNT
+    max_prod = int(os.environ.get("ARI_PRODUCTION_MAX_SUBMISSIONS", "0") or "0")
+    if max_prod and _REAL_SUBMISSION_COUNT >= max_prod:
+        raise RuntimeError(f"hard_limit_{max_prod}_real_submissions")
     _REAL_SUBMISSION_COUNT += 1
+
+
+def reset_real_submission_count() -> None:
+    """テスト用: 送信カウンタをリセット。"""
+    global _REAL_SUBMISSION_COUNT
+    _REAL_SUBMISSION_COUNT = 0
+
+
+async def _page_fill(page, selector: str, value: str) -> None:
+    """Production: Playwright default fill. Night Factory PF budget: bounded + interactable pick."""
+    try:
+        from ari_pipeline.pf_rf_hardening import nf_pf_fill, nf_pf_mode_active
+        if nf_pf_mode_active():
+            await nf_pf_fill(page, selector, value)
+            return
+    except ImportError:
+        pass
+    await page.fill(selector, value)
 
 
 def _digits_only(s: str) -> str:
@@ -76,7 +104,7 @@ async def _fill_postal_code(page, selector: str) -> None:
         return
     for v in _postal_variants(SENDER_POSTAL_CODE):
         try:
-            await page.fill(selector, v)
+            await _page_fill(page, selector, v)
             return
         except Exception:
             continue
@@ -103,10 +131,23 @@ async def _fill_prefecture(page, fields: dict) -> None:
 
 # 送信ボタン探索: 描画待ち後に DOM から直接特定（Claude セレクタ失敗・動的生成対応）
 _SUBMIT_CONTROL_SELECTOR = (
-    'button, input[type="submit"], input[type="button"], '
+    'form button[type="submit"], form input[type="submit"], '
+    'button[type="submit"], input[type="submit"], input[type="button"], '
     'input[type="image"], [role="button"]'
 )
 _SUBMIT_WAIT_MS = 5_000
+_GENERIC_SUBMIT_SELECTORS = frozenset({"input", "button", "submit", "a", "img"})
+
+
+def _is_usable_submit_selector(sel: str) -> bool:
+    """Reject tag-only Claude selectors like ``input`` / ``button``."""
+    s = (sel or "").strip().lower()
+    if not s or s in _GENERIC_SUBMIT_SELECTORS:
+        return False
+    if re.match(r"^[a-z]+$", s):
+        return False
+    return True
+
 
 _FIND_SUBMIT_ELEMENT_JS = r"""
 () => {
@@ -129,6 +170,14 @@ _FIND_SUBMIT_ELEMENT_JS = r"""
     return true;
   };
   const norm = (s) => (s || '').toLowerCase();
+  const isCookieBanner = (el) => {
+    if (!el || el.closest('form')) return false;
+    const id = norm(el.id);
+    const cl = norm(el.getAttribute('class') || '');
+    if (id.includes('cookie') || cl.includes('cookie')) return true;
+    const root = el.closest('[id*="cookie" i], [class*="cookie" i]');
+    return !!root;
+  };
   const textMatch = (el) => {
     const t = norm((el.innerText || '') + ' ' + (el.textContent || '') + ' ' + (el.value || ''));
     return TEXT_KWS.some((k) => t.includes(k.toLowerCase()));
@@ -140,14 +189,38 @@ _FIND_SUBMIT_ELEMENT_JS = r"""
     return ATTR_KWS.some((k) => s.includes(k));
   };
   const firstVisible = (list) => {
-    for (const el of list) if (visible(el)) return el;
+    for (const el of list) if (visible(el) && !isCookieBanner(el)) return el;
     return null;
   };
+  const formSubmitSelector = (form) =>
+    'button[type="submit"], input[type="submit"], input[type="image"]';
 
-  // 1 type=submit の button / input（表示状態を優先）
-  let hit = firstVisible(
+  // 0 Jimdo / cc-m-form（フォーム内 submit を最優先）
+  let hit = firstVisible(Array.from(document.querySelectorAll(
+    'form.cc-m-form input[type="submit"], form.cc-m-form button[type="submit"], ' +
+    'form[class*="cc-m-form"] input[type="submit"], form[class*="cc-m-form"] button[type="submit"]'
+  )));
+  if (hit) return hit;
+
+  // 1 各 form 内の type=submit（cookie バナー外）
+  for (const form of document.querySelectorAll('form')) {
+    hit = firstVisible(Array.from(form.querySelectorAll(formSubmitSelector(form))));
+    if (hit) return hit;
+  }
+
+  // 2 ページ全体の type=submit（後方互換）
+  hit = firstVisible(
     Array.from(document.querySelectorAll('button[type="submit"], input[type="submit"]'))
   );
+  if (hit) return hit;
+
+  // 1a 画像送信ボタン（alt/name のみ・テキストラベルなし）
+  hit = firstVisible(Array.from(document.querySelectorAll('input[type="image"]')).filter((el) => {
+    const alt = norm(el.getAttribute('alt') || '');
+    const nm = norm(el.getAttribute('name') || '');
+    return attrMatch(el) || nm.includes('send') || nm.includes('submit')
+      || alt.includes('送信') || alt.includes('submit') || alt.includes('確認');
+  }));
   if (hit) return hit;
 
   // 1b 歯科・WordPress系 CMS（Contact Form 7 / MW WP Form 等）
@@ -205,8 +278,15 @@ _FIND_SUBMIT_ELEMENT_JS = r"""
 
 # CSS セレクタフォールバック（Claude / JS 探索の次）
 _FALLBACK_SUBMIT_SELECTORS: tuple[str, ...] = (
+    "form.cc-m-form input[type='submit']",
+    "form.cc-m-form button[type='submit']",
+    "form[class*='cc-m-form'] input[type='submit']",
+    "form input[type='submit']",
+    "form button[type='submit']",
     "button[type='submit']",
     "input[type='submit']",
+    "input[type='image'][name='send']",
+    "input[type='image']",
     ".wpcf7-submit",
     "input.wpcf7-submit",
     ".mwform-submit",
@@ -241,6 +321,15 @@ async def _wait_for_submit_controls(page) -> None:
         pass
 
 
+async def _prepare_submit_surface(page) -> None:
+    """Cookie オーバーレイ解除 → submit コントロール描画待ち。"""
+    from cookie_banner import dismiss_cookie_banner
+
+    await dismiss_cookie_banner(page)
+    await _wait_for_submit_controls(page)
+    await asyncio.sleep(0.45)
+
+
 async def _find_submit_element_handle(page):
     """page.evaluate_handle で送信相当の要素を返す。見つからなければ None。"""
     h = await page.evaluate_handle(_FIND_SUBMIT_ELEMENT_JS)
@@ -263,20 +352,164 @@ async def _click_fallback_submit_selectors(page) -> bool:
     return False
 
 
-async def _click_submit(page, fields: dict) -> tuple[bool, str]:
+_CONFIRM_HTML_KEYWORDS = (
+    "確認画面",
+    "入力内容の確認",
+    "入力内容確認",
+    "この内容で送信",
+    "内容をご確認",
+)
+
+_SUCCESS_HTML_KEYWORDS = (
+    "送信完了",
+    "送信しました",
+    "ありがとうございました",
+    "お問い合わせを受け付け",
+    "受付完了",
+    "thank you",
+    "thanks",
+)
+
+_SUCCESS_URL_FRAGMENTS = (
+    "thanks",
+    "thank-you",
+    "complete",
+    "done",
+    "success",
+)
+
+
+def detect_submission_success(
+    final_url: str,
+    form_url: str,
+    html: str,
+    meta: dict,
+) -> tuple[bool, str]:
+    """
+    Real submission 判定（Success State Contract 準拠）。
+    URL の confirmation だけでは True にしない。
+    Returns: (success, reason_code)
+    """
+    from submission_state import CONFIRMED_SENT, classify_submission_outcome
+
+    outcome = classify_submission_outcome(
+        final_url=final_url,
+        form_url=form_url,
+        html=html,
+        meta=meta,
+    )
+    return outcome.counts_toward_confirmed_sent, outcome.reason
+
+
+async def _click_audited_button(page, btn: dict) -> bool:
+    sel = (btn.get("selector") or "").strip()
+    if sel:
+        try:
+            await page.click(sel, timeout=_SUBMIT_WAIT_MS)
+            return True
+        except Exception:
+            pass
+    label = (btn.get("label") or "").strip()
+    if label:
+        try:
+            loc = page.get_by_role("button", name=label.split()[0], exact=False)
+            if await loc.count():
+                await loc.first.click(timeout=_SUBMIT_WAIT_MS)
+                return True
+        except Exception:
+            pass
+    return False
+
+
+async def _await_post_submit_settle(page) -> None:
+    """AJAX / same-URL フォームの完了 DOM 出現を待つ。"""
+    selectors = (
+        ".wpcf7-mail-sent-ok",
+        ".wpcf7-response-output",
+        '[class*="mail-sent"]',
+        '[class*="thanks"]',
+        '[class*="complete"]',
+        '[role="alert"]',
+    )
+    for sel in selectors:
+        try:
+            await page.wait_for_selector(sel, timeout=6_000)
+            await asyncio.sleep(0.6)
+            return
+        except Exception:
+            continue
+    await asyncio.sleep(2.5)
+
+
+async def _click_submit(
+    page,
+    fields: dict,
+    *,
+    allow_confirmation_final_submit: bool = False,
+) -> tuple[bool, str, dict]:
     """
     送信ボタンをクリックする（2段階フォーム: 確認 → 送信 に対応）。
+    Uses scoped button audit from shared runtime (contact_form_scope).
     Returns:
-        (成功したか, 失敗時理由コード)
+        (成功したか, 失敗時理由コード, submission_meta)
     """
+    meta: dict = {
+        "steps_clicked": 0,
+        "confirmation_reached": False,
+        "final_submit_clicked": False,
+    }
+    from mw_wp_form_state import (
+        MW_COMPLETE, MW_CONFIRMATION, MW_INITIAL, detect_mw_wp_form_state_dom,
+    )
+    mw_before = await detect_mw_wp_form_state_dom(page)
+    meta["mw_wp_form_state_before"] = mw_before
     if _SUBMIT_FORBIDDEN:
-        return False, "submit_forbidden_detect_only"
+        return False, "submit_forbidden_detect_only", meta
 
-    await _wait_for_submit_controls(page)
+    await _prepare_submit_surface(page)
+
+    contact_scope = fields.get("contact_form_scope")
+    from form_fill_no_submit import (
+        BACK,
+        FINAL_SUBMIT,
+        NEXT_STEP_SAFE,
+        _audit_buttons,
+        _click_button_scoped,
+        click_final_submit_button,
+        pick_final_submit_button,
+    )
+    from submission_state import _html_signals, _url_signals
 
     claude_sel = (fields.get("submit_button") or "").strip()
+    if not _is_usable_submit_selector(claude_sel):
+        claude_sel = ""
 
-    async def _try_once() -> bool:
+    async def _try_scoped_submit() -> bool:
+        audited = await _audit_buttons(page, contact_scope)
+        interactive = [b for b in audited if not b.get("disabled") and not b.get("ariaDisabled")]
+        finals = [b for b in interactive if b.get("classification") == FINAL_SUBMIT]
+        nexts = [b for b in interactive if b.get("classification") == NEXT_STEP_SAFE]
+        if len(finals) == 1 and not nexts:
+            btn = finals[0]
+            if await _click_button_scoped(page, btn, contact_scope):
+                meta["final_submit_label"] = btn.get("label")
+                return True
+        if len(nexts) == 1 and not finals:
+            btn = nexts[0]
+            if await _click_button_scoped(page, btn, contact_scope):
+                meta["final_submit_label"] = btn.get("label")
+                return True
+        if claude_sel:
+            try:
+                scoped = f"{contact_scope} {claude_sel.split(' ', 1)[-1]}" if contact_scope and claude_sel.startswith("form") else claude_sel
+                await page.wait_for_selector(scoped, timeout=_SUBMIT_WAIT_MS, state="visible")
+                await page.click(scoped, timeout=_SUBMIT_WAIT_MS)
+                return True
+            except Exception:
+                pass
+        return False
+
+    async def _try_legacy_once() -> bool:
         if claude_sel:
             try:
                 await page.wait_for_selector(claude_sel, timeout=_SUBMIT_WAIT_MS, state="visible")
@@ -294,10 +527,13 @@ async def _click_submit(page, fields: dict) -> tuple[bool, str]:
             pass
         return await _click_fallback_submit_selectors(page)
 
-    if not await _try_once():
-        return False, "submit_button_not_found"
+    if not await _try_scoped_submit():
+        if not await _try_legacy_once():
+            return False, "submit_button_not_found", meta
 
-    # 2段階フォーム: 確認画面で第2の送信ボタンを探す
+    form_url_before = page.url
+    meta["steps_clicked"] = 1
+
     try:
         await page.wait_for_load_state("domcontentloaded", timeout=8_000)
     except Exception:
@@ -305,11 +541,88 @@ async def _click_submit(page, fields: dict) -> tuple[bool, str]:
     await asyncio.sleep(1.2)
 
     html = await page.content()
-    if any(k in html for k in ("確認画面", "入力内容の確認", "この内容で送信", "g-recaptcha")):
-        if not await _try_once():
-            # 第1クリックで完了した可能性もある
-            return True, ""
-    return True, ""
+    mw_after = await detect_mw_wp_form_state_dom(page)
+    meta["mw_wp_form_state_after_first_click"] = mw_after
+    if mw_before.get("state") == MW_INITIAL and mw_after.get("state") == MW_CONFIRMATION:
+        meta["confirmation_reached"] = True
+        meta["final_submit_clicked"] = False
+        meta["mw_wp_form_final_contract_required"] = True
+        return True, "", meta
+    if mw_after.get("state") == MW_COMPLETE:
+        meta["final_submit_clicked"] = True
+        return True, "", meta
+    audited = await _audit_buttons(page, contact_scope)
+    interactive = [b for b in audited if not b.get("disabled") and not b.get("ariaDisabled")]
+    finals = [b for b in interactive if b.get("classification") == "FINAL_SUBMIT"]
+    nexts = [b for b in interactive if b.get("classification") == "NEXT_STEP_SAFE"]
+    backs = [b for b in interactive if b.get("classification") == BACK]
+    _, confirm_url_flag, success_url_flag = _url_signals(page.url, form_url_before)
+    _, confirm_dom, _ = _html_signals(html)
+    url_changed = page.url.rstrip("/") != form_url_before.rstrip("/")
+
+    is_confirm = (
+        bool(nexts)
+        or confirm_url_flag
+        or (confirm_dom and bool(finals))
+        or (any(k in html for k in _CONFIRM_HTML_KEYWORDS) and bool(finals))
+        or (bool(finals) and bool(backs))
+        or (bool(finals) and url_changed and not success_url_flag)
+        or (bool(finals) and confirm_dom and meta["steps_clicked"] == 1)
+    )
+
+    if is_confirm:
+        meta["confirmation_reached"] = True
+        meta["confirmation_snapshot"] = {
+            "page_url": page.url,
+            "final_controls": [
+                {k: b.get(k) for k in ("selector", "label", "tag", "type", "name", "value", "order")}
+                for b in finals
+            ],
+            "back_controls": [
+                {k: b.get(k) for k in ("selector", "label", "tag", "type", "name", "value", "order")}
+                for b in backs
+            ],
+            "final_control_count": len(finals),
+        }
+        if not allow_confirmation_final_submit:
+            meta["confirmation_auto_follow"] = False
+            meta["final_submit_clicked"] = False
+            return True, "", meta
+        meta["confirmation_auto_follow"] = True
+        if finals:
+            ok_final, detail, _btn = await click_final_submit_button(page, audited)
+            if ok_final:
+                meta["steps_clicked"] = 2
+                meta["final_submit_label"] = detail
+                try:
+                    await page.wait_for_load_state("domcontentloaded", timeout=8_000)
+                except Exception:
+                    pass
+                await asyncio.sleep(1.5)
+                from submission_state import has_confirm_validation_errors, _url_signals as _url_sig
+                html_after_final = await page.content()
+                _, still_confirm, success_after = _url_sig(page.url, form_url_before)
+                if has_confirm_validation_errors(html_after_final):
+                    meta["confirm_validation_failed"] = True
+                    meta["final_submit_clicked"] = False
+                elif still_confirm and not success_after:
+                    meta["confirm_submit_stalled"] = True
+                    meta["final_submit_clicked"] = True
+                else:
+                    meta["final_submit_clicked"] = True
+            else:
+                return False, detail or "final_submit_click_failed", meta
+        elif await _try_scoped_submit() or await _try_legacy_once():
+            meta["steps_clicked"] = 2
+            audited2 = await _audit_buttons(page, contact_scope)
+            if not [b for b in audited2 if b.get("classification") == NEXT_STEP_SAFE]:
+                meta["final_submit_clicked"] = True
+        else:
+            return False, "confirmation_no_final_submit", meta
+    else:
+        meta["final_submit_clicked"] = True
+
+    return True, "", meta
 
 
 async def _fill_message_field(page, fields: dict, message: str) -> tuple[bool, str]:
@@ -336,7 +649,7 @@ async def _fill_message_field(page, fields: dict, message: str) -> tuple[bool, s
         if tag not in ("textarea", "input"):
             continue
         try:
-            await page.fill(sel, message)
+            await _page_fill(page, sel, message)
             fields["message_field"] = sel
             return True, sel
         except Exception:
@@ -464,37 +777,242 @@ async def _reset_gender_age_fields(page, fields: dict) -> None:
 
 async def _fill_address_block(page, fields: dict) -> None:
     """
-    住所・建物 split / 単一 / 都道府県別select の組み合わせに対応。
+    住所・建物 split / 単一 / 都道府県別select / 市町村 の組み合わせに対応。
     """
+    async def _is_text_field(selector: str) -> bool:
+        try:
+            tag = await page.eval_on_selector(selector, "el => el.tagName.toLowerCase()")
+            return tag in ("input", "textarea")
+        except Exception:
+            return False
+
+    city = fields.get("city_field")
+    if city and await _is_text_field(city):
+        await _page_fill(page, city, SENDER_ADDRESS_LINE1)
+
     l1, l2 = fields.get("address_line1_field"), fields.get("address_line2_field")
     single = fields.get("address_field")
     has_pref = bool(fields.get("prefecture_field"))
 
     if l1 and l2:
-        await page.fill(l1, SENDER_ADDRESS_LINE1)
-        await page.fill(l2, SENDER_ADDRESS_LINE2)
+        if await _is_text_field(l1):
+            await _page_fill(page, l1, SENDER_ADDRESS_LINE1)
+        if await _is_text_field(l2):
+            await _page_fill(page, l2, SENDER_ADDRESS_LINE2)
         return
 
     if l1 and not l2:
-        text = (
-            _address_without_prefecture(SENDER_ADDRESS_FULL, SENDER_PREFECTURE)
-            if has_pref
-            else SENDER_ADDRESS_FULL
-        )
-        await page.fill(l1, text)
+        if await _is_text_field(l1):
+            text = (
+                _address_without_prefecture(SENDER_ADDRESS_FULL, SENDER_PREFECTURE)
+                if has_pref
+                else SENDER_ADDRESS_FULL
+            )
+            await _page_fill(page, l1, text)
         return
 
-    if single:
+    if single and await _is_text_field(single):
         if has_pref:
-            await page.fill(single, _address_without_prefecture(SENDER_ADDRESS_FULL, SENDER_PREFECTURE))
+            await _page_fill(page, single, _address_without_prefecture(SENDER_ADDRESS_FULL, SENDER_PREFECTURE))
         else:
-            await page.fill(single, SENDER_ADDRESS_FULL)
+            await _page_fill(page, single, SENDER_ADDRESS_FULL)
         return
 
 
 # ─── メイン送信処理 ───────────────────────────────────────────────────────────
 
-async def send_form(company: dict, message: str, lp_url: str) -> dict:
+async def submit_prepared_form(
+    prepared,
+    *,
+    lp_url: str,
+    message_slug: str,
+    preflight_mapping_hash: str | None = None,
+    company: dict | None = None,
+    allow_confirmation_final_submit: bool = False,
+) -> dict:
+    """
+    FINAL_SUBMIT using the same PreparedFormSnapshot state (no second prepare).
+    Caller must have authorized the snapshot and passed validate_snapshot_invariants.
+    """
+    from shared_form_prepare import (
+        RUNTIME_DIVERGENCE,
+        validate_snapshot_invariants,
+    )
+
+    form_url = prepared.form_url
+    prep = prepared.prep
+    page = prepared.page
+    selection = prep.selection
+    fields = prep.fields
+    message = prep.message
+
+    valid, inv_reasons = await validate_snapshot_invariants(prepared)
+    if not valid:
+        return {
+            "status": "error",
+            "reason": RUNTIME_DIVERGENCE,
+            "form_url": form_url,
+            "lp_url": lp_url,
+            "message_slug": message_slug,
+            "runtime_divergence": inv_reasons,
+            "production_mapping_hash": prep.mapping_hash,
+            "prepare_snapshot": prep.snapshot,
+        }
+
+    if _SUBMIT_FORBIDDEN:
+        return {
+            "status": "skipped",
+            "reason": "submit_forbidden",
+            "form_url": form_url,
+            "lp_url": lp_url,
+            "message_slug": message_slug,
+            "production_mapping_hash": prep.mapping_hash,
+            "prepare_snapshot": prep.snapshot,
+            "single_snapshot": True,
+        }
+
+    await asyncio.sleep(random.uniform(SEND_INTERVAL_MIN, SEND_INTERVAL_MAX))
+
+    html_before_submit = await page.content()
+    from submission_state import _count_forms
+    form_count_before = _count_forms(html_before_submit)
+    post_requests: list[str] = []
+    post_responses: list[dict] = []
+
+    def _on_request(req):
+        if req.method == "POST":
+            post_requests.append(req.url)
+
+    async def _on_response(resp):
+        try:
+            if resp.request.method.upper() != "POST":
+                return
+            body = await resp.text()
+            headers = await resp.all_headers()
+            digest = hashlib.sha256((body or "").encode("utf-8", errors="replace")).hexdigest()
+            marker_re = re.compile(r"mail_sent|mailsent|送信完了|送信しました|ありがとうございました|error|invalid|failed", re.I)
+            match = marker_re.search(body or "")
+            start = max(0, (match.start() - 300) if match else 0)
+            excerpt = (body or "")[start:start + (1200 if match else 500)]
+            post_responses.append({
+                "url": resp.url,
+                "status": resp.status,
+                "headers": {k: v for k, v in headers.items() if k.lower() in {
+                    "content-type", "location", "cache-control", "x-powered-by",
+                }},
+                "content_type": headers.get("content-type", ""),
+                "body_sha256": digest,
+                "body_excerpt": excerpt,
+            })
+        except Exception:
+            pass
+
+    page.on("request", _on_request)
+    page.on("response", _on_response)
+    from cf7_feedback import attach_cf7_feedback_capture
+    cf7_feedback_responses = attach_cf7_feedback_capture(page)
+
+    ok_submit, submit_err, submit_meta = await _click_submit(
+        page,
+        fields,
+        allow_confirmation_final_submit=allow_confirmation_final_submit,
+    )
+    submit_meta["html_before"] = html_before_submit
+    submit_meta["form_count_before"] = form_count_before
+    submit_meta["form_url"] = form_url
+    submit_meta["post_requests"] = post_requests
+    submit_meta["post_responses"] = post_responses
+    submit_meta["production_mapping_hash"] = prep.mapping_hash
+    submit_meta["preflight_mapping_hash"] = preflight_mapping_hash
+    submit_meta["prepare_snapshot"] = prep.snapshot
+    submit_meta["field_map"] = prep.field_map
+    submit_meta["required_choices"] = prep.choice_log
+    submit_meta["cf7_feedback_responses"] = cf7_feedback_responses
+    submit_meta["single_snapshot"] = True
+    if cf7_feedback_responses:
+        submit_meta["cf7_feedback"] = cf7_feedback_responses[-1]
+
+    if not ok_submit:
+        return {
+            "status": "error",
+            "reason": submit_err,
+            "form_url": form_url,
+            "lp_url": lp_url,
+            "message_slug": message_slug,
+            "submission_meta": submit_meta,
+            "production_mapping_hash": prep.mapping_hash,
+            "prepare_snapshot": prep.snapshot,
+        }
+
+    try:
+        await page.wait_for_load_state("domcontentloaded", timeout=15_000)
+    except Exception:
+        pass
+    await _await_post_submit_settle(page)
+
+    final_url = page.url
+    html_after = await page.content()
+    submit_meta["form_count_after"] = _count_forms(html_after)
+    from submission_state import (
+        CONFIRMED_SENT,
+        classify_submission_outcome,
+        outcome_to_send_status,
+    )
+
+    outcome = classify_submission_outcome(
+        final_url=final_url,
+        form_url=form_url,
+        html=html_after,
+        meta=submit_meta,
+    )
+    send_status = outcome_to_send_status(outcome)
+    prepared.submitted = True
+
+    if outcome.state != CONFIRMED_SENT:
+        return {
+            "status": send_status,
+            "reason": outcome.reason,
+            "form_url": form_url,
+            "lp_url": lp_url,
+            "message_slug": message_slug,
+            "submission_meta": submit_meta,
+            "submission_state": outcome.state,
+            "final_url": final_url,
+            "message_selection": selection_as_dict(selection),
+            **selection.to_log_fields(),
+        }
+
+    _record_real_submission()
+    return {
+        "status": "sent",
+        "reason": outcome.reason,
+        "form_url": form_url,
+        "lp_url": lp_url,
+        "message_slug": message_slug,
+        "message_selection": selection_as_dict(selection),
+        **selection.to_log_fields(),
+        "final_url": final_url,
+        "submission_meta": submit_meta,
+        "submission_state": CONFIRMED_SENT,
+        "production_mapping_hash": prep.mapping_hash,
+        "prepare_snapshot": prep.snapshot,
+    }
+
+
+async def send_form(
+    company: dict,
+    message: str,
+    lp_url: str,
+    *,
+    preflight_snapshot: dict | None = None,
+    preflight_mapping_hash: str | None = None,
+    preflight_evidence: dict | None = None,
+    prepared_snapshot=None,
+    allow_expected_selector_refinement: bool = False,
+    fixed_message_variant: str | None = None,
+    fixed_subject: str | None = None,
+    v2_send_payload=None,
+) -> dict:
     """
     フォームページにアクセスし、メッセージを送信する。
 
@@ -546,6 +1064,16 @@ async def send_form(company: dict, message: str, lp_url: str) -> dict:
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
+        # TLS bypass is opt-in and intended only for discovery/preflight
+        # of explicitly recovered cohorts.
+        # Default and production behavior remains strict TLS verification.
+        _tls_discovery_mode = (
+            os.environ.get("ARI_PREFLIGHT_TLS_DISCOVERY", "")
+            .strip()
+            .lower()
+            in {"1", "true", "yes"}
+        )
+
         context = await browser.new_context(
             user_agent=(
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -553,6 +1081,7 @@ async def send_form(company: dict, message: str, lp_url: str) -> dict:
                 "Chrome/124.0.0.0 Safari/537.36"
             ),
             locale="ja-JP",
+            ignore_https_errors=_tls_discovery_mode,
         )
         page = await context.new_page()
 
@@ -568,96 +1097,158 @@ async def send_form(company: dict, message: str, lp_url: str) -> dict:
                     "message_slug": message_slug,
                 }
 
-            # ── 2. フィールド解決（cache → DOM → Claude）────────────────────
-            html = await page.content()
-            fields, field_source = await resolve_form_fields(
-                page, html, str(form_url_raw).strip()
+            # ── 2–3. SINGLE-SNAPSHOT: prepare_once → authorize → submit ────
+            from shared_form_prepare import (
+                RUNTIME_DIVERGENCE,
+                authorize_snapshot,
+                build_preflight_semantic_evidence,
+                mark_snapshot_authorized,
+                prepare_once,
             )
-            if field_source != "none":
-                print(f"  📋 フィールド解決: {field_source}")
 
-            if not fields:
-                await browser.close()
-                return {
-                    "status":       "error",
-                    "reason":       "form_analysis_failed",
-                    "form_url":     str(form_url_raw).strip(),
-                    "lp_url":       lp_url,
-                    "message_slug": message_slug,
-                }
-
-            # ── 3. 各フィールドに入力 ────────────────────────────────────────
-            # 会社・担当者（先に入れるフォームが多い）
-            if fields.get("company_field"):
-                await page.fill(fields["company_field"], SENDER_COMPANY)
-
-            if fields.get("name_field"):
-                await page.fill(fields["name_field"], SENDER_NAME)
-
-            if fields.get("furigana_name_field"):
-                furigana_value = (
-                    "ささきたけし"
-                    if fields.get("furigana_format") == "hiragana"
-                    else "ササキタケシ"
+            if prepared_snapshot is not None:
+                prepared = prepared_snapshot
+            else:
+                html = await page.content()
+                prepared = await prepare_once(
+                    page,
+                    str(form_url_raw).strip(),
+                    message,
+                    lp_url,
+                    allow_validation_fallback=False,
+                    html=html,
+                    fixed_message_variant=fixed_message_variant,
+                    fixed_subject=fixed_subject,
                 )
-                await page.fill(fields["furigana_name_field"], furigana_value)
+                prepared.page = page
+                prepared.browser = browser
+                prepared.context = context
 
-            if fields.get("email_field"):
-                await page.fill(fields["email_field"], SENDER_EMAIL)
+            prep = prepared.prep
+            if prep.blocked or not prep.ok:
+                await browser.close()
+                status = "skipped" if prep.reason in (
+                    "form_not_suitable", "unsuitable_required_choices",
+                    "compact_message_exceeds_maxlength",
+                ) else "error"
+                return {
+                    "status": status,
+                    "reason": prep.reason,
+                    "form_url": str(form_url_raw).strip(),
+                    "lp_url": lp_url,
+                    "message_slug": message_slug,
+                    "production_mapping_hash": prep.mapping_hash,
+                    "prepare_snapshot": prep.snapshot,
+                    "single_snapshot": True,
+                }
 
-            if fields.get("phone_field"):
-                await page.fill(fields["phone_field"], SENDER_PHONE)
+            fields = prep.fields
+            selection = prep.selection
+            message = prep.message
+            print(f"  📝 {format_selection_log_line(selection)}")
 
-            # 郵便番号 → 都道府県 → 住所（1つ／2分割／県別select）
-            await _fill_postal_code(page, fields.get("postal_code_field") or "")
-            await _fill_prefecture(page, fields)
-            await _fill_address_block(page, fields)
-
-            # 性別・年齢（ラジオのデフォルト女性・10代を先にリセット）
-            await _reset_gender_age_fields(page, fields)
-
-            msg_ok, _msg_sel = await _fill_message_field(page, fields, message)
-            if not msg_ok:
+            if prep.field_map.get("message") not in ("FILLED", "FOUND"):
                 await browser.close()
                 return {
-                    "status":       "error",
-                    "reason":       "message_field_not_found",
-                    "form_url":     str(form_url_raw).strip(),
-                    "lp_url":       lp_url,
+                    "status": "error",
+                    "reason": "message_field_not_found",
+                    "form_url": str(form_url_raw).strip(),
+                    "lp_url": lp_url,
                     "message_slug": message_slug,
                 }
 
-            # 送信直前に性別・年齢を再確認（本文入力後にフォームJSで戻る場合）
-            await _reset_gender_age_fields(page, fields)
+            from message_variant import VARIANT_V2
 
-            # ── 4. 送信前ランダム待機（bot 検知回避）───────────────────────
-            await asyncio.sleep(random.uniform(SEND_INTERVAL_MIN, SEND_INTERVAL_MAX))
+            # Authorize fresh snapshot against FULL_PREFLIGHT semantic evidence
+            semantic_evidence = preflight_evidence
+            auth_meta: dict = {}
+            if semantic_evidence is None and preflight_snapshot:
+                semantic_evidence = dict(preflight_snapshot)
+                if preflight_mapping_hash:
+                    semantic_evidence.setdefault("mapping_hash", preflight_mapping_hash)
 
-            # ── 5. 送信ボタンをクリック（wait_for_selector + DOM 多段フォールバック）────
-            ok_submit, submit_err = await _click_submit(page, fields)
-            if not ok_submit:
-                await browser.close()
-                return {
-                    "status":       "error",
-                    "reason":       submit_err,
-                    "form_url":     str(form_url_raw).strip(),
-                    "lp_url":       lp_url,
-                    "message_slug": message_slug,
-                }
-            try:
-                await page.wait_for_load_state("domcontentloaded", timeout=15_000)
-            except Exception:
-                pass
+            if fixed_message_variant == VARIANT_V2 and not semantic_evidence:
+                from v2_send_authorization import (
+                    ImmutableV2SendPayload,
+                    authorize_v2_fixed_snapshot,
+                )
 
-            _record_real_submission()
+                if v2_send_payload is None:
+                    await browser.close()
+                    return {
+                        "status": "error",
+                        "reason": RUNTIME_DIVERGENCE,
+                        "form_url": str(form_url_raw).strip(),
+                        "lp_url": lp_url,
+                        "message_slug": message_slug,
+                        "runtime_divergence": ["v2_send_payload_missing"],
+                        "prepare_snapshot": prep.snapshot,
+                        "single_snapshot": True,
+                    }
+
+                payload = (
+                    v2_send_payload
+                    if isinstance(v2_send_payload, ImmutableV2SendPayload)
+                    else ImmutableV2SendPayload(**v2_send_payload)
+                )
+                authorized, auth_reasons = authorize_v2_fixed_snapshot(prepared, payload)
+                if not authorized:
+                    await browser.close()
+                    return {
+                        "status": "error",
+                        "reason": RUNTIME_DIVERGENCE,
+                        "form_url": str(form_url_raw).strip(),
+                        "lp_url": lp_url,
+                        "message_slug": message_slug,
+                        "runtime_divergence": auth_reasons,
+                        "v2_authorization": "payload_parity_failed",
+                        "prepare_snapshot": prep.snapshot,
+                        "single_snapshot": True,
+                    }
+                auth_meta["v2_payload_authorized"] = True
+            elif semantic_evidence:
+                from shared_form_prepare import mark_snapshot_authorized
+                from evidence_reauthorization import authorize_production_evidence
+
+                authorized, auth_reasons, auth_meta = authorize_production_evidence(
+                    prepared,
+                    semantic_evidence,
+                    allow_selector_refinement=allow_expected_selector_refinement,
+                )
+                if not authorized:
+                    await browser.close()
+                    return {
+                        "status": "error",
+                        "reason": RUNTIME_DIVERGENCE,
+                        "form_url": str(form_url_raw).strip(),
+                        "lp_url": lp_url,
+                        "message_slug": message_slug,
+                        "preflight_mapping_hash": semantic_evidence.get("mapping_hash"),
+                        "production_mapping_hash": prep.mapping_hash,
+                        "runtime_divergence": auth_reasons,
+                        "hash_drift_class": auth_meta.get("hash_drift_class"),
+                        "prepare_snapshot": prep.snapshot,
+                        "single_snapshot": True,
+                    }
+                mark_snapshot_authorized(prepared)
+
+            result = await submit_prepared_form(
+                prepared,
+                lp_url=lp_url,
+                message_slug=message_slug,
+                preflight_mapping_hash=(
+                    preflight_mapping_hash or (semantic_evidence or {}).get("mapping_hash")
+                ),
+                company=company,
+            )
+            if auth_meta.get("evidence_reauthorized"):
+                result["evidence_reauthorized"] = True
+                result["reauthorization_reason"] = auth_meta.get("reauthorization_reason")
+                result["hash_drift_class"] = auth_meta.get("hash_drift_class")
+                result["preflight_mapping_hash"] = auth_meta.get("preflight_hash")
+                result["production_mapping_hash"] = auth_meta.get("production_hash") or prep.mapping_hash
             await browser.close()
-            return {
-                "status":       "sent",
-                "reason":       "",
-                "form_url":     str(form_url_raw).strip(),
-                "lp_url":       lp_url,
-                "message_slug": message_slug,
-            }
+            return result
 
         except Exception as e:
             await browser.close()

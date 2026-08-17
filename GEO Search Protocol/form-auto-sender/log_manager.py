@@ -9,6 +9,7 @@ log_manager.py  —  送信ログ管理モジュール
 from __future__ import annotations
 
 import csv
+import hashlib
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Literal
@@ -51,6 +52,21 @@ _FAILURE_COOLDOWN_HEADERS = [
     "reason_category",
     "last_failed_date",
     "cooldown_until",
+]
+
+# Immutable event history.  .failure_cooldown.csv remains a mutable operational
+# index and must never be used as the sole historical record.
+FAILURE_EVENT_LOG = LOG_DIR / "failure_events.csv"
+_FAILURE_EVENT_HEADERS = [
+    "event_id", "timestamp", "company", "domain", "website_url", "place_id",
+    "event_class", "reason", "category", "source_execution", "attempted",
+    "submit_clicked", "post_observed", "confirmed_sent", "cooldown_until",
+    "evidence_reference", "correction_of",
+]
+FAILURE_STATUS_CORRECTIONS = LOG_DIR / "failure_status_corrections.csv"
+_FAILURE_STATUS_CORRECTION_HEADERS = [
+    "correction_id", "corrected_at", "company", "domain", "original_status",
+    "corrected_status", "reason", "evidence_reference", "source_execution",
 ]
 
 _ERROR_CSV_HEADERS = [
@@ -152,6 +168,22 @@ def _ensure_permanent_skip_csv() -> None:
             csv.writer(f).writerow(_PERMANENT_SKIP_HEADERS)
 
 
+_SENT_STATUS_CORRECTION_HEADERS = [
+    "corrected_at",
+    "company_name",
+    "website_url",
+    "place_id",
+    "original_status",
+    "corrected_status",
+    "reason",
+    "evidence_type",
+    "audit_ref",
+    "batch_id",
+]
+
+LOG_SENT_STATUS_CORRECTIONS = LOG_DIR / "sent_status_corrections.csv"
+
+
 def append_sent_csv_row(company: dict, extra: dict | None = None) -> None:
     """送信成功を logs/sent.csv に1行追記する。"""
     extra = extra or {}
@@ -170,6 +202,99 @@ def append_sent_csv_row(company: dict, extra: dict | None = None) -> None:
     with LOG_SENT.open("a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=_SENT_CSV_HEADERS)
         writer.writerow(row)
+
+
+def _ensure_sent_status_corrections_csv() -> None:
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    if not LOG_SENT_STATUS_CORRECTIONS.exists():
+        with LOG_SENT_STATUS_CORRECTIONS.open("w", newline="", encoding="utf-8") as f:
+            csv.DictWriter(f, fieldnames=_SENT_STATUS_CORRECTION_HEADERS).writeheader()
+
+
+def append_sent_status_correction(
+    company: dict,
+    *,
+    original_status: str,
+    corrected_status: str,
+    reason: str,
+    evidence_type: str = "",
+    audit_ref: str = "",
+    batch_id: str = "ari_batch1_2026-08-11",
+) -> None:
+    """
+    sent.csv の状態訂正 audit trail（追記のみ・既存行は削除しない）。
+    """
+    _ensure_sent_status_corrections_csv()
+    row = {
+        "corrected_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S JST"),
+        "company_name": company.get("company_name", ""),
+        "website_url": (company.get("website_url") or "").strip(),
+        "place_id": (company.get("place_id") or "").strip(),
+        "original_status": original_status,
+        "corrected_status": corrected_status,
+        "reason": reason,
+        "evidence_type": evidence_type,
+        "audit_ref": audit_ref,
+        "batch_id": batch_id,
+    }
+    with LOG_SENT_STATUS_CORRECTIONS.open("a", newline="", encoding="utf-8") as f:
+        csv.DictWriter(f, fieldnames=_SENT_STATUS_CORRECTION_HEADERS, extrasaction="ignore").writerow(row)
+
+
+def get_effective_sent_status(company_name: str, website_url: str = "") -> str:
+    """sent.csv 行 + 最新 correction を考慮した effective status（canonical）。"""
+    from submission_state import NOT_SENT, normalize_effective_status
+
+    base = NOT_SENT
+    nu = _normalize_website_url(website_url)
+    if LOG_SENT.exists():
+        with LOG_SENT.open("r", encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                row_url = _normalize_website_url(row.get("website_url", ""))
+                match = (
+                    row.get("company_name") == company_name
+                    or (nu and row_url and (nu == row_url or nu in row_url or row_url in nu))
+                    or (
+                        website_url
+                        and website_url.rstrip("/") in (row.get("website_url") or "")
+                    )
+                )
+                if match:
+                    base = row.get("status") or "sent"
+
+    latest_correction: str | None = None
+    latest_at = ""
+    if LOG_SENT_STATUS_CORRECTIONS.exists():
+        with LOG_SENT_STATUS_CORRECTIONS.open("r", encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                row_url = _normalize_website_url(row.get("website_url", ""))
+                if row.get("company_name") == company_name or (
+                    nu and row_url and (nu == row_url or nu in row_url or row_url in nu)
+                ):
+                    at = row.get("corrected_at") or ""
+                    if at >= latest_at:
+                        latest_at = at
+                        latest_correction = row.get("corrected_status")
+
+    if latest_correction:
+        return normalize_effective_status(latest_correction)
+    return normalize_effective_status(base)
+
+
+def get_effective_sent_row(company_name: str, website_url: str = "") -> dict | None:
+    """sent.csv から該当行（effective status 付き）を返す。"""
+    nu = _normalize_website_url(website_url)
+    for row in _load_all_sent_csv_rows():
+        row_url = _normalize_website_url(row.get("website_url", ""))
+        if row.get("company_name") == company_name or (
+            nu and row_url and (nu == row_url or nu in row_url or row_url in nu)
+        ):
+            enriched = dict(row)
+            enriched["effective_status"] = get_effective_sent_status(
+                company_name, website_url or row.get("website_url", "")
+            )
+            return enriched
+    return None
 
 
 def _load_permanent_skip_rows() -> list[dict]:
@@ -737,6 +862,7 @@ def _company_match_key(company: dict) -> str:
 
 
 def _ensure_failure_cooldown_index() -> None:
+    """Ensure mutable operational current-state cooldown index exists."""
     _ensure_dir()
     if not FAILURE_COOLDOWN_INDEX.exists():
         with FAILURE_COOLDOWN_INDEX.open("w", newline="", encoding="utf-8") as f:
@@ -793,7 +919,8 @@ def is_in_failure_cooldown(company: dict) -> tuple[bool, str]:
 
 def record_failure_cooldown(company: dict, reason: str) -> bool:
     """
-    失敗をクールダウン索引に記録する。
+    失敗を mutable operational current-state cooldown 索引に記録する。
+    Immutable history is recorded separately in failure_events.csv.
     Returns:
         error.csv に追記してよいか（クールダウン開始時のみ True）
     """
@@ -836,6 +963,126 @@ def record_failure_cooldown(company: dict, reason: str) -> bool:
         }
     _write_failure_cooldown_rows(rows)
     return append_error
+
+
+def _ensure_failure_event_log() -> None:
+    _ensure_dir()
+    if not FAILURE_EVENT_LOG.exists():
+        with FAILURE_EVENT_LOG.open("w", newline="", encoding="utf-8") as f:
+            csv.DictWriter(f, fieldnames=_FAILURE_EVENT_HEADERS).writeheader()
+
+
+def append_failure_event(
+    company: dict,
+    *,
+    event_class: str,
+    reason: str,
+    source_execution: str,
+    attempted: bool,
+    submit_clicked: bool,
+    post_observed: bool,
+    confirmed_sent: bool = False,
+    cooldown_until: str = "",
+    evidence_reference: str = "",
+    event_identity: str = "",
+    correction_of: str = "",
+    timestamp: str = "",
+) -> tuple[bool, str]:
+    """Append one immutable failure/safety event; dedupe by execution identity."""
+    _ensure_failure_event_log()
+    domain = (company.get("domain") or "").strip().lower()
+    website_url = (company.get("website_url") or "").strip()
+    if not domain and website_url:
+        from urllib.parse import urlparse
+        domain = (urlparse(website_url).hostname or "").lower().removeprefix("www.")
+    identity = event_identity or "|".join((
+        source_execution, domain, event_class, reason, evidence_reference,
+    ))
+    event_id = hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24]
+    with FAILURE_EVENT_LOG.open("r", newline="", encoding="utf-8") as f:
+        if any((row.get("event_id") or "") == event_id for row in csv.DictReader(f)):
+            return False, event_id
+    row = {
+        "event_id": event_id,
+        "timestamp": timestamp or datetime.now(_VAULT_TZ).isoformat(timespec="seconds"),
+        "company": company.get("company_name", ""),
+        "domain": domain,
+        "website_url": website_url,
+        "place_id": company.get("place_id", "") or "",
+        "event_class": event_class,
+        "reason": reason,
+        "category": reason_to_category(reason),
+        "source_execution": source_execution,
+        "attempted": str(bool(attempted)).lower(),
+        "submit_clicked": str(bool(submit_clicked)).lower(),
+        "post_observed": str(bool(post_observed)).lower(),
+        "confirmed_sent": str(bool(confirmed_sent)).lower(),
+        "cooldown_until": cooldown_until,
+        "evidence_reference": evidence_reference,
+        "correction_of": correction_of,
+    }
+    with FAILURE_EVENT_LOG.open("a", newline="", encoding="utf-8") as f:
+        csv.DictWriter(f, fieldnames=_FAILURE_EVENT_HEADERS).writerow(row)
+    return True, event_id
+
+
+def load_failure_events(*, domain: str = "") -> list[dict]:
+    _ensure_failure_event_log()
+    with FAILURE_EVENT_LOG.open("r", newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    normalized = domain.strip().lower().removeprefix("www.")
+    return [r for r in rows if not normalized or (r.get("domain") or "") == normalized]
+
+
+def append_failure_status_correction(
+    company: dict,
+    *,
+    original_status: str,
+    corrected_status: str,
+    reason: str,
+    evidence_reference: str,
+    source_execution: str,
+) -> tuple[bool, str]:
+    """Append an authorized classification correction without rewriting history."""
+    _ensure_dir()
+    if not FAILURE_STATUS_CORRECTIONS.exists():
+        with FAILURE_STATUS_CORRECTIONS.open("w", newline="", encoding="utf-8") as f:
+            csv.DictWriter(f, fieldnames=_FAILURE_STATUS_CORRECTION_HEADERS).writeheader()
+    domain = (company.get("domain") or "").strip().lower().removeprefix("www.")
+    identity = "|".join((domain, original_status, corrected_status, evidence_reference))
+    correction_id = hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24]
+    with FAILURE_STATUS_CORRECTIONS.open("r", newline="", encoding="utf-8") as f:
+        if any((r.get("correction_id") or "") == correction_id for r in csv.DictReader(f)):
+            return False, correction_id
+    row = {
+        "correction_id": correction_id,
+        "corrected_at": datetime.now(_VAULT_TZ).isoformat(timespec="seconds"),
+        "company": company.get("company_name", ""),
+        "domain": domain,
+        "original_status": original_status,
+        "corrected_status": corrected_status,
+        "reason": reason,
+        "evidence_reference": evidence_reference,
+        "source_execution": source_execution,
+    }
+    with FAILURE_STATUS_CORRECTIONS.open("a", newline="", encoding="utf-8") as f:
+        csv.DictWriter(f, fieldnames=_FAILURE_STATUS_CORRECTION_HEADERS).writerow(row)
+    return True, correction_id
+
+
+def get_effective_failure_status(domain: str, default: str = "") -> str:
+    """Return latest append-only correction, otherwise latest ledger event class."""
+    normalized = domain.strip().lower().removeprefix("www.")
+    latest = default
+    if FAILURE_STATUS_CORRECTIONS.exists():
+        with FAILURE_STATUS_CORRECTIONS.open("r", newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                if (row.get("domain") or "") == normalized:
+                    latest = row.get("corrected_status") or latest
+    if latest != default:
+        return latest
+    events = load_failure_events(domain=normalized)
+    return (events[-1].get("event_class") or default) if events else default
 
 
 def seed_failure_cooldown_from_error_csv(csv_path: Path | None = None) -> int:
@@ -1052,13 +1299,32 @@ def log_result(
     extra = extra or {}
     _ensure_dir()
 
+    if status != "sent" and extra.get("event_identity"):
+        event_class = str(extra.get("event_class") or (
+            "SAFETY_BLOCKED" if status == "pending" else "FAILED"
+        ))
+        append_failure_event(
+            company,
+            event_class=event_class,
+            reason=str(extra.get("detail", extra.get("reason", ""))),
+            source_execution=str(extra.get("source_execution") or "runtime"),
+            attempted=bool(extra.get("attempted", False)),
+            submit_clicked=bool(extra.get("submit_clicked", False)),
+            post_observed=bool(extra.get("post_observed", False)),
+            confirmed_sent=False,
+            cooldown_until=str(extra.get("cooldown_until") or ""),
+            evidence_reference=str(extra.get("evidence_reference") or ""),
+            event_identity=str(extra.get("event_identity")),
+        )
+
     log_path = _daily_log()
     _init_daily_log(log_path)
 
     if status == "sent":
         _append_to_section(log_path, "## ✅ 送信済み", _sent_block(company, extra))
         _append_sent_index(company["company_name"], company.get("website_url", ""))
-        append_sent_csv_row(company, extra)
+        if not extra.get("_skip_sent_csv_append"):
+            append_sent_csv_row(company, extra)
         clear_failure_cooldown(company)
 
     elif status == "pending":
@@ -1073,29 +1339,24 @@ def log_result(
 
 def is_already_sent(company_name: str, website_url: str) -> bool:
     """
-    同一企業への送信が RESEND_INTERVAL_DAYS 以内にあるか確認する。
+    effective status が CONFIRMED_SENT のみ duplicate lock。
+    CONFIRMATION_REACHED / FAILED / UNKNOWN は自動再送をブロックしない。
     """
-    _ensure_sent_index()
-    if not _SENT_INDEX.exists():
+    from submission_state import should_block_duplicate_send
+
+    eff = get_effective_sent_status(company_name, website_url)
+    if not should_block_duplicate_send(eff):
         return False
 
+    sent_row = get_effective_sent_row(company_name, website_url)
+    if not sent_row:
+        return True
+
+    sent_date = _parse_row_date(sent_row)
+    if sent_date is None:
+        return True
     cutoff = vault_today() - timedelta(days=RESEND_INTERVAL_DAYS)
-
-    with _SENT_INDEX.open("r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            try:
-                sent_date = date.fromisoformat(row["date"])
-            except (ValueError, KeyError):
-                continue
-            if sent_date < cutoff:
-                continue
-            if row.get("company_name") == company_name:
-                return True
-            if website_url and website_url.rstrip("/") in row.get("website_url", ""):
-                return True
-
-    return False
+    return sent_date >= cutoff
 
 
 def get_stats() -> dict:

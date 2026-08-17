@@ -547,6 +547,27 @@ async def _scan_anchor_links_for_inquiry_form(
         if not href or href.startswith(("mailto:", "tel:", "javascript:", "#")):
             continue
         abs_url = _normalize_url(base_url, href)
+
+        # Do not treat a link back to the current document as a recovered
+        # inquiry-form destination. The current page is evaluated separately
+        # by the normal base-page/form checks. Keeping self-links here can
+        # prematurely stop discovery before a real nested form URL
+        # (e.g. /reserve/) is inspected.
+        try:
+            _base_cmp = urlparse(base_url)
+            _abs_cmp = urlparse(abs_url)
+            _same_document = (
+                _base_cmp.scheme.lower() == _abs_cmp.scheme.lower()
+                and _base_cmp.netloc.lower() == _abs_cmp.netloc.lower()
+                and _base_cmp.path.rstrip("/") == _abs_cmp.path.rstrip("/")
+                and _base_cmp.query == _abs_cmp.query
+            )
+        except Exception:
+            _same_document = abs_url.rstrip("/") == base_url.rstrip("/")
+
+        if _same_document:
+            continue
+
         if is_file_download_url(abs_url):
             continue
         if is_external_booking_only_url(abs_url):
@@ -626,6 +647,121 @@ async def _scan_anchor_links_for_inquiry_form(
             return abs_url
     return None
 
+
+
+async def recover_form_url_on_live_page(
+    page,
+    base_url: str,
+    *,
+    max_link_follows: int = 6,
+    max_iframe_follows: int = 3,
+) -> str | None:
+    """
+    Recover an inquiry form URL using the existing live Playwright page.
+
+    Intended for resolver recovery only:
+      resolver failure
+        -> anchor inquiry scan
+        -> iframe inquiry scan
+        -> common contact paths
+
+    Does not create a browser/context.
+    Does not submit forms.
+    """
+    if not base_url:
+        return None
+
+    try:
+        parsed = urlparse(base_url)
+        if not parsed.scheme or not parsed.netloc:
+            return None
+
+        origin = f"{parsed.scheme}://{parsed.netloc}"
+
+        rejected_counter = [0]
+        external_booking_counter = [0]
+
+        # Recovery gets its own small navigation budget.
+        budget = NavigationBudget(
+            max_navigations=max(
+                max_link_follows + max_iframe_follows + 4,
+                8,
+            ),
+            deadline=time.monotonic() + min(
+                FORM_FIND_TOTAL_TIMEOUT_SEC,
+                30,
+            ),
+        )
+
+        # Always restore/open the supplied starting URL first.
+        if not await _goto_settled(page, base_url, budget=budget):
+            return None
+
+        # 1. Inquiry/contact links on current page.
+        recovered = await _scan_anchor_links_for_inquiry_form(
+            page,
+            base_url,
+            rejected_counter,
+            external_booking_counter,
+            budget,
+            max_follows=max_link_follows,
+            chain_mode=False,
+        )
+        if recovered:
+            return recovered
+
+        # Anchor scan may navigate away. Restore before iframe scan.
+        if not budget.exhausted:
+            await _goto_settled(page, base_url, budget=budget)
+
+        # 2. Embedded inquiry forms.
+        recovered = await _scan_iframe_sources_for_inquiry_form(
+            page,
+            base_url,
+            rejected_counter,
+            external_booking_counter,
+            budget,
+            max_follows=max_iframe_follows,
+        )
+        if recovered:
+            return recovered
+
+        # 3. Common same-origin inquiry paths.
+        if not budget.exhausted:
+            recovered = await _try_contact_paths_on_origin(
+                page,
+                origin,
+                rejected_counter,
+                budget,
+            )
+
+            # Recovery must actually move us to a different document.
+            # Do not "recover" back to the same supplied URL.
+            if recovered:
+                try:
+                    base_cmp = urlparse(base_url)
+                    rec_cmp = urlparse(recovered)
+
+                    same_document = (
+                        base_cmp.scheme.lower() == rec_cmp.scheme.lower()
+                        and base_cmp.netloc.lower() == rec_cmp.netloc.lower()
+                        and base_cmp.path.rstrip("/") == rec_cmp.path.rstrip("/")
+                        and base_cmp.query == rec_cmp.query
+                    )
+                except Exception:
+                    same_document = (
+                        recovered.rstrip("/") == base_url.rstrip("/")
+                    )
+
+                if not same_document:
+                    return recovered
+
+        return None
+
+    except Exception:
+        # Recovery is fail-closed. Existing resolver classification
+        # remains authoritative when recovery cannot complete.
+        return None
 
 async def _try_chain_site_fallback(
     page,

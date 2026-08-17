@@ -98,9 +98,9 @@
     .shell {
       position: relative;
       z-index: 1;
-      max-width: 1180px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 32px 24px 64px;
+      padding: 32px 20px 64px;
     }
 
     /* ── Header ── */
@@ -191,8 +191,8 @@
     }
     .cursor-tip strong { color: var(--text); font-weight: 600; }
 
-    /* ── Tab bar ── */
-    .tab-bar {
+    /* ── Board switcher ── */
+    .board-switcher {
       display: flex;
       gap: 4px;
       margin-bottom: 24px;
@@ -207,13 +207,13 @@
       scrollbar-width: none;
       animation: rise 0.7s 0.15s ease both;
     }
-    .tab-bar::-webkit-scrollbar { display: none; }
-    .tab-bar button {
+    .board-switcher::-webkit-scrollbar { display: none; }
+    .board-switcher button {
       flex-shrink: 0;
-      padding: 10px 16px;
+      padding: 10px 18px;
       border-radius: var(--radius-sm);
       font-family: var(--font-body);
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 600;
       color: var(--muted);
       background: transparent;
@@ -222,35 +222,195 @@
       transition: color 0.2s, background 0.2s, box-shadow 0.2s;
       white-space: nowrap;
     }
-    .tab-bar button:hover {
+    .board-switcher button:hover {
       color: var(--text);
       background: rgba(255, 255, 255, 0.05);
     }
-    .tab-bar button.is-active,
-    .tab-bar button[aria-selected="true"] {
+    .board-switcher button.is-active,
+    .board-switcher button[aria-selected="true"] {
       color: var(--text);
       background: linear-gradient(135deg, rgba(45, 111, 212, 0.35), rgba(45, 111, 212, 0.15));
       box-shadow: 0 0 0 1px rgba(45, 111, 212, 0.4);
     }
-    .tab-bar button:focus-visible {
+    .board-switcher button:focus-visible {
       outline: 2px solid var(--accent-bright);
       outline-offset: 2px;
     }
 
-    /* ── Tab panels ── */
-    .tab-content { position: relative; min-height: 240px; }
-    .tab-panel {
+    /* ── Board panels ── */
+    .board-content { position: relative; min-height: 400px; }
+    .board-panel {
       display: none;
       margin-bottom: 36px;
     }
-    .tab-panel.active {
+    .board-panel.active {
       display: block;
-      animation: tabIn 0.35s ease both;
+      animation: boardIn 0.35s ease both;
     }
-    @keyframes tabIn {
+    @keyframes boardIn {
       from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* ── Kanban board ── */
+    .kanban-board {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      align-items: flex-start;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--muted-dim) transparent;
+    }
+    .kanban-board::-webkit-scrollbar { height: 6px; }
+    .kanban-board::-webkit-scrollbar-thumb {
+      background: var(--muted-dim);
+      border-radius: 3px;
+    }
+    .kanban-column {
+      flex: 0 0 300px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .kanban-column--wide { flex: 0 0 360px; }
+    .kanban-column--highlight .kanban-col-header {
+      border-color: rgba(94, 234, 212, 0.35);
+      background: var(--cyan-dim);
+    }
+    .kanban-col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(45, 111, 212, 0.12);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .kanban-col-title {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .kanban-count {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+    }
+    .kanban-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .kanban-card {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .kanban-card:hover {
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow);
+    }
+    .kanban-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .kanban-card--highlight {
+      border-color: rgba(94, 234, 212, 0.35);
+      box-shadow: 0 0 24px rgba(94, 234, 212, 0.08);
+    }
+    .kanban-card--success {
+      border-color: rgba(52, 211, 153, 0.35);
+      background: var(--success-dim);
+    }
+    .kanban-card--wide { min-width: 0; }
+    .kanban-card--scroll {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    .kanban-card--scroll .card { overflow-x: auto; }
+    .kanban-card.has-alert {
+      border-color: rgba(248, 113, 113, 0.45);
+    }
+    .kanban-card.is-off { opacity: 0.72; }
+    .kanban-status-value {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .kanban-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .kanban-card-head .auto-name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .kanban-card-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .kanban-card-meta code {
+      font-size: 0.72rem;
+      word-break: break-all;
+    }
+    .kanban-card .kpis {
+      grid-template-columns: 1fr 1fr;
+    }
+    .kanban-card .kpi { padding: 12px 14px; }
+    .kanban-card .kpi .value { font-size: 1.3rem; }
+    .kanban-ref-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .kanban-ref-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .kanban-ref-item:first-child { padding-top: 0; }
+    .kanban-ref-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted-dim);
+      margin-bottom: 6px;
+    }
+    .kanban-card .path-row code {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .folder-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* legacy tab aliases for patch compat */
+    .tab-bar { display: none; }
+    .tab-content { display: contents; }
+    .tab-panel { display: contents; }
 
     /* ── Sections ── */
     section { margin-bottom: 0; }
@@ -548,11 +708,16 @@
       transform: translateY(0);
     }
 
+    @media (max-width: 768px) {
+      .kanban-board { flex-direction: column; overflow-x: visible; }
+      .kanban-column, .kanban-column--wide { flex: 1 1 auto; width: 100%; }
+      .kanban-card--scroll { max-height: none; }
+    }
     @media (max-width: 640px) {
       .shell { padding: 20px 16px 48px; }
       .hero { grid-template-columns: 1fr; }
       .hero-meta { text-align: left; padding-top: 0; }
-      .tab-bar button { padding: 9px 12px; font-size: 0.78rem; }
+      .board-switcher button { padding: 9px 12px; font-size: 0.78rem; }
       .kpis { grid-template-columns: 1fr 1fr; }
       td:first-child { white-space: normal; }
     }
@@ -1044,40 +1209,116 @@
       パスは <strong>コピー</strong> ボタンで取得し、Cursor の <span class="mono">Cmd+P</span>（クイックオープン）に貼る。ブラウザが <span class="mono">file://</span> のときは絶対パス、ローカルサーバ経由のときは Vault 相対パスになる。
     </div>
 
-    <nav class="tab-bar" role="tablist" aria-label="ダッシュボード項目">
-      <button type="button" role="tab" id="tab-ari-daily" data-tab="ari-daily" aria-selected="true" aria-controls="ari-daily">日次運用</button>
-      <button type="button" role="tab" id="tab-metrics" data-tab="metrics" aria-selected="false" aria-controls="metrics">指標</button>
-      <button type="button" role="tab" id="tab-automation" data-tab="automation" aria-selected="false" aria-controls="automation">自動運用</button>
-      <button type="button" role="tab" id="tab-entry" data-tab="entry" aria-selected="false" aria-controls="entry">入口</button>
-      <button type="button" role="tab" id="tab-folders" data-tab="folders" aria-selected="false" aria-controls="folders">フォルダ</button>
-      <button type="button" role="tab" id="tab-urls" data-tab="urls" aria-selected="false" aria-controls="urls">GEO URL</button>
-      <button type="button" role="tab" id="tab-projects" data-tab="projects" aria-selected="false" aria-controls="projects">深掘り</button>
-      <button type="button" role="tab" id="tab-fitness-crawler" data-tab="fitness-crawler" aria-selected="false" aria-controls="fitness-crawler">パーソナルジムクローラー</button>
-      <button type="button" role="tab" id="tab-monthly" data-tab="monthly" aria-selected="false" aria-controls="monthly">月次</button>
-      <button type="button" role="tab" id="tab-expo-match" data-tab="expo-match" aria-selected="false" aria-controls="expo-match">展示会×名指し</button>
+    <nav class="board-switcher" role="tablist" aria-label="運用ボード">
+      <button type="button" role="tab" id="tab-board-daily" data-board="ari-daily" aria-selected="true" aria-controls="ari-daily">日次運用</button>
+      <button type="button" role="tab" id="tab-board-sales" data-board="board-sales" aria-selected="false" aria-controls="board-sales">営業・GEO</button>
+      <button type="button" role="tab" id="tab-board-automation" data-board="board-automation" aria-selected="false" aria-controls="board-automation">自動化</button>
+      <button type="button" role="tab" id="tab-board-reference" data-board="board-reference" aria-selected="false" aria-controls="board-reference">参照</button>
     </nav>
 
-    <div class="tab-content">
+    <div class="board-content">
 <!-- OPS_DASHBOARD_ARI_BEGIN -->
 __ARI_SECTION__
 <!-- OPS_DASHBOARD_ARI_END -->
-    <section id="metrics" class="tab-panel" role="tabpanel" aria-labelledby="tab-metrics" hidden>
+
+    <div id="board-sales" class="board-panel" role="tabpanel" aria-labelledby="tab-board-sales" hidden>
       <div class="section-head">
-        <h2>form-auto-sender 指標</h2>
-        <span class="section-tag">自動更新</span>
+        <h2>営業 · GEO · 展示会</h2>
+        <span class="section-tag">form-auto-sender / クローラー / JV</span>
       </div>
+      <div class="kanban-board">
+        <div class="kanban-column kanban-column--wide">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">指標</span>
+            <span class="kanban-count">fas</span>
+          </div>
+          <div class="kanban-cards">
+            <div id="metrics" class="kanban-card">
+              <h3>form-auto-sender 指標</h3>
 <!-- OPS_DASHBOARD_METRICS_BEGIN -->
 __METRICS_BLOCK__
 <!-- OPS_DASHBOARD_METRICS_END -->
-      <div class="path-row" style="margin-top:12px">
-        <code id="p-error-md"></code>
-        <button type="button" class="copy" data-copy-target="p-error-md">コピー</button>
+              <div class="path-row" style="margin-top:12px">
+                <code id="p-error-md"></code>
+                <button type="button" class="copy" data-copy-target="p-error-md">コピー</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-column kanban-column--wide">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">クローラー</span>
+            <span class="kanban-count">23区</span>
+          </div>
+          <div class="kanban-cards">
+<!-- OPS_DASHBOARD_FITNESS_BEGIN -->
+__FITNESS_SECTION__
+<!-- OPS_DASHBOARD_FITNESS_END -->
+          </div>
+        </div>
+        <div class="kanban-column kanban-column--wide">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">展示会</span>
+            <span class="kanban-count">JV</span>
+          </div>
+          <div class="kanban-cards">
+<!-- OPS_DASHBOARD_EXPO_BEGIN -->
+__EXPO_SECTION__
+<!-- OPS_DASHBOARD_EXPO_END -->
+          </div>
+        </div>
+        <div class="kanban-column">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">パイプライン</span>
+            <span class="kanban-count">L0</span>
+          </div>
+          <div class="kanban-cards">
+            <div class="kanban-card">
+              <h3>名指し営業 · 展示会</h3>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">展示会マッチング</div>
+                <div class="path-row">
+                  <code id="p-expo-match-md"></code>
+                  <button type="button" class="copy" data-copy-target="p-expo-match-md">コピー</button>
+                </div>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">展示会一覧</div>
+                <div class="path-row">
+                  <code id="p-expo-list-md"></code>
+                  <button type="button" class="copy" data-copy-target="p-expo-list-md">コピー</button>
+                </div>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">MW夏 対象企業</div>
+                <div class="path-row">
+                  <code id="p-expo-mw-summer-md"></code>
+                  <button type="button" class="copy" data-copy-target="p-expo-mw-summer-md">コピー</button>
+                </div>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">ドラッグストアショー JV</div>
+                <div class="path-row">
+                  <code id="p-expo-drugstore-md"></code>
+                  <button type="button" class="copy" data-copy-target="p-expo-drugstore-md">コピー</button>
+                </div>
+              </div>
+            </div>
+            <div class="kanban-card">
+              <h3>North Star · Tier1</h3>
+              <p class="hint" style="margin:0 0 10px">MedicalForce · B4A · ストランザ · GMOビューティー</p>
+              <div class="path-row">
+                <code>40_Sales/名指し営業リスト.md</code>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section id="automation" class="tab-panel" role="tabpanel" aria-labelledby="tab-automation" hidden>
+    <div id="board-automation" class="board-panel" role="tabpanel" aria-labelledby="tab-board-automation" hidden>
       <div class="section-head">
-        <h2>自動運用一覧</h2>
+        <h2>自動運用</h2>
         <span class="section-tag">launchd / cron</span>
       </div>
       <p class="auto-note">
@@ -1089,184 +1330,166 @@ __METRICS_BLOCK__
         <button type="button" id="auto-sync-cmd">sync-defaults コピー</button>
         <button type="button" id="auto-enforce-cmd">enforce（即時停止）コピー</button>
       </div>
-      <div id="automation-root" style="margin-top:16px"></div>
-    </section>
+      <section id="automation">
+        <div class="kanban-board" id="automation-root" style="margin-top:16px"></div>
+      </section>
+    </div>
 
-    <section id="entry" class="tab-panel" role="tabpanel" aria-labelledby="tab-entry" hidden>
+    <div id="board-reference" class="board-panel" role="tabpanel" aria-labelledby="tab-board-reference" hidden>
       <div class="section-head">
-        <h2>入口</h2>
-        <span class="section-tag">毎日触る場所</span>
+        <h2>参照 · ショートカット</h2>
+        <span class="section-tag">Vault 入口</span>
       </div>
-      <div class="card">
-        <table>
-          <thead>
-            <tr><th>用途</th><th>パス / メモ</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>迷ったら投入</td>
-              <td><code>00_INBOX/</code>（未作成なら新規フォルダ）</td>
-            </tr>
-            <tr>
-              <td>今週の振り返り</td>
-              <td>
+      <div class="kanban-board">
+        <div class="kanban-column">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">入口</span>
+            <span class="kanban-count">daily</span>
+          </div>
+          <div class="kanban-cards">
+            <div id="entry" class="kanban-card">
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">迷ったら投入</div>
+                <code>00_INBOX/</code>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">今週の振り返り</div>
                 <div class="path-row">
                   <code id="p-weekly"></code>
                   <button type="button" class="copy" data-copy-target="p-weekly">コピー</button>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>AI・Vault ルール</td>
-              <td>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">AI・Vault ルール</div>
                 <div class="path-row">
                   <code id="p-claude"></code>
                   <button type="button" class="copy" data-copy-target="p-claude">コピー</button>
                 </div>
                 <span class="hint">サブプロジェクト配下の同名 <code>CLAUDE.md</code> と混同しないこと</span>
-              </td>
-            </tr>
-            <tr>
-              <td>ナレッジ目次</td>
-              <td>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">ナレッジ目次</div>
                 <div class="path-row">
                   <code id="p-index"></code>
                   <button type="button" class="copy" data-copy-target="p-index">コピー</button>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="folders" class="tab-panel" role="tabpanel" aria-labelledby="tab-folders" hidden>
-      <div class="section-head">
-        <h2>フォルダ別ショートカット</h2>
-      </div>
-      <div class="card">
-        <table>
-          <thead>
-            <tr><th>領域</th><th>パス</th></tr>
-          </thead>
-          <tbody id="folder-body"></tbody>
-        </table>
-      </div>
-      <p class="hint" style="margin-top:12px">各行のコピーは Cursor の <span class="mono">Cmd+P</span>（クイックオープン）に貼る想定。フォルダを開きたい場合はパスの末尾を調整。</p>
-    </section>
-
-    <section id="urls" class="tab-panel" role="tabpanel" aria-labelledby="tab-urls" hidden>
-      <div class="section-head">
-        <h2>GEO / 営業</h2>
-        <span class="section-tag">固定 URL</span>
-      </div>
-      <div class="card">
-        <table>
-          <thead>
-            <tr><th>名称</th><th>URL</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>GEO サービス</td><td><a class="ext-link" href="https://www.coaretail.com/geo" target="_blank" rel="noopener">https://www.coaretail.com/geo</a></td></tr>
-            <tr><td>無料診断（予約）</td><td><a class="ext-link" href="https://www.coaretail.com/geo_schedule" target="_blank" rel="noopener">https://www.coaretail.com/geo_schedule</a></td></tr>
-            <tr><td>AI 露出診断ツール</td><td><a class="ext-link" href="https://aiscan.coaretail.com" target="_blank" rel="noopener">https://aiscan.coaretail.com</a></td></tr>
-            <tr><td>実績サイト例（Bar SECRET）</td><td><a class="ext-link" href="https://www.barsecret.tokyo" target="_blank" rel="noopener">https://www.barsecret.tokyo</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="projects" class="tab-panel" role="tabpanel" aria-labelledby="tab-projects" hidden>
-      <div class="section-head">
-        <h2>プロジェクト深掘り</h2>
-      </div>
-      <div class="card">
-        <table>
-          <thead>
-            <tr><th>案件・ツール</th><th>パス</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>form-auto-sender</td>
-              <td>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-column">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">フォルダ</span>
+            <span class="kanban-count">7</span>
+          </div>
+          <div class="kanban-cards">
+            <div id="folders" class="kanban-card">
+              <div id="folder-body" class="folder-list"></div>
+              <p class="hint" style="margin-top:10px">Cmd+P に貼る想定</p>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-column">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">GEO URL</span>
+            <span class="kanban-count">4</span>
+          </div>
+          <div class="kanban-cards">
+            <div id="urls" class="kanban-card">
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">GEO サービス</div>
+                <a class="ext-link" href="https://www.coaretail.com/geo" target="_blank" rel="noopener">coaretail.com/geo</a>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">無料診断（予約）</div>
+                <a class="ext-link" href="https://www.coaretail.com/geo_schedule" target="_blank" rel="noopener">geo_schedule</a>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">AI 露出診断</div>
+                <a class="ext-link" href="https://aiscan.coaretail.com" target="_blank" rel="noopener">aiscan.coaretail.com</a>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">Bar SECRET 実績</div>
+                <a class="ext-link" href="https://www.barsecret.tokyo" target="_blank" rel="noopener">barsecret.tokyo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-column kanban-column--wide">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">深掘り</span>
+            <span class="kanban-count">tools</span>
+          </div>
+          <div class="kanban-cards">
+            <div id="projects" class="kanban-card">
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">form-auto-sender</div>
                 <div class="path-row">
                   <code id="p-fas-readme"></code>
                   <button type="button" class="copy" data-copy-target="p-fas-readme">コピー</button>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>送信エラー一覧（Markdown）</td>
-              <td>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">送信エラー一覧</div>
                 <div class="path-row">
                   <code id="p-fas-errors"></code>
                   <button type="button" class="copy" data-copy-target="p-fas-errors">コピー</button>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>ダッシュボード再生成スクリプト</td>
-              <td>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">ダッシュボード再生成</div>
                 <div class="path-row">
                   <code id="p-fas-dashboard"></code>
                   <button type="button" class="copy" data-copy-target="p-fas-dashboard">コピー</button>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>パーソナルジムクローラー（FIT Search）</td>
-              <td>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">パーソナルジムクローラー</div>
                 <div class="path-row">
                   <code id="p-reservation-crawler-dir"></code>
                   <button type="button" class="copy" data-copy-target="p-reservation-crawler-dir">コピー</button>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>日次フル診断スケジューラ</td>
-              <td>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">日次フル診断</div>
                 <div class="path-row">
                   <code id="p-daily-ward"></code>
                   <button type="button" class="copy" data-copy-target="p-daily-ward">コピー</button>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Agent Readiness Index 診断</td>
-              <td>
+              </div>
+              <div class="kanban-ref-item">
+                <div class="kanban-ref-label">Agent Readiness Index</div>
                 <div class="path-row">
                   <code id="p-ari-tool"></code>
                   <button type="button" class="copy" data-copy-target="p-ari-tool">コピー</button>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-column">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">月次</span>
+            <span class="kanban-count">5</span>
+          </div>
+          <div class="kanban-cards">
+            <div id="monthly" class="kanban-card">
+              <h3>月次チェック</h3>
+              <span class="section-tag" style="display:inline-block;margin-bottom:12px">CLAUDE.md 07</span>
+              <ul class="remind" style="grid-template-columns:1fr">
+                <li>矛盾（GEO 数値・料金）</li>
+                <li>抜けトピック</li>
+                <li>出典不明の主張</li>
+                <li>3 ヶ月以上未更新の wiki</li>
+                <li><code>00_INBOX</code> 滞留</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
 
-<!-- OPS_DASHBOARD_FITNESS_BEGIN -->
-__FITNESS_SECTION__
-<!-- OPS_DASHBOARD_FITNESS_END -->
-
-    <section id="monthly" class="tab-panel" role="tabpanel" aria-labelledby="tab-monthly" hidden>
-      <div class="section-head">
-        <h2>月次チェック</h2>
-        <span class="section-tag">CLAUDE.md 07</span>
-      </div>
-      <ul class="remind">
-        <li>矛盾（GEO 数値・料金）</li>
-        <li>抜けトピック</li>
-        <li>出典不明の主張</li>
-        <li>3 ヶ月以上未更新の wiki</li>
-        <li><code>00_INBOX</code> 滞留</li>
-      </ul>
-    </section>
-
-<!-- OPS_DASHBOARD_EXPO_BEGIN -->
-__EXPO_SECTION__
-<!-- OPS_DASHBOARD_EXPO_END -->
-
-    </div><!-- /.tab-content -->
+    </div><!-- /.board-content -->
 
     <footer>
       数値の最終生成: <strong>__FOOTER_UPDATED__</strong> · <code>build_ops_dashboard.py</code> が <span class="mono">70_outputs/運用ダッシュボード.html</span> を上書き。
@@ -1279,33 +1502,51 @@ __EXPO_SECTION__
 
   <script>
     (function () {
-      var TAB_IDS = ["ari-daily", "metrics", "automation", "entry", "folders", "urls", "projects", "fitness-crawler", "monthly", "expo-match"];
+      var BOARD_IDS = ["ari-daily", "board-sales", "board-automation", "board-reference"];
+      var BOARD_HASH_ALIASES = {
+        "daily": "ari-daily",
+        "sales": "board-sales",
+        "automation": "board-automation",
+        "reference": "board-reference",
+        "board-daily": "ari-daily",
+        "metrics": "board-sales",
+        "fitness-crawler": "board-sales",
+        "expo-match": "board-sales"
+      };
 
-      function initTabs() {
-        var tabs = document.querySelectorAll(".tab-bar [role=tab]");
-        var panels = document.querySelectorAll(".tab-panel");
+      function resolveBoardId(hash) {
+        if (!hash) return "ari-daily";
+        if (BOARD_HASH_ALIASES[hash]) return BOARD_HASH_ALIASES[hash];
+        if (BOARD_IDS.indexOf(hash) !== -1) return hash;
+        return "ari-daily";
+      }
+
+      function initBoards() {
+        var tabs = document.querySelectorAll(".board-switcher [role=tab]");
+        var panels = document.querySelectorAll(".board-panel");
         if (!tabs.length || !panels.length) return;
 
-        function activate(tabId, updateHash) {
-          if (TAB_IDS.indexOf(tabId) === -1) tabId = "ari-daily";
+        function activate(boardId, updateHash) {
+          boardId = resolveBoardId(boardId);
           tabs.forEach(function (tab) {
-            var on = tab.getAttribute("data-tab") === tabId;
+            var on = tab.getAttribute("data-board") === boardId;
             tab.setAttribute("aria-selected", on ? "true" : "false");
             tab.classList.toggle("is-active", on);
           });
           panels.forEach(function (panel) {
-            var on = panel.id === tabId;
+            var on = panel.id === boardId;
             panel.classList.toggle("active", on);
             panel.hidden = !on;
           });
           if (updateHash !== false) {
-            try { history.replaceState(null, "", "#" + tabId); } catch (e) { location.hash = tabId; }
+            var shortHash = boardId === "ari-daily" ? "daily" : boardId.replace("board-", "");
+            try { history.replaceState(null, "", "#" + shortHash); } catch (e) { location.hash = shortHash; }
           }
         }
 
         tabs.forEach(function (tab) {
           tab.addEventListener("click", function () {
-            activate(tab.getAttribute("data-tab"));
+            activate(tab.getAttribute("data-board"));
           });
         });
 
@@ -1316,7 +1557,7 @@ __EXPO_SECTION__
         });
       }
 
-      initTabs();
+      initBoards();
 
       function vaultRootFromLocation() {
         var p = decodeURIComponent(window.location.pathname || "");
@@ -1535,14 +1776,16 @@ __EXPO_SECTION__
       ];
       var fb = document.getElementById("folder-body");
       folders.forEach(function (row, idx) {
-        var tr = document.createElement("tr");
+        var item = document.createElement("div");
+        item.className = "kanban-ref-item";
         var id = "p-folder-" + idx;
         var rel = row[1];
         var display = root ? root + "/" + rel : rel;
-        tr.innerHTML =
-          "<td>" + row[0] + "</td><td><div class=\"path-row\"><code id=\"" + id + "\"></code>" +
-          "<button type=\"button\" class=\"copy\" data-copy-target=\"" + id + "\">コピー</button></div></td>";
-        fb.appendChild(tr);
+        item.innerHTML =
+          "<div class=\"kanban-ref-label\">" + row[0] + "</div>" +
+          "<div class=\"path-row\"><code id=\"" + id + "\"></code>" +
+          "<button type=\"button\" class=\"copy\" data-copy-target=\"" + id + "\">コピー</button></div>";
+        fb.appendChild(item);
         var c = document.getElementById(id);
         if (c) {
           c.textContent = display;
@@ -1608,6 +1851,30 @@ __EXPO_SECTION__
         var verb = isOn(id) ? "pause" : "resume";
         return automationCmd(verb + " " + id);
       }
+      function autoColumnKey(item) {
+        if (item.alert || item.category === "attention") return "attention";
+        if (!isOn(item.id) || item.status === "stopped" || item.category === "stopped") return "stopped";
+        if (item.category === "weekly" || item.category === "buffer") return "weekly";
+        return "active";
+      }
+      function renderAutomationCard(item) {
+        var on = isOn(item.id);
+        var card = document.createElement("div");
+        card.className = "kanban-card" + (on ? "" : " is-off") + (item.alert ? " has-alert" : "");
+        var alertHtml = item.alert ? "<span class=\"auto-alert " + (item.status === "unconfirmed" ? "auto-alert--warn" : "auto-alert--error") + "\" title=\"" + item.alert.replace(/"/g, "&quot;") + "\">要対応</span>" : "";
+        var rt = AUTOMATION_RUNTIME && AUTOMATION_RUNTIME[item.id];
+        var rtLabel = runtimePaused(item.id) ? "停止中" : "稼働中";
+        var rtAt = rt && rt.updatedAt ? " · " + rt.updatedAt : "";
+        var runtimeBadge = "<span class=\"auto-runtime " + (runtimePaused(item.id) ? "auto-runtime--off" : "auto-runtime--on") + "\">" + rtLabel + rtAt + "</span>";
+        card.innerHTML =
+          "<div class=\"kanban-card-head\">" +
+            "<div><span class=\"auto-name\">" + item.name + "</span><br><span class=\"auto-schedule\">" + item.schedule + "</span></div>" +
+            "<button type=\"button\" class=\"auto-toggle\" role=\"switch\" aria-checked=\"" + (on ? "true" : "false") + "\" aria-label=\"" + item.name + "\" data-auto-id=\"" + item.id + "\"></button>" +
+          "</div>" +
+          runtimeBadge + alertHtml +
+          "<div class=\"kanban-card-meta\"><code>" + item.launchd + "</code><br>" + item.detail + "<br><code>" + item.path + "</code></div>";
+        return card;
+      }
       function renderAutomation() {
         var root = document.getElementById("automation-root");
         var summary = document.getElementById("auto-summary");
@@ -1620,29 +1887,25 @@ __EXPO_SECTION__
         if (summary) {
           summary.innerHTML = "稼働中: <strong class=\"count-on\">" + onCount + "</strong> / " + AUTOMATION_ITEMS.length + " 件 · 要対応: <strong class=\"count-err\">" + errCount + "</strong> 件 · <code>automation_state.json</code>";
         }
+        var columns = [
+          { key: "active", title: "稼働中" },
+          { key: "stopped", title: "停止中" },
+          { key: "attention", title: "要対応" },
+          { key: "weekly", title: "週次・Buffer" }
+        ];
         root.innerHTML = "";
-        Object.keys(AUTO_CATEGORIES).forEach(function (catKey) {
-          var items = AUTOMATION_ITEMS.filter(function (it) { return it.category === catKey; });
-          if (!items.length) return;
-          var cat = document.createElement("div");
-          cat.className = "auto-cat";
-          cat.innerHTML = "<h3 class=\"auto-cat-title\">" + AUTO_CATEGORIES[catKey] + "</h3>";
-          var list = document.createElement("div");
-          list.className = "auto-list";
+        columns.forEach(function (col) {
+          var items = AUTOMATION_ITEMS.filter(function (it) { return autoColumnKey(it) === col.key; });
+          var column = document.createElement("div");
+          column.className = "kanban-column";
+          column.innerHTML = "<div class=\"kanban-col-header\"><span class=\"kanban-col-title\">" + col.title + "</span><span class=\"kanban-count\">" + items.length + "</span></div>";
+          var cards = document.createElement("div");
+          cards.className = "kanban-cards";
           items.forEach(function (item) {
-            var on = isOn(item.id);
-            var row = document.createElement("div");
-            row.className = "auto-row" + (on ? "" : " is-off") + (item.alert ? " has-alert" : "");
-            var alertHtml = item.alert ? "<span class=\"auto-alert " + (item.status === "unconfirmed" ? "auto-alert--warn" : "auto-alert--error") + "\" title=\"" + item.alert.replace(/"/g, "&quot;") + "\">要対応</span>" : "";
-            var rt = AUTOMATION_RUNTIME && AUTOMATION_RUNTIME[item.id];
-            var rtLabel = runtimePaused(item.id) ? "停止中" : "稼働中";
-            var rtAt = rt && rt.updatedAt ? " · " + rt.updatedAt : "";
-            var runtimeBadge = "<span class=\"auto-runtime " + (runtimePaused(item.id) ? "auto-runtime--off" : "auto-runtime--on") + "\">" + rtLabel + rtAt + "</span>";
-            row.innerHTML = "<div class=\"auto-row-main\"><div class=\"auto-row-head\"><span class=\"auto-name\">" + item.name + "</span><span class=\"auto-schedule\">" + item.schedule + "</span>" + runtimeBadge + alertHtml + "</div><div class=\"auto-detail\"><code>" + item.launchd + "</code> · " + item.detail + "<br><code>" + item.path + "</code></div></div><button type=\"button\" class=\"auto-toggle\" role=\"switch\" aria-checked=\"" + (on ? "true" : "false") + "\" aria-label=\"" + item.name + "\" data-auto-id=\"" + item.id + "\"></button>";
-            list.appendChild(row);
+            cards.appendChild(renderAutomationCard(item));
           });
-          cat.appendChild(list);
-          root.appendChild(cat);
+          column.appendChild(cards);
+          root.appendChild(column);
         });
       }
       renderAutomation();

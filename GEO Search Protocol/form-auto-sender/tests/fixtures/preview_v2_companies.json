@@ -1,0 +1,40 @@
+[
+  {
+    "company_name": "デモ美容クリニック",
+    "website_url": "https://demo-clinic.example.jp",
+    "industry_name": "美容クリニック",
+    "area_name": "港区",
+    "crawler": {
+      "reservation_button": 0,
+      "has_reservation_url": false,
+      "faq": 5,
+      "schema_org": 8,
+      "local_business": 0,
+      "has_llms_txt": false,
+      "site_reachable": true,
+      "run_date": "2026-08-01"
+    }
+  },
+  {
+    "company_name": "デモパーソナルジム",
+    "website_url": "https://demo-gym.example.jp",
+    "industry_name": "パーソナルジム",
+    "area_name": "渋谷区",
+    "crawler": {
+      "reservation_button": 18,
+      "faq": 15,
+      "schema_org": 20,
+      "local_business": 14,
+      "has_llms_txt": true,
+      "site_reachable": true,
+      "run_date": "2026-08-01"
+    }
+  },
+  {
+    "company_name": "クローラー未登録サンプル",
+    "website_url": "https://unknown-domain-no-crawler.example",
+    "industry_name": "その他",
+    "area_name": "",
+    "crawler": null
+  }
+]

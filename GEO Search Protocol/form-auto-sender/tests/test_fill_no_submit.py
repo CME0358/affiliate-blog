@@ -58,7 +58,7 @@ class TestButtonClassification(unittest.TestCase):
 class TestSubmitForbiddenFillMode(unittest.TestCase):
     def test_submit_forbidden_blocks_click(self):
         set_submit_forbidden(True)
-        ok, reason = asyncio.get_event_loop().run_until_complete(_click_submit(None, {}))
+        ok, reason, _meta = asyncio.run(_click_submit(None, {}))
         self.assertFalse(ok)
         self.assertEqual(reason, "submit_forbidden_detect_only")
         set_submit_forbidden(False)

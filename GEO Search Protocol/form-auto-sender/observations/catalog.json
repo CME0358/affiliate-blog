@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "preview_teaser_total": 23,
+  "max_observations_per_message": 2,
+  "observations": [
+    {
+      "code": "OBS_BOOKING_PATH_PRESENT",
+      "display_priority": 10,
+      "severity": "info",
+      "check_item_id": "booking_path",
+      "check_status": "pass",
+      "source_evidence": {
+        "any_of": [
+          { "field": "reservation_button", "operator": ">=", "threshold": 12 },
+          { "field": "has_reservation_url", "operator": "==", "value": true }
+        ]
+      },
+      "qualification": "公開ページのHTML解析時点。予約システム連携の可否までは確認しません。",
+      "approved_copy": "公開ページ上で、予約・問い合わせ導線の痕跡を確認しました。"
+    },
+    {
+      "code": "OBS_BOOKING_PATH_WEAK",
+      "display_priority": 20,
+      "severity": "medium",
+      "check_item_id": "booking_path",
+      "check_status": "warn",
+      "source_evidence": {
+        "all_of": [
+          { "field": "reservation_button", "operator": "between", "min": 1, "max": 11 },
+          { "field": "has_reservation_url", "operator": "==", "value": false }
+        ]
+      },
+      "qualification": "公開ページのHTML解析時点。AIエージェントが辿れる導線かは完全版レポートで確認します。",
+      "approved_copy": "予約・問い合わせ導線はあるものの、AIが辿りやすい形には整理しきれていない可能性があります。"
+    },
+    {
+      "code": "OBS_BOOKING_PATH_MISSING",
+      "display_priority": 15,
+      "severity": "medium",
+      "check_item_id": "booking_path",
+      "check_status": "warn",
+      "source_evidence": {
+        "all_of": [
+          { "field": "reservation_button", "operator": "==", "threshold": 0 },
+          { "field": "has_reservation_url", "operator": "==", "value": false }
+        ]
+      },
+      "qualification": "公開ページのHTML解析時点。別ドメインの予約ページは検出されない場合があります。",
+      "approved_copy": "公開ページ上で、予約・問い合わせ導線を確認できませんでした。"
+    },
+    {
+      "code": "OBS_FAQ_STRUCTURE_WEAK",
+      "display_priority": 25,
+      "severity": "medium",
+      "check_item_id": "faq_structure",
+      "check_status": "warn",
+      "source_evidence": {
+        "field": "faq",
+        "operator": "<",
+        "threshold": 12
+      },
+      "qualification": "FAQPage schema の有無は完全版レポートで確認します。",
+      "approved_copy": "FAQ / よくある質問の構造化が弱く、AIが回答材料を拾いにくい状態です。"
+    },
+    {
+      "code": "OBS_FAQ_STRUCTURE_OK",
+      "display_priority": 26,
+      "severity": "info",
+      "check_item_id": "faq_structure",
+      "check_status": "pass",
+      "source_evidence": {
+        "field": "faq",
+        "operator": ">=",
+        "threshold": 12
+      },
+      "qualification": "公開ページのHTML解析時点。",
+      "approved_copy": "FAQ / よくある質問に関する情報を確認しました。"
+    },
+    {
+      "code": "OBS_SCHEMA_PARTIAL",
+      "display_priority": 30,
+      "severity": "medium",
+      "check_item_id": "structured_data",
+      "check_status": "warn",
+      "source_evidence": {
+        "all_of": [
+          { "field": "schema_org", "operator": ">", "threshold": 0 },
+          { "field": "schema_org", "operator": "<", "threshold": 20 }
+        ]
+      },
+      "qualification": "Schema.org / JSON-LD の実装範囲は完全版レポートで確認します。",
+      "approved_copy": "構造化データ（Schema.org）が部分的です。"
+    },
+    {
+      "code": "OBS_SCHEMA_MISSING",
+      "display_priority": 35,
+      "severity": "medium",
+      "check_item_id": "structured_data",
+      "check_status": "warn",
+      "source_evidence": {
+        "field": "schema_org",
+        "operator": "==",
+        "threshold": 0
+      },
+      "qualification": "公開ページのHTML解析時点。",
+      "approved_copy": "構造化データ（Schema.org）を確認できませんでした。"
+    },
+    {
+      "code": "OBS_SCHEMA_OK",
+      "display_priority": 36,
+      "severity": "info",
+      "check_item_id": "structured_data",
+      "check_status": "pass",
+      "source_evidence": {
+        "field": "schema_org",
+        "operator": ">=",
+        "threshold": 20
+      },
+      "qualification": "公開ページのHTML解析時点。",
+      "approved_copy": "構造化データ（Schema.org）を確認しました。"
+    },
+    {
+      "code": "OBS_LOCALBUSINESS_MISSING",
+      "display_priority": 40,
+      "severity": "low",
+      "check_item_id": "local_business",
+      "check_status": "warn",
+      "source_evidence": {
+        "field": "local_business",
+        "operator": "==",
+        "threshold": 0
+      },
+      "qualification": "LocalBusiness 等の地域ビジネス向け schema は完全版レポートで確認します。",
+      "approved_copy": "地域ビジネス向けの構造化情報が不足しています。"
+    },
+    {
+      "code": "OBS_LOCALBUSINESS_OK",
+      "display_priority": 41,
+      "severity": "info",
+      "check_item_id": "local_business",
+      "check_status": "pass",
+      "source_evidence": {
+        "field": "local_business",
+        "operator": ">=",
+        "threshold": 12
+      },
+      "qualification": "公開ページのHTML解析時点。",
+      "approved_copy": "地域ビジネス向けの構造化情報を確認しました。"
+    },
+    {
+      "code": "OBS_LLMS_TXT_MISSING",
+      "display_priority": 45,
+      "severity": "low",
+      "check_item_id": "llms_txt",
+      "check_status": "warn",
+      "source_evidence": {
+        "field": "has_llms_txt",
+        "operator": "==",
+        "value": false
+      },
+      "qualification": "HTTP 200 応答の有無のみ。ファイル内容は完全版レポートで確認します。",
+      "approved_copy": "llms.txt を確認できませんでした。"
+    },
+    {
+      "code": "OBS_LLMS_TXT_OK",
+      "display_priority": 46,
+      "severity": "info",
+      "check_item_id": "llms_txt",
+      "check_status": "pass",
+      "source_evidence": {
+        "field": "has_llms_txt",
+        "operator": "==",
+        "value": true
+      },
+      "qualification": "HTTP 200 応答の有無のみ。",
+      "approved_copy": "llms.txt を確認しました。"
+    },
+    {
+      "code": "OBS_SITE_UNREACHABLE",
+      "display_priority": 999,
+      "severity": "block",
+      "check_item_id": null,
+      "check_status": "unknown",
+      "source_evidence": {
+        "field": "site_reachable",
+        "operator": "==",
+        "value": false
+      },
+      "qualification": "内部判定専用。Preview / メッセージには使用しません。",
+      "approved_copy": ""
+    },
+    {
+      "code": "OBS_ACTION_PATH_PRESENT",
+      "display_priority": 10,
+      "severity": "info",
+      "check_item_id": "action_path",
+      "check_status": "pass",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "action_path_scanned", "operator": "==", "value": true },
+          { "field": "action_path_present", "operator": "==", "value": true }
+        ]
+      },
+      "qualification": "確認対象：取得した公開HTML。別ドメインの導線は対象外。",
+      "approved_copy": "公開ページ上で、サービス利用に向けた次の行動（お問い合わせ・相談・予約等）への導線を確認しました。"
+    },
+    {
+      "code": "OBS_ACTION_PATH_NOT_FOUND",
+      "display_priority": 15,
+      "severity": "medium",
+      "check_item_id": "action_path",
+      "check_status": "warn",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "action_path_scanned", "operator": "==", "value": true },
+          { "field": "action_path_present", "operator": "==", "value": false }
+        ]
+      },
+      "qualification": "確認対象：取得した公開HTML。サイト全体の不存在は断定しません（NOT_FOUND）。",
+      "approved_copy": "公開ページ上では、サービス利用に向けた次の行動への導線を確認できませんでした。"
+    },
+    {
+      "code": "OBS_FAQ_STRUCTURE_OK",
+      "display_priority": 26,
+      "severity": "info",
+      "check_item_id": "faq_structure",
+      "check_status": "pass",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "faq_scanned", "operator": "==", "value": true },
+          { "field": "faq_present", "operator": "==", "value": true }
+        ]
+      },
+      "qualification": "確認した公開ページのHTML解析時点。",
+      "approved_copy": "FAQ / よくある質問に関する情報を確認しました。"
+    },
+    {
+      "code": "OBS_FAQ_STRUCTURE_NOT_FOUND",
+      "display_priority": 25,
+      "severity": "medium",
+      "check_item_id": "faq_structure",
+      "check_status": "warn",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "faq_scanned", "operator": "==", "value": true },
+          { "field": "faq_present", "operator": "==", "value": false }
+        ]
+      },
+      "qualification": "確認した公開ページでは FAQ / よくある質問を見つけられませんでした（NOT_FOUND）。",
+      "approved_copy": "FAQ / よくある質問に関する情報を、確認した公開ページでは見つけられませんでした。"
+    },
+    {
+      "code": "OBS_SCHEMA_OK",
+      "display_priority": 36,
+      "severity": "info",
+      "check_item_id": "structured_data",
+      "check_status": "pass",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "schema_scanned", "operator": "==", "value": true },
+          { "field": "schema_present", "operator": "==", "value": true }
+        ]
+      },
+      "qualification": "確認した公開HTML解析時点。",
+      "approved_copy": "構造化データ（Schema.org）を確認しました。"
+    },
+    {
+      "code": "OBS_SCHEMA_NOT_FOUND",
+      "display_priority": 35,
+      "severity": "medium",
+      "check_item_id": "structured_data",
+      "check_status": "warn",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "schema_scanned", "operator": "==", "value": true },
+          { "field": "schema_present", "operator": "==", "value": false }
+        ]
+      },
+      "qualification": "確認した公開HTML上で Schema.org / JSON-LD を検出できませんでした（NOT_FOUND）。",
+      "approved_copy": "構造化データ（Schema.org）を、確認した公開ページでは見つけられませんでした。"
+    },
+    {
+      "code": "OBS_SERVICE_INFO_OK",
+      "display_priority": 20,
+      "severity": "info",
+      "check_item_id": "service_info",
+      "check_status": "pass",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "service_info_scanned", "operator": "==", "value": true },
+          { "field": "service_info_ok", "operator": "==", "value": true }
+        ]
+      },
+      "qualification": "タイトル・説明文等、公開ページ上の基本情報。",
+      "approved_copy": "サービス内容を示す基本情報（タイトル・説明文等）を確認しました。"
+    },
+    {
+      "code": "OBS_SERVICE_INFO_WEAK",
+      "display_priority": 22,
+      "severity": "medium",
+      "check_item_id": "service_info",
+      "check_status": "warn",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "service_info_scanned", "operator": "==", "value": true },
+          { "field": "service_info_weak", "operator": "==", "value": true }
+        ]
+      },
+      "qualification": "公開ページ上の基本情報がやや不足している可能性（断定はしません）。",
+      "approved_copy": "サービス内容を判断するための公開情報が、やや不足している可能性があります。"
+    },
+    {
+      "code": "OBS_LLMS_TXT_NOT_FOUND",
+      "display_priority": 45,
+      "severity": "low",
+      "check_item_id": "llms_txt",
+      "check_status": "warn",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "llms_txt_scanned", "operator": "==", "value": true },
+          { "field": "has_llms_txt", "operator": "==", "value": false }
+        ]
+      },
+      "qualification": "HTTP 200 応答の有無のみ。ファイル内容は確認しません。",
+      "approved_copy": "llms.txt を確認できませんでした。"
+    },
+    {
+      "code": "OBS_LLMS_TXT_OK",
+      "display_priority": 46,
+      "severity": "info",
+      "check_item_id": "llms_txt",
+      "check_status": "pass",
+      "evidence_source": "generic_scan",
+      "source_evidence": {
+        "all_of": [
+          { "field": "llms_txt_scanned", "operator": "==", "value": true },
+          { "field": "has_llms_txt", "operator": "==", "value": true }
+        ]
+      },
+      "qualification": "HTTP 200 応答の有無のみ。",
+      "approved_copy": "llms.txt を確認しました。"
+    }
+  ],
+  "check_items": [
+    {
+      "id": "booking_path",
+      "label": "問い合わせ / 予約導線"
+    },
+    {
+      "id": "faq_structure",
+      "label": "FAQ / 構造化情報"
+    },
+    {
+      "id": "structured_data",
+      "label": "構造化データ（Schema.org）"
+    },
+    {
+      "id": "local_business",
+      "label": "地域ビジネス情報"
+    },
+    {
+      "id": "llms_txt",
+      "label": "llms.txt（AI向け公開情報）"
+    },
+    {
+      "id": "action_path",
+      "label": "次の行動への導線"
+    },
+    {
+      "id": "service_info",
+      "label": "サービス基本情報"
+    }
+  ]
+}

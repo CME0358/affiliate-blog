@@ -8,7 +8,45 @@ url_builder で生成した LP URL と templates/messages.py のテンプレー�
 from __future__ import annotations
 
 from url_builder import build_lp_url, get_industry_slug
-from templates.messages import ARI_MESSAGE_V1
+from templates.messages import (
+    ARI_MESSAGE_V1,
+    ARI_MESSAGE_V2,
+    ARI_MESSAGE_V2_SUBJECT_RECOMMENDATION,
+)
+
+# Email body: max 1 positive observation (deterministic priority)
+EMAIL_POSITIVE_OBS_PRIORITY: tuple[str, ...] = (
+    "OBS_ACTION_PATH_PRESENT",
+    "OBS_BOOKING_PATH_PRESENT",
+    "OBS_FAQ_STRUCTURE_OK",
+    "OBS_SCHEMA_OK",
+    "OBS_SERVICE_INFO_OK",
+    "OBS_LLMS_TXT_OK",
+)
+
+# Human-facing email copy (semantics aligned with catalog approved_copy; no internal wording)
+EMAIL_OBSERVATION_COPY: dict[str, str] = {
+    "OBS_ACTION_PATH_PRESENT": (
+        "お問い合わせなど、サービス利用に向けた導線を確認できました。"
+    ),
+    "OBS_BOOKING_PATH_PRESENT": (
+        "予約・問い合わせに向けた導線を確認できました。"
+    ),
+    "OBS_FAQ_STRUCTURE_OK": (
+        "FAQ / よくある質問に関する情報を確認できました。"
+    ),
+    "OBS_SCHEMA_OK": (
+        "構造化データ（Schema.org）を確認できました。"
+    ),
+    "OBS_SERVICE_INFO_OK": (
+        "サービス内容を示す基本情報を確認できました。"
+    ),
+    "OBS_LLMS_TXT_OK": (
+        "llms.txt に関する情報を確認できました。"
+    ),
+}
+
+_SEO_TAIL_MARKERS = ("修理", "調査", "工事", "対応", "サービス", "エリア", "近く", "おすすめ", "塗装", "清掃")
 
 # slug → 検索フレーズ用の業種キーワード短縮形
 INDUSTRY_KEYWORD_BY_SLUG: dict[str, str] = {
@@ -180,14 +218,218 @@ def build_message(
     """
     slug = get_industry_slug(industry_name)
     industry_keyword = get_industry_keyword(industry_name, slug)
-    area = (area_name or "").strip()
-    area_context = f"{area}の{industry_keyword}" if area else industry_keyword
 
     return ARI_MESSAGE_V1.format(
-        company_name=company_name,
-        area_context=area_context,
         lp_url=lp_url,
     )
+
+
+def sanitize_company_display_name(
+    name: str,
+    *,
+    domain: str = "",
+) -> tuple[str, bool, str]:
+    """
+    Trim SEO-stuffed listing labels for email salutation.
+
+    Returns:
+        (display_name, was_normalized, review_note)
+        review_note is non-empty when human review is recommended.
+    """
+    original = (name or "").strip()
+    if not original:
+        return "貴社", False, ""
+
+    normalized = original
+    was_normalized = False
+    review_note = ""
+
+    if "【" in normalized:
+        candidate = normalized.split("【", 1)[0].strip()
+        if candidate and len(candidate) < len(normalized):
+            normalized = candidate
+            was_normalized = True
+
+    if "（" in normalized and len(normalized) > 40:
+        candidate = normalized.split("（", 1)[0].strip()
+        if candidate and len(candidate) <= 35:
+            normalized = candidate
+            was_normalized = True
+
+    parts = normalized.split()
+    if len(parts) >= 3:
+        tail_seo = sum(
+            1 for part in parts[2:] if any(marker in part for marker in _SEO_TAIL_MARKERS)
+        )
+        if tail_seo >= max(1, len(parts) - 2):
+            candidate = " ".join(parts[:2])
+            if candidate and candidate != normalized:
+                normalized = candidate
+                was_normalized = True
+
+    if was_normalized and normalized != original:
+        review_note = f"SEO label trimmed: `{original}` → `{normalized}`"
+    elif len(original) > 45:
+        review_note = f"Long display name retained: `{original}`"
+
+    return normalized, was_normalized, review_note
+
+
+def select_email_positive_observation(observations: list[dict]) -> dict | None:
+    """Pick at most one observation for the email body (positive preferred)."""
+    if not observations:
+        return None
+
+    by_code = {
+        (obs.get("code") or "").strip(): obs
+        for obs in observations
+        if (obs.get("code") or "").strip()
+    }
+    for code in EMAIL_POSITIVE_OBS_PRIORITY:
+        if code in by_code:
+            return by_code[code]
+
+    for obs in observations:
+        code = (obs.get("code") or "").strip()
+        if not code or code.endswith("_UNREACHABLE"):
+            continue
+        if obs.get("severity") == "info" or code.endswith(("_OK", "_PRESENT")):
+            return obs
+
+    for obs in observations:
+        code = (obs.get("code") or "").strip()
+        if code and not code.endswith("_UNREACHABLE"):
+            return obs
+    return None
+
+
+def humanize_email_observation(obs: dict | None) -> str:
+    """Render catalog observation as human-facing email sentence (no internal jargon)."""
+    if not obs:
+        return "公開情報から主要な確認項目を整理しました。"
+
+    code = (obs.get("code") or "").strip()
+    if code in EMAIL_OBSERVATION_COPY:
+        return EMAIL_OBSERVATION_COPY[code]
+
+    copy = (obs.get("approved_copy") or obs.get("copy") or "").strip()
+    for prefix in (
+        "公開ページ上で、",
+        "公開ページ上では、",
+        "公開ページ上で",
+        "確認した公開ページでは ",
+        "確認した公開ページのHTML解析時点。",
+    ):
+        if copy.startswith(prefix):
+            copy = copy[len(prefix):].lstrip()
+            break
+
+    if copy.endswith("。"):
+        return copy
+    if copy:
+        return f"{copy}。"
+    return "公開情報から主要な確認項目を整理しました。"
+
+
+def build_message_v2(
+    company_name: str,
+    website_url: str,
+    lp_url: str,
+    observations: list[dict],
+    *,
+    company_display_name: str | None = None,
+) -> str:
+    """V2 文面（observation 1件 + bridge + preview URL）。送信切替前の dry-run 用。"""
+    display_name, _, _ = sanitize_company_display_name(
+        company_display_name or company_name,
+    )
+    selected = select_email_positive_observation(observations)
+    positive_observation = humanize_email_observation(selected)
+    return ARI_MESSAGE_V2.format(
+        company_name=display_name,
+        lp_url=lp_url,
+    )
+
+
+def build_message_v2_render_context(
+    company_name: str,
+    website_url: str,
+    lp_url: str,
+    observations: list[dict],
+    *,
+    domain: str = "",
+    company_display_name: str | None = None,
+) -> dict:
+    """Deterministic V2 render metadata for review artifacts."""
+    original = (company_name or "").strip()
+    display_name, was_normalized, review_note = sanitize_company_display_name(
+        company_display_name or company_name,
+        domain=domain,
+    )
+    selected = select_email_positive_observation(observations)
+    positive_observation = humanize_email_observation(selected)
+    rendered = ARI_MESSAGE_V2.format(
+        company_name=display_name,
+        lp_url=lp_url,
+    )
+    return {
+        "company_original": original,
+        "company_display_name": display_name,
+        "display_name_normalized": was_normalized,
+        "display_name_review_note": review_note,
+        "domain": domain,
+        "website_url": (website_url or "").strip(),
+        "selected_observation_code": (selected or {}).get("code", ""),
+        "selected_observation_approved_copy": (selected or {}).get("approved_copy", ""),
+        "positive_observation_sentence": positive_observation,
+        "subject": ARI_MESSAGE_V2_SUBJECT_RECOMMENDATION,
+        "rendered_message": rendered,
+    }
+
+
+def build_preview_message_for_company(
+    company: dict,
+    *,
+    ab_arm: str = "C",
+    dry_run_snapshot: bool = False,
+) -> tuple[str, str, dict | None]:
+    """
+    crawler join → snapshot → V2 文面を生成（送信はしない）。
+
+    Returns:
+        (preview_url_or_lp, message, snapshot_or_none)
+    """
+    from observations.snapshot_builder import create_preview_snapshot
+    from observations.crawler_join import lookup_crawler_data_for_company
+    from url_builder import build_lp_url
+
+    crawler = lookup_crawler_data_for_company(company)
+    if not crawler:
+        lp = build_lp_url(company.get("industry_name", ""), company.get("area_name", ""))
+        msg = build_message(
+            company.get("industry_name", ""),
+            company.get("company_name", ""),
+            lp,
+            area_name=company.get("area_name", ""),
+        )
+        return lp, msg, None
+
+    snap = create_preview_snapshot(
+        company,
+        crawler_data=crawler,
+        ab_arm=ab_arm,
+        dry_run=dry_run_snapshot,
+    )
+    lp_url = snap["preview_url"] if ab_arm == "C" else build_lp_url(
+        company.get("industry_name", ""), company.get("area_name", "")
+    )
+    message = build_message_v2(
+        company.get("company_name", ""),
+        company.get("website_url") or company.get("url", ""),
+        lp_url,
+        snap.get("message_observations") or [],
+    )
+    return lp_url, message, snap
 
 
 def build_message_for_company(company: dict) -> tuple[str, str]:
@@ -210,10 +452,158 @@ def build_message_for_company(company: dict) -> tuple[str, str]:
     return lp_url, message
 
 
-def preview(company: dict) -> None:
+def build_preview_record(
+    company: dict,
+    *,
+    ab_arm: str = "C",
+    dry_run_snapshot: bool = True,
+    crawler_data: dict | None = None,
+) -> dict:
+    """
+    Structured preview record for P1 validation (zero send).
+    """
+    from urllib.parse import urlparse
+    import hashlib
+
+    from observations.resolver import map_industry_to_form
+
+    website_url = company.get("website_url") or company.get("url") or ""
+    company_name = company.get("company_name") or ""
+    industry_name = company.get("industry_name") or company.get("industry") or ""
+    domain = urlparse(website_url).netloc or website_url
+
+    def _local_candidate_id() -> str:
+        raw = f"{domain}|{company_name}"
+        return hashlib.sha256(raw.encode()).hexdigest()[:16]
+
+    record: dict = {
+        "company": company_name,
+        "domain": domain,
+        "url": website_url,
+        "industry": map_industry_to_form(industry_name),
+        "industry_source": industry_name,
+        "message_version": "ARI_MESSAGE_V2" if ab_arm in ("B", "C") else "ARI_MESSAGE_V1",
+        "ab_arm": ab_arm,
+        "observations": [],
+        "preview_token": None,
+        "preview_url": None,
+        "rendered_message": "",
+        "fallback": False,
+        "fallback_reason": "",
+    }
+
+    if ab_arm == "A":
+        lp_url, message = build_message_for_company(company)
+        record["preview_url"] = lp_url
+        record["rendered_message"] = message
+        return record
+
+    # B / C — V2 path
+    from observations.snapshot_builder import create_preview_snapshot
+
+    row = crawler_data
+    if row is None:
+        from observations.crawler_join import lookup_preview_evidence
+        row, evidence_src = lookup_preview_evidence(company)
+    else:
+        evidence_src = row.get("evidence_source") or "reservation_crawler"
+
+    if not row:
+        lp_url = build_lp_url(company.get("industry_name", ""), company.get("area_name", ""))
+        message = build_message(
+            company.get("industry_name", ""),
+            company_name,
+            lp_url,
+            area_name=company.get("area_name", ""),
+        )
+        record["fallback"] = True
+        record["fallback_reason"] = "preview_evidence_not_found"
+        record["preview_url"] = lp_url
+        record["rendered_message"] = message
+        record["message_version"] = "ARI_MESSAGE_V1"
+        return record
+
+    try:
+        snap = create_preview_snapshot(
+            company,
+            crawler_data=row,
+            ab_arm=ab_arm,
+            dry_run=dry_run_snapshot,
+        )
+    except ValueError as e:
+        lp_url = build_lp_url(company.get("industry_name", ""), company.get("area_name", ""))
+        message = build_message(
+            company.get("industry_name", ""),
+            company_name,
+            lp_url,
+            area_name=company.get("area_name", ""),
+        )
+        record["fallback"] = True
+        record["fallback_reason"] = str(e)
+        record["preview_url"] = lp_url
+        record["rendered_message"] = message
+        record["message_version"] = "ARI_MESSAGE_V1"
+        return record
+
+    lp_url = snap["preview_url"] if ab_arm == "C" else build_lp_url(
+        company.get("industry_name", ""), company.get("area_name", "")
+    )
+    message = build_message_v2(
+        company_name,
+        website_url,
+        lp_url,
+        snap.get("message_observations") or [],
+    )
+    record["preview_token"] = snap.get("token")
+    record["preview_url"] = lp_url
+    record["candidate_id"] = snap.get("candidate_id") or _local_candidate_id()
+    record["observations"] = [
+        {
+            "code": o.get("code"),
+            "approved_copy": o.get("approved_copy") or o.get("copy"),
+        }
+        for o in (snap.get("message_observations") or [])
+    ]
+    record["rendered_message"] = message
+    return record
+
+
+def preview_v2(company: dict, *, ab_arm: str = "C", as_json: bool = False) -> None:
+    """Console preview for V2 / preview funnel (dry-run only)."""
+    import json as _json
+
+    record = build_preview_record(company, ab_arm=ab_arm, dry_run_snapshot=True)
+    if as_json:
+        print(_json.dumps(record, ensure_ascii=False, indent=2))
+        return
+
+    print(f"{'─'*60}")
+    print(f"  [V2 PREVIEW] {record['company']}")
+    print(f"  domain: {record['domain']}")
+    print(f"  url: {record['url']}")
+    print(f"  industry: {record['industry']} ({record['industry_source']})")
+    print(f"  ab_arm: {record['ab_arm']}  version: {record['message_version']}")
+    if record.get("fallback"):
+        print(f"  ⚠ fallback: {record['fallback_reason']}")
+    if record.get("preview_token"):
+        print(f"  preview_token: {record['preview_token']}")
+    print(f"  preview_url: {record['preview_url']}")
+    for obs in record.get("observations") or []:
+        print(f"  observation: {obs.get('code')}")
+        print(f"    copy: {obs.get('approved_copy')}")
+    print(f"  文字数: {len(record['rendered_message'])} 字")
+    print(f"{'─'*60}")
+    print(record["rendered_message"])
+    print()
+
+
+def preview(company: dict, *, message_version: str = "v1") -> None:
     """
     company dict の内容をもとに送信予定の文面をコンソールに表示する（dry-run 用）。
     """
+    if message_version == "v2":
+        preview_v2(company, ab_arm="C")
+        return
     lp_url, message = build_message_for_company(company)
 
     print(f"{'─'*60}")
@@ -237,13 +627,27 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="文面プレビュー")
     ap.add_argument("--preview", metavar="FILE", help="MDファイルを読み込んで全件の文面をプレビュー")
     ap.add_argument("--limit", type=int, default=3, metavar="N", help="プレビュー件数（デフォルト: 3）")
+    ap.add_argument(
+        "--message-version",
+        choices=("v1", "v2"),
+        default="v1",
+        help="v2 = ARI_MESSAGE_V2 + preview URL（--preview 専用・送信不可）",
+    )
+    ap.add_argument("--json", action="store_true", help="V2 preview を JSON 出力")
     args = ap.parse_args()
+
+    if args.message_version == "v2" and not args.preview:
+        print("⛔  --message-version v2 は --preview と併用時のみ許可されます。", file=sys.stderr)
+        sys.exit(1)
 
     if args.preview:
         companies = parse_md_file(args.preview)
         targets = companies[: args.limit]
-        print(f"\n全 {len(companies)} 件中、先頭 {len(targets)} 件をプレビュー\n")
+        print(f"\n全 {len(companies)} 件中、先頭 {len(targets)} 件をプレビュー [{args.message_version}]\n")
         for c in targets:
-            preview(c)
+            if args.message_version == "v2":
+                preview_v2(c, ab_arm="C", as_json=args.json)
+            else:
+                preview(c)
     else:
         ap.print_help()

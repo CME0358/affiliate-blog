@@ -151,6 +151,114 @@ def _map_finder_to_type(form_result: dict, website_url: str) -> tuple[str, str]:
     return "ERROR", reason or status
 
 
+async def detect_form_only_at_url(
+    company: dict,
+    form_url: str,
+    *,
+    browser_pool=None,
+    timeout_sec: int = 18,
+) -> dict[str, Any]:
+    """
+    URL-first lightweight detect: skip find_form_url crawl.
+    Uses shared browser pool when provided (one Chromium, isolated contexts).
+    """
+    set_submit_forbidden(True)
+    name = company.get("company_name", "")
+    website = (company.get("website_url") or form_url or "").strip()
+    industry = company.get("industry_name", "")
+
+    base: dict[str, Any] = {
+        "company_name": name,
+        "industry_name": industry,
+        "website_url": website,
+        "contact_page_url": form_url,
+        "form_url": form_url,
+        "form_type": "ERROR",
+        "confidence": "LOW",
+        "captcha": False,
+        "external_provider": None,
+        "submit_label": None,
+        "field_map": {},
+        "field_names": [],
+        "failure_reason": "",
+        "url_first": True,
+    }
+
+    if not form_url:
+        base["failure_reason"] = "form_url_missing"
+        return base
+
+    if is_file_download_url(str(form_url)):
+        base["form_type"] = "ERROR"
+        base["failure_reason"] = "pdf_or_file_download"
+        return base
+
+    ext = _external_provider(form_url)
+    if ext:
+        base["form_type"] = "EXTERNAL_FORM"
+        base["external_provider"] = ext
+        base["confidence"] = "LOW"
+        return base
+
+    try:
+        from playwright.async_api import async_playwright
+    except ImportError:
+        base["failure_reason"] = "playwright_not_installed"
+        return base
+
+    nav_timeout = min(timeout_sec * 1000, NAV_TIMEOUT)
+
+    async def _inspect(page) -> dict[str, Any]:
+        if not await _goto_settled(page, str(form_url).strip(), goto_timeout=nav_timeout):
+            base["form_type"] = "ERROR"
+            base["failure_reason"] = "page_load_timeout"
+            return base
+        base["contact_page_url"] = page.url
+        html = await page.content()
+        base["captcha"] = _has_recaptcha(html) or any(ind in html.lower() for ind in RECAPTCHA_INDICATORS)
+        if base["captcha"]:
+            base["form_type"] = "CAPTCHA"
+            base["confidence"] = "LOW"
+            return base
+        signals = await _inspect_page_signals(page, html)
+        fields = await extract_fields_from_dom(page)
+        if signals["login_required"] and not (fields and fields.get("message_field") and fields.get("email_field")):
+            base["form_type"] = "LOGIN_REQUIRED"
+        elif signals["multi_step"]:
+            base["form_type"] = "MULTI_STEP"
+        else:
+            base["form_type"] = "FORM_FOUND"
+        base["field_map"] = _field_map(fields, signals)
+        base["submit_label"] = signals.get("submit_label")
+        if fields:
+            base["field_names"] = sorted(k for k, v in fields.items() if v and k != "furigana_format")
+        same_domain = _same_registrable_domain(website, page.url)
+        base["confidence"] = _confidence(base["form_type"], base["field_map"], same_domain)
+        return base
+
+    try:
+        if browser_pool is not None:
+            async with browser_pool.context() as context:
+                page = await context.new_page()
+                try:
+                    return await _inspect(page)
+                finally:
+                    await page.close()
+        else:
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                context = await browser.new_context(locale="ja-JP")
+                page = await context.new_page()
+                try:
+                    return await _inspect(page)
+                finally:
+                    await browser.close()
+    except Exception as e:
+        base["form_type"] = "ERROR"
+        base["failure_reason"] = str(e)[:200]
+        return base
+
+
 async def detect_form_only(company: dict, timeout_sec: int | None = None) -> dict[str, Any]:
     """
     1社分のフォーム検出（submit 禁止・fill 禁止）。

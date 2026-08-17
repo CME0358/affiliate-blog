@@ -75,6 +75,12 @@ from message_builder import build_message
 from form_sender import send_form, send_form_dry_run, set_submit_forbidden, get_real_submission_count
 from form_detector import detect_form_only
 from form_fill_no_submit import fill_form_no_submit, write_canary_report
+from form_submit_canary import (
+    validate_submit_canary_preconditions,
+    submit_canary as run_submit_canary,
+    is_live_execution_armed,
+    MAX_REAL_SUBMISSIONS,
+)
 from log_manager import (
     get_stats,
     is_already_sent,
@@ -164,12 +170,46 @@ async def process_company(
     detect_only: bool = False,
     detect_timeout: int | None = None,
     fill_no_submit: bool = False,
+    submit_canary: bool = False,
+    message_version: str = "v1",
 ) -> tuple[str, str]:
     """
     Returns:
         (outcome, progress_suffix) — outcome: sent|error|pending|skipped|dry_run
     """
     name = company["company_name"]
+
+    # ── submit-canary: 単発 submit（live 未武装時は実装検証のみ）──────────────
+    if submit_canary:
+        set_submit_forbidden(not is_live_execution_armed())
+        form_url = company.get("form_url") or company.get("フォームURL")
+        if form_url:
+            company["form_url"] = str(form_url).strip()
+
+        lp_url = build_lp_url(company["industry_name"], company.get("area_name", ""))
+        message = build_message(
+            company["industry_name"],
+            company["company_name"],
+            lp_url,
+            area_name=company.get("area_name", ""),
+        )
+        result = await run_submit_canary(company, message, lp_url)
+        company["_submit_canary_result"] = result
+        overall = result.get("overall", "BLOCKED")
+        live = result.get("live_execution", False)
+        print(
+            f"  → SUBMIT-CANARY | {overall} | live={live} | "
+            f"submissions={result.get('real_submission_count', 0)}/{MAX_REAL_SUBMISSIONS}"
+        )
+        if not live:
+            assert get_real_submission_count() == 0, "real_submission_count must remain 0 when live not armed"
+        if result.get("status") == "error":
+            return "error", f"CANARY:{overall}"
+        if result.get("status") == "implementation_ready":
+            return "canary_ready", f"CANARY:{overall}"
+        if result.get("status") == "sent":
+            return "sent", "CANARY:SENT"
+        return "error", f"CANARY:{overall}"
 
     # ── fill-no-submit: 入力のみ（submit 禁止）────────────────────────────────
     if fill_no_submit:
@@ -259,13 +299,21 @@ async def process_company(
         )
 
     # LP URL & 文面生成（フォーム探索と並行して先に確定させる）
-    lp_url = build_lp_url(company["industry_name"], company["area_name"])
-    message = build_message(
-        company["industry_name"],
-        company["company_name"],
-        lp_url,
-        area_name=company.get("area_name", ""),
-    )
+    if message_version == "v2":
+        from message_builder import build_preview_message_for_company
+        lp_url, message, _snap = build_preview_message_for_company(
+            company,
+            ab_arm="C",
+            dry_run_snapshot=True,
+        )
+    else:
+        lp_url = build_lp_url(company["industry_name"], company["area_name"])
+        message = build_message(
+            company["industry_name"],
+            company["company_name"],
+            lp_url,
+            area_name=company.get("area_name", ""),
+        )
 
     if form_result["status"] == "pending":
         print(f"⚠️  要手動確認（reCAPTCHA）: {name}")
@@ -352,8 +400,13 @@ async def run_batch(
     detect_only: bool = False,
     detect_timeout: int | None = None,
     fill_no_submit: bool = False,
+    submit_canary: bool = False,
+    pilot_list_path: str = "",
+    message_version: str = "v1",
 ) -> list[dict]:
-    if fill_no_submit:
+    if submit_canary:
+        mode_label = "[SUBMIT-CANARY]"
+    elif fill_no_submit:
         mode_label = "[FILL-NO-SUBMIT]"
     elif detect_only:
         mode_label = "[DETECT-ONLY]"
@@ -365,6 +418,8 @@ async def run_batch(
     print(f"  フォーム自動送信システム {mode_label}")
     if pilot:
         print("  [PILOT]")
+    if submit_canary:
+        print("  ⛔  live 未武装（SUBMIT_CANARY_LIVE≠1）/ submit 禁止 / retry 禁止")
     if fill_no_submit:
         print("  ⛔  submit 禁止 / 入力のみ / CAPTCHA 操作禁止")
     if detect_only:
@@ -380,7 +435,7 @@ async def run_batch(
     sync_permanent_skip()
     print()
 
-    if not force_retry:
+    if not force_retry and not submit_canary:
         companies = apply_list_filter(companies, source_label=source_label)
 
     if not companies:
@@ -390,11 +445,22 @@ async def run_batch(
     if limit:
         companies = companies[:limit]
 
+    if submit_canary:
+        ok, err = validate_submit_canary_preconditions(
+            pilot_list_path or source_label,
+            companies,
+            limit=1,
+        )
+        if not ok:
+            print(f"⛔  submit-canary ガード失敗: {err}", file=sys.stderr)
+            sys.exit(1)
+        companies = companies[:1]
+
     print(f"処理対象: {len(companies)} 件")
     _print_industry_tier_summary(companies)
 
     apply_daily_limit = (
-        not dry_run and not detect_only and not fill_no_submit
+        not dry_run and not detect_only and not fill_no_submit and not submit_canary
         and DAILY_OUTCOME_LIMIT > 0 and not force_retry
     )
 
@@ -417,12 +483,13 @@ async def run_batch(
     if force_retry and not dry_run:
         print("📊  --force-retry: 本日の1日上限チェックをスキップします\n")
 
-    batch_counts = {"sent": 0, "error": 0, "skipped": 0, "excluded": 0, "detected": 0, "filled": 0}
+    batch_counts = {"sent": 0, "error": 0, "skipped": 0, "excluded": 0, "detected": 0, "filled": 0, "canary_ready": 0}
     detection_results: list[dict] = []
     fill_results: list[dict] = []
+    submit_canary_results: list[dict] = []
 
     for i, company in enumerate(companies, 1):
-        if not dry_run and not detect_only and not fill_no_submit and is_paused("form-auto-sender"):
+        if not dry_run and not detect_only and not fill_no_submit and not submit_canary and is_paused("form-auto-sender"):
             print(
                 f"\n⏸  停止フラグ検知（{i - 1}/{len(companies)} 件処理済）。"
                 "残りは再開後に実行してください。"
@@ -438,7 +505,7 @@ async def run_batch(
                 )
                 break
 
-        if not dry_run and not detect_only and not fill_no_submit and not force_retry and datetime.now().hour >= SEND_HOUR_END:
+        if not dry_run and not detect_only and not fill_no_submit and not submit_canary and not force_retry and datetime.now().hour >= SEND_HOUR_END:
             remaining = len(companies) - i + 1
             print(f"\n⏰  18:00 を超えました。残り {remaining} 件は翌日 10:00 に処理します。")
             break
@@ -454,6 +521,8 @@ async def run_batch(
                 detect_only=detect_only,
                 detect_timeout=detect_timeout,
                 fill_no_submit=fill_no_submit,
+                submit_canary=submit_canary,
+                message_version=message_version,
             )
         except Exception as e:
             elapsed = time.perf_counter() - t0
@@ -474,6 +543,11 @@ async def run_batch(
             batch_counts["error"] += 1
         elif outcome == "dry_run":
             pass
+        elif outcome == "canary_ready":
+            batch_counts["canary_ready"] += 1
+            sr = company.get("_submit_canary_result")
+            if sr:
+                submit_canary_results.append(sr)
         elif outcome == "filled":
             batch_counts["filled"] = batch_counts.get("filled", 0) + 1
             fr = company.get("_fill_no_submit_result")
@@ -486,7 +560,13 @@ async def run_batch(
                 detection_results.append(dr)
 
     print(f"\n{'='*60}")
-    if fill_no_submit:
+    if submit_canary:
+        print(f"  SUBMIT-CANARY 完了: {len(submit_canary_results)} 件")
+        print(f"  live execution armed: {is_live_execution_armed()}")
+        print(f"  実送信: {get_real_submission_count()}（max {MAX_REAL_SUBMISSIONS}）")
+        if not is_live_execution_armed():
+            assert get_real_submission_count() == 0
+    elif fill_no_submit:
         print(f"  FILL-NO-SUBMIT 完了: {len(fill_results)} 件")
         print(f"  実送信: {get_real_submission_count()}（submit 禁止）")
         assert get_real_submission_count() == 0
@@ -518,6 +598,8 @@ async def run_batch(
         except Exception as e:
             print(f"⚠️  reCAPTCHA手動キュー出力スキップ: {e}", file=sys.stderr)
     print(f"{'='*60}\n")
+    if submit_canary:
+        return submit_canary_results
     if fill_no_submit:
         return fill_results
     return detection_results
@@ -531,6 +613,8 @@ async def main(
     detect_only: bool = False,
     detect_timeout: int | None = None,
     fill_no_submit: bool = False,
+    submit_canary: bool = False,
+    message_version: str = "v1",
 ) -> list[dict]:
     companies = parse_md_list(input_path)
     return await run_batch(
@@ -542,6 +626,9 @@ async def main(
         detect_only=detect_only,
         detect_timeout=detect_timeout,
         fill_no_submit=fill_no_submit,
+        submit_canary=submit_canary,
+        pilot_list_path=input_path,
+        message_version=message_version,
     )
 
 
@@ -678,6 +765,11 @@ if __name__ == "__main__":
         help="フォーム入力のみ（submit 禁止・--pilot-list 必須）",
     )
     ap.add_argument(
+        "--submit-canary",
+        action="store_true",
+        help="ARI 単発 submit canary（--pilot-list 必須・--limit 1 強制・live 未武装時は submit 禁止）",
+    )
+    ap.add_argument(
         "--detect-timeout",
         type=int,
         default=None,
@@ -689,7 +781,17 @@ if __name__ == "__main__":
         action="store_true",
         help="失敗クールダウンを無視して再処理する（--retry-errors と併用）",
     )
+    ap.add_argument(
+        "--message-version",
+        choices=("v1", "v2"),
+        default="v1",
+        help="v2 = preview funnel 文面（--dry-run 専用・本番送信不可）",
+    )
     args = ap.parse_args()
+
+    if args.message_version == "v2" and not args.dry_run:
+        print("⛔  --message-version v2 は --dry-run と併用時のみ許可されます。", file=sys.stderr)
+        sys.exit(1)
 
     if args.pilot_list:
         args.input = args.pilot_list
@@ -715,9 +817,20 @@ if __name__ == "__main__":
             )
             sys.exit(1)
 
+    if args.submit_canary:
+        args.pilot = True
+        args.limit = 1
+        set_submit_forbidden(not is_live_execution_armed())
+        if not args.pilot_list:
+            print(
+                "⛔  --submit-canary には --pilot-list <path> が必須です。",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
     ensure_not_bulk_inventory(args.input, pilot=args.pilot)
 
-    if not args.dry_run and not args.detect_only and not args.fill_no_submit:
+    if not args.dry_run and not args.detect_only and not args.fill_no_submit and not args.submit_canary:
         ensure_not_paused()
         if not args.pilot:
             print(
@@ -736,6 +849,26 @@ if __name__ == "__main__":
 
     if args.fill_no_submit and args.detect_only:
         print("⛔  --fill-no-submit と --detect-only は同時指定できません。", file=sys.stderr)
+        sys.exit(1)
+
+    if args.submit_canary and args.dry_run:
+        print("⛔  --submit-canary と --dry-run は同時指定できません。", file=sys.stderr)
+        sys.exit(1)
+
+    if args.submit_canary and args.detect_only:
+        print("⛔  --submit-canary と --detect-only は同時指定できません。", file=sys.stderr)
+        sys.exit(1)
+
+    if args.submit_canary and args.fill_no_submit:
+        print("⛔  --submit-canary と --fill-no-submit は同時指定できません。", file=sys.stderr)
+        sys.exit(1)
+
+    if args.submit_canary and args.retry_errors:
+        print("⛔  --submit-canary と --retry-errors は同時指定できません。", file=sys.stderr)
+        sys.exit(1)
+
+    if args.submit_canary and args.force_retry:
+        print("⛔  --submit-canary と --force-retry は同時指定できません。", file=sys.stderr)
         sys.exit(1)
 
     if args.retry_errors:
@@ -759,6 +892,8 @@ if __name__ == "__main__":
                 detect_only=args.detect_only,
                 detect_timeout=args.detect_timeout,
                 fill_no_submit=args.fill_no_submit,
+                submit_canary=args.submit_canary,
+                message_version=args.message_version,
             )
         )
         if args.detect_only and results:
