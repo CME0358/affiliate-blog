@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large">
   <title>ファクタリング比較2026｜手数料・スピード・審査通過率で選ぶおすすめ業者 | QOL media</title>
+  <meta name="description" content="ファクタリングの手数料相場・2社間と3社間の違い・入金スピード・悪徳業者の見分け方を解説。法人・個人事業主向けに複数業者を比較し、相見積もりのポイントを紹介します。">
+  <link rel="canonical" href="https://www.qolmedia.info/factoring-lp.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.qolmedia.info/factoring-lp.html">
+  <meta property="og:title" content="ファクタリング比較2026｜手数料・スピード・業者選び">
+  <meta property="og:description" content="手数料相場・2社間と3社間の違い・入金スピード・悪徳業者の見分け方を解説。">
+  <meta property="og:image" content="https://www.qolmedia.info/og-health.svg">
+  <meta property="og:site_name" content="QOL media">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ファクタリング比較2026｜手数料・スピード・業者選び">
+  <meta name="twitter:description" content="手数料相場・2社間と3社間の違い・入金スピード・悪徳業者の見分け方を解説。">
+  <meta name="twitter:image" content="https://www.qolmedia.info/og-health.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -69,7 +82,7 @@
 
     /* ===== HERO ===== */
     .hero {
-      background: url('/factoring-lp-hero.jpg') center center / cover no-repeat;
+      background: url('/fv-health.jpg') center center / cover no-repeat;
       color: #fff;
       padding: 80px 24px 64px;
       text-align: center;
@@ -635,28 +648,27 @@
     .site-footer a { color: rgba(255,255,255,0.45); text-decoration: none; margin: 0 8px; }
 
     /* ===== STICKY CTA (mobile) ===== */
+    @media (max-width: 639px) {
+      body {
+        padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+      }
+      body:has(#sticky-diag.is-result) {
+        padding-bottom: min(42vh, 300px);
+      }
+    }
     .sticky-cta {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      background: var(--cta);
-      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(15, 28, 46, 0.08);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 200;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-    }
-    .sticky-cta p { color: #fff; font-size: 13px; font-weight: 700; line-height: 1.4; }
-    .sticky-cta p span { font-size: 11px; font-weight: 400; opacity: 0.85; display: block; }
-    .sticky-cta a {
-      background: #fff;
-      color: var(--cta-dark);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 10px 20px;
-      border-radius: 4px;
-      text-decoration: none;
-      white-space: nowrap;
+      box-shadow: 0 -8px 32px rgba(15, 28, 46, 0.12);
     }
     @media (min-width: 640px) { .sticky-cta { display: none; } }
 
@@ -673,7 +685,7 @@
       background: #fff;
       border: none;
       border-radius: 14px;
-      padding: 12px 14px;
+      padding: 20px 24px;
       box-shadow: 0 6px 24px rgba(0,0,0,0.25);
       max-width: 480px;
       margin: 0 auto;
@@ -698,8 +710,8 @@
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 14px;
+      padding: 14px 20px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       transition: background 0.2s, transform 0.1s;
@@ -774,39 +786,118 @@
       text-decoration: underline;
     }
 
-    /* sticky診断UI */
+    /* sticky診断UI（スリム横並びバー） */
+    @media (min-width: 640px) { #sticky-diag { display: none; } }
+    #sticky-diag {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      width: 100%;
+    }
+    #sticky-diag.is-result {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      max-height: 40vh;
+      overflow-y: auto;
+    }
     .sticky-diag-box {
       background: transparent;
       border: none;
       backdrop-filter: none;
       padding: 0;
       flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: none;
+      max-width: none;
+      margin: 0;
     }
     .sticky-diag-q {
-      color: #fff;
-      font-size: 13px;
-      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 0;
+      text-align: left;
+      flex: 0 0 auto;
+      white-space: nowrap;
+      line-height: 1.3;
     }
-    .sticky-diag-btns { gap: 8px; justify-content: flex-start; }
-    .sticky-diag-btn {
-      font-size: 12px;
-      padding: 8px 14px;
+    #sticky-diag:not(.is-result) .sticky-diag-box {
+      width: 100%;
+    }
+    .sticky-diag-btns {
+      flex: 1;
+      flex-direction: row;
+      gap: 6px;
       min-width: 0;
-      flex: none;
+    }
+    .sticky-diag-btn {
+      flex: 1;
+      font-size: 12px;
+      padding: 10px 6px;
+      min-width: 0;
+      width: auto;
+      text-align: center;
+      border-radius: 999px;
+      box-shadow: none;
+      animation: none;
+      background: var(--warm-white);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+    .sticky-diag-btn::after { content: none; }
+    .sticky-diag-btn:active { transform: scale(0.97); }
+    .sticky-diag-btn-primary {
+      flex: 1.15;
+      background: var(--cta);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 8px rgba(6, 199, 85, 0.35);
     }
     .sticky-diag-result {
       flex: 1;
+      width: 100%;
+      color: var(--ink);
+      text-align: left;
     }
-    .sticky-diag-result .result-label { font-size: 10px; }
-    .sticky-diag-result .result-name { font-size: 14px; margin-bottom: 6px; }
+    .sticky-diag-result .result-label {
+      font-size: 10px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .sticky-diag-result .result-card {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+    .sticky-diag-result .result-card-name {
+      font-size: 14px;
+      margin: 0 0 2px;
+    }
+    .sticky-diag-result .result-card-sub {
+      font-size: 11px;
+      margin-bottom: 0;
+    }
+    .sticky-diag-result .result-card-body { flex: 1; min-width: 0; }
     .sticky-diag-result .result-cta {
       font-size: 13px;
-      padding: 10px 20px;
+      padding: 10px 16px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .sticky-diag-result .result-retry { font-size: 11px; margin-top: 6px; }
-    @media (min-width: 640px) { #sticky-diag { display: none; } }
-    /* sticky内はcolumn配置 */
-    #sticky-diag { flex-direction: column; padding: 12px 16px; gap: 0; }
+    .sticky-diag-result .result-cta-sub { display: none; }
+    .sticky-diag-result .result-retry {
+      font-size: 11px;
+      margin-top: 4px;
+      color: var(--text-muted);
+      text-align: center;
+    }
   </style>
 
   <!-- Google Analytics GA4 -->
@@ -819,11 +910,38 @@
   </script>
   <!-- Microsoft Clarity -->
   <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w6fgeud38o");</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Article",
+  "headline":"ファクタリング比較2026｜手数料・スピード・業者選び",
+  "description":"ファクタリングの手数料相場・2社間と3社間の違い・入金スピード・悪徳業者の見分け方を解説。",
+  "url":"https://www.qolmedia.info/factoring-lp.html",
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://www.qolmedia.info/factoring-lp.html"},
+  "dateModified":"2026-08-27",
+  "inLanguage":"ja-JP",
+  "author":{"@type":"Organization","name":"QOL media","url":"https://www.qolmedia.info/about"},
+  "publisher":{"@type":"Organization","name":"QOL media","url":"https://www.qolmedia.info","logo":{"@type":"ImageObject","url":"https://www.qolmedia.info/QOL_logo_transparent.png"}}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"ファクタリングは借金になりますか？","acceptedAnswer":{"@type":"Answer","text":"ファクタリングは売掛金の売買取引であり、融資とは異なります。ただし契約条件は業者ごとに異なるため、契約前に確認してください。"}},
+    {"@type":"Question","name":"ファクタリングの手数料相場はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"2社間と3社間で目安が異なり、売掛金額や売掛先の信用力でも変動します。複数社から見積もりを取り、総額で比較してください。"}},
+    {"@type":"Question","name":"悪徳業者を避けるにはどうすればよいですか？","acceptedAnswer":{"@type":"Answer","text":"手数料や入金額を明示しない業者、契約前に費用を請求する業者には注意し、契約書と運営会社の情報を確認してください。"}}
+  ]
+}
+</script>
 </head>
 <body>
 
+<div style="padding:9px 20px;background:#f7f9fc;border-bottom:1px solid #e2e8f0;color:#64748b;font-size:12px;text-align:center;line-height:1.6;">本ページにはアフィリエイト広告が含まれます。手数料・入金条件は各社の公式情報と見積もりでご確認ください。</div>
+
 <!-- 月末カウントダウンバナー（25日以降のみ表示・最上面） -->
-<div id="month-end-banner" style="display:none;position:relative;z-index:9999;background:linear-gradient(90deg,#ff4500,#ffcc00);color:#fff;font-size:15px;font-weight:800;text-align:center;padding:10px 16px;letter-spacing:0.04em;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>
+<div id="month-end-banner" style="display:none;position:relative;z-index:9999;background:linear-gradient(90deg,#ff4500,#ffcc00);color:#fff;font-size:17px;font-weight:800;text-align:center;padding:10px 16px;letter-spacing:0.04em;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>
 
 <!-- HEADER -->
 <header class="site-header">
@@ -837,18 +955,24 @@
 <section class="hero">
   <div class="hero-eyebrow">ファクタリング 完全比較ガイド 2026</div>
   <h1>売掛金を<em>最短即日</em>で資金化。<br>手数料・スピードで選ぶ最適業者</h1>
-  <p class="hero-sub">審査なし・担保不要・最短2時間入金。資金繰りに悩む中小企業・個人事業主のための、失敗しない業者選びを徹底解説。</p>
-  <div class="hero-cta-wrap" id="hero-diag-wrap">
-    <!-- 診断UI（FV内） -->
-    <div class="diag-box" id="diag-hero">
-      <p class="diag-q">資金調達の希望スピードは？</p>
-      <div class="diag-btns">
-        <button class="diag-btn" onclick="diagSelect('hero','fast')">⚡ 即日・最速で欲しい</button>
-        <button class="diag-btn" onclick="diagSelect('hero','low')">💰 手数料を抑えたい</button>
-        <button class="diag-btn" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--cta-dark);border:2px solid var(--cta);box-shadow:none;">📋 複数社を相見積もり</button>
-      </div>
+  <p class="hero-sub">担保・保証人不要の選択肢。資金繰りに悩む中小企業・個人事業主のために、手数料・入金条件・注意点を比較します。</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">最短</span>
+      <div class="hero-stat-label">2時間で入金</div>
     </div>
-    <div class="diag-result" id="diag-hero-result" style="display:none;"></div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">1%〜</span>
+      <div class="hero-stat-label">手数料（2社間）</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">審査</span>
+      <div class="hero-stat-label">売掛先が基準</div>
+    </div>
+  </div>
+  <div style="position:relative;margin-top:24px;">
+    <a href="#compare" style="display:inline-block;background:var(--cta);color:#fff;font-size:15px;font-weight:700;padding:16px 32px;border-radius:4px;text-decoration:none;">▶ おすすめ業者比較表を見る</a>
+    <span style="display:block;margin-top:10px;font-size:11px;opacity:0.85;">手数料・即日入金で比較（無料相談）</span>
   </div>
 </section>
 
@@ -875,9 +999,9 @@
 </section>
 
 <!-- DIVIDER -->
-<div class="divider-banner">
-  その悩み、ファクタリングで今日中に解決できます。<br>
-  <span>正規業者・低手数料・最短即日入金の情報だけを厳選しました</span>
+  <div class="divider-banner">
+  その悩み、ファクタリングで解決できる可能性があります。<br>
+  <span>手数料・入金条件・契約前に確認したい情報を整理しました</span>
 </div>
 
 <!-- MECHANISM -->
@@ -966,51 +1090,51 @@
           </tr>
         </thead>
         <tbody id="compare-tbody">
-          <!-- ↓ factoring-data.js で上書き可能 -->
+          <!-- ↓ factoring-data.js で上書き可能。JS無効時も実データを表示 -->
           <tr>
-            <td class="company-name">A社<span class="badge-recommend">おすすめ</span></td>
-            <td>2〜9%</td>
-            <td><span class="badge-fast">最短2時間</span></td>
-            <td>95%以上</td>
+            <td class="company-name">株式会社No.1<span class="badge-recommend">おすすめ</span></td>
+            <td>1〜15%</td>
+            <td>最短即日</td>
+            <td>要確認</td>
             <td>法人・個人事業主</td>
-            <td>オンライン完結・24時間申し込み可能</td>
-            <td class="cta-cell"><a href="#PLACEHOLDER_A" target="_blank">無料相談する</a></td>
+            <td>最大1億円まで対応可能</td>
+            <td class="cta-cell"><a href="https://px.a8.net/svt/ejp?a8mat=4B1G9M+5GH3YA+4EKW+TRVYQ" target="_blank" rel="sponsored nofollow noopener">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name">B社</td>
-            <td>1.5〜8%</td>
-            <td><span class="badge-fast">最短即日</span></td>
-            <td>90%以上</td>
+            <td class="company-name">ジャパンマネジメント</td>
+            <td>10〜20%</td>
+            <td>最短即日</td>
+            <td>要確認</td>
+            <td>法人・個人事業主</td>
+            <td>最大5,000万円まで対応可能</td>
+            <td class="cta-cell"><a href="https://px.a8.net/svt/ejp?a8mat=4B1G9M+5L8KSI+3V6A+5YJRM" target="_blank" rel="sponsored nofollow noopener">無料相談する</a></td>
+          </tr>
+          <tr>
+            <td class="company-name">株式会社アクシアプラス<span class="badge-recommend">おすすめ</span></td>
+            <td>4%〜</td>
+            <td>最短即日</td>
+            <td>要確認</td>
+            <td>法人のみ</td>
+            <td>土日祝日・平日時間外の振込にも対応</td>
+            <td class="cta-cell"><a href="https://px.a8.net/svt/ejp?a8mat=3N82JP+4YM3SY+4HV8+5YJRM" target="_blank" rel="sponsored nofollow noopener">無料相談する</a></td>
+          </tr>
+          <tr>
+            <td class="company-name">PayToday</td>
+            <td>1〜9.5%</td>
+            <td>最短即日</td>
+            <td>要確認</td>
             <td>法人・個人事業主</td>
             <td>低手数料・少額から対応（10万円〜）</td>
-            <td class="cta-cell"><a href="#PLACEHOLDER_B" target="_blank">無料相談する</a></td>
+            <td class="cta-cell"><a href="https://px.a8.net/svt/ejp?a8mat=3N83C4+6J6A9U+4OPW+5YRHE" target="_blank" rel="sponsored nofollow noopener">無料相談する</a></td>
           </tr>
           <tr>
-            <td class="company-name">C社</td>
-            <td>3〜10%</td>
-            <td>最短翌日</td>
-            <td>85%以上</td>
-            <td>法人のみ</td>
-            <td>高額対応（1億円以上）・大企業向け</td>
-            <td class="cta-cell"><a href="#PLACEHOLDER_C" target="_blank">無料相談する</a></td>
-          </tr>
-          <tr>
-            <td class="company-name">D社</td>
-            <td>5〜20%</td>
+            <td class="company-name">うりかけ堂<span class="badge-recommend">おすすめ</span></td>
+            <td>2%〜</td>
             <td><span class="badge-fast">最短2時間</span></td>
-            <td>98%以上</td>
+            <td>要確認</td>
             <td>法人・個人事業主</td>
-            <td>審査通過率No.1・赤字・税滞納でも可</td>
-            <td class="cta-cell"><a href="#PLACEHOLDER_D" target="_blank">無料相談する</a></td>
-          </tr>
-          <tr>
-            <td class="company-name">E社</td>
-            <td>2〜12%</td>
-            <td>最短翌日</td>
-            <td>88%以上</td>
-            <td>法人・個人事業主</td>
-            <td>医療・建設業界に強い専門型</td>
-            <td class="cta-cell"><a href="#PLACEHOLDER_E" target="_blank">無料相談する</a></td>
+            <td>少額から対応（10万円〜）</td>
+            <td class="cta-cell"><a href="https://px.a8.net/svt/ejp?a8mat=3N81RK+6JRPVM+4S8A+5YJRM" target="_blank" rel="sponsored nofollow noopener">無料相談する</a></td>
           </tr>
         </tbody>
       </table>
@@ -1130,9 +1254,10 @@
   <p class="cta-label">▼ おすすめ業者</p>
   <h2>資金繰りの悩みを<br><em>今日中</em>に解決する</h2>
   <p>手数料・スピード・審査通過率で厳選した業者に無料相談。</p>
-  <a href="https://px.a8.net/svt/ejp?a8mat=3N83C4+6JRPVM+4OCA+60OXE" class="cta-btn" target="_blank">
-    おすすめ業者に無料相談する
-    <span class="cta-btn-sub">最短2時間入金 / 審査通過率95%以上 / 無料</span>
+  <a href="https://px.a8.net/svt/ejp?a8mat=4B1G9M+5GH3YA+4EKW+TRVYQ" class="cta-btn" target="_blank" rel="nofollow noopener"
+    onclick="if(typeof gtag==='function')gtag('event','cta_click',{event_category:'affiliate',event_label:'株式会社No.1',cta_location:'footer_cta'})">
+    株式会社No.1に無料相談する
+    <span class="cta-btn-sub">比較表1位・最大1億円対応 / 無料</span>
   </a>
   <p class="cta-note">※ 当サイトはアフィリエイト広告を含みます</p>
 </section>
@@ -1170,8 +1295,16 @@
 </footer>
 
 <!-- STICKY DIAG (mobile) -->
-<div class="sticky-cta" id="sticky-diag" style="padding:10px 16px;">
-  <button class="diag-btn" onclick="document.getElementById('diag-hero').scrollIntoView({behavior:'smooth',block:'center'});" style="width:100%;font-size:15px;padding:12px 20px;text-align:center;">📋 あなたに合う業者は？</button>
+<div class="sticky-cta" id="sticky-diag">
+  <div class="diag-box sticky-diag-box" id="diag-sticky">
+    <p class="diag-q sticky-diag-q">おすすめ診断</p>
+    <div class="diag-btns sticky-diag-btns">
+      <button type="button" class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','fast')">⚡ 即日</button>
+      <button type="button" class="diag-btn sticky-diag-btn" onclick="diagSelect('sticky','low')">💰 低コスト</button>
+      <button type="button" class="diag-btn sticky-diag-btn sticky-diag-btn-primary" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})">相見積もり →</button>
+    </div>
+  </div>
+  <div class="diag-result sticky-diag-result" id="diag-sticky-result" style="display:none;"></div>
 </div>
 
 <!-- ===== 比較テーブルデータ上書き用 =====
@@ -1229,7 +1362,7 @@
       label: 'コスト重視ならコレ',
       name: '株式会社No.1',
       sub: '手数料1%〜 / 繰り返し利用に最適',
-      cta_sub: '無料相談・審査通過率No.1',
+      cta_sub: '無料相談・条件を確認',
       url: 'https://px.a8.net/svt/ejp?a8mat=4B1G9M+5GH3YA+4EKW+TS3OI',
       img: 'https://www29.a8.net/svt/bgt?aid=260408218337&wid=003&eno=01&mid=s00000020552001008000&mc=1',
       pixel: '<img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4B1G9M+5GH3YA+4EKW+TS3OI" alt="" style="position:absolute;opacity:0;">'
@@ -1240,26 +1373,43 @@
     const d = DIAG_DATA[answer];
     const boxId    = ctx === 'hero' ? 'diag-hero' : 'diag-sticky';
     const resultId = ctx === 'hero' ? 'diag-hero-result' : 'diag-sticky-result';
+    const isSticky = ctx === 'sticky';
 
     gtag('event', 'diag_select', { event_category: 'cta', event_label: answer });
 
     document.getElementById(boxId).style.display = 'none';
     const resultEl = document.getElementById(resultId);
-    resultEl.innerHTML =
-      '<span class="result-label">あなたへのおすすめ</span>' +
-      '<div class="result-card">' +
-        '<a href="' + d.url + '" target="_blank" rel="nofollow noopener" style="display:block;" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
-          '<img src="' + d.img + '" alt="' + d.name + '" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto;border-radius:8px;">' +
-        '</a>' +
-        '<p class="result-card-name">' + d.name + '</p>' +
-        '<p class="result-card-sub">' + d.sub + '</p>' +
-        '<a href="' + d.url + '" class="result-cta" target="_blank" rel="nofollow noopener" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
-          '無料相談する' +
-          '<span class="result-cta-sub">' + d.cta_sub + '</span>' +
-        '</a>' +
-        d.pixel +
-      '</div>' +
-      '<span class="result-retry" onclick="diagReset(\'' + ctx + '\')">← もう一度診断する</span>';
+
+    if (isSticky) {
+      document.getElementById('sticky-diag').classList.add('is-result');
+      resultEl.innerHTML =
+        '<span class="result-label">' + d.label + '</span>' +
+        '<div class="result-card">' +
+          '<div class="result-card-body">' +
+            '<p class="result-card-name">' + d.name + '</p>' +
+            '<p class="result-card-sub">' + d.sub + '</p>' +
+          '</div>' +
+          '<a href="' + d.url + '" class="result-cta" target="_blank" rel="sponsored nofollow noopener" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">無料相談</a>' +
+          d.pixel +
+        '</div>' +
+        '<span class="result-retry" onclick="diagReset(\'sticky\')">← もう一度診断する</span>';
+    } else {
+      resultEl.innerHTML =
+        '<span class="result-label">あなたへのおすすめ</span>' +
+        '<div class="result-card">' +
+          '<a href="' + d.url + '" target="_blank" rel="sponsored nofollow noopener" style="display:block;" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
+            '<img src="' + d.img + '" alt="' + d.name + '" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto;border-radius:8px;">' +
+          '</a>' +
+          '<p class="result-card-name">' + d.name + '</p>' +
+          '<p class="result-card-sub">' + d.sub + '</p>' +
+          '<a href="' + d.url + '" class="result-cta" target="_blank" rel="sponsored nofollow noopener" onclick="gtag(\'event\',\'cta_click\',{event_category:\'affiliate\',event_label:\'' + d.name + '\'})">' +
+            '無料相談する' +
+            '<span class="result-cta-sub">' + d.cta_sub + '</span>' +
+          '</a>' +
+          d.pixel +
+        '</div>' +
+        '<span class="result-retry" onclick="diagReset(\'' + ctx + '\')">← もう一度診断する</span>';
+    }
     resultEl.style.display = 'block';
   }
 
@@ -1268,6 +1418,9 @@
     const resultId = ctx === 'hero' ? 'diag-hero-result' : 'diag-sticky-result';
     document.getElementById(boxId).style.display = '';
     document.getElementById(resultId).style.display = 'none';
+    if (ctx === 'sticky') {
+      document.getElementById('sticky-diag').classList.remove('is-result');
+    }
   }
 </script>
 
@@ -1281,12 +1434,16 @@
   animation: textBlink 1s step-start infinite;
   font-size: 0.9em;
 }
-  0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
-  50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
+@keyframes ctaPulse {
+  0%,100% { box-shadow: 0 3px 12px rgba(6,199,85,0.4), 0 0 0 0 rgba(6,199,85,0.6); }
+  50%      { box-shadow: 0 3px 12px rgba(6,199,85,0.4), 0 0 0 10px rgba(6,199,85,0); }
 }
-.diag-btn { animation: ctaPulse 2s infinite; }
+.diag-btn:not(.sticky-diag-btn) { animation: ctaPulse 2s infinite; }
 #lp-toast {
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+  position: fixed;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
   background: #1a1a2e; color: #fff; font-size: 13px; font-weight: 700;
   padding: 12px 20px; border-radius: 30px; white-space: nowrap;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9999;
@@ -1327,13 +1484,13 @@
   var now = new Date();
   var day = now.getDate();
   var lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-  var remaining = lastDay - day + 1;
+  var remaining = lastDay - day;
   if(day >= 25){
     var banner = document.getElementById('month-end-banner');
     if(remaining === 0){
       banner.textContent = '⚠️ 今日が今月の最終日！月内入金は本日中の申込が必須です';
     } else {
-      banner.textContent = '⏰ 今月も残りあと' + remaining + '日';
+      banner.textContent = '⏰ 今月も残りあと' + remaining + '日｜月内に資金化するなら今がラストチャンス';
     }
     banner.style.display = 'block';
     gtag('event', 'month_end_banner_show', { event_category: 'engagement', event_label: 'remaining_' + remaining });

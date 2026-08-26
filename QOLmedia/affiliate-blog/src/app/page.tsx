@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'QOL media | Quality Of Life情報メディア',
   description: '生活の質（QOL）を高める情報をお届けするメディア。',
+  alternates: { canonical: '/' },
 }
 
 const CATEGORIES = [
@@ -68,9 +69,9 @@ export default function Home() {
                       color:'#fff', fontSize:'11px', fontWeight:'700',
                       padding:'3px 10px', borderRadius:'2px', marginBottom:'10px',
                     }}>{featured.category}</span>
-                    <h2 className="fv-title" style={{fontSize:'26px', fontWeight:'700', color:'#fff', lineHeight:'1.45', margin:'0 0 8px'}}>
+                    <h1 className="fv-title" style={{fontSize:'26px', fontWeight:'700', color:'#fff', lineHeight:'1.45', margin:'0 0 8px'}}>
                       {featured.title}
-                    </h2>
+                    </h1>
                     <p className="fv-desc" style={{fontSize:'13px', color:'rgba(255,255,255,0.75)', lineHeight:'1.7', margin:0, maxWidth:'580px'}}>
                       {featured.description}
                     </p>

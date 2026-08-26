@@ -1,4 +1,4 @@
-import { getAllPosts, getPostBySlug } from '@/lib/posts'
+import { getAllPosts, getPostBySlug, getPostImage } from '@/lib/posts'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
@@ -18,11 +18,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.description,
+    alternates: {
+      canonical: `/posts/${post.slug}`,
+    },
+    robots: { index: true, follow: true },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
       publishedTime: post.date,
+      url: `/posts/${post.slug}`,
+      siteName: 'QOL media',
+      locale: 'ja_JP',
+      images: [{ url: getPostImage(post), alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [getPostImage(post)],
     },
   }
 }
@@ -139,8 +153,35 @@ export default async function PostPage({ params }: Props) {
             headline: post.title,
             description: post.description,
             datePublished: post.date,
+            dateModified: post.date,
+            url: `https://www.qolmedia.info/posts/${post.slug}`,
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': `https://www.qolmedia.info/posts/${post.slug}`,
+            },
+            image: [`https://www.qolmedia.info${getPostImage(post)}`],
             keywords: post.tags.join(', '),
-            publisher: { '@type': 'Organization', name: 'QOL media' },
+            author: { '@type': 'Organization', name: 'QOL media', url: 'https://www.qolmedia.info/about' },
+            publisher: {
+              '@type': 'Organization',
+              name: 'QOL media',
+              url: 'https://www.qolmedia.info',
+              logo: { '@type': 'ImageObject', url: 'https://www.qolmedia.info/QOL_logo_transparent.png' },
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'QOL media', item: 'https://www.qolmedia.info/' },
+              { '@type': 'ListItem', position: 2, name: post.category, item: `https://www.qolmedia.info/${post.category === 'ペット' ? 'pet' : post.category === '健康' ? 'health' : post.category === '睡眠' ? 'sleep' : 'life'}` },
+              { '@type': 'ListItem', position: 3, name: post.title, item: `https://www.qolmedia.info/posts/${post.slug}` },
+            ],
           }),
         }}
       />
