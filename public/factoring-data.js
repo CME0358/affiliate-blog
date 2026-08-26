@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
     tbody.innerHTML = rows.map(r => `
       <tr>
         <td class="company-name">
-          <a href="${r.ctaUrl}" target="_blank" rel="nofollow noopener"
+          <a href="${r.ctaUrl}" target="_blank" rel="sponsored nofollow noopener"
             onclick="if(typeof gtag==='function')gtag('event','cta_click',{event_category:'affiliate',event_label:'${r.name}',cta_location:'compare_name'})">
             ${r.name}
           </a>${r.badge ? '<span class="badge-recommend">' + r.badge + '</span>' : ''}
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <td>${r.target}</td>
         <td>${r.feature}</td>
         <td class="cta-cell">
-          <a href="${r.ctaUrl}" target="_blank" rel="nofollow noopener"
+          <a href="${r.ctaUrl}" target="_blank" rel="sponsored nofollow noopener"
             onclick="if(typeof gtag==='function')gtag('event','cta_click',{event_category:'affiliate',event_label:'${r.name}',cta_location:'compare_cta'})">
             ${r.ctaText}
           </a>
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const recHtml = sorted.length
         ? sorted.map(r =>
-            `<a href="${r.ctaUrl}" target="_blank" rel="nofollow noopener" class="type-card-rec-link"
+            `<a href="${r.ctaUrl}" target="_blank" rel="sponsored nofollow noopener" class="type-card-rec-link"
               onclick="if(typeof gtag==='function')gtag('event','cta_click',{event_category:'affiliate',event_label:'${r.name}',cta_location:'type_card_${cfg.key}'})">
               <span class="type-card-rec-badge">おすすめ</span>${r.name}
             </a>`

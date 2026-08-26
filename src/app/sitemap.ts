@@ -17,6 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${siteUrl}/`, lastModified: now, changeFrequency: 'daily', priority: 1 },
+    // public/ 配下の静的LPはNext.jsのルート自動検出に含まれないため明示する
+    { url: `${siteUrl}/factoring-lp.html`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${siteUrl}/hc-guide.html`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${siteUrl}/sleep-guide.html`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${siteUrl}/pet-lp.html`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${siteUrl}/pet`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
     { url: `${siteUrl}/health`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
     { url: `${siteUrl}/life`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
@@ -35,4 +40,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...postRoutes]
 }
-

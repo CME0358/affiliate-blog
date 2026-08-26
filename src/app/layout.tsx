@@ -3,11 +3,37 @@ import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.qolmedia.info'),
   title: { default: 'QOL media | Quality Of Life情報メディア', template: '%s | QOL media' },
   description: '生活の質（QOL）を高める情報をお届けするメディア。ペットケア・健康・暮らしのヒントをわかりやすく解説します。',
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   alternates: {
     canonical: 'https://www.qolmedia.info',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'QOL media',
+    locale: 'ja_JP',
+    title: 'QOL media | Quality Of Life情報メディア',
+    description: '生活の質（QOL）を高める情報をお届けするメディア。',
+    url: 'https://www.qolmedia.info',
+    images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'QOL media' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'QOL media | Quality Of Life情報メディア',
+    description: '生活の質（QOL）を高める情報をお届けするメディア。',
+    images: ['/og-default.svg'],
   },
   icons: {
     icon: [
@@ -23,6 +49,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body style={{margin:0, padding:0, fontFamily:'-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif', backgroundColor:'#fff', color:'#1a1a1a'}}>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'QOL media',
+              url: 'https://www.qolmedia.info',
+              logo: 'https://www.qolmedia.info/QOL_logo_transparent.png',
+            }),
+          }}
+        />
 
         {/* --- Google AdSense --- */}
         <Script

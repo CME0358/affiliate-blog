@@ -44,6 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${label}の記事一覧 | QOL media`,
     description: `QOL mediaの${label}カテゴリ記事一覧です。`,
+    alternates: { canonical: `/${category}` },
   }
 }
 
@@ -116,9 +117,9 @@ export default async function CategoryPage({ params }: Props) {
       <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '28px 20px 60px' }}>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
           <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: color, display: 'inline-block', marginRight: '8px' }} />
-          <h2 style={{ fontSize: '12px', fontWeight: '700', color: '#6b7280', letterSpacing: '0.12em', textTransform: 'uppercase', margin: 0 }}>
+          <h1 style={{ fontSize: '20px', fontWeight: '700', color: '#111827', letterSpacing: '0.04em', margin: 0 }}>
             {label} <span style={{ color: '#9ca3af', fontWeight: '400' }}>— {posts.length}件</span>
-          </h2>
+          </h1>
         </div>
 
         {posts.length === 0 ? (
