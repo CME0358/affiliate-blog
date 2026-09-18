@@ -1,6 +1,7 @@
 ---
 title: "スマホ見すぎて眠れない対策｜ブルーライトより怖い本当の原因"
 date: "2026-04-07"
+updated: "2026-09-18"
 description: "スマホで眠れない原因はブルーライトだけではありません。脳の覚醒と光刺激の関係を科学的に解説し、今日からできる対策とおすすめアイマスクを紹介します。"
 category: "睡眠"
 tags: ["睡眠", "スマホ依存", "ブルーライト", "アイマスク", "不眠対策"]
@@ -132,3 +133,12 @@ A. 影響します。医学的に、子どもは大人より光刺激に敏感�
 すべてを一度に変える必要はありません。まず1つだけ試してみてください。今夜、スマホを寝室の外に置いてみる。それだけで明日の目覚めが変わるはずです。
 
 [快眠をサポートする遮光アイマスクの詳細を見る](https://amzn.to/41ibR1E)
+
+
+## 次のステップ：悩み別の比較
+
+首・頭の支えやいびき対策だけでなく、寝つき・中途覚醒の悩み別に出発点を変えると比較しやすいです。効能や「必ず眠れる」ことは保証できません。料金は公式情報で確認してください。
+
+**[寝つき・中途覚醒の対策比較ガイド](/sleep-guide.html?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=sumaho-nemurenai-eyemask)**
+
+成分の並べ方を先に整理したい場合は、[睡眠サプリ比較ランキング2026](/posts/suimin-supplement-ranking-2026?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=sumaho-nemurenai-eyemask) も参照してください。

@@ -1,6 +1,7 @@
 ---
 title: "寝る前ルーティンにアロマを取り入れる効果と選び方"
 date: "2026-04-07"
+updated: "2026-09-18"
 description: "寝る前のアロマ習慣で睡眠の質が変わります。科学的に効果が認められた香りの選び方と、おすすめのエッセンシャルオイルを専門家監修のもと解説します。"
 category: "睡眠"
 tags: ["睡眠", "アロマ", "ナイトルーティン"]
@@ -136,3 +137,12 @@ A. ストレス性の不眠にはベルガモット、考え事が止まらな�
 まず1週間、試してみてください。朝の目覚めが変わるはずです。
 
 [生活の木 エッセンシャルオイルをAmazonでチェック](https://amzn.to/4t5Nlx2)
+
+
+## 次のステップ：悩み別の比較
+
+生活習慣の見直しと並行して、アイテム比較が必要になったときの出発点です。効能や「必ず眠れる」ことは保証できません。料金は公式で確認してください。
+
+**[寝つき・中途覚醒の対策比較ガイド](/sleep-guide.html?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=neru-mae-routine-aroma)**
+
+成分の並べ方を先に整理したい場合は、[睡眠サプリ比較ランキング2026](/posts/suimin-supplement-ranking-2026?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=neru-mae-routine-aroma) も参照してください。

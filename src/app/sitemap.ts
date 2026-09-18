@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/posts'
+import { HC_CLUSTER_POSTS } from '@/lib/site'
 
 function getSiteUrl(): string {
   return 'https://www.qolmedia.info'
@@ -31,11 +32,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
   ]
 
+  const hcClusterSlugs = new Set<string>(HC_CLUSTER_POSTS.map(item => item.slug))
+
   const postRoutes: MetadataRoute.Sitemap = getAllPosts().map(post => ({
     url: `${siteUrl}/posts/${post.slug}`,
     lastModified: toLastModified(post.updated || post.date) ?? now,
     changeFrequency: 'weekly',
-    priority: post.slug === 'aga-hiyo-hikaku-2026' ? 0.85 : post.slug === 'suimin-supplement-ranking-2026' ? 0.8 : 0.6,
+    priority: hcClusterSlugs.has(post.slug)
+      ? 0.85
+      : post.slug === 'suimin-supplement-ranking-2026'
+        ? 0.8
+        : 0.6,
   }))
 
   return [...staticRoutes, ...postRoutes]

@@ -1,6 +1,7 @@
 ---
 title: "自律神経の乱れと睡眠の関係｜整えるサプリと生活習慣の科学"
 date: "2026-03-30"
+updated: "2026-09-18"
 description: "自律神経の乱れが睡眠に与える影響を科学的に解説。HRV研究データをもとに、テアニンやリラクミンなど効果的なサプリと生活習慣改善法を紹介します。"
 category: "睡眠"
 tags: ["睡眠", "自律神経", "サプリメント", "テアニン", "生活習慣"]
@@ -115,3 +116,12 @@ A. スマートウォッチやウェアラブル端末でHRVを測定できま�
 テアニンとリラクミンの併用は、科学的に効果が認められた組み合わせです。これに加えて、朝の太陽光浴び、夜のデジタルデトックス、ぬるめの入浴を習慣化することで、より確実に自律神経を整えられます。
 
 まず1つだけ試してみてください。今夜からスマートフォンを就寝2時間前にオフにするだけでも、睡眠の変化を感じられるはずです。
+
+
+## 次のステップ：悩み別の比較
+
+食品としての成分比較と、枕・マットレスなど環境側の見方を分けて並べると判断しやすいです。サプリは食品であり睡眠薬ではありません。効能は保証できません。
+
+**[寝つき・中途覚醒の対策比較ガイド](/sleep-guide.html?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=jiritsu-shinkei-suimin-supplement)**
+
+成分の並べ方を先に整理したい場合は、[睡眠サプリ比較ランキング2026](/posts/suimin-supplement-ranking-2026?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=jiritsu-shinkei-suimin-supplement) も参照してください。

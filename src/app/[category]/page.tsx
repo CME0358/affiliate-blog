@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getAllPosts, getPostImage } from '@/lib/posts'
+import { HC_CLUSTER_POSTS } from '@/lib/site'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
@@ -40,7 +41,7 @@ const CATEGORY_META: Record<string, { title: string; description: string }> = {
   },
   health: {
     title: '健康・AGA費用比較の記事一覧',
-    description: 'AGA治療の費用比較（初月キャンペーンと半年〜1年の総額の見方）など、健康カテゴリの記事一覧。料金や効果は断定しません。',
+    description: 'AGA治療の費用比較（初月料金、オンライン診療、カウンセリングで聞くこと、薬と植毛の単位）など、健康カテゴリの記事一覧。料金や効果は断定しません。',
   },
   life: {
     title: '暮らしの記事一覧',
@@ -143,47 +144,91 @@ export default async function CategoryPage({ params }: Props) {
         </div>
 
         {category === 'health' && (
-          <a
-            href="/hc-guide.html"
-            style={{
-              display: 'block',
-              marginBottom: '20px',
-              padding: '14px 16px',
-              backgroundColor: '#f5f3ff',
-              border: '1px solid #ddd6fe',
-              borderRadius: '8px',
-              textDecoration: 'none',
-            }}
-          >
-            <strong style={{ display: 'block', fontSize: '14px', color: '#5b21b6', marginBottom: '4px' }}>
-              AGA治療の費用比較ガイド
-            </strong>
-            <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
-              初月キャンペーンと総額の見方を整理し、無料カウンセリングで確認する流れをまとめています。
-            </span>
-          </a>
+          <div style={{ marginBottom: '20px' }}>
+            <a
+              href="/hc-guide.html"
+              style={{
+                display: 'block',
+                marginBottom: '12px',
+                padding: '14px 16px',
+                backgroundColor: '#f5f3ff',
+                border: '2px solid #7c3aed',
+                borderRadius: '8px',
+                textDecoration: 'none',
+              }}
+            >
+              <strong style={{ display: 'block', fontSize: '14px', color: '#5b21b6', marginBottom: '4px' }}>
+                AGA治療の費用比較ガイド
+              </strong>
+              <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
+                初月キャンペーンと総額の見方を整理し、無料カウンセリングで確認する流れをまとめています。健康カテゴリの第一導線です。
+              </span>
+            </a>
+            <p style={{ fontSize: '11px', fontWeight: 700, color: '#6b7280', letterSpacing: '0.08em', margin: '0 0 8px' }}>
+              AGA費用の関連記事
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {HC_CLUSTER_POSTS.map(item => (
+                <Link
+                  key={item.slug}
+                  href={'/posts/' + item.slug}
+                  className="cluster-row"
+                  style={{
+                    padding: '10px 12px',
+                    backgroundColor: '#fff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span className="cluster-label" style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{item.label}</span>
+                  <span className="cluster-hint" style={{ fontSize: '12px', color: '#6b7280' }}>{item.hint}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
         )}
 
         {category === 'sleep' && (
-          <a
-            href="/sleep-guide.html"
-            style={{
-              display: 'block',
-              marginBottom: '20px',
-              padding: '14px 16px',
-              backgroundColor: '#eff6ff',
-              border: '1px solid #bfdbfe',
-              borderRadius: '8px',
-              textDecoration: 'none',
-            }}
-          >
-            <strong style={{ display: 'block', fontSize: '14px', color: '#1d4ed8', marginBottom: '4px' }}>
-              寝つき・中途覚醒の対策比較ガイド
-            </strong>
-            <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
-              サプリ・枕・マットレスの選び方と受診目安を整理。比較ランキング記事と悩み別の確認導線があります。料金・効能は断定しません。
-            </span>
-          </a>
+          <div style={{ marginBottom: '20px' }}>
+            <a
+              href="/sleep-guide.html"
+              style={{
+                display: 'block',
+                marginBottom: '12px',
+                padding: '14px 16px',
+                backgroundColor: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                borderRadius: '8px',
+                textDecoration: 'none',
+              }}
+            >
+              <strong style={{ display: 'block', fontSize: '14px', color: '#1d4ed8', marginBottom: '4px' }}>
+                寝つき・中途覚醒の対策比較ガイド
+              </strong>
+              <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
+                サプリ・枕・マットレスの選び方と受診目安を整理。比較ランキング記事と悩み別の確認導線があります。料金・効能は断定しません。
+              </span>
+            </a>
+            <Link
+              href="/posts/suimin-supplement-ranking-2026"
+              style={{
+                display: 'block',
+                padding: '10px 12px',
+                backgroundColor: '#fff',
+                border: '1px solid #e5e7eb',
+                borderRadius: '6px',
+                textDecoration: 'none',
+              }}
+            >
+              <strong style={{ display: 'block', fontSize: '13px', color: '#111827', marginBottom: '2px' }}>
+                睡眠サプリ比較ランキング2026
+              </strong>
+              <span style={{ fontSize: '12px', color: '#6b7280' }}>
+                成分比較の読み方。詳細の悩み別導線は睡眠ガイドへ。
+              </span>
+            </Link>
+          </div>
         )}
 
         {posts.length === 0 ? (

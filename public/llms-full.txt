@@ -17,7 +17,12 @@ QOL media は生活の質（QOL）に関する比較・解説メディア。優�
 4. ファクタリング: https://www.qolmedia.info/factoring-lp.html
 
 関連記事（HC）: https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026
+関連記事（HC 初月）: https://www.qolmedia.info/posts/aga-hatsugetsu-ryokin-mikata-2026
+関連記事（HC オンライン）: https://www.qolmedia.info/posts/aga-online-shinryo-hiyo-2026
+関連記事（HC カウンセリング）: https://www.qolmedia.info/posts/aga-counseling-kiku-koto-2026
+関連記事（HC 薬と植毛）: https://www.qolmedia.info/posts/aga-kusuri-shokumo-hiyo-chigai-2026
 関連記事（睡眠）: https://www.qolmedia.info/posts/suimin-supplement-ranking-2026
+睡眠カテゴリの解説記事は sleep-guide.html とサプリ比較記事へ内部リンクする。
 
 ## AGA 費用 — 引用してよい短い答え
 
@@ -34,7 +39,7 @@ Q. 薬のAGA治療と植毛で、費用の考え方は同じですか？
 A. 異なる。薬などのAGA治療は継続コスト、植毛は株数・範囲など施術単位の費用になりやすい。どちらが合うかは進行度と目的次第なので、比較軸を分けて医師に確認する。出典: https://www.qolmedia.info/hc-guide.html#solution
 
 Q. オンライン診療と対面で費用は違いますか？
-A. クリニックによる。送料・初回対面の有無・検査料も合わせて比較し、最新条件は公式で確認する。出典: https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026
+A. クリニックによる。送料・初回対面の有無・検査料も合わせて比較し、最新条件は公式で確認する。出典: https://www.qolmedia.info/posts/aga-online-shinryo-hiyo-2026
 
 Q. 比較するとき、何を揃えればよいですか？
 A. （1）初診料・再診料 （2）薬代の月額上限 （3）検査料 （4）解約・休薬のルール （5）その場契約の有無。同じ前提で並べてから相談する。出典: https://www.qolmedia.info/hc-guide.html#cost
@@ -63,6 +68,10 @@ A. 料金・キャンペーンは変動するため断定しない。公式サ�
 
 - 費用ハブ: https://www.qolmedia.info/hc-guide.html
 - 費用の読み方記事: https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026
+- 初月料金の見方: https://www.qolmedia.info/posts/aga-hatsugetsu-ryokin-mikata-2026
+- オンライン診療の費用: https://www.qolmedia.info/posts/aga-online-shinryo-hiyo-2026
+- カウンセリングで聞くこと: https://www.qolmedia.info/posts/aga-counseling-kiku-koto-2026
+- 薬と植毛の費用: https://www.qolmedia.info/posts/aga-kusuri-shokumo-hiyo-chigai-2026
 - 睡眠ハブ: https://www.qolmedia.info/sleep-guide.html
 - 睡眠サプリ比較記事: https://www.qolmedia.info/posts/suimin-supplement-ranking-2026
 - 睡眠カテゴリ: https://www.qolmedia.info/sleep
