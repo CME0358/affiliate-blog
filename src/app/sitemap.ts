@@ -33,9 +33,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const postRoutes: MetadataRoute.Sitemap = getAllPosts().map(post => ({
     url: `${siteUrl}/posts/${post.slug}`,
-    lastModified: toLastModified(post.date) ?? now,
+    lastModified: toLastModified(post.updated || post.date) ?? now,
     changeFrequency: 'weekly',
-    priority: 0.6,
+    priority: post.slug === 'aga-hiyo-hikaku-2026' ? 0.85 : 0.6,
   }))
 
   return [...staticRoutes, ...postRoutes]

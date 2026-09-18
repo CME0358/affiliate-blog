@@ -1,11 +1,17 @@
 import Link from 'next/link'
 import { getAllPosts, getPostImage, getPickupImage } from '@/lib/posts'
+import { HOME_DESCRIPTION, HOME_TITLE, HUBS } from '@/lib/site'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'QOL media | Quality Of Life情報メディア',
-  description: '生活の質（QOL）を高める情報をお届けするメディア。',
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
   alternates: { canonical: '/' },
+  openGraph: {
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: '/',
+  },
 }
 
 const CATEGORIES = [
@@ -110,6 +116,39 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 比較ガイド（HCを埋もれさせない） */}
+      <div style={{backgroundColor:'#fff', borderBottom:'1px solid #e5e7eb'}}>
+        <div style={{maxWidth:'1080px', margin:'0 auto', padding:'14px 20px 16px'}}>
+          <p style={{fontSize:'11px', fontWeight:700, color:'#6b7280', letterSpacing:'0.12em', textTransform:'uppercase', margin:'0 0 10px'}}>
+            Comparison Guides
+          </p>
+          <div className="hub-row">
+            {HUBS.map(hub => (
+              <a
+                key={hub.href}
+                href={hub.href}
+                style={{
+                  display:'flex',
+                  flexDirection:'column',
+                  gap:'2px',
+                  textDecoration:'none',
+                  padding:'10px 12px',
+                  borderRadius:'8px',
+                  border: hub.primary ? '2px solid #7c3aed' : '1px solid #e5e7eb',
+                  backgroundColor: hub.primary ? '#f5f3ff' : '#fff',
+                  minWidth:'0',
+                }}
+              >
+                <span style={{fontSize:'13px', fontWeight:700, color: hub.primary ? '#5b21b6' : '#111827'}}>
+                  {hub.label}
+                </span>
+                <span style={{fontSize:'11px', color:'#6b7280'}}>{hub.hint}</span>
+              </a>
             ))}
           </div>
         </div>

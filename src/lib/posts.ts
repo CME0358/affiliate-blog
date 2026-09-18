@@ -4,17 +4,39 @@ import matter from 'gray-matter'
 
 const postsDir = path.join(process.cwd(), 'content/posts')
 
+export type PostFaq = {
+  q: string
+  a: string
+}
+
 export type Post = {
   slug: string
   title: string
   date: string
+  updated?: string
   description: string
   category: string
   tags: string[]
   image?: string
   pickupImage?: string
   published?: boolean
+  faq?: PostFaq[]
   content: string
+}
+
+function parseFaq(raw: unknown): PostFaq[] | undefined {
+  if (!Array.isArray(raw)) return undefined
+  const faq = raw
+    .map(item => {
+      if (!item || typeof item !== 'object') return null
+      const rec = item as Record<string, unknown>
+      const q = typeof rec.q === 'string' ? rec.q.trim() : ''
+      const a = typeof rec.a === 'string' ? rec.a.trim() : ''
+      if (!q || !a) return null
+      return { q, a }
+    })
+    .filter((item): item is PostFaq => item !== null)
+  return faq.length ? faq : undefined
 }
 
 // FVヒーロー用画像（1枚目固定）
@@ -73,12 +95,14 @@ export function getAllPosts(): Post[] {
         slug,
         title: data.title || '',
         date: data.date || '',
+        updated: data.updated || '',
         description: data.description || '',
         category: data.category || '未分類',
         tags: data.tags || [],
         image: data.image || '',
         pickupImage: data.pickupImage || '',
         published: data.published !== false,
+        faq: parseFaq(data.faq),
         content,
       }
     })
@@ -97,12 +121,14 @@ export function getPostBySlug(slug: string): Post | null {
     slug,
     title: data.title || '',
     date: data.date || '',
+    updated: data.updated || '',
     description: data.description || '',
     category: data.category || '未分類',
     tags: data.tags || [],
     image: data.image || '',
     pickupImage: data.pickupImage || '',
     published: data.published !== false,
+    faq: parseFaq(data.faq),
     content,
   }
 }

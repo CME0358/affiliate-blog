@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.qolmedia.info'),
-  title: { default: 'QOL media | Quality Of Life情報メディア', template: '%s | QOL media' },
-  description: '生活の質（QOL）を高める情報をお届けするメディア。ペットケア・健康・暮らしのヒントをわかりやすく解説します。',
+  metadataBase: new URL(SITE_URL),
+  title: { default: HOME_TITLE, template: '%s | QOL media' },
+  description: HOME_DESCRIPTION,
   robots: {
     index: true,
     follow: true,
@@ -18,21 +19,24 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://www.qolmedia.info',
+    canonical: SITE_URL,
+    types: {
+      'text/plain': '/llms.txt',
+    },
   },
   openGraph: {
     type: 'website',
-    siteName: 'QOL media',
+    siteName: SITE_NAME,
     locale: 'ja_JP',
-    title: 'QOL media | Quality Of Life情報メディア',
-    description: '生活の質（QOL）を高める情報をお届けするメディア。',
-    url: 'https://www.qolmedia.info',
-    images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'QOL media' }],
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: SITE_URL,
+    images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'QOL media | Quality Of Life情報メディア',
-    description: '生活の質（QOL）を高める情報をお届けするメディア。',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: ['/og-default.svg'],
   },
   icons: {
@@ -48,6 +52,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
+      <head>
+        <link rel="describedby" href={`${SITE_URL}/llms.txt`} />
+      </head>
       <body style={{margin:0, padding:0, fontFamily:'-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif', backgroundColor:'#fff', color:'#1a1a1a'}}>
 
         <script
@@ -55,10 +62,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'QOL media',
-              url: 'https://www.qolmedia.info',
-              logo: 'https://www.qolmedia.info/QOL_logo_transparent.png',
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  '@id': `${SITE_URL}/#organization`,
+                  name: SITE_NAME,
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/QOL_logo_transparent.png`,
+                  description: HOME_DESCRIPTION,
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': `${SITE_URL}/#website`,
+                  name: SITE_NAME,
+                  url: SITE_URL,
+                  inLanguage: 'ja-JP',
+                  description: HOME_DESCRIPTION,
+                  publisher: { '@id': `${SITE_URL}/#organization` },
+                },
+              ],
             }),
           }}
         />
