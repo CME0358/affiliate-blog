@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/posts'
-import { HC_CLUSTER_POSTS } from '@/lib/site'
+import { HC_CLUSTER_POSTS, PET_CLUSTER_POSTS } from '@/lib/site'
 
 function getSiteUrl(): string {
   return 'https://www.qolmedia.info'
@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   const hcClusterSlugs = new Set<string>(HC_CLUSTER_POSTS.map(item => item.slug))
+  const petClusterSlugs = new Set<string>(PET_CLUSTER_POSTS.map(item => item.slug))
 
   const postRoutes: MetadataRoute.Sitemap = getAllPosts().map(post => ({
     url: `${siteUrl}/posts/${post.slug}`,
@@ -42,7 +43,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ? 0.85
       : post.slug === 'suimin-supplement-ranking-2026'
         ? 0.8
-        : 0.6,
+        : post.slug === 'heartworm-medicine-cheapest-ranking'
+          ? 0.8
+          : petClusterSlugs.has(post.slug)
+            ? 0.7
+            : 0.6,
   }))
 
   return [...staticRoutes, ...postRoutes]

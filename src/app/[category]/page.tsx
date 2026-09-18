@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getAllPosts, getPostImage } from '@/lib/posts'
-import { HC_CLUSTER_POSTS } from '@/lib/site'
+import { HC_CLUSTER_POSTS, PET_CLUSTER_POSTS } from '@/lib/site'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
@@ -36,8 +36,8 @@ const CATEGORY_FV: Record<string, string> = {
 
 const CATEGORY_META: Record<string, { title: string; description: string }> = {
   pet: {
-    title: 'ペットケアの記事一覧',
-    description: 'フィラリア薬・ペット薬の選び方など、犬・猫のケアに関する記事一覧。通販と病院の使い分けは獣医師への相談を前提に解説します。',
+    title: 'ペットケアの記事一覧｜フィラリア・ノミダニ薬の比較',
+    description: 'フィラリア薬・ノミダニ薬の通販比較、個人輸入の注意、正規品の確認など犬・猫のケア記事一覧。ハブは pet-lp。効能は断定せず、獣医師への相談を前提にします。',
   },
   health: {
     title: '健康・AGA費用比較の記事一覧',
@@ -142,6 +142,52 @@ export default async function CategoryPage({ params }: Props) {
             {label} <span style={{ color: '#9ca3af', fontWeight: '400' }}>— {posts.length}件</span>
           </h1>
         </div>
+
+        {category === 'pet' && (
+          <div style={{ marginBottom: '20px' }}>
+            <a
+              href="/pet-lp.html"
+              style={{
+                display: 'block',
+                marginBottom: '12px',
+                padding: '14px 16px',
+                backgroundColor: '#dcfce7',
+                border: '2px solid #16a34a',
+                borderRadius: '8px',
+                textDecoration: 'none',
+              }}
+            >
+              <strong style={{ display: 'block', fontSize: '14px', color: '#166534', marginBottom: '4px' }}>
+                フィラリア薬の通販比較ガイド
+              </strong>
+              <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
+                動物病院との価格差、個人輸入の注意、正規品と副作用の確認。ペットカテゴリの第一導線です。料金・効能は断定しません。
+              </span>
+            </a>
+            <p style={{ fontSize: '11px', fontWeight: 700, color: '#6b7280', letterSpacing: '0.08em', margin: '0 0 8px' }}>
+              フィラリア・ノミダニの関連記事
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {PET_CLUSTER_POSTS.map(item => (
+                <Link
+                  key={item.slug}
+                  href={'/posts/' + item.slug}
+                  className="cluster-row"
+                  style={{
+                    padding: '10px 12px',
+                    backgroundColor: '#fff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span className="cluster-label" style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{item.label}</span>
+                  <span className="cluster-hint" style={{ fontSize: '12px', color: '#6b7280' }}>{item.hint}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {category === 'health' && (
           <div style={{ marginBottom: '20px' }}>
