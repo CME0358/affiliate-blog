@@ -1,6 +1,7 @@
 ---
 title: "不安で眠れない夜を変える｜サプリと認知行動療法的アプローチ"
 date: "2026-03-30"
+updated: "2026-09-18"
 description: "不安で眠れない夜に悩む方へ。認知行動療法（CBT-I）の考え方とGABA・リラクミンなどのサプリを組み合わせた実践的な睡眠改善法を専門家の視点から解説します。"
 category: "睡眠"
 tags: ["睡眠", "不安", "サプリメント", "CBT-I", "GABA"]
@@ -124,3 +125,12 @@ A. 睡眠薬は即効性がありますが、依存性や翌日のふらつき�
 今夜からできることは、「15分ルール」を試すこと。そして、明日から[リラクミンやGABAサプリ](https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s)を手元に置いておくこと。
 
 まずは1つだけ、試してみてください。小さな一歩が、眠れない夜を変える大きなきっかけになります。
+
+
+## 次のステップ：悩み別の比較
+
+食品としての成分比較と、枕・マットレスなど環境側の見方を分けて並べると判断しやすいです。サプリは食品であり睡眠薬ではありません。効能は保証できません。
+
+**[寝つき・中途覚醒の対策比較ガイド](/sleep-guide.html?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=fuan-nemurenai-supplement-cbt)**
+
+成分の並べ方を先に整理したい場合は、[睡眠サプリ比較ランキング2026](/posts/suimin-supplement-ranking-2026?utm_source=article&utm_medium=referral&utm_campaign=sleep_cluster&utm_content=fuan-nemurenai-supplement-cbt) も参照してください。

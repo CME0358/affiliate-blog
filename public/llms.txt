@@ -26,6 +26,10 @@
 - [無料カウンセリング](https://www.qolmedia.info/hc-guide.html#faq): 掲載院は無料カウンセリングありと案内。対象メニュー・予約条件・その場契約の有無は院による
 - [薬と植毛の費用](https://www.qolmedia.info/hc-guide.html#solution): 薬などの AGA 治療は継続コスト、植毛は施術単位。比較軸を分けて医師に確認
 - [記事からガイドへ](https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026): 読み方の整理は記事、院の比較とカウンセリング導線は hc-guide.html
+- [初月料金の見方](https://www.qolmedia.info/posts/aga-hatsugetsu-ryokin-mikata-2026): 広告の安さではなく2ヶ月目以降と総額で比較
+- [オンライン診療の費用](https://www.qolmedia.info/posts/aga-online-shinryo-hiyo-2026): 薬代に送料・検査・初回対面の有無を足す
+- [カウンセリングで聞くこと](https://www.qolmedia.info/posts/aga-counseling-kiku-koto-2026): 見積もりの持ち帰り、解約、その場契約
+- [薬と植毛の費用](https://www.qolmedia.info/posts/aga-kusuri-shokumo-hiyo-chigai-2026): 継続コストと施術単位を分けて医師に確認
 
 ## Top sleep answers
 
@@ -35,6 +39,7 @@
 - [サプリ vs 枕 vs マットレス](https://www.qolmedia.info/sleep-guide.html#compare): サプリは食品、枕は首・頭、マットレスは体圧と寝返り。比較軸を分け、料金は公式で要確認
 - [受診目安](https://www.qolmedia.info/sleep-guide.html#faq): 2週間以上眠れない、日中の強い眠気、呼吸停止・大きないびき、気分の落ち込みが強い場合は医療機関へ
 - [成分比較記事](https://www.qolmedia.info/posts/suimin-supplement-ranking-2026): 読み方の整理は記事、悩み別の比較と環境側（枕・マットレス）導線は sleep-guide.html
+- 睡眠カテゴリの解説記事は、末尾から sleep-guide.html（主）とサプリ比較記事（副）へ内部リンクする
 
 ## Site sections
 
