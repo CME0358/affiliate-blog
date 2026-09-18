@@ -169,7 +169,7 @@ export default async function CategoryPage({ params }: Props) {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {HC_CLUSTER_POSTS.map(item => (
-                <a
+                <Link
                   key={item.slug}
                   href={'/posts/' + item.slug}
                   style={{
@@ -185,7 +185,7 @@ export default async function CategoryPage({ params }: Props) {
                 >
                   <span style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{item.label}</span>
                   <span style={{ fontSize: '12px', color: '#6b7280', flexShrink: 0 }}>{item.hint}</span>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -212,7 +212,7 @@ export default async function CategoryPage({ params }: Props) {
                 サプリ・枕・マットレスの選び方と受診目安を整理。比較ランキング記事と悩み別の確認導線があります。料金・効能は断定しません。
               </span>
             </a>
-            <a
+            <Link
               href="/posts/suimin-supplement-ranking-2026"
               style={{
                 display: 'block',
@@ -229,7 +229,7 @@ export default async function CategoryPage({ params }: Props) {
               <span style={{ fontSize: '12px', color: '#6b7280' }}>
                 成分比較の読み方。詳細の悩み別導線は睡眠ガイドへ。
               </span>
-            </a>
+            </Link>
           </div>
         )}
 

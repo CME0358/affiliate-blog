@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
   ]
 
-  const hcClusterSlugs = new Set(HC_CLUSTER_POSTS.map(item => item.slug))
+  const hcClusterSlugs = new Set<string>(HC_CLUSTER_POSTS.map(item => item.slug))
 
   const postRoutes: MetadataRoute.Sitemap = getAllPosts().map(post => ({
     url: `${siteUrl}/posts/${post.slug}`,
