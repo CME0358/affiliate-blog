@@ -13,9 +13,25 @@
 /* 記事グリッド */
 .article-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
+.hub-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
 /* カードホバー */
 .article-card { transition: all 0.2s; }
 .article-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+article aside {
+  background: #f5f3ff;
+  border-left: 4px solid #7c3aed;
+  margin: 8px 0 24px;
+  padding: 14px 16px;
+  border-radius: 0 8px 8px 0;
+  color: #1f2937;
+  line-height: 1.8;
+}
 
 /* モバイル (640px以下) */
 @media (max-width: 640px) {
@@ -24,6 +40,7 @@
   .pickup-grid { grid-template-columns: 1fr !important; }
   .pickup-img { height: 140px !important; }
   .article-grid { grid-template-columns: 1fr !important; }
+  .hub-row { grid-template-columns: 1fr 1fr !important; }
   .fv-title { font-size: 17px !important; }
   .fv-desc { display: none !important; }
   .fv-overlay { padding: 16px 18px !important; }

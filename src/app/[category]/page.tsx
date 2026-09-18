@@ -33,6 +33,25 @@ const CATEGORY_FV: Record<string, string> = {
   '睡眠':   '/fv-sleep.jpg',
 }
 
+const CATEGORY_META: Record<string, { title: string; description: string }> = {
+  pet: {
+    title: 'ペットケアの記事一覧',
+    description: 'フィラリア薬・ペット薬の選び方など、犬・猫のケアに関する記事一覧。通販と病院の使い分けは獣医師への相談を前提に解説します。',
+  },
+  health: {
+    title: '健康・AGA費用比較の記事一覧',
+    description: 'AGA治療の費用比較（初月キャンペーンと半年〜1年の総額の見方）など、健康カテゴリの記事一覧。料金や効果は断定しません。',
+  },
+  life: {
+    title: '暮らしの記事一覧',
+    description: '暮らしと資金繰りに役立つ比較・解説記事の一覧です。',
+  },
+  sleep: {
+    title: '睡眠の記事一覧',
+    description: '寝つき・夜中に目が覚める悩みなど、睡眠の対策と比較記事の一覧です。',
+  },
+}
+
 export async function generateStaticParams() {
   return Object.keys(SLUG_TO_LABEL).map(category => ({ category }))
 }
@@ -41,9 +60,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params
   const label = SLUG_TO_LABEL[category]
   if (!label) return {}
+  const meta = CATEGORY_META[category]
   return {
-    title: `${label}の記事一覧 | QOL media`,
-    description: `QOL mediaの${label}カテゴリ記事一覧です。`,
+    title: meta?.title ?? `${label}の記事一覧`,
+    description: meta?.description ?? `QOL mediaの${label}カテゴリ記事一覧です。`,
     alternates: { canonical: `/${category}` },
   }
 }
@@ -121,6 +141,28 @@ export default async function CategoryPage({ params }: Props) {
             {label} <span style={{ color: '#9ca3af', fontWeight: '400' }}>— {posts.length}件</span>
           </h1>
         </div>
+
+        {category === 'health' && (
+          <a
+            href="/hc-guide.html"
+            style={{
+              display: 'block',
+              marginBottom: '20px',
+              padding: '14px 16px',
+              backgroundColor: '#f5f3ff',
+              border: '1px solid #ddd6fe',
+              borderRadius: '8px',
+              textDecoration: 'none',
+            }}
+          >
+            <strong style={{ display: 'block', fontSize: '14px', color: '#5b21b6', marginBottom: '4px' }}>
+              AGA治療の費用比較ガイド
+            </strong>
+            <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
+              初月キャンペーンと総額の見方を整理し、無料カウンセリングで確認する流れをまとめています。
+            </span>
+          </a>
+        )}
 
         {posts.length === 0 ? (
           <p style={{ color: '#9ca3af', fontSize: '14px' }}>記事がまだありません。</p>

@@ -4,8 +4,16 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import remarkGfm from 'remark-gfm'
+import { SITE_NAME, SITE_URL } from '@/lib/site'
 
 type Props = { params: Promise<{ slug: string }> }
+
+const CATEGORY_SLUG: Record<string, string> = {
+  'ペット': 'pet',
+  '健康': 'health',
+  '睡眠': 'sleep',
+  '暮らし': 'life',
+}
 
 export async function generateStaticParams() {
   return getAllPosts().map(p => ({ slug: p.slug }))
@@ -15,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) return {}
+  const modified = post.updated || post.date
   return {
     title: post.title,
     description: post.description,
@@ -27,8 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       type: 'article',
       publishedTime: post.date,
+      modifiedTime: modified,
       url: `/posts/${post.slug}`,
-      siteName: 'QOL media',
+      siteName: SITE_NAME,
       locale: 'ja_JP',
       images: [{ url: getPostImage(post), alt: post.title }],
     },
@@ -97,12 +107,29 @@ const mdxComponents = {
   hr: () => (
     <hr style={{border:'none', borderTop:'1px solid #f3f4f6', margin:'32px 0'}} />
   ),
+  aside: (props: React.HTMLAttributes<HTMLElement>) => (
+    <aside
+      {...props}
+      style={{
+        backgroundColor:'#f5f3ff',
+        borderLeft:'4px solid #7c3aed',
+        margin:'8px 0 24px',
+        padding:'14px 16px',
+        borderRadius:'0 8px 8px 0',
+        color:'#1f2937',
+        lineHeight:1.8,
+      }}
+    />
+  ),
 }
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) notFound()
+  const categorySlug = CATEGORY_SLUG[post.category] || 'life'
+  const modified = post.updated || post.date
+  const canonical = `${SITE_URL}/posts/${post.slug}`
 
   return (
     <div style={{maxWidth:'720px', margin:'0 auto', padding:'32px 20px 60px'}}>
@@ -110,8 +137,10 @@ export default async function PostPage({ params }: Props) {
         PR・広告を含む記事です
       </div>
 
-      <div style={{marginBottom:'20px'}}>
-        <Link href="/" style={{fontSize:'12px', color:'#6b7280', textDecoration:'none'}}>← トップに戻る</Link>
+      <div style={{marginBottom:'20px', fontSize:'12px', color:'#6b7280'}}>
+        <Link href="/" style={{color:'#6b7280', textDecoration:'none'}}>トップ</Link>
+        {' / '}
+        <Link href={`/${categorySlug}`} style={{color:'#6b7280', textDecoration:'none'}}>{post.category}</Link>
       </div>
 
       <article>
@@ -119,7 +148,7 @@ export default async function PostPage({ params }: Props) {
           <span style={{fontSize:'11px', fontWeight:'500', backgroundColor:'#f3f4f6', color:'#6b7280', padding:'2px 8px', borderRadius:'4px'}}>
             {post.category}
           </span>
-          <time style={{fontSize:'11px', color:'#9ca3af'}}>{post.date}</time>
+          <time dateTime={post.date} style={{fontSize:'11px', color:'#9ca3af'}}>{post.date}</time>
         </div>
 
         <h1 style={{fontSize:'clamp(20px, 4vw, 28px)', fontWeight:'700', color:'#111827', lineHeight:'1.4', margin:'0 0 12px 0'}}>
@@ -142,6 +171,26 @@ export default async function PostPage({ params }: Props) {
             options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
           />
         </div>
+
+        {post.faq && post.faq.length > 0 && (
+          <section style={{marginTop:'40px'}}>
+            <h2 style={{fontSize:'20px', fontWeight:700, color:'#111827', margin:'0 0 16px', paddingBottom:'8px', borderBottom:'2px solid #f3f4f6'}}>
+              よくある質問
+            </h2>
+            <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+              {post.faq.map(item => (
+                <div key={item.q} style={{backgroundColor:'#f9fafb', border:'1px solid #e5e7eb', borderRadius:'8px', padding:'16px 18px'}}>
+                  <h3 style={{fontSize:'15px', fontWeight:700, color:'#111827', margin:'0 0 8px', lineHeight:1.6}}>
+                    {item.q}
+                  </h3>
+                  <p style={{fontSize:'14px', color:'#374151', lineHeight:1.8, margin:0}}>
+                    {item.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </article>
 
       <script
@@ -153,24 +202,41 @@ export default async function PostPage({ params }: Props) {
             headline: post.title,
             description: post.description,
             datePublished: post.date,
-            dateModified: post.date,
-            url: `https://www.qolmedia.info/posts/${post.slug}`,
+            dateModified: modified,
+            url: canonical,
+            inLanguage: 'ja-JP',
             mainEntityOfPage: {
               '@type': 'WebPage',
-              '@id': `https://www.qolmedia.info/posts/${post.slug}`,
+              '@id': canonical,
             },
-            image: [`https://www.qolmedia.info${getPostImage(post)}`],
+            image: [`${SITE_URL}${getPostImage(post)}`],
             keywords: post.tags.join(', '),
-            author: { '@type': 'Organization', name: 'QOL media', url: 'https://www.qolmedia.info/about' },
+            author: { '@type': 'Organization', name: SITE_NAME, url: `${SITE_URL}/about` },
             publisher: {
               '@type': 'Organization',
-              name: 'QOL media',
-              url: 'https://www.qolmedia.info',
-              logo: { '@type': 'ImageObject', url: 'https://www.qolmedia.info/QOL_logo_transparent.png' },
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: { '@type': 'ImageObject', url: `${SITE_URL}/QOL_logo_transparent.png` },
             },
           }),
         }}
       />
+      {post.faq && post.faq.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: post.faq.map(item => ({
+                '@type': 'Question',
+                name: item.q,
+                acceptedAnswer: { '@type': 'Answer', text: item.a },
+              })),
+            }),
+          }}
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -178,9 +244,9 @@ export default async function PostPage({ params }: Props) {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'QOL media', item: 'https://www.qolmedia.info/' },
-              { '@type': 'ListItem', position: 2, name: post.category, item: `https://www.qolmedia.info/${post.category === 'ペット' ? 'pet' : post.category === '健康' ? 'health' : post.category === '睡眠' ? 'sleep' : 'life'}` },
-              { '@type': 'ListItem', position: 3, name: post.title, item: `https://www.qolmedia.info/posts/${post.slug}` },
+              { '@type': 'ListItem', position: 1, name: SITE_NAME, item: `${SITE_URL}/` },
+              { '@type': 'ListItem', position: 2, name: post.category, item: `${SITE_URL}/${categorySlug}` },
+              { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
             ],
           }),
         }}
