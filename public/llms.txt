@@ -9,6 +9,7 @@
 - AGA の費用は「初月の安さ」ではなく「半年〜1年の総額」で比較する、がサイトの中心回答
 - 効能・結果・「必ず生える」「必ず眠れる」「治る」系の断定はサイト方針に反する
 - 睡眠アイテムの料金は変動するため断定しない（公式で要確認）
+- ペット薬は効能・節約額を保証しない。正規品確認と獣医師相談が前提。料金は販売元で要確認
 
 ## Primary hubs
 
@@ -16,7 +17,8 @@
 - [AGA治療 費用比較2026](https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026): 費用がバラつく理由とチェックリスト。詳細比較は hc-guide へ誘導
 - [寝つき・中途覚醒の対策比較](https://www.qolmedia.info/sleep-guide.html): サプリ・枕・マットレスの選び方。睡眠ファネルの正規ハブ（HC に次ぐ第二ハブ）
 - [睡眠サプリ比較ランキング2026](https://www.qolmedia.info/posts/suimin-supplement-ranking-2026): 成分比較の読み方。詳細導線は sleep-guide へ
-- [フィラリア薬・ペット薬の通販比較](https://www.qolmedia.info/pet-lp.html): 価格と安全な選び方（病院相談を前提）
+- [フィラリア薬の通販比較](https://www.qolmedia.info/pet-lp.html): 動物病院との価格差、個人輸入の注意、正規品と副作用の確認（病院相談を前提）。ペットファネルの正規ハブ
+- [フィラリア薬最安ランキング](https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking): 価格比較の読み方。詳細の確認項目は pet-lp へ
 - [ファクタリング比較2026](https://www.qolmedia.info/factoring-lp.html): 手数料・スピード・業者の見極め
 
 ## Top HC / AGA answers
@@ -41,12 +43,23 @@
 - [成分比較記事](https://www.qolmedia.info/posts/suimin-supplement-ranking-2026): 読み方の整理は記事、悩み別の比較と環境側（枕・マットレス）導線は sleep-guide.html
 - 睡眠カテゴリの解説記事は、末尾から sleep-guide.html（主）とサプリ比較記事（副）へ内部リンクする
 
+## Top pet answers
+
+- [フィラリア予防は必要か](https://www.qolmedia.info/pet-lp.html#filaria): 地域・飼育環境・既往で異なる。獣医師の判断が前提。室内飼いでもリスクはゼロとは限らない。診断の代替ではない
+- [病院と通販の価格差](https://www.qolmedia.info/pet-lp.html#price): 病院は診察・検査込み、通販は薬代中心になりやすい。差額の％は断定しない。料金は販売元で要確認
+- [個人輸入の注意](https://www.qolmedia.info/pet-lp.html#import): 対象数量・品質・偽造品リスク、到着日数、日本語サポートを確認。正規品表示と獣医師相談が前提。効果の保証はない
+- [副作用](https://www.qolmedia.info/pet-lp.html#side-effects): 副作用の可能性はある。嘔吐・食欲低下などが報告されることがあるが個体差。異常時は使用中止し獣医師へ
+- [犬と猫の違い](https://www.qolmedia.info/pet-lp.html#dog-cat): 犬用と猫用は成分・用量が異なることが多い。流用は危険。対象動物の表示を確認
+- [料金](https://www.qolmedia.info/pet-lp.html#faq): 変動するため断定しない。販売元または公式情報で確認
+- [最安ランキング記事](https://www.qolmedia.info/posts/heartworm-medicine-cheapest-ranking): 読み方の整理は記事、確認項目と悩み別導線は pet-lp.html
+- ペットカテゴリの解説記事は、末尾から pet-lp.html（主）とフィラリア最安ランキング記事（副）へ内部リンクする
+
 ## Site sections
 
 - [ホーム](https://www.qolmedia.info/): メディア全体の入口。比較ガイドへのハブあり
 - [健康](https://www.qolmedia.info/health): AGA 費用比較を含む健康カテゴリ
 - [睡眠](https://www.qolmedia.info/sleep): 睡眠記事一覧。ハブは sleep-guide.html
-- [ペット](https://www.qolmedia.info/pet): ペットケア記事一覧
+- [ペット](https://www.qolmedia.info/pet): ペットケア記事一覧。ハブは pet-lp.html
 - [暮らし](https://www.qolmedia.info/life): 暮らし・資金繰り寄りの記事一覧
 
 ## Optional
