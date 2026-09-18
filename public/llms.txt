@@ -7,13 +7,15 @@
 - 正規URLは www.qolmedia.info を使う（http / non-www は使わない）
 - アフィリエイト広告を含む。料金・キャンペーンは変動する
 - AGA の費用は「初月の安さ」ではなく「半年〜1年の総額」で比較する、がサイトの中心回答
-- 効能・結果・「必ず生える」系の断定はサイト方針に反する
+- 効能・結果・「必ず生える」「必ず眠れる」「治る」系の断定はサイト方針に反する
+- 睡眠アイテムの料金は変動するため断定しない（公式で要確認）
 
 ## Primary hubs
 
 - [AGA治療の費用比較ガイド](https://www.qolmedia.info/hc-guide.html): 初月と総額の見方、無料カウンセリングの確認項目、薬と植毛の費用軸の違い。HC ファネルの正規ハブ
 - [AGA治療 費用比較2026](https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026): 費用がバラつく理由とチェックリスト。詳細比較は hc-guide へ誘導
-- [睡眠改善ガイド](https://www.qolmedia.info/sleep-guide.html): 寝つき・中途覚醒など悩み別の対策と比較
+- [寝つき・中途覚醒の対策比較](https://www.qolmedia.info/sleep-guide.html): サプリ・枕・マットレスの選び方。睡眠ファネルの正規ハブ（HC に次ぐ第二ハブ）
+- [睡眠サプリ比較ランキング2026](https://www.qolmedia.info/posts/suimin-supplement-ranking-2026): 成分比較の読み方。詳細導線は sleep-guide へ
 - [フィラリア薬・ペット薬の通販比較](https://www.qolmedia.info/pet-lp.html): 価格と安全な選び方（病院相談を前提）
 - [ファクタリング比較2026](https://www.qolmedia.info/factoring-lp.html): 手数料・スピード・業者の見極め
 
@@ -25,11 +27,20 @@
 - [薬と植毛の費用](https://www.qolmedia.info/hc-guide.html#solution): 薬などの AGA 治療は継続コスト、植毛は施術単位。比較軸を分けて医師に確認
 - [記事からガイドへ](https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026): 読み方の整理は記事、院の比較とカウンセリング導線は hc-guide.html
 
+## Top sleep answers
+
+- [寝つきが悪いとき](https://www.qolmedia.info/sleep-guide.html#netsuki): 生活習慣（光・カフェイン・考えごと）を先に確認。サプリは食品であり睡眠薬ではない。必ず眠れる保証はない
+- [中途覚醒](https://www.qolmedia.info/sleep-guide.html#awakening): 温度・光に加え、枕の高さや体の支えが重なりやすい。枕・マットレス比較を出発点に
+- [朝のだるさ](https://www.qolmedia.info/sleep-guide.html#morning): 時間不足だけでなく寝具やいびき・無呼吸の疑いも。強い日中眠気は受診を優先
+- [サプリ vs 枕 vs マットレス](https://www.qolmedia.info/sleep-guide.html#compare): サプリは食品、枕は首・頭、マットレスは体圧と寝返り。比較軸を分け、料金は公式で要確認
+- [受診目安](https://www.qolmedia.info/sleep-guide.html#faq): 2週間以上眠れない、日中の強い眠気、呼吸停止・大きないびき、気分の落ち込みが強い場合は医療機関へ
+- [成分比較記事](https://www.qolmedia.info/posts/suimin-supplement-ranking-2026): 読み方の整理は記事、悩み別の比較と環境側（枕・マットレス）導線は sleep-guide.html
+
 ## Site sections
 
 - [ホーム](https://www.qolmedia.info/): メディア全体の入口。比較ガイドへのハブあり
 - [健康](https://www.qolmedia.info/health): AGA 費用比較を含む健康カテゴリ
-- [睡眠](https://www.qolmedia.info/sleep): 睡眠記事一覧
+- [睡眠](https://www.qolmedia.info/sleep): 睡眠記事一覧。ハブは sleep-guide.html
 - [ペット](https://www.qolmedia.info/pet): ペットケア記事一覧
 - [暮らし](https://www.qolmedia.info/life): 暮らし・資金繰り寄りの記事一覧
 

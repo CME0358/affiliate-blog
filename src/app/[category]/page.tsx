@@ -47,8 +47,8 @@ const CATEGORY_META: Record<string, { title: string; description: string }> = {
     description: '暮らしと資金繰りに役立つ比較・解説記事の一覧です。',
   },
   sleep: {
-    title: '睡眠の記事一覧',
-    description: '寝つき・夜中に目が覚める悩みなど、睡眠の対策と比較記事の一覧です。',
+    title: '睡眠の記事一覧｜寝つき・中途覚醒の比較',
+    description: '寝つき・夜中に目が覚める・朝のだるさなど、睡眠の対策と比較記事の一覧。サプリ・枕・マットレスの選び方は睡眠ガイドへ。料金や効能は断定しません。',
   },
 }
 
@@ -160,6 +160,28 @@ export default async function CategoryPage({ params }: Props) {
             </strong>
             <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
               初月キャンペーンと総額の見方を整理し、無料カウンセリングで確認する流れをまとめています。
+            </span>
+          </a>
+        )}
+
+        {category === 'sleep' && (
+          <a
+            href="/sleep-guide.html"
+            style={{
+              display: 'block',
+              marginBottom: '20px',
+              padding: '14px 16px',
+              backgroundColor: '#eff6ff',
+              border: '1px solid #bfdbfe',
+              borderRadius: '8px',
+              textDecoration: 'none',
+            }}
+          >
+            <strong style={{ display: 'block', fontSize: '14px', color: '#1d4ed8', marginBottom: '4px' }}>
+              寝つき・中途覚醒の対策比較ガイド
+            </strong>
+            <span style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.6 }}>
+              サプリ・枕・マットレスの選び方と受診目安を整理。比較ランキング記事と悩み別の確認導線があります。料金・効能は断定しません。
             </span>
           </a>
         )}

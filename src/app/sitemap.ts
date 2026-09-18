@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${siteUrl}/posts/${post.slug}`,
     lastModified: toLastModified(post.updated || post.date) ?? now,
     changeFrequency: 'weekly',
-    priority: post.slug === 'aga-hiyo-hikaku-2026' ? 0.85 : 0.6,
+    priority: post.slug === 'aga-hiyo-hikaku-2026' ? 0.85 : post.slug === 'suimin-supplement-ranking-2026' ? 0.8 : 0.6,
   }))
 
   return [...staticRoutes, ...postRoutes]

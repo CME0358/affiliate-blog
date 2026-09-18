@@ -15,7 +15,7 @@ export const HUBS = [
   {
     href: '/sleep-guide.html',
     label: '睡眠ガイド',
-    hint: '悩み別の対策',
+    hint: '寝つき・中途覚醒の比較',
     primary: false,
   },
   {
