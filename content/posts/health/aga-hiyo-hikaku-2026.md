@@ -51,11 +51,11 @@ tags: ["AGA", "薄毛", "費用", "カウンセリング", "クリニック比�
 
 クリニックごとの費用感・通いやすさ・口コミの見方を1ページにまとめたガイドを用意しています。
 
-**[薄毛・AGAクリニック比較ガイド（無料カウンセリング一覧）](https://www.qolmedia.info/hc-guide.html?utm_source=qolmedia&utm_medium=article&utm_campaign=aga_hiyo_2026)**
+**[AGA治療の費用比較ガイド（無料カウンセリングで総額を確認）](https://www.qolmedia.info/hc-guide.html?utm_source=qolmedia&utm_medium=article&utm_campaign=hc_aga_hiyo)**
 
 - 30秒で悩みタイプを選べる診断モーダル
-- 無料カウンセリング対応クリニックの比較
-- 強引な勧誘なしをうたう院を中心に掲載
+- 無料カウンセリング対応クリニックの比較（費用相談の第一候補はアルモ形成クリニック）
+- 料金・予約条件は各院の公式情報で要確認
 
 ## よくある質問
 
