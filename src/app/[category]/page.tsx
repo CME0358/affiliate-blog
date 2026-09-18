@@ -172,10 +172,8 @@ export default async function CategoryPage({ params }: Props) {
                 <Link
                   key={item.slug}
                   href={'/posts/' + item.slug}
+                  className="cluster-row"
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    gap: '12px',
                     padding: '10px 12px',
                     backgroundColor: '#fff',
                     border: '1px solid #e5e7eb',
@@ -183,8 +181,8 @@ export default async function CategoryPage({ params }: Props) {
                     textDecoration: 'none',
                   }}
                 >
-                  <span style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{item.label}</span>
-                  <span style={{ fontSize: '12px', color: '#6b7280', flexShrink: 0 }}>{item.hint}</span>
+                  <span className="cluster-label" style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{item.label}</span>
+                  <span className="cluster-hint" style={{ fontSize: '12px', color: '#6b7280' }}>{item.hint}</span>
                 </Link>
               ))}
             </div>

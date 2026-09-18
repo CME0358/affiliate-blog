@@ -19,6 +19,22 @@
   gap: 8px;
 }
 
+.cluster-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 12px;
+}
+
+.cluster-row .cluster-label {
+  min-width: 0;
+}
+
+.cluster-row .cluster-hint {
+  flex: 0 1 auto;
+  text-align: right;
+}
+
 /* カードホバー */
 .article-card { transition: all 0.2s; }
 .article-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
@@ -41,6 +57,14 @@ article aside {
   .pickup-img { height: 140px !important; }
   .article-grid { grid-template-columns: 1fr !important; }
   .hub-row { grid-template-columns: 1fr 1fr !important; }
+  .cluster-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .cluster-row .cluster-hint {
+    text-align: left;
+  }
   .fv-title { font-size: 17px !important; }
   .fv-desc { display: none !important; }
   .fv-overlay { padding: 16px 18px !important; }
