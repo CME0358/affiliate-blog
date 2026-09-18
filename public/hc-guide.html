@@ -131,6 +131,10 @@ header {
   transition: background 0.2s;
 }
 .header-cta:hover { background: var(--cta-dark); }
+@media (max-width: 767px) {
+  .header-cta { font-size: 11px; padding: 7px 10px; max-width: 52vw; }
+  .logo img { height: 22px; }
+}
 
 /* ========== FV ========== */
 #fv {
@@ -331,6 +335,23 @@ header {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+}
+.fv-cta-stack .btn-primary,
+.fv-cta-stack .btn-secondary,
+.cost-cta-box .btn-primary,
+#closing .btn-primary,
+#closing .btn-secondary {
+  white-space: nowrap;
+  font-size: 15px;
+  padding: 16px 18px;
+}
+@media (max-width: 380px) {
+  .fv-cta-stack .btn-primary,
+  .cost-cta-box .btn-primary,
+  #closing .btn-primary {
+    white-space: normal;
+    font-size: 14px;
+  }
 }
 .btn-secondary {
   display: inline-block;
@@ -1137,7 +1158,7 @@ a.method-card:hover .method-title {
 .sticky-btn:hover { background: var(--cta-dark); }
 
 @media (max-width: 767px) {
-  #sticky-cta { display: block; }
+  #sticky-cta { display: none; }
   body { padding-bottom: 72px; }
   .cred-stats { grid-template-columns: repeat(3,1fr); }
   .fv-mb { display: block; }
@@ -1412,7 +1433,7 @@ footer {
   <a href="/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <button class="header-cta open-modal">▶ 費用の確認方法を30秒で見る</button>
+  <button class="header-cta open-modal">▶ 30秒で費用確認</button>
 </header>
 
 <p class="ad-disclosure">本ページにはアフィリエイト広告が含まれます。料金・施術内容・キャンペーンは変更される場合があるため、申込み前に各クリニックの公式情報をご確認ください。</p>
@@ -2034,10 +2055,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== STICKY CTA scroll hide on FV =====
   var stickyCta = document.getElementById('sticky-cta');
-  window.addEventListener('scroll', function() {
-    var fvBottom = document.getElementById('fv').getBoundingClientRect().bottom;
+  function updateSticky() {
+    var fv = document.getElementById('fv');
+    if (!fv || !stickyCta) return;
+    var fvBottom = fv.getBoundingClientRect().bottom;
     stickyCta.style.display = fvBottom < 0 ? 'block' : 'none';
-  }, { passive: true });
+  }
+  updateSticky();
+  window.addEventListener('scroll', updateSticky, { passive: true });
 
 });
 </script>
