@@ -83,6 +83,9 @@
       border-radius: 4px;
       text-decoration: none;
       white-space: nowrap;
+      display: inline-block;
+      text-align: center;
+      line-height: 1.3;
     }
 
     /* ===== HERO ===== */
@@ -246,6 +249,19 @@
     .hero-cta-wrap {
       margin-top: 28px;
       animation: fadeUp 0.6s ease 0.25s both;
+      position: relative;
+    }
+    .hero-cta-kicker {
+      display: inline-block;
+      background: rgba(6,199,85,0.18);
+      border: 1px solid rgba(6,199,85,0.45);
+      color: #b8f5c9;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
     }
     .hero-cta-btn {
       display: inline-block;
@@ -253,11 +269,19 @@
       color: #fff;
       font-size: 15px;
       font-weight: 700;
-      padding: 16px 32px;
+      padding: 16px 28px;
       border-radius: 4px;
       text-decoration: none;
       box-shadow: 0 4px 20px rgba(6,199,85,0.4);
       letter-spacing: 0.03em;
+      min-height: 52px;
+    }
+    .hero-cta-btn .btn-sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      opacity: 0.92;
+      margin-top: 3px;
     }
     .hero-cta-btn:hover { background: var(--cta-dark); }
     .hero-cta-note {
@@ -310,6 +334,11 @@
       font-size: 12px;
       position: relative;
     }
+    .hero-cta-secondary a {
+      color: rgba(250,247,242,0.65);
+      text-decoration: underline;
+    }
+    .hero-cta-secondary a:hover { color: #fff; }
     .hero-cta-secondary button {
       background: none;
       border: none;
@@ -760,10 +789,14 @@
       color: var(--cta-dark);
       font-size: 13px;
       font-weight: 700;
-      padding: 10px 20px;
+      padding: 10px 16px;
       border-radius: 4px;
       text-decoration: none;
       white-space: nowrap;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     @media (min-width: 640px) {
@@ -1014,7 +1047,7 @@
   <a href="/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <a href="/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=pet_ranking" class="header-cta primary-cta-link" data-track-location="header" data-track-label="フィラリア最安ランキング">▶ 最安ランキングを見る</a>
+  <a href="https://mttag.com/s/L7IrW864-jY" class="header-cta affiliate-cta" data-cta="mttag_header" target="_blank" rel="nofollow sponsored">▶ 通販で価格確認</a>
 </header>
 
 <!-- HERO -->
@@ -1037,10 +1070,13 @@
     </div>
   </div>
   <div class="hero-cta-wrap">
-    <a href="/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=pet_ranking" class="hero-cta-btn primary-cta-link" data-track-location="hero" data-track-label="フィラリア最安ランキング">▶ フィラリア薬・最安ランキングを読む</a>
-    <span class="hero-cta-note">動物病院との価格差・正規品の確認（金額は販売元で要確認）</span>
+    <span class="hero-cta-kicker">通販で正規品表示を確認</span>
+    <a href="https://mttag.com/s/L7IrW864-jY" class="hero-cta-btn affiliate-cta" data-cta="mttag_hero" target="_blank" rel="nofollow sponsored">▶ フィラリア薬の価格を通販で確認<span class="btn-sub">正規品表示・対象体重は販売元で要確認</span></a>
+    <span class="hero-cta-note">使用前は獣医師へ。効能・節約額の保証はありません</span>
     <p class="hero-cta-secondary">
-      <button type="button" class="open-modal" data-track-location="hero_secondary">症状別でフィラリア・ノミダニ薬を探す</button>
+      <a href="/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=pet_ranking" class="primary-cta-link" data-track-location="hero_secondary" data-track-label="フィラリア最安ランキング">最安ランキング記事も見る</a>
+      <span style="display:inline-block;margin:0 6px;opacity:.45;">/</span>
+      <button type="button" class="open-modal" data-track-location="hero_secondary">症状別で探す</button>
     </p>
   </div>
 </section>
@@ -1721,8 +1757,12 @@ document.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('click', function(e){
     const link = e.target.closest('a[href*="mttag.com"]');
     if(!link) return;
-    const name = link.closest('.solution-card')?.querySelector('.solution-card-name')?.textContent || link.getAttribute('alt') || 'mttag';
-    trackEvent('cta_click', { event_category: 'affiliate', event_label: name, cta_location: 'modal' });
+    const name = link.getAttribute('data-cta')
+      || link.closest('.solution-card')?.querySelector('.solution-card-name')?.textContent
+      || link.getAttribute('alt')
+      || 'mttag';
+    const loc = link.getAttribute('data-cta') || link.dataset.trackLocation || 'modal';
+    trackEvent('cta_click', { event_category: 'affiliate', event_label: name, cta_location: loc });
   });
 
   document.querySelectorAll('.faq-q').forEach(function(q){
@@ -1748,8 +1788,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <!-- STICKY BOTTOM CTA (mobile only) -->
 <div class="sticky-cta">
-  <p>フィラリア薬の価格比較<span>ランキング記事で確認</span></p>
-  <a id="stickyCta" href="/posts/heartworm-medicine-cheapest-ranking?utm_source=pet_lp&amp;utm_medium=referral&amp;utm_campaign=pet_ranking" class="primary-cta-link" data-track-location="sticky" data-track-label="フィラリア最安ランキング">記事を読む</a>
+  <p>フィラリア薬の価格を確認<span>通販で正規品表示を見る</span></p>
+  <a id="stickyCta" href="https://mttag.com/s/L7IrW864-jY" class="affiliate-cta" data-cta="mttag_sticky" target="_blank" rel="nofollow sponsored">通販で見る</a>
 </div>
 
 <style>
@@ -1757,7 +1797,8 @@ document.addEventListener('DOMContentLoaded', function(){
   0%,100% { box-shadow: 0 0 0 0 rgba(6,199,85,0.6); }
   50%      { box-shadow: 0 0 0 10px rgba(6,199,85,0); }
 }
-.open-modal { animation: ctaPulse 2s infinite; }
+.hero-cta-btn.affiliate-cta,
+.header-cta.affiliate-cta { animation: ctaPulse 2s infinite; }
 #lp-toast {
   position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
   background: #1a1a2e; color: #fff; font-size: 13px; font-weight: 700;

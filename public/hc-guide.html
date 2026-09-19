@@ -130,6 +130,10 @@ header {
   cursor: pointer;
   letter-spacing: 0.03em;
   transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.3;
 }
 .header-cta:hover { background: var(--cta-dark); }
 @media (max-width: 767px) {
@@ -196,7 +200,7 @@ header {
 .fv-mb {
   display: none;
   position: relative;
-  min-height: calc(100svh - 60px);
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -224,13 +228,13 @@ header {
 .fv-mb-content {
   position: relative;
   z-index: 1;
-  padding: 48px 24px 80px;
+  padding: 20px 20px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-height: calc(100svh - 60px);
-  justify-content: center;
+  min-height: 0;
+  justify-content: flex-start;
 }
 
 .fv-eyebrow {
@@ -243,17 +247,17 @@ header {
   letter-spacing: 0.12em;
   padding: 5px 14px;
   border-radius: 2px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
   text-transform: uppercase;
 }
 
 .fv-headline {
   color: #fff;
-  font-size: clamp(26px, 6vw, 42px);
+  font-size: clamp(24px, 6vw, 42px);
   font-weight: 900;
   line-height: 1.35;
   letter-spacing: -0.01em;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .fv-headline em {
@@ -323,14 +327,34 @@ header {
   margin-top: 10px;
 }
 
+.cta-kicker {
+  display: inline-block;
+  background: rgba(6,199,85,0.18);
+  border: 1px solid rgba(6,199,85,0.45);
+  color: #7dffb3;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 2px;
+}
+.btn-primary .btn-sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  opacity: 0.92;
+  margin-top: 4px;
+}
 .fv-cta-stack {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 16px 0 8px;
+  margin: 12px 0 8px;
   align-items: flex-start;
   width: 100%;
-  max-width: 360px;
+  max-width: 400px;
 }
 .fv-mb-content .fv-cta-stack {
   align-items: center;
@@ -346,12 +370,19 @@ header {
   font-size: 15px;
   padding: 16px 18px;
 }
+.fv-cta-stack .btn-primary {
+  white-space: normal;
+  font-size: 17px;
+  padding: 16px 16px 14px;
+  max-width: 100%;
+  min-height: 56px;
+}
 @media (max-width: 380px) {
   .fv-cta-stack .btn-primary,
   .cost-cta-box .btn-primary,
   #closing .btn-primary {
     white-space: normal;
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 .btn-secondary {
@@ -1162,20 +1193,34 @@ a.method-card:hover .method-title {
   color: #fff;
   border: none;
   border-radius: 6px;
-  padding: 15px;
+  padding: 12px 14px;
   font-size: 16px;
   font-weight: 900;
   cursor: pointer;
   letter-spacing: 0.04em;
   transition: background 0.2s;
+  min-height: 52px;
+}
+.sticky-btn .sticky-btn-sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  opacity: 0.92;
+  margin-top: 2px;
 }
 .sticky-btn:hover { background: var(--cta-dark); }
 
 @media (max-width: 767px) {
   #sticky-cta { display: none; }
-  body { padding-bottom: 72px; }
+  body { padding-bottom: 84px; }
   .cred-stats { grid-template-columns: repeat(3,1fr); }
   .fv-mb { display: block; }
+  .fv-stat { font-size: 13px; padding: 10px 12px; }
+  .fv-arrow { display: none; }
+}
+@media (min-width: 768px) {
+  #sticky-cta { display: none !important; }
 }
 
 /* ========== MODAL ========== */
@@ -1467,7 +1512,7 @@ footer {
   <a href="/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <button class="header-cta open-modal">▶ 30秒で費用確認</button>
+  <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="header-cta hc-aff" data-cta="armo_header" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリング</a>
 </header>
 
 <p class="ad-disclosure">本ページにはアフィリエイト広告が含まれます。料金・施術内容・キャンペーンは変更される場合があるため、申込み前に各クリニックの公式情報をご確認ください。</p>
@@ -1492,10 +1537,11 @@ footer {
         <strong>「続けられなかった」</strong>を避けるには、総額の見方が先です。
       </div>
       <div class="fv-cta-stack">
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="btn-primary hc-aff" data-cta="armo_hero" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで費用を確認</a>
+        <span class="cta-kicker">費用が先にわかる</span>
+        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="btn-primary hc-aff" data-cta="armo_hero" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで費用を確認<span class="btn-sub">相談無料 · 費用が先にわかる</span></a>
         <button type="button" class="btn-secondary open-modal">30秒で悩みタイプを選ぶ</button>
       </div>
-      <span class="btn-note">相談は無料。料金・条件は公式で要確認（結果には個人差があります）</span>
+      <span class="btn-note">無料カウンセリングで費用の見方を確認。料金・条件は公式で要確認（結果には個人差があります）</span>
       <span class="fv-arrow">▼ 費用の見方から先に整理できます</span>
     </div>
     <div class="fv-pc-right">
@@ -1522,10 +1568,11 @@ footer {
         <strong>「続けられなかった」</strong>を避けるには、総額の見方が先です。
       </div>
       <div class="fv-cta-stack">
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="btn-primary hc-aff" data-cta="armo_hero" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで費用を確認</a>
+        <span class="cta-kicker">費用が先にわかる</span>
+        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="btn-primary hc-aff" data-cta="armo_hero" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで費用を確認<span class="btn-sub">相談無料 · 費用が先にわかる</span></a>
         <button type="button" class="btn-secondary open-modal">30秒で悩みタイプを選ぶ</button>
       </div>
-      <span class="btn-note">相談は無料。料金・条件は公式で要確認（結果には個人差があります）</span>
+      <span class="btn-note">無料カウンセリングで費用の見方を確認。料金・条件は公式で要確認（結果には個人差があります）</span>
       <span class="fv-arrow">▼ 費用の見方から先に整理できます</span>
     </div>
   </div>
@@ -1943,7 +1990,7 @@ footer {
 
 <!-- STICKY CTA -->
 <div id="sticky-cta">
-  <a class="sticky-btn hc-aff" data-cta="armo_sticky" href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで費用を確認</a>
+  <a class="sticky-btn hc-aff" data-cta="armo_sticky" href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで費用を確認<span class="sticky-btn-sub">相談無料 · 費用が先にわかる</span></a>
 </div>
 
 <!-- MODAL -->
@@ -2114,16 +2161,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   reveals.forEach(function(el) { observer.observe(el); });
 
-  // ===== STICKY CTA scroll hide on FV =====
+  // ===== STICKY CTA: show as soon as hero CTA starts leaving, or after a short scroll =====
   var stickyCta = document.getElementById('sticky-cta');
   function updateSticky() {
-    var fv = document.getElementById('fv');
-    if (!fv || !stickyCta) return;
-    var fvBottom = fv.getBoundingClientRect().bottom;
-    stickyCta.style.display = fvBottom < 0 ? 'block' : 'none';
+    if (!stickyCta) return;
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      stickyCta.style.display = 'none';
+      return;
+    }
+    var show = window.scrollY > 64;
+    if (!show) {
+      var heroCtas = document.querySelectorAll('a.hc-aff[data-cta="armo_hero"]');
+      heroCtas.forEach(function(el) {
+        if (!el.offsetParent) return;
+        if (el.getBoundingClientRect().bottom < 88) show = true;
+      });
+    }
+    stickyCta.style.display = show ? 'block' : 'none';
   }
   updateSticky();
   window.addEventListener('scroll', updateSticky, { passive: true });
+  window.addEventListener('resize', updateSticky);
 
 });
 </script>
