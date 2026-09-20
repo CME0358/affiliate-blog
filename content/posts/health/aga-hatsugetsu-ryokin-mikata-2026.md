@@ -72,7 +72,7 @@ faq:
 **[AGA治療の費用比較ガイド（無料カウンセリングで総額を確認）](/hc-guide.html?utm_source=article&utm_medium=referral&utm_campaign=hc_cluster&utm_content=aga-hatsugetsu-ryokin-mikata-2026)**
 
 - 30秒で悩みタイプを選べる診断モーダル
-- 無料カウンセリング対応クリニックの比較（費用相談の第一候補はアルモ形成クリニック）
+- 薬・クリニック治療と植毛を軸ごとに分けた確認先
 - 料金・予約条件は各院の公式情報で要確認
 
 カウンセリングで何を聞くかは、[聞くことのチェックリスト](/posts/aga-counseling-kiku-koto-2026)に分けてまとめています。

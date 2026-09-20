@@ -13,7 +13,7 @@
 
 ## Primary hubs
 
-- [AGA治療の費用比較ガイド](https://www.qolmedia.info/hc-guide.html): 初月と総額の見方、無料カウンセリングの確認項目、薬と植毛の費用軸の違い。HC ファネルの正規ハブ
+- [AGA治療の費用比較ガイド](https://www.qolmedia.info/hc-guide.html): 初月と総額の見方、薬・クリニック治療と植毛の二軸、無料カウンセリングの確認項目。HC ファネルの正規ハブ
 - [AGA治療 費用比較2026](https://www.qolmedia.info/posts/aga-hiyo-hikaku-2026): 費用がバラつく理由とチェックリスト。詳細比較は hc-guide へ誘導
 - [寝つき・中途覚醒の対策比較](https://www.qolmedia.info/sleep-guide.html): サプリ・枕・マットレスの選び方。睡眠ファネルの正規ハブ（HC に次ぐ第二ハブ）
 - [睡眠サプリ比較ランキング2026](https://www.qolmedia.info/posts/suimin-supplement-ranking-2026): 成分比較の読み方。詳細導線は sleep-guide へ

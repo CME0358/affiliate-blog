@@ -1069,7 +1069,8 @@ a.method-card:hover .method-title {
   padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px 10px;
 }
 
 .clinic-rank {
@@ -1144,6 +1145,65 @@ a.method-card:hover .method-title {
   color: var(--text-sub);
   text-align: center;
   margin-top: 8px;
+}
+
+.clinic-card-body { position: relative; }
+.affili-pixel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+}
+.clinic-path {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #7dffb3;
+  margin-right: 6px;
+}
+.clinic-card:not(.primary) .clinic-path { color: #cfcfe0; }
+.method-cards.path-fork { margin-bottom: 20px; }
+.method-cta-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--cta-dark);
+}
+.path-alt-link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  line-height: 1.5;
+}
+.fv-cta-stack .path-alt-link,
+#closing .path-alt-link {
+  color: rgba(255,255,255,0.82);
+}
+.cost-cta-box .path-alt-link,
+.how-cta-row .path-alt-link,
+#solution .path-alt-link {
+  color: var(--cta-dark);
+}
+.how-cta-row {
+  margin-top: 20px;
+  text-align: center;
+}
+.how-cta-row .btn-primary { color: #fff; }
+.how-cta-row .path-alt-link { display: block; margin-top: 12px; }
+.cost-cta-box .path-alt-link { margin-top: 12px; }
+.fv-cta-stack .path-alt-link { margin-top: 2px; }
+#closing .path-alt-link { margin: 4px 0 16px; }
+@media (min-width: 768px) {
+  .method-cards.path-fork {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
 }
 
 /* ========== CLOSING ========== */
@@ -1508,17 +1568,18 @@ footer {
 <body>
 
 <!--
-  HC affiliate audit 2026-09-20 (do not invent new a8mat):
-  DEAD primary: Armo a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75 → HTTP 404 / ConnectYourDomain on almomedia.com.
-    Must be replaced before HC conversion work can succeed. Href left unchanged on clinic/modal only.
-  LIVE primary on this page: esteworld a8mat=4B41ZI+CZYRSY+5VSG+5YZ75 → usugenomadoguchi.com (200).
+  HC affiliate map 2026-09-20:
+  LIVE medical path: AGAスキンクリニック AFB visit.php?a=46393a-U221067n&p=e855734s → agaskin.info (200).
+    Lead pixel once (affili-pixel): t.afi-b.com/lead/46393a/e855734s/U221067n
+  LIVE transplant path: esteworld a8mat=4B41ZI+CZYRSY+5VSG+5YZ75 → usugenomadoguchi.com (200).
+  Dead Armo landing is not promoted as primary. Do not invent new affiliate IDs.
 -->
 <!-- HEADER -->
 <header>
   <a href="/" class="logo">
     <img src="/QOL_logo_transparent.png" alt="QOL media" />
   </a>
-  <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="header-cta hc-aff" data-cta="esteworld_header" target="_blank" rel="sponsored nofollow noopener">▶ 表示料金を確認</a>
+  <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="header-cta hc-aff" data-cta="aga_skin_header" target="_blank" rel="sponsored nofollow noopener">▶ 料金を公式で確認</a>
 </header>
 
 <p class="ad-disclosure">本ページにはアフィリエイト広告が含まれます。料金・施術内容・キャンペーンは変更される場合があるため、申込み前に各クリニックの公式情報をご確認ください。</p>
@@ -1543,8 +1604,9 @@ footer {
         <strong>「続けられなかった」</strong>を避けるには、総額の見方が先です。
       </div>
       <div class="fv-cta-stack">
-        <span class="cta-kicker">表示料金は公式で確認</span>
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="btn-primary hc-aff" data-cta="esteworld_hero" target="_blank" rel="sponsored nofollow noopener">▶ 植毛の表示料金を公式で確認<span class="btn-sub">無料カウンセリングあり · 条件は公式で要確認</span></a>
+        <span class="cta-kicker">薬・クリニック治療の費用から</span>
+        <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="btn-primary hc-aff" data-cta="aga_skin_hero" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで総額の目安を聞く<span class="btn-sub">AGAスキンクリニック · 料金は公式で要確認</span></a>
+        <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="path-alt-link hc-aff" data-cta="esteworld_hero" target="_blank" rel="sponsored nofollow noopener">植毛の表示料金を公式で確認</a>
         <button type="button" class="btn-secondary open-modal">30秒で悩みタイプを選ぶ</button>
       </div>
       <span class="btn-note">料金・適応・予約条件は公式で要確認（結果には個人差があります）</span>
@@ -1574,8 +1636,9 @@ footer {
         <strong>「続けられなかった」</strong>を避けるには、総額の見方が先です。
       </div>
       <div class="fv-cta-stack">
-        <span class="cta-kicker">表示料金は公式で確認</span>
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="btn-primary hc-aff" data-cta="esteworld_hero" target="_blank" rel="sponsored nofollow noopener">▶ 植毛の表示料金を公式で確認<span class="btn-sub">無料カウンセリングあり · 条件は公式で要確認</span></a>
+        <span class="cta-kicker">薬・クリニック治療の費用から</span>
+        <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="btn-primary hc-aff" data-cta="aga_skin_hero" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで総額の目安を聞く<span class="btn-sub">AGAスキンクリニック · 料金は公式で要確認</span></a>
+        <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="path-alt-link hc-aff" data-cta="esteworld_hero" target="_blank" rel="sponsored nofollow noopener">植毛の表示料金を公式で確認</a>
         <button type="button" class="btn-secondary open-modal">30秒で悩みタイプを選ぶ</button>
       </div>
       <span class="btn-note">料金・適応・予約条件は公式で要確認（結果には個人差があります）</span>
@@ -1624,8 +1687,9 @@ footer {
       <li data-num="5"><strong>勧誘の有無</strong> — その場契約を求めないか（公式FAQ・口コミで確認）</li>
     </ul>
     <div class="cost-cta-box reveal">
-      <p>数字の最終確認は、公式の表示料金と無料カウンセリングで、自分の進行度に合うプランを聞くのが安全です。</p>
-      <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="btn-primary hc-aff" data-cta="esteworld_cost_section" target="_blank" rel="sponsored nofollow noopener">植毛の表示料金を公式で確認する</a>
+      <p>数字の最終確認は、公式の表示料金と無料カウンセリングで、自分の進行度に合うプランを聞くのが安全です。薬・通院の費用と、植毛の表示料金は別の軸で確認してください。</p>
+      <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="btn-primary hc-aff" data-cta="aga_skin_cost" target="_blank" rel="sponsored nofollow noopener">無料カウンセリングで総額の目安を聞く</a>
+      <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="path-alt-link hc-aff" data-cta="esteworld_cost_section" target="_blank" rel="sponsored nofollow noopener">植毛の表示料金を公式で確認する</a>
       <span class="cost-cta-note">料金の断定はできません。予約条件・勧誘の有無は公式で要確認</span>
     </div>
   </div>
@@ -1694,38 +1758,37 @@ footer {
 <section id="solution">
   <div class="section-inner">
     <span class="section-label">Options</span>
-    <h2 class="section-title reveal">薄毛への対応は、<br>費用の出方も違います。</h2>
+    <h2 class="section-title reveal">確認先は、ふたつの軸に<br>分けて考える。</h2>
 
-    <div class="method-cards reveal">
-      <div class="method-card featured">
+    <p class="compare-intro reveal">
+      AGAの費用は、同じ「いくら？」でも中身が違います。<strong>薬・クリニック治療</strong>は継続コスト、<strong>植毛</strong>は施術単位。並べる前に、どちらを確認したいかを分けてください。
+    </p>
+
+    <div class="method-cards path-fork reveal">
+      <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="method-card featured hc-aff" data-cta="aga_skin_method" target="_blank" rel="sponsored nofollow noopener">
         <div class="method-num">01</div>
         <div>
-          <span class="method-badge">まず確認したい軸</span>
-          <div class="method-title">内服薬・外用薬などのAGA治療</div>
-          <div class="method-desc">医師の判断のもと進行を緩やかにすることを目的とした継続プラン。月額だけでなく、半年〜1年の総額で見る。</div>
+          <span class="method-badge">薬・クリニック</span>
+          <div class="method-title">内服・外用・クリニック通院</div>
+          <div class="method-desc">医師の判断のもと続ける治療。初月だけでなく、検査料・解約条件を含めた半年〜1年の総額で見る。</div>
+          <div class="method-cta-hint">AGA治療の料金を公式で確認 →</div>
         </div>
-      </div>
+      </a>
 
-      <div class="method-card">
+      <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="method-card hc-aff" data-cta="esteworld_method" target="_blank" rel="sponsored nofollow noopener">
         <div class="method-num">02</div>
         <div>
-          <div class="method-title">育毛サロン・クリニックケア</div>
-          <div class="method-desc">頭皮環境のケアを通じて、状態を整えるアプローチ。継続的な通院が必要な場合が多い。</div>
+          <span class="method-badge" style="background:#1a1a2e;">植毛</span>
+          <div class="method-title">自毛植毛（施術単位）</div>
+          <div class="method-desc">株数・範囲の費用になりやすく、薬の月額とは比較軸が異なります。表示料金と追加費用を公式で確認。</div>
+          <div class="method-cta-hint">植毛の表示料金を公式で確認 →</div>
         </div>
-      </div>
-
-      <div class="method-card">
-        <div class="method-num">03</div>
-        <div>
-          <div class="method-title">自毛植毛（選択肢の一つ）</div>
-          <div class="method-desc">自分の毛を移植する医療施術。株数単位の費用になりやすく、薬の継続コストとは比較軸が異なります。</div>
-        </div>
-      </div>
+      </a>
     </div>
 
     <div class="solution-lead reveal">
-      まずは<strong>費用の見方を揃えてから</strong>、薬・ケア・植毛のどれを検討するかを医師に確認しましょう。<br>
-      結果や仕上がりには個人差があります。
+      まずは<strong>費用の見方を軸ごとに揃えてから</strong>、薬・通院と植毛のどれを検討するかを医師に確認しましょう。<br>
+      育毛サロンなどのケアは、上記とは別枠の継続費として見てください。結果や仕上がりには個人差があります。
     </div>
   </div>
 </section>
@@ -1734,10 +1797,10 @@ footer {
 <section id="how">
   <div class="section-inner">
     <span class="section-label">About Transplant</span>
-    <h2 class="section-title reveal">植毛は、治療の<br>選択肢の一つです。</h2>
+    <h2 class="section-title reveal">植毛は、薬とは別の<br>費用の軸です。</h2>
 
     <p class="reveal" style="font-size:14px;color:var(--text-sub);line-height:1.8;margin-bottom:20px;">
-      自毛植毛は、後頭部など残存している毛を採取し、薄くなった部分に移植する医療施術です。AGA治療（継続コスト）とは費用の考え方が異なります。
+      自毛植毛は、後頭部など残存している毛を採取し、薄くなった部分に移植する医療施術です。内服・外用などのAGA治療（継続コスト）とは費用の考え方が異なります。薬・通院の総額を先に揃えたい場合は、<a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="hc-aff" data-cta="aga_skin_how" target="_blank" rel="sponsored nofollow noopener" style="color:var(--cta-dark);font-weight:700;">クリニック治療の料金案内</a>を公式で確認してください。
     </p>
 
     <div class="how-points reveal">
@@ -1767,6 +1830,10 @@ footer {
     <p class="how-note reveal">
       ※ 施術内容・結果には個人差があります。詳細はカウンセリングにてご確認ください。
     </p>
+    <div class="how-cta-row reveal">
+      <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="btn-primary hc-aff" data-cta="esteworld_how" target="_blank" rel="sponsored nofollow noopener">植毛の表示料金を公式で確認する</a>
+      <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="path-alt-link hc-aff" data-cta="aga_skin_how_alt" target="_blank" rel="sponsored nofollow noopener">薬・クリニック治療の料金を公式で確認</a>
+    </div>
   </div>
 </section>
 
@@ -1877,11 +1944,11 @@ footer {
 <section id="comparison">
   <div class="section-inner">
     <span class="section-label">Clinic Guide</span>
-    <h2 class="section-title reveal">クリニック選びで<br>大切な3つのこと。</h2>
+    <h2 class="section-title reveal">確認する院も、<br>軸ごとに分けます。</h2>
 
     <p class="compare-intro reveal">
-      AGA治療・植毛のいずれを検討する場合も、クリニック選びが費用と続けやすさに直結します。
-      以下の3点を基準に、複数院を比較することをおすすめします。
+      薬・クリニック治療と植毛では、聞く項目も見積もりの単位も違います。
+      以下の3点を、選んだ軸の院に同じ前提で確認してください。
     </p>
 
     <ul class="compare-points reveal">
@@ -1897,52 +1964,54 @@ footer {
 
     <div class="comparison-table-wrap reveal">
       <table class="comparison-table">
-        <caption class="sr-only">掲載クリニックの比較</caption>
+        <caption class="sr-only">薬・クリニック治療と植毛の確認先</caption>
         <thead>
-          <tr><th>比較項目</th><th class="reco">アルモ形成クリニック（第一候補）</th><th>東京植毛クリニック esteworld Japan</th></tr>
+          <tr><th>比較項目</th><th class="reco">AGAスキンクリニック（薬・クリニック）</th><th>東京植毛クリニック esteworld Japan（植毛）</th></tr>
         </thead>
         <tbody>
-          <tr><td>役割</td><td class="reco">費用・方針の相談から始めたい人向け</td><td>植毛の表示料金を確認したい人向け</td></tr>
+          <tr><td>役割</td><td class="reco">内服・外用など継続治療の費用確認</td><td>植毛の表示料金を確認したい人向け</td></tr>
           <tr><td>相談</td><td class="reco">無料カウンセリングあり</td><td>無料カウンセリングあり</td></tr>
-          <tr><td>内容</td><td class="reco">自毛植毛・人工毛植毛<br><small>詳細は公式情報で確認</small></td><td>高密度FUE</td></tr>
-          <tr><td>料金</td><td class="reco">範囲・株数により異なるため<strong>要確認</strong></td><td>高密度FUE基本料金 220,000円<br><small>500〜2,500株の目安。条件は公式情報で確認</small></td></tr>
-          <tr><td>向いている人</td><td class="reco">総額の見方を聞いてから決めたい人</td><td>FUE方式や表示料金を確認したい人</td></tr>
+          <tr><td>内容</td><td class="reco">内服・外用・クリニック通院<br><small>詳細は公式情報で確認</small></td><td>高密度FUE</td></tr>
+          <tr><td>料金</td><td class="reco">プラン・期間により異なるため<strong>要確認</strong></td><td>高密度FUE基本料金 220,000円<br><small>500〜2,500株の目安。条件は公式情報で確認</small></td></tr>
+          <tr><td>向いている人</td><td class="reco">総額の見方を揃えてから決めたい人</td><td>FUE方式や表示料金を確認したい人</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="clinic-cards reveal">
-      <!-- WARNING (2026-09-20): Armo a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75 is DEAD (HTTP 404 / ConnectYourDomain). Href left unchanged for replacement; do NOT promote as primary CV until a live a8mat is issued. -->
-      <!-- クリニック1：アルモ形成クリニック -->
+      <!-- 01 薬・クリニック：AGAスキンクリニック（AFB live → agaskin.info） -->
       <div class="clinic-card primary">
         <div class="clinic-card-header">
-          <span class="clinic-rank">PICK UP 01</span>
-          <span class="clinic-name">アルモ形成クリニック</span>
-          <span class="reco-badge">まずはここ</span>
+          <span class="clinic-path">01 薬・クリニック</span>
+          <span class="clinic-rank">PICK UP</span>
+          <span class="clinic-name">AGAスキンクリニック</span>
+          <span class="reco-badge">継続治療</span>
         </div>
         <div class="clinic-card-body">
-            <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="clinic-banner hc-aff" data-cta="armo_card_banner" target="_blank" rel="sponsored nofollow noopener">
-            <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000025561&id=202402261733557060" alt="アルモ形成クリニック" />
+          <img class="affili-pixel" src="https://t.afi-b.com/lead/46393a/e855734s/U221067n" alt="" width="1" height="1" />
+          <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="clinic-banner hc-aff" data-cta="aga_skin_card_banner" target="_blank" rel="sponsored nofollow noopener">
+            <img src="https://www.afi-b.com/upload_image/6393-1408091219-3.jpg" width="300" height="250" alt="AGAスキンクリニック" />
           </a>
           <div class="clinic-tags">
             <span class="tag">無料カウンセリングあり</span>
-            <span class="tag">費用の確認向き</span>
-            <span class="tag">分割払い可</span>
+            <span class="tag">内服・外用</span>
+            <span class="tag">総額の確認向き</span>
           </div>
           <p class="clinic-desc">
-            費用・施術内容・アフターケアを案内する形成外科のクリニックです。まずは無料カウンセリングで、今の進行度に合う選択肢と費用の見方を確認できます。予約条件や勧誘の有無は、申込み前に公式情報をご確認ください。
+            内服・外用など、クリニック通院で続けるAGA治療の費用を確認できる医療機関です。初月の数字だけでなく、続けた場合の総額の目安を無料カウンセリングで聞けます。適応・料金・予約条件は、申込み前に公式情報をご確認ください。
           </p>
-          <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="clinic-cta hc-aff" data-cta="armo_card_cta" target="_blank" rel="sponsored nofollow noopener">
-            無料カウンセリングで費用を確認する →
+          <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="clinic-cta hc-aff" data-cta="aga_skin_card" target="_blank" rel="sponsored nofollow noopener">
+            無料カウンセリングで総額の目安を聞く →
           </a>
           <p class="clinic-note">※ 無料・予約条件や勧誘の有無は公式情報をご確認ください</p>
         </div>
       </div>
 
-      <!-- クリニック2：東京植毛クリニック esteworld Japan -->
+      <!-- 02 植毛：東京植毛クリニック esteworld Japan -->
       <div class="clinic-card">
         <div class="clinic-card-header">
-          <span class="clinic-rank">PICK UP 02</span>
+          <span class="clinic-path">02 植毛</span>
+          <span class="clinic-rank">PICK UP</span>
           <span class="clinic-name">東京植毛クリニック esteworld Japan</span>
         </div>
         <div class="clinic-card-body">
@@ -1985,9 +2054,10 @@ footer {
       適応・追加費用・カウンセリング条件は各院の公式で確認してください。
     </p>
 
-    <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="btn-primary hc-aff reveal" data-cta="esteworld_closing" target="_blank" rel="sponsored nofollow noopener" style="margin: 0 auto 12px;">
-      植毛の表示料金を公式で確認する
+    <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="btn-primary hc-aff reveal" data-cta="aga_skin_closing" target="_blank" rel="sponsored nofollow noopener" style="margin: 0 auto 12px;">
+      無料カウンセリングで総額の目安を聞く
     </a>
+    <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="path-alt-link hc-aff reveal" data-cta="esteworld_closing" target="_blank" rel="sponsored nofollow noopener">植毛の表示料金を公式で確認する</a>
     <button class="btn-secondary open-modal reveal" style="margin: 0 auto 12px; display:block;">
       30秒で比較してから決める
     </button>
@@ -1995,9 +2065,9 @@ footer {
   </div>
 </section>
 
-<!-- STICKY CTA: live esteworld a8 only. Dead Armo a8mat must not be the sticky primary. -->
+<!-- STICKY CTA: one primary. Medical path (AGA Skin) matches the cost-comparison narrative. -->
 <div id="sticky-cta">
-  <a class="sticky-btn hc-aff" data-cta="esteworld_sticky" href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" target="_blank" rel="sponsored nofollow noopener">▶ 植毛の表示料金を公式で確認<span class="sticky-btn-sub">無料カウンセリングあり · 条件は公式で要確認</span></a>
+  <a class="sticky-btn hc-aff" data-cta="aga_skin_sticky" href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" target="_blank" rel="sponsored nofollow noopener">▶ 無料カウンセリングで総額の目安を聞く<span class="sticky-btn-sub">薬・クリニック治療 · 料金は公式で要確認</span></a>
 </div>
 
 <!-- MODAL -->
@@ -2013,7 +2083,7 @@ footer {
       <div class="modal-choices">
         <div class="modal-choice" onclick="showResult('clinic-a')">
           <span class="modal-choice-icon">💬</span>
-          <span>AGA治療の費用・総額の見方を確認したい</span>
+          <span>薬・クリニック治療の総額の目安を確認したい</span>
         </div>
         <div class="modal-choice" onclick="showResult('clinic-b')">
           <span class="modal-choice-icon">📖</span>
@@ -2022,19 +2092,18 @@ footer {
       </div>
     </div>
 
-    <!-- Result A -->
-    <!-- WARNING (2026-09-20): Armo a8mat below is DEAD (404). Kept href unchanged; replace program before treating this as a CV path. -->
+    <!-- Result A: 薬・クリニック -->
     <div class="modal-step" id="result-clinic-a">
       <div class="modal-result">
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="hc-aff" data-cta="armo_modal_banner" target="_blank" rel="sponsored nofollow noopener">
-          <img src="https://pub.a8.net/a8v2/A8ImageAction.do?eid=s00000025561&id=202402261733557060" alt="アルモ形成クリニック" class="modal-result-img" />
+        <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="hc-aff" data-cta="aga_skin_modal_banner" target="_blank" rel="sponsored nofollow noopener">
+          <img src="https://www.afi-b.com/upload_image/6393-1408091219-3.jpg" width="300" height="250" alt="AGAスキンクリニック" class="modal-result-img" />
         </a>
-        <div class="modal-result-name">アルモ形成クリニック</div>
+        <div class="modal-result-name">AGAスキンクリニック</div>
         <div class="modal-result-desc">
-          費用の見方・施術内容・アフターケアを案内しています。無料カウンセリングで、進行度に合うプランを確認できます。予約条件は公式情報をご確認ください。
+          内服・外用など、クリニック通院で続けるAGA治療の費用を確認できます。無料カウンセリングで、進行度に合うプランと総額の目安を聞いてください。予約条件は公式情報をご確認ください。
         </div>
-        <a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="modal-result-cta hc-aff" data-cta="armo_modal" target="_blank" rel="sponsored nofollow noopener">
-          無料カウンセリングで費用を確認する →
+        <a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="modal-result-cta hc-aff" data-cta="aga_skin_modal" target="_blank" rel="sponsored nofollow noopener">
+          無料カウンセリングで総額の目安を聞く →
         </a>
         <button class="modal-back" onclick="goBack('step1')">← 前に戻る</button>
       </div>
@@ -2053,8 +2122,7 @@ footer {
         <a href="https://px.a8.net/svt/ejp?a8mat=4B41ZI+CZYRSY+5VSG+5YZ75" class="modal-result-cta hc-aff" data-cta="esteworld_modal" target="_blank" rel="sponsored nofollow noopener">
           植毛の表示料金を確認する →
         </a>
-        <!-- WARNING (2026-09-20): Armo a8mat in this alt link is DEAD. Demoted from「第一候補」copy. Href unchanged pending replacement. -->
-        <p class="modal-alt">費用の方針も各院の公式情報で確認してください。<a href="https://px.a8.net/svt/ejp?a8mat=4B1R5O+GF7I0Y+5H8A+5YZ75" class="hc-aff" data-cta="armo_modal_from_b" target="_blank" rel="sponsored nofollow noopener">アルモの案内</a></p>
+        <p class="modal-alt">薬・クリニック治療の費用も公式で確認できます。<a href="https://t.afi-b.com/visit.php?a=46393a-U221067n&p=e855734s" class="hc-aff" data-cta="aga_skin_modal_from_b" target="_blank" rel="sponsored nofollow noopener">AGA治療の料金を公式で確認</a></p>
         <button class="modal-back" onclick="goBack('step1')">← 前に戻る</button>
       </div>
     </div>
@@ -2180,7 +2248,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     var show = window.scrollY > 64;
     if (!show) {
-      var heroCtas = document.querySelectorAll('a.hc-aff[data-cta="esteworld_hero"]');
+      var heroCtas = document.querySelectorAll('a.hc-aff[data-cta="aga_skin_hero"], a.hc-aff[data-cta="esteworld_hero"]');
       heroCtas.forEach(function(el) {
         if (!el.offsetParent) return;
         if (el.getBoundingClientRect().bottom < 88) show = true;

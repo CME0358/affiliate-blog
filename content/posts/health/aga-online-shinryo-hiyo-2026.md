@@ -75,7 +75,7 @@ faq:
 **[AGA治療の費用比較ガイド（無料カウンセリングで総額を確認）](/hc-guide.html?utm_source=article&utm_medium=referral&utm_campaign=hc_cluster&utm_content=aga-online-shinryo-hiyo-2026)**
 
 - オンライン／対面の確認項目を同じ前提で整理
-- 無料カウンセリング対応クリニックの比較（費用相談の第一候補はアルモ形成クリニック）
+- 薬・クリニック治療と植毛を軸ごとに分けた確認先
 - 料金・対象メニューは各院の公式情報で要確認
 
 当日に聞くことは、[カウンセリングで聞くこと](/posts/aga-counseling-kiku-koto-2026)に分けてあります。費用全体の読み方は[AGA治療 費用比較2026](/posts/aga-hiyo-hikaku-2026)も参照してください。
