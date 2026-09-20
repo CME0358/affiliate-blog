@@ -118,7 +118,7 @@ A. GABAは発芽玄米やキムチ、テアニンは緑茶に含まれていま�
 
 [GABAサプリで入眠をサポート](https://t.afi-b.com/visit.php?a=M7608f-l253786F&p=e855734s)
 
-[テアニンサプリで睡眠の質を向上](hhttps://amzn.to/4cfAMrL)
+[テアニンサプリで睡眠の質を向上](https://amzn.to/4cfAMrL)
 
 明日の朝、目覚めたときの違いを実感できるはずです。
 
