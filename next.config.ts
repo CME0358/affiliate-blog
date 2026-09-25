@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/sitemap.xml": ["./content/posts/**/*"],
   },
+  async redirects() {
+    return [
+      {
+        source: '/posts/suimin-shitsu-ageru',
+        destination: '/posts/suimin-shitsu-ageru-matome',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
