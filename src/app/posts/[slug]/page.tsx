@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import remarkGfm from 'remark-gfm'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import { ArticleAffiliateClicks } from '@/components/ArticleAffiliateClicks'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -164,13 +165,13 @@ export default async function PostPage({ params }: Props) {
           ))}
         </div>
 
-        <div style={{fontSize:'15px', lineHeight:'1.9', color:'#374151'}}>
+        <ArticleAffiliateClicks>
           <MDXRemote
             source={post.content}
             components={mdxComponents}
             options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
           />
-        </div>
+        </ArticleAffiliateClicks>
 
         {post.faq && post.faq.length > 0 && (
           <section style={{marginTop:'40px'}}>
